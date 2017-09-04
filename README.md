@@ -13,7 +13,9 @@ sudo apt-get update && sudo apt-get dist-upgrade
 
 
 Install Node and npm
+````bash
     $ wget -O - https://raw.githubusercontent.com/sdesalas/node-pi-zero/master/install-node-v6.9.1.sh | bash
+````
 
 Use raspi-config
     $ sudo raspi-config
