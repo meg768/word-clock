@@ -30,3 +30,4 @@ https://blog.miniarray.com/installing-node-js-on-a-raspberry-pi-zero-21a1522db2b
 https://github.com/sdesalas/node-pi-zero
 https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial
 http://arduclock.de
+https://www.raspberrypi.org/documentation/hardware/raspberrypi/mechanical/README.md
