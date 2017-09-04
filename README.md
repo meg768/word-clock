@@ -14,13 +14,15 @@ sudo apt-get update && sudo apt-get dist-upgrade
 
 Install Node and npm
 ````bash
-    $ wget -O - https://raw.githubusercontent.com/sdesalas/node-pi-zero/master/install-node-v6.9.1.sh | bash
+wget -O - https://raw.githubusercontent.com/sdesalas/node-pi-zero/master/install-node-v6.9.1.sh | bash
 ````
 
-Use raspi-config
-    $ sudo raspi-config
+Use raspi-config to set time zone, enable SSH and SPI.
 
-Make sure to set time zone, enable SSH and SPI.
+````bash
+sudo raspi-config
+````
+
 
 ## Links
 http://thisdavej.com/upgrading-to-more-recent-versions-of-node-js-on-the-raspberry-pi/
