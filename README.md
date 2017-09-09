@@ -33,9 +33,5 @@ http://arduclock.de
 https://www.raspberrypi.org/documentation/hardware/raspberrypi/mechanical/README.md
 
 Powering lots of leds - http://www.eerkmans.nl/powering-lots-of-leds-from-arduino/
-
-### Adafruit Neopixel Library
-https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library
-
-### I2C
-https://oscarliang.com/raspberry-pi-arduino-connected-i2c/
+Adafruit Neopixel Library - https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library
+I2C Communication between Raspberry and Arduino - https://oscarliang.com/raspberry-pi-arduino-connected-i2c/
