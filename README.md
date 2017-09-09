@@ -31,4 +31,11 @@ https://github.com/sdesalas/node-pi-zero
 https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial
 http://arduclock.de
 https://www.raspberrypi.org/documentation/hardware/raspberrypi/mechanical/README.md
+
+Powering lots of leds - http://www.eerkmans.nl/powering-lots-of-leds-from-arduino/
+
+### Adafruit Neopixel Library
+https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library
+
+### I2C
 https://oscarliang.com/raspberry-pi-arduino-connected-i2c/
