@@ -31,3 +31,4 @@ https://github.com/sdesalas/node-pi-zero
 https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial
 http://arduclock.de
 https://www.raspberrypi.org/documentation/hardware/raspberrypi/mechanical/README.md
+https://oscarliang.com/raspberry-pi-arduino-connected-i2c/

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.2" baseProfile="tiny" id="Lager_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="47.2" height="614.2" viewBox="0 0 47.2 614.2" xml:space="preserve">
+<g id="board">
+
+		<rect id="boardoutline" y="0" fill="#008000" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="47.2" height="614.2"/>
+</g>
+<g id="silkscreen">
+	<g>
+
+			<rect x="38.7" y="12.3" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="59.6" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="47.3" fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="106.8" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="94.5" fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="154.1" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="141.8" fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="201.3" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="189" fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="248.5" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="236.3" fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="295.8" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="283.5" fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="343" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="330.7" fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="390.3" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="378" fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="437.5" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="425.2" fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="484.8" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="472.5" fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="532" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="519.7" fill="none" width="47.2" height="47.2"/>
+	</g>
+	<g>
+
+			<rect x="38.7" y="579.3" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.5" height="22.7"/>
+		<rect y="567" fill="none" width="47.2" height="47.2"/>
+	</g>
+</g>
+</svg>
