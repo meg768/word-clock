@@ -68,10 +68,8 @@ sudo raspi-config
 
 
 ### More links
---------------------------------------------------------------------------------
-
-    - http://thisdavej.com/upgrading-to-more-recent-versions-of-node-js-on-the-raspberry-pi/
-    - https://blog.miniarray.com/installing-node-js-on-a-raspberry-pi-zero-21a1522db2bb
-    - https://github.com/sdesalas/node-pi-zero
-    - https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial
-    - http://arduclock.de
+- http://thisdavej.com/upgrading-to-more-recent-versions-of-node-js-on-the-raspberry-pi/
+- https://blog.miniarray.com/installing-node-js-on-a-raspberry-pi-zero-21a1522db2bb
+- https://github.com/sdesalas/node-pi-zero
+- https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial
+- http://arduclock.de
