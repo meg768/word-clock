@@ -26,38 +26,38 @@ sudo raspi-config
 ## Texts to display
 
 ### Time
-    - FEM/TIO/KVART/TJUGO/LITE
-    - I/ÖVER
-    - ETT/TVÅ/TRE/FYRA/FEM/SEX/SJU/ÅTTA/NIO/TIO
-    - MÅ/TI/ON/TO/FR/LÖ/SÖ
+- FEM/TIO/KVART/TJUGO/LITE
+- I/ÖVER
+- ETT/TVÅ/TRE/FYRA/FEM/SEX/SJU/ÅTTA/NIO/TIO
+- MÅ/TI/ON/TO/FR/LÖ/SÖ
 
 
 ### Weather
-    - REGN
-    - SNÖ
-    - SOL
-    - MOLN
-    - VIND
+- REGN
+- SNÖ
+- SOL
+- MOLN
+- VIND
 
 ### Stock Index
-    - OMX
-    - NASDAQ
-    - DAX
-    - DOWJONES
-    - HANGSENG
-    - USA
-    - UK
-    - BRIC
-    - NIKKEI
+- OMX
+- NASDAQ
+- DAX
+- DOWJONES
+- HANGSENG
+- USA
+- UK
+- BRIC
+- NIKKEI
 
 ### Currency
-    - EUR
-    - USD
-    - GBP
-    - CAD
-    - NOK
-    - DKK
-    - JPY
+- EUR
+- USD
+- GBP
+- CAD
+- NOK
+- DKK
+- JPY
 
 ## Links
 - Powering lots of leds - http://www.eerkmans.nl/powering-lots-of-leds-from-arduino/
