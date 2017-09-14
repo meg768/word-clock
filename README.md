@@ -28,6 +28,7 @@ sudo raspi-config
 ### Time
 - FEM/TIO/KVART/TJUGO/LITE
 - I/ÖVER
+- HALV
 - ETT/TVÅ/TRE/FYRA/FEM/SEX/SJU/ÅTTA/NIO/TIO
 - MÅ/TI/ON/TO/FR/LÖ/SÖ
 
