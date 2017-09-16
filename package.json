@@ -1,0 +1,23 @@
+{
+  "name": "word-clock",
+  "version": "1.0.0",
+  "description": "Word Clock",
+  "main": "word-clock.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meg768/word-clock.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meg768/word-clock/issues"
+  },
+  "homepage": "https://github.com/meg768/word-clock#readme",
+  "dependencies": {
+    "yargs": "^8.0.2",
+    "yow": "^1.0.81"
+  }
+}
