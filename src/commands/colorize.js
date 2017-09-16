@@ -73,7 +73,10 @@ var Module = new function() {
 						offset : argv.offset,
 						length : argv.length,
 						color  : argv.color
-					});
+					})
+					.catch(function(error) {
+						console.log(error);
+					})
 
 
 				}

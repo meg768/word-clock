@@ -244,7 +244,7 @@ module.exports = function NeopixelStrip(options) {
 			var buffer = new Buffer(bytes);
 			_wire.i2cRead(options.address, bytes, buffer, function(error, bytes, buffer) {
 				if (error) {
-					console.log('read error', error);
+					//console.log('read error', error);
 					reject(error)
 
 				}
