@@ -52,7 +52,7 @@ var Module = new function() {
 								length     : word.length,
 								color      : argv.color,
 								transition : 'fade',
-								duration   : 500
+								duration   : argv.duration
 
 
 
