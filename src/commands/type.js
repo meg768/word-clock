@@ -46,7 +46,7 @@ var Module = new function() {
 				letters.forEach(function(letter) {
 					if (letter == ' ') {
 						promise = promise.then(function() {
-							return strip.pause(argv.duration);							
+							return strip.pause(argv.duration);
 						})
 					}
 					else {
@@ -69,7 +69,7 @@ var Module = new function() {
 				});
 
 				promise.then(function() {
-					return strip.clear({transition:argv.transition, duration:argv.duration});
+					return strip.clear({transition:argv.transition, duration:500});
 				})
 				promise.then(function() {
 					console.log('Done.');
