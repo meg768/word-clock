@@ -4,6 +4,7 @@ var sprintf    = require('yow/sprintf');
 var isObject   = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var isString   = require('yow/is').isString;
+var isArray    = require('yow/is').isArray;
 var config     = require('../scripts/config.js');
 
 
@@ -23,6 +24,15 @@ var Module = new function() {
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:undefined});
 		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
 		args.option('duration',   {alias:'d', describe:'Transition duration', default:100});
+
+
+		args.check(function(argv) {
+
+			if (isArray(argv.color))
+				argv.color = argv.color[0];
+
+			return true;
+		});
 
 		args.wrap(null);
 	}
