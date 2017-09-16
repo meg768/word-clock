@@ -18,6 +18,7 @@ var Module = new function() {
 		args.help('help').alias('help', 'h');
 
 		args.option('offset',     {alias:'o', describe:'Offset on strip', default:0});
+		args.option('length',     {alias:'l', describe:'Length of strip to colorize', default:undefined});
 		args.option('color',      {alias:'c', describe:'Color', default:"rgb(0,0,0)"});
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:undefined});
 		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
@@ -34,7 +35,7 @@ var Module = new function() {
 
 			var strip = new Strip({
 				address : argv.address,
-				length  : argv.length
+				length  : argv.size
 			});
 
 			strip.initialize().then(function() {
@@ -70,6 +71,9 @@ var Module = new function() {
 
 				}
 				else {
+					if (argv.length == undefined)
+						argv.length = argv.size;
+						
 					strip.colorize({
 						offset : argv.offset,
 						length : argv.length,
