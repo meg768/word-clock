@@ -27,6 +27,7 @@ var App = function() {
 			args.wrap(null);
 			args.demand(1);
 
+			console.log(args.argv);
 			args.argv;
 		}
 
