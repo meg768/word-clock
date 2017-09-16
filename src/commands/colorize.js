@@ -51,7 +51,7 @@ var Module = new function() {
 								offset     : word.offset,
 								length     : word.length,
 								color      : argv.color,
-								transition : 'fade',
+								transition : argv.transition,
 								duration   : argv.duration
 
 
