@@ -17,10 +17,12 @@ var Module = new function() {
 
 		args.help('help').alias('help', 'h');
 
-		args.option('offset',   {alias:'o', describe:'Offset on strip', default:0});
-		args.option('length',   {alias:'l', describe:'Length to colorize', default:config.strip.length});
-		args.option('color',    {alias:'c', describe:'Color', default:"rgb(0,0,0)"});
-		args.option('text',     {alias:'t', describe:'Text strip to colorize', default:undefined});
+		args.option('offset',     {alias:'o', describe:'Offset on strip', default:0});
+		args.option('length',     {alias:'l', describe:'Length to colorize', default:config.strip.length});
+		args.option('color',      {alias:'c', describe:'Color', default:"rgb(0,0,0)"});
+		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:undefined});
+		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
+		args.option('duration',   {alias:'d', describe:'Transition duration', default:300});
 
 		args.wrap(null);
 	}
@@ -46,9 +48,13 @@ var Module = new function() {
 					words.forEach(function(word) {
 						promise = promise.then(function() {
 							return strip.colorize({
-								offset : word.offset,
-								length : word.length,
-								color  : argv.color,
+								offset     : word.offset,
+								length     : word.length,
+								color      : argv.color,
+								transition : 'fade',
+								duration   : 500
+
+
 
 							});
 						});
