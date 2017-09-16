@@ -45,7 +45,9 @@ var Module = new function() {
 
 				letters.forEach(function(letter) {
 					if (letter == ' ') {
-						promise = strip.pause(argv.duration);
+						promise = promise.then(function() {
+							return strip.pause(argv.duration);							
+						})
 					}
 					else {
 						var words = layout.getLayout(letter);
