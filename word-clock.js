@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-var sprintf = require('yow/sprintf');
+var sprintf    = require('yow/sprintf');
 var prefixLogs = require('yow/logs').prefix;
+var config     = require('./scripts/config.js');
 
 var App = function() {
 
@@ -13,6 +14,9 @@ var App = function() {
 			args.usage('Usage: $0 <command> [options]')
 
 			args.help();
+
+			args.option('length',    {alias:'L', describe:'Length to colorize', default:config.strip.length});
+			args.option('address',   {alias:'A', describe:'I2C bus address', default:config.i2c.address});
 
 			//args.command(require('./src/commands/server.js'));
 			args.command(require('./src/commands/test.js'));
