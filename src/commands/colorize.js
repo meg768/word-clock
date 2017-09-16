@@ -41,17 +41,25 @@ var Module = new function() {
 					var layout = new Layout();
 
 					var words = layout.getLayout(argv.text);
+					var promise = Promise.resolve();
 
 					words.forEach(function(word) {
-						console.log(word);
-						strip.colorize({
-							offset : word.offset,
-							length : word.length,
-							color  : argv.color,
+						promise = promise.then(function() {
+							return strip.colorize({
+								offset : word.offset,
+								length : word.length,
+								color  : argv.color,
 
+							});
 						});
-
 					});
+
+					promise.then(function() {
+						console.log('Done.');
+					})
+					.catch(function(error) {
+						console.log(error);
+					})
 
 				}
 				else {
