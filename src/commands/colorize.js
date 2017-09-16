@@ -22,7 +22,7 @@ var Module = new function() {
 		args.option('color',      {alias:'c', describe:'Color', default:"rgb(0,0,0)"});
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:undefined});
 		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
-		args.option('duration',   {alias:'d', describe:'Transition duration', default:100
+		args.option('duration',   {alias:'d', describe:'Transition duration', default:100});
 
 		args.wrap(null);
 	}
