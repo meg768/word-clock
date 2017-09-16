@@ -34,7 +34,7 @@ var Module = new function() {
 				length  : config.strip.length
 			});
 
-			Promise.resolve().then(function() {
+			strip.initialize().then(function() {
 
 				if (isString(argv.text)) {
 					var Layout = require('../scripts/layout.js');
