@@ -81,7 +81,7 @@ var Module = new function() {
 						length : argv.length,
 						color  : argv.color
 					})
-					promise.then(function() {
+					.then(function() {
 						return strip.clear({transition:argv.transition, duration:500});
 					})
 					.catch(function(error) {
