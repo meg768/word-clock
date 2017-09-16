@@ -20,6 +20,7 @@ var Module = new function() {
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:'ABCDEFG'});
 		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
 		args.option('duration',   {alias:'d', describe:'Transition duration', default:100});
+		args.option('color',      {alias:'c', describe:'Color', default:"rgb(64,0,0)"});
 
 		args.wrap(null);
 	}
