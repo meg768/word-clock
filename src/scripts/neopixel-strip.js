@@ -84,7 +84,6 @@ module.exports = function NeopixelStrip(options) {
 					}
 					catch(error) {
 						return reject(error);
-						//return Promise.reject(error);
 					}
 
 				}

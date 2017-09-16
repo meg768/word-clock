@@ -73,14 +73,14 @@ var Module = new function() {
 				else {
 					if (argv.length == undefined)
 						argv.length = argv.size;
-						
+
 					strip.colorize({
 						offset : argv.offset,
 						length : argv.length,
 						color  : argv.color
 					})
 					.catch(function(error) {
-						console.log(error);
+						console.log('sdflkasdölfkasdlfjk', error);
 					})
 
 
