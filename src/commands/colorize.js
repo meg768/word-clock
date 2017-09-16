@@ -32,6 +32,11 @@ var Module = new function() {
 		});
 
 		strip.initialize().then(function() {
+			strip.colorize({
+				offset : argv.offset,
+				length : argv.length,
+				color  : argv.color
+			});
 
 		})
 //		console.log(layout.getLayout(argv.text));
