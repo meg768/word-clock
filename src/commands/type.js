@@ -62,7 +62,7 @@ var Module = new function() {
 				});
 
 				promise.then(function() {
-					return strip.clear({transition:'fade', duration:100});
+					return strip.clear({transition:'fade', duration:500});
 				})
 				promise.then(function() {
 					console.log('Done.');
