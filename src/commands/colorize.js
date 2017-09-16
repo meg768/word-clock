@@ -17,7 +17,6 @@ var Module = new function() {
 
 		args.help('help').alias('help', 'h');
 
-		//args.option('length',     {alias:'l', describe:'Length to colorize', default:config.strip.length});
 		args.option('offset',     {alias:'o', describe:'Offset on strip', default:0});
 		args.option('color',      {alias:'c', describe:'Color', default:"rgb(0,0,0)"});
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:undefined});

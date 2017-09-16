@@ -17,6 +17,7 @@ var App = function() {
 
 			args.option('length',    {alias:'L', describe:'Length to colorize', default:config.strip.length});
 			args.option('address',   {alias:'A', describe:'I2C bus address', default:config.i2c.address});
+			args.option('debug',     {alias:'D', describe:'Debug mode', default:false});
 
 			//args.command(require('./src/commands/server.js'));
 			args.command(require('./src/commands/test.js'));
