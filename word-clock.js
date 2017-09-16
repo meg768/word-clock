@@ -2,7 +2,7 @@
 
 var sprintf    = require('yow/sprintf');
 var prefixLogs = require('yow/logs').prefix;
-var config     = require('./scripts/config.js');
+var config     = require('./src/scripts/config.js');
 
 var App = function() {
 
