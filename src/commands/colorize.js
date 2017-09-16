@@ -30,7 +30,6 @@ var Module = new function() {
 
 	function run(argv) {
 		try {
-			console.log(argv);
 			var Strip = require('../scripts/neopixel-strip.js');
 
 			var strip = new Strip({
