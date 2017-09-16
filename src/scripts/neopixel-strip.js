@@ -25,7 +25,7 @@ module.exports = function NeopixelStrip(options) {
 	var _this          = this;         // That
 	var _debug         = 1;            // Output log messages to console?
 	var _timeout       = 30000;        // Read/write timeout in ms
-	var _retryInterval = 200;          // Milliseconds to wait before retrying read/write
+	var _retryInterval = 100;          // Milliseconds to wait before retrying read/write
 
 	var _length        = options.length;
 	var _address       = options.address;
@@ -244,7 +244,6 @@ module.exports = function NeopixelStrip(options) {
 			var buffer = new Buffer(bytes);
 			_wire.i2cRead(options.address, bytes, buffer, function(error, bytes, buffer) {
 				if (error) {
-					//console.log('read error', error);
 					reject(error)
 
 				}
