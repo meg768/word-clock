@@ -39,7 +39,9 @@ var Module = new function() {
 				var Layout = require('../scripts/layout.js');
 				var layout = new Layout();
 
-				var words = layout.getLayout(argv.text.split('').join(' '));
+				var text = argv.text.split('').join(' ');
+				console.log(text);
+				var words = layout.getLayout(text);
 				var promise = Promise.resolve();
 
 				words.forEach(function(word) {
