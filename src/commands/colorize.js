@@ -62,6 +62,9 @@ var Module = new function() {
 					});
 
 					promise.then(function() {
+						return strip.clear({transition:argv.transition, duration:500});
+					})
+					promise.then(function() {
 						console.log('Done.');
 					})
 					.catch(function(error) {
@@ -77,6 +80,9 @@ var Module = new function() {
 						offset : argv.offset,
 						length : argv.length,
 						color  : argv.color
+					})
+					promise.then(function() {
+						return strip.clear({transition:argv.transition, duration:500});
 					})
 					.catch(function(error) {
 						console.log(error);
