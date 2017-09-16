@@ -34,7 +34,7 @@ var Module = new function() {
 				length  : config.strip.length
 			});
 
-			strip.initialize().then(function() {
+			Promise.resolve().then(function() {
 
 				if (isString(argv.text)) {
 					var Layout = require('../scripts/layout.js');
@@ -47,7 +47,8 @@ var Module = new function() {
 						strip.colorize({
 							offset : word.offset,
 							length : word.length,
-							color  : argv.color
+							color  : argv.color,
+
 						});
 
 					});
