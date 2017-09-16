@@ -15,7 +15,7 @@ var App = function() {
 
 			args.help();
 
-			args.option('length',    {alias:'L', describe:'Length to colorize', default:config.strip.length});
+			args.option('length',    {alias:'L', describe:'Length of Neopixel strip', default:config.strip.length});
 			args.option('address',   {alias:'A', describe:'I2C bus address', default:config.i2c.address});
 			args.option('debug',     {alias:'D', describe:'Debug mode', default:false});
 
@@ -27,6 +27,8 @@ var App = function() {
 			args.demand(1);
 
 			args.argv;
+
+			console.log(args.argv);
 
 		}
 		catch(error) {
