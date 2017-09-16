@@ -50,6 +50,10 @@ module.exports = function NeopixelStrip(options) {
 		return _this.send([CMD_RESET]);
 	}
 
+	_this.clear = function(options) {
+		return _this.colorize(Object.assign({}, options, {offset: 0, length: _length, color: 'black'}));
+	}
+
 	_this.colorize = function(options) {
 
 		return new Promise(function(resolve, reject) {
