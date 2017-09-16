@@ -20,7 +20,7 @@ var Module = new function() {
 
 		args.option('offset',     {alias:'o', describe:'Offset on strip', default:0});
 		args.option('length',     {alias:'l', describe:'Length of strip to colorize', default:undefined});
-		args.option('color',      {alias:'c', describe:'Color', type: 'string', default:"rgb(0,0,0)"});
+		args.option('color',      {alias:'c', describe:'Color', type: 'string', default:"rgb(32,0,0)"});
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:undefined});
 		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
 		args.option('duration',   {alias:'d', describe:'Transition duration', default:100});
@@ -28,6 +28,7 @@ var Module = new function() {
 
 		args.check(function(argv) {
 
+			// ??
 			if (isArray(argv.color))
 				argv.color = argv.color[0];
 
