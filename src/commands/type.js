@@ -45,6 +45,7 @@ var Module = new function() {
 				var promise = Promise.resolve();
 
 				words.forEach(function(word) {
+					console.log(word);
 					promise = promise.then(function() {
 						return strip.colorize({
 							offset     : word.offset,
