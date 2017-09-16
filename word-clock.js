@@ -1,38 +1,38 @@
 #!/usr/bin/env node
 
 var sprintf = require('yow/sprintf');
-var Layout = require('./src/layout.js');
+var prefixLogs = require('yow/logs').prefix;
 
 var App = function() {
 
 
-	function run(argv) {
-		console.log(argv);
+	function run() {
+		try {
+			var args = require('yargs');
 
-		var layout = new Layout(argv);
-		var foo = layout.getLayout(argv.text);
-        console.log(JSON.stringify(foo, null, '\t'));
+			args.usage('Usage: $0 <command> [options]')
 
+			args.help();
 
-	}
+			//args.command(require('./src/commands/server.js'));
+			args.command(require('./src/commands/test.js'));
+			args.command(require('./src/commands/colorize.js'));
 
-	try {
-		var args = require('yargs');
+			args.wrap(null);
+			args.demand(1);
 
-		args.usage('Usage: $0 <command> [options]')
+			args.argv;
 
-		args.help();
+		}
+		catch(error) {
+			console.log(error.stack);
+			process.exit(-1);
+		}
 
+	};
 
-		args.wrap(null);
-
-		run(args.argv);
-
-	}
-	catch(error) {
-		console.log(error.stack);
-		process.exit(-1);
-	}
+	prefixLogs();
+	run();
 };
 
 module.exports = new App();

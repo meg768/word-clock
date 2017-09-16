@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/meg768/word-clock#readme",
   "dependencies": {
+    "i2c-bus": "^1.2.2",
     "yargs": "^8.0.2",
     "yow": "^1.0.81"
   }
