@@ -28,7 +28,7 @@ var App = function() {
 
 			args.argv;
 
-			console.log(args.argv);
+			console.log('*******************', args.argv);
 
 		}
 		catch(error) {
