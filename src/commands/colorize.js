@@ -80,7 +80,7 @@ var Module = new function() {
 						color  : argv.color
 					})
 					.catch(function(error) {
-						console.log('sdflkasdölfkasdlfjk', error);
+						console.log(error);
 					})
 
 
