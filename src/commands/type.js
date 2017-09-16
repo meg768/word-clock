@@ -19,7 +19,7 @@ var Module = new function() {
 
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:'ABCDEFG'});
 		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
-		args.option('duration',   {alias:'d', describe:'Transition duration', default:100});
+		args.option('duration',   {alias:'d', describe:'Transition duration', default:50});
 		args.option('color',      {alias:'c', describe:'Color', default:"rgb(64,0,0)"});
 
 		args.wrap(null);
@@ -44,20 +44,26 @@ var Module = new function() {
 				var letters = argv.text.split('');
 
 				letters.forEach(function(letter) {
-					var words = layout.getLayout(letter);
+					if (letter == ' ') {
+						promise = strip.pause(argv.duration);
+					}
+					else {
+						var words = layout.getLayout(letter);
 
-					words.forEach(function(word) {
-						console.log(word);
-						promise = promise.then(function() {
-							return strip.colorize({
-								offset     : word.offset,
-								length     : word.length,
-								color      : argv.color,
-								transition : argv.transition,
-								duration   : argv.duration
+						words.forEach(function(word) {
+							console.log(word);
+							promise = promise.then(function() {
+								return strip.colorize({
+									offset     : word.offset,
+									length     : word.length,
+									color      : argv.color,
+									transition : argv.transition,
+									duration   : argv.duration
+								});
 							});
 						});
-					});
+
+					}
 				});
 
 				promise.then(function() {
