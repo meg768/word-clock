@@ -37,26 +37,25 @@ var Module = new function() {
 
 			strip.initialize().then(function() {
 
-				var Layout = require('../scripts/layout.js');
-				var layout = new Layout();
-
-				var text = argv.text.split('').join(' ');
-				console.log(text);
-				var words = layout.getLayout(text);
 				var promise = Promise.resolve();
+				var Layout  = require('../scripts/layout.js');
+				var layout  = new Layout();
 
-				words.forEach(function(word) {
-					console.log(word);
-					promise = promise.then(function() {
-						return strip.colorize({
-							offset     : word.offset,
-							length     : word.length,
-							color      : argv.color,
-							transition : argv.transition,
-							duration   : argv.duration
+				var letters = argv.text.split('');
 
+				letters.forEach(function(letter) {
+					var words = layout.getLayout(letter);
 
-
+					words.forEach(function(word) {
+						console.log(word);
+						promise = promise.then(function() {
+							return strip.colorize({
+								offset     : word.offset,
+								length     : word.length,
+								color      : argv.color,
+								transition : argv.transition,
+								duration   : argv.duration
+							});
 						});
 					});
 				});
@@ -71,7 +70,8 @@ var Module = new function() {
 					console.log(error);
 				})
 
-			})
+
+			});
 
 		}
 		catch(error) {
