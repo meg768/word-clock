@@ -118,7 +118,7 @@ module.exports = function NeopixelStrip(options) {
 
 	_this.show = function(duration) {
 		duration = parseInt(duration);
-		return _this.send([CMD_SHOW, (duration >> 8) & 0xFF, duration & 0xFF]]);
+		return _this.send([CMD_SHOW, (duration >> 8) & 0xFF, duration & 0xFF]);
 
 	}
 	_this.initialize = function() {
