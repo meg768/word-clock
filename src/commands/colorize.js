@@ -88,9 +88,11 @@ var Module = new function() {
 						argv.length = argv.size;
 
 					strip.colorize({
-						offset : argv.offset,
-						length : argv.length,
-						color  : argv.color
+						offset     : argv.offset,
+						length     : argv.length,
+						color      : argv.color,
+						transition : argv.transition,
+						duration   : argv.duration
 					})
 					.then(function() {
 						return strip.clear({transition:argv.transition, duration:500});
