@@ -71,8 +71,6 @@ var Module = new function() {
 						});
 					});
 
-					console.log('GHEJ');
-
 					promise = promise.then(function() {
 						return strip.show(argv.duration);
 					})
