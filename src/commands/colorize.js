@@ -31,7 +31,7 @@ var Module = new function() {
 
 			// ??
 			if (argv.color == undefined) {
-				argv.color = sprintf('hsl(%d, 100%%, 50%%)', random(360));
+				argv.color = sprintf('hsl(%d, 100%%, 50%%)', 30 * random(12));
 			}
 			if (isArray(argv.color))
 				argv.color = argv.color[0];
