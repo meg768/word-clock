@@ -88,14 +88,16 @@ class NeopixelStrip : public Adafruit_NeoPixel {
 
             int length = numPixels();
 
+        
+
             if (1) {
                 RGB *rgb = _rgb.bytes();
                 
                 for (int i = 0; i < length; i++, rgb++) {
                     uint32_t color = getPixelColor(i);
-                    rgb->red   = (int)(uint8_t)(color >> 16);
-                    rgb->green = (int)(uint8_t)(color >> 8);
-                    rgb->blue  = (int)(uint8_t)(color);
+                    rgb->red   = (uint8_t)(color >> 16);
+                    rgb->green = (uint8_t)(color >> 8);
+                    rgb->blue  = (uint8_t)(color);
                 }
             }
 
@@ -108,17 +110,18 @@ class NeopixelStrip : public Adafruit_NeoPixel {
             float factorY = 1.033333333333333;
             float factorZ = 1.0;
 
-            long numSteps = (long)((float)duration * factorZ / ((float)length * factorX + factorY));
+            uint32_t numSteps = (uint32_t)((float)duration * factorZ / ((float)length * factorX + factorY));
 
-            for (long step = 0; step <= numSteps; step++) {
+
+            for (uint32_t step = 0; step <= numSteps; step++) {
 
                 RGB *rgb = _rgb.bytes();
                 RGB *strip = _strip.bytes();
 
                 for (int i = 0; i < length; i++, rgb++, strip++) {
-                    int pixelRed   = (long)rgb->red   + (step * ((long)strip->red   - (long)rgb->red))   / numSteps;
-                    int pixelGreen = (long)rgb->green + (step * ((long)strip->green - (long)rgb->green)) / numSteps;
-                    int pixelBlue  = (long)rgb->blue  + (step * ((long)strip->blue  - (long)rgb->blue))  / numSteps;
+                    uint8_t pixelRed   = (uint8_t)(rgb->red   + (step * ((uint32_t)strip->red   - (uint32_t)rgb->red))   / numSteps);
+                    uint8_t pixelGreen = (uint8_t)(rgb->green + (step * ((uint32_t)strip->green - (uint32_t)rgb->green)) / numSteps);
+                    uint8_t pixelBlue  = (uint8_t)(rgb->blue  + (step * ((uint32_t)strip->blue  - (uint32_t)rgb->blue))  / numSteps);
 
                     setPixelColor(i, pixelRed, pixelGreen, pixelBlue);
                 }

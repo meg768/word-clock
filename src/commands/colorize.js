@@ -24,7 +24,7 @@ var Module = new function() {
 		args.option('color',      {alias:'c', describe:'Color', type: 'string', default:undefined});
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:undefined});
 		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
-		args.option('duration',   {alias:'d', describe:'Transition duration', default:500});
+		args.option('duration',   {alias:'d', describe:'Transition duration', type: 'int', default:500});
 
 
 		args.check(function(argv) {
