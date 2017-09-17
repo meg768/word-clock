@@ -91,12 +91,6 @@ var Module = new function() {
 					.then(function() {
 						return strip.show(argv.duration);
 					})
-					.then(function() {
-						return strip.clear({transition:argv.transition, duration:500});
-					})
-					.then(function() {
-						return strip.show(argv.duration);
-					})
 					.catch(function(error) {
 						console.log(error);
 					})
