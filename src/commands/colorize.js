@@ -23,7 +23,7 @@ var Module = new function() {
 		args.option('color',      {alias:'c', describe:'Color', type: 'string', default:"rgb(32,0,0)"});
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:undefined});
 		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
-		args.option('duration',   {alias:'d', describe:'Transition duration', default:100});
+		args.option('duration',   {alias:'d', describe:'Transition duration', default:500});
 
 
 		args.check(function(argv) {
@@ -62,20 +62,28 @@ var Module = new function() {
 							return strip.colorize({
 								offset     : word.offset,
 								length     : word.length,
-								color      : argv.color,
-								transition : argv.transition,
-								duration   : argv.duration
-
-
-
+								color      : argv.color
 							});
 						});
 					});
 
 					promise.then(function() {
-						return strip.clear({transition:argv.transition, duration:500});
+						return strip.show(argv.duration);
 					})
-					promise.then(function() {
+
+					.then(function() {
+						return strip.pause(2000);
+					})
+
+					.then(function() {
+						return strip.clear();
+					})
+
+					.then(function() {
+						return strip.show(argv.duration);
+					})
+
+					.then(function() {
 						console.log('Done.');
 					})
 					.catch(function(error) {

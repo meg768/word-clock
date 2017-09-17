@@ -43,11 +43,6 @@ module.exports = function NeopixelStrip(options) {
 		});
 	}
 
-	_this.reset = function() {
-
-		debug('Resetting...');
-		return _this.send([CMD_RESET]);
-	}
 
 	_this.clear = function(options) {
 		return _this.colorize(Object.assign({}, options, {offset: 0, length: _length, color: 'black'}));
@@ -122,6 +117,7 @@ module.exports = function NeopixelStrip(options) {
 	};
 
 	_this.show = function(duration) {
+		duration = parseInt(duration);
 		return _this.send([CMD_SHOW, (duration >> 8) & 0xFF, duration & 0xFF]]);
 
 	}
