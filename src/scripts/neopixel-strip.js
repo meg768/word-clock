@@ -121,7 +121,7 @@ module.exports = function NeopixelStrip(options) {
 		var byteA = (duration >> 8) & 0xFF;
 		var byteB = duration & 0xFF;
 		varf bytes = [CMD_SHOW, byteA, byteB];
-		console.log(bytes);
+		console.log('BYTES!!!', bytes);
 		return _this.send(bytes);
 
 	}
