@@ -11,9 +11,8 @@ const int ACK = 6;
 const int NAK = 21;
 
 const int CMD_INITIALIZE    = 0x10;  // size
-const int CMD_SET_TO_COLOR  = 0x11;  // red, green, blue
-const int CMD_FADE_TO_COLOR = 0x12;  // red, green, blue
-const int CMD_WIPE_TO_COLOR = 0x13;  // red, green, blue, delay
+const int CMD_COLORIZE      = 0x11;  // offset, length, red, green, blue
+const int CMD_SHOW          = 0x12;  // duration
 
 const int ERR_OK                = 0;
 const int ERR_INVALID_PARAMETER = 1;
@@ -34,7 +33,7 @@ class App {
             _bufferIndex  = 0;
             _bufferLength = 0;
             _loop         = 0;
-
+            
             memset(_buffer, 0, sizeof(_buffer));
         }
 
@@ -46,24 +45,25 @@ class App {
         static void onRequestService() {
             return ((App *)_app)->onRequest();
         }
-
+        
         void setup() {
             Wire.onReceive(App::onReceiveService);
             Wire.onRequest(App::onRequestService);
             Wire.begin(APP_I2C_ADDRESS);
-
+            
             _hartBeat.setPin(13);
             _error.setPin(12);
             _busy.setPin(11);
             _debug1.setPin(10);
             _debug2.setPin(9);
 
-
+            
             _strip.begin();
-            _strip.setColor(0, 0, 0);
+            _strip.colorize(16, 0, 0);
+            _strip.show(500);
 
             _hartBeat.blink(5, 100);
-
+       
         }
 
 
@@ -107,12 +107,12 @@ class App {
         int readByte(int &byte) {
             if (!available())
                 return false;
-
+                
             byte = _buffer[_bufferIndex++];
 
             return true;
         }
-
+       
         int readRGB(int &red, int &green, int &blue) {
             return readByte(red) && readByte(green) && readByte(blue);
         }
@@ -126,7 +126,7 @@ class App {
             }
 
             return false;
-        };
+        };     
 
 
 
@@ -142,7 +142,7 @@ class App {
                 if (parseRequest() != ERR_OK)
                     _error.blink(2, 50);
 
-                _status = ACK;
+                _status = ACK; 
                 _busy.setState(LOW);
 
                 _bufferIndex  = 0;
@@ -155,7 +155,7 @@ class App {
         int parseRequest() {
 
             int command = 0;
-
+            
             if (!readByte(command))
                 return ERR_INVALID_COMMAND;
 
@@ -168,52 +168,34 @@ class App {
 
                     if (length < 0 || length > 240)
                         return ERR_INVALID_PARAMETER;
-
-                    _strip.setColor(0, 0, 0);
+                    
+                    _strip.colorize(0, 0, 0);
 
                     _strip.updateLength(length);
 
                     break;
                 }
 
-                case CMD_SET_TO_COLOR: {
+                case CMD_COLORIZE: {
 
                     int index = 0, lengthX = 0, red = 0, green = 0, blue = 0;
 
                     if (!readByte(index) || !readByte(lengthX) || !readRGB(red, green, blue))
                         return ERR_INVALID_PARAMETER;
 
-                    _strip.setColor(index, lengthX, red, green, blue);
+                    _strip.colorize(index, lengthX, red, green, blue);
 
                     break;
                 };
 
-                case CMD_WIPE_TO_COLOR: {
+                case CMD_SHOW: {
 
-                    int index = 0, length = 0, red = 0, green = 0, blue = 0, delay = 0;
-
-                    if (!readByte(index) || !readByte(length) || !readRGB(red, green, blue))
+                    int duration = 0;
+                    
+                    if (!readWord(duration))
                         return ERR_INVALID_PARAMETER;
 
-                    if (!readWord(delay))
-                        return ERR_INVALID_PARAMETER;
-
-                    _strip.wipeToColor(index, length, red, green, blue, delay);
-
-                    break;
-                }
-
-                case CMD_FADE_TO_COLOR: {
-
-                    int index = 0, length = 0, red = 0, green = 0, blue = 0, delay = 0;
-
-                    if (!readByte(index) || !readByte(length) || !readRGB(red, green, blue))
-                        return ERR_INVALID_PARAMETER;
-
-                    if (!readWord(delay))
-                        return ERR_INVALID_PARAMETER;
-
-                    _strip.fadeToColor(index, length, red, green, blue, delay);
+                    _strip.show(duration);
 
                     break;
                 }
@@ -232,9 +214,9 @@ class App {
         NeopixelStrip _strip;
         Blinker _hartBeat, _error, _busy, _debug1, _debug2;
 
-        volatile uint8_t _buffer[32];
+        volatile uint8_t _buffer[32]; 
         volatile int _bufferIndex, _bufferLength;
-
+    
         volatile int _status;
         volatile int _loop;
 

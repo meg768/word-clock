@@ -17,10 +17,9 @@ module.exports = function NeopixelStrip(options) {
 		throw new Error('I2C address not defined');
 
 	const CMD_INITIALIZE    = 0x10;
-	const CMD_SET_TO_COLOR  = 0x11;
-	const CMD_FADE_TO_COLOR = 0x12;
-	const CMD_WIPE_TO_COLOR = 0x13;
-	const CMD_RESET         = 0x14;
+	const CMD_COLORIZE      = 0x11;
+	const CMD_SHOW          = 0x12;
+
 
 	var _this          = this;         // That
 	var _debug         = 1;            // Output log messages to console?
@@ -106,23 +105,8 @@ module.exports = function NeopixelStrip(options) {
 			blue   = Math.round(blue);
 
 			var bytes = [];
+			bytes = [CMD_COLORIZE, offset, length, red, green, blue];
 
-			switch(options.transition) {
-				case 'fade': {
-					bytes = [CMD_FADE_TO_COLOR, offset, length, red, green, blue, (duration >> 8) & 0xFF, duration & 0xFF];
-					break;
-				}
-
-				case 'wipe': {
-					bytes = [CMD_WIPE_TO_COLOR, offset, length, red, green, blue, (duration >> 8) & 0xFF, duration & 0xFF];
-					break;
-				}
-
-				default: {
-					bytes = [CMD_SET_TO_COLOR, offset, length, red, green, blue];
-					break;
-				}
-			}
 
 			var startTime = new Date();
 
@@ -137,6 +121,10 @@ module.exports = function NeopixelStrip(options) {
 		});
 	};
 
+	_this.show = function(duration) {
+		return _this.send([CMD_SHOW, (duration >> 8) & 0xFF, duration & 0xFF]]);
+
+	}
 	_this.initialize = function() {
 		return _this.send([CMD_INITIALIZE, parseInt(_length)]);
 	}
