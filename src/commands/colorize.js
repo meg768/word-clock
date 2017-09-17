@@ -98,12 +98,16 @@ var Module = new function() {
 					strip.colorize({
 						offset     : argv.offset,
 						length     : argv.length,
-						color      : argv.color,
-						transition : argv.transition,
-						duration   : argv.duration
+						color      : argv.color
+					})
+					.then(function() {
+						return strip.show(argv.duration);
 					})
 					.then(function() {
 						return strip.clear({transition:argv.transition, duration:500});
+					})
+					.then(function() {
+						return strip.show(argv.duration);
 					})
 					.catch(function(error) {
 						console.log(error);
