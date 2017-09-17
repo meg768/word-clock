@@ -71,7 +71,7 @@ var Module = new function() {
 						});
 					});
 
-					promise.then(function() {
+					promise = promise.then(function() {
 						return strip.show(argv.duration);
 					})
 
