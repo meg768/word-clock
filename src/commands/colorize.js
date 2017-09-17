@@ -55,7 +55,7 @@ var Module = new function() {
 					var layout = new Layout();
 
 					var words = layout.getLayout(argv.text);
-					var promise = Promise.resolve();
+					var promise = strip.clear();
 
 					words.forEach(function(word) {
 						promise = promise.then(function() {
