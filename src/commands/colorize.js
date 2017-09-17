@@ -72,18 +72,6 @@ var Module = new function() {
 					})
 
 					.then(function() {
-						return strip.pause(2000);
-					})
-
-					.then(function() {
-						return strip.clear();
-					})
-
-					.then(function() {
-						return strip.show(argv.duration);
-					})
-
-					.then(function() {
 						console.log('Done.');
 					})
 					.catch(function(error) {

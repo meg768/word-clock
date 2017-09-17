@@ -49,16 +49,23 @@ class NeopixelStrip : public Adafruit_NeoPixel {
         void colorize(int index, int length, int red, int green, int blue) {
 
             int count = numPixels();
-            
+
+            if (index < 0)
+                index = 0;
+
+            if (index >= count)
+                index = count - 1;
+                
             if (index + length > count)
                 length = count - index;
 
             RGB *strip = _strip.bytes();
-
-            for (int i = 0; i < length; i++, strip++) {
-                strip->red = red;
-                strip->green = green;
-                strip->blue = blue;                
+            RGB *pixel = strip + index;
+            
+            for (int i = 0; i < length; i++, pixel++) {
+                pixel->red = red;
+                pixel->green = green;
+                pixel->blue = blue;                
             }
         }
         
@@ -80,18 +87,18 @@ class NeopixelStrip : public Adafruit_NeoPixel {
         void show(int duration) {
 
             int length = numPixels();
-            int offset = 0;
-            
 
-            RGB *rgb = _rgb.bytes();
-            RGB *strip = _strip.bytes();
-
-            for (int i = 0; i < length; i++) {
-                uint32_t color = getPixelColor(i + offset);
-                rgb[i].red   = (int)(uint8_t)(color >> 16);
-                rgb[i].green = (int)(uint8_t)(color >> 8);
-                rgb[i].blue  = (int)(uint8_t)(color);
+            if (1) {
+                RGB *rgb = _rgb.bytes();
+                
+                for (int i = 0; i < length; i++, rgb++) {
+                    uint32_t color = getPixelColor(i);
+                    rgb->red   = (int)(uint8_t)(color >> 16);
+                    rgb->green = (int)(uint8_t)(color >> 8);
+                    rgb->blue  = (int)(uint8_t)(color);
+                }
             }
+
        
 
             // Calculate number of steps to be finished in specified time
@@ -105,12 +112,15 @@ class NeopixelStrip : public Adafruit_NeoPixel {
 
             for (long step = 0; step <= numSteps; step++) {
 
-                for (int i = 0; i < length; i++) {
-                    int pixelRed   = (long)rgb[i].red   + (step * ((long)strip[i].red   - (long)rgb[i].red))   / numSteps;
-                    int pixelGreen = (long)rgb[i].green + (step * ((long)strip[i].green - (long)rgb[i].green)) / numSteps;
-                    int pixelBlue  = (long)rgb[i].blue  + (step * ((long)strip[i].blue  - (long)rgb[i].blue))  / numSteps;
+                RGB *rgb = _rgb.bytes();
+                RGB *strip = _strip.bytes();
 
-                    setPixelColor(offset + i, pixelRed, pixelGreen, pixelBlue);
+                for (int i = 0; i < length; i++, rgb++, strip++) {
+                    int pixelRed   = (long)rgb->red   + (step * ((long)strip->red   - (long)rgb->red))   / numSteps;
+                    int pixelGreen = (long)rgb->green + (step * ((long)strip->green - (long)rgb->green)) / numSteps;
+                    int pixelBlue  = (long)rgb->blue  + (step * ((long)strip->blue  - (long)rgb->blue))  / numSteps;
+
+                    setPixelColor(i, pixelRed, pixelGreen, pixelBlue);
                 }
 
                 Adafruit_NeoPixel::show();
