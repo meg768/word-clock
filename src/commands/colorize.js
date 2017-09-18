@@ -74,7 +74,7 @@ var Module = new function() {
 						});
 					});
 
-					.then(function() {
+					promise.then(function() {
 						console.log('Done.');
 					})
 					.catch(function(error) {
