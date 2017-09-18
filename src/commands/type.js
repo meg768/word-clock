@@ -21,6 +21,7 @@ var Module = new function() {
 		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
 		args.option('duration',   {alias:'d', describe:'Transition duration', default:50});
 		args.option('color',      {alias:'c', describe:'Color', default:"rgb(64,0,0)"});
+		args.option('step',       {alias:'c', describe:'Step', default:8});
 
 		args.wrap(null);
 	}
@@ -63,7 +64,7 @@ var Module = new function() {
 								});
 							});
 							promise = promise.then(function() {
-								return strip.show(16);
+								return strip.show(argv.step);
 							});
 
 							promise = promise.then(function() {
@@ -79,7 +80,7 @@ var Module = new function() {
 				});
 
 				promise = promise.then(function() {
-					return strip.show(16);
+					return strip.show(argv.step);
 				});
 
 				promise = promise.then(function() {
