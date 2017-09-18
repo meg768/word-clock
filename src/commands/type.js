@@ -5,6 +5,7 @@ var isObject   = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var isString   = require('yow/is').isString;
 var config     = require('../scripts/config.js');
+var random     = require('yow/random');
 
 
 var Module = new function() {
