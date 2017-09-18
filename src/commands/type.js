@@ -86,7 +86,7 @@ var Module = new function() {
 								return strip.colorize({
 									offset     : word.offset,
 									length     : word.length,
-									color      : argv.color.darken(0.25);
+									color      : argv.color.darken(0.25)
 								});
 							});
 						});
