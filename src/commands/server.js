@@ -9,6 +9,8 @@ var io = require('socket.io-client');
 //var SkyBightness = require('sky-brightness');
 //var SkyBightness = require('../scripts/sky-brightness.js');
 
+var tellTime = require('../scripts/tell-time.js');
+var Layout   = require('../scripts/layout.js');
 
 var Module = new function() {
 
@@ -21,6 +23,7 @@ var Module = new function() {
 		args.help('help').alias('help', 'h');
 
 		args.option('service',   {alias:'n', describe:'Service name', default:config.service.url});
+		args.option('interval',  {alias:'i', describe:'Upådate interval', default:10});
 
 		args.wrap(null);
 
@@ -72,14 +75,32 @@ var Module = new function() {
 
 
                 return new Promise(function(resolve, reject) {
+					var Layout = require('../scripts/layout.js');
+					var layout = new Layout();
 
-					Promise.resolve().then(function() {
-        				//strip.colorize(options);
+					var words = layout.getLayout(tellTime());
+					var promise = strip.clear();
 
-                    })
-                    .catch(function(error) {
-                        console.log(error);
-                    })
+					words.forEach(function(word) {
+						promise = promise.then(function() {
+							return strip.colorize({
+								offset     : word.offset,
+								length     : word.length,
+								color      : 'darkblue'
+							});
+						});
+					});
+
+					promise = promise.then(function() {
+						return strip.show(16);
+					});
+
+					promise.then(function() {
+						resolve();
+					})
+					.catch(function(error) {
+						console.log(error);
+					})
                     .then(function() {
                         resolve();
                     })
