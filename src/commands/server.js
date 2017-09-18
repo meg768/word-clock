@@ -72,6 +72,8 @@ var Module = new function() {
 
 
                 return new Promise(function(resolve, reject) {
+
+					Promise.resolve().then(function() {
         				//strip.colorize(options);
 
                     })
@@ -82,7 +84,7 @@ var Module = new function() {
                         resolve();
                     })
 
-                });
+                }
 
 			}
 
