@@ -23,7 +23,7 @@ var Module = new function() {
 		args.option('length',     {alias:'l', describe:'Length of strip to colorize', default:undefined});
 		args.option('color',      {alias:'c', describe:'Color', type: 'string', default:undefined});
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:undefined});
-		args.option('delay',      {alias:'d', describe:'Delay', type: 'int', default:100});
+		args.option('delay',      {alias:'d', describe:'Delay', type: 'int', default:16});
 
 
 		args.check(function(argv) {
@@ -59,6 +59,10 @@ var Module = new function() {
 
 					var words = layout.getLayout(argv.text);
 					var promise = strip.clear();
+
+					promise = promise.then(function() {
+						return strip.show(argv.delay);
+					});
 
 					words.forEach(function(word) {
 						promise = promise.then(function() {
