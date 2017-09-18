@@ -23,7 +23,6 @@ var Module = new function() {
 		args.option('length',     {alias:'l', describe:'Length of strip to colorize', default:undefined});
 		args.option('color',      {alias:'c', describe:'Color', type: 'string', default:undefined});
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:undefined});
-		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
 		args.option('delay',      {alias:'d', describe:'Delay', type: 'int', default:100});
 
 

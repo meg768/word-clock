@@ -20,7 +20,7 @@ var Module = new function() {
 
 		args.help('help').alias('help', 'h');
 
-		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:'ABCDEFG'});
+		args.option('text',       {alias:'t', describe:'Letters to colorize', default:'ABCDEFG'});
 		args.option('color',      {alias:'c', describe:'Color', default:undefined});
 		args.option('delay',      {alias:'d', describe:'Delay', default:8});
 
