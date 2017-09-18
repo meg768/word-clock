@@ -93,8 +93,7 @@ var Module = new function() {
 
 					promise = promise.then(function() {
 						return strip.show(16);
-					});
-
+					})
 					.catch(function(error) {
 						console.log(error);
 					})
