@@ -84,11 +84,9 @@ class NeopixelStrip : public Adafruit_NeoPixel {
        
         }
         
-        void show(int duration) {
+        void show(int numSteps) {
 
             int length = numPixels();
-
-        
 
             if (1) {
                 RGB *rgb = _rgb.bytes();
@@ -101,27 +99,15 @@ class NeopixelStrip : public Adafruit_NeoPixel {
                 }
             }
 
-       
-
-            // Calculate number of steps to be finished in specified time
-            // Factors are computed by measuring a fixed number of iterations for different lengths
-
-            float factorX = 0.273958333333333;
-            float factorY = 1.033333333333333;
-            float factorZ = 1.0;
-
-            uint32_t numSteps = (uint32_t)((float)duration * factorZ / ((float)length * factorX + factorY));
-
-
-            for (uint32_t step = 0; step <= numSteps; step++) {
+            for (int32_t step = 0; step <= numSteps; step++) {
 
                 RGB *rgb = _rgb.bytes();
                 RGB *strip = _strip.bytes();
 
                 for (int i = 0; i < length; i++, rgb++, strip++) {
-                    uint8_t pixelRed   = (uint8_t)(rgb->red   + (step * ((uint32_t)strip->red   - (uint32_t)rgb->red))   / numSteps);
-                    uint8_t pixelGreen = (uint8_t)(rgb->green + (step * ((uint32_t)strip->green - (uint32_t)rgb->green)) / numSteps);
-                    uint8_t pixelBlue  = (uint8_t)(rgb->blue  + (step * ((uint32_t)strip->blue  - (uint32_t)rgb->blue))  / numSteps);
+                    int32_t pixelRed   = ((int32_t)rgb->red   + (step * ((int32_t)strip->red   - (int32_t)rgb->red))   / numSteps);
+                    int32_t pixelGreen = ((int32_t)rgb->green + (step * ((int32_t)strip->green - (int32_t)rgb->green)) / numSteps);
+                    int32_t pixelBlue  = ((int32_t)rgb->blue  + (step * ((int32_t)strip->blue  - (int32_t)rgb->blue))  / numSteps);
 
                     setPixelColor(i, pixelRed, pixelGreen, pixelBlue);
                 }

@@ -24,7 +24,7 @@ var Module = new function() {
 		args.option('color',      {alias:'c', describe:'Color', type: 'string', default:undefined});
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:undefined});
 		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
-		args.option('duration',   {alias:'d', describe:'Transition duration', type: 'int', default:500});
+		args.option('delay',      {alias:'d', describe:'Delay', type: 'int', default:0});
 
 
 		args.check(function(argv) {
@@ -72,7 +72,7 @@ var Module = new function() {
 					});
 
 					promise = promise.then(function() {
-						return strip.show(argv.duration);
+						return strip.show(argv.delay);
 					})
 
 					.then(function() {
@@ -93,7 +93,7 @@ var Module = new function() {
 						color      : argv.color
 					})
 					.then(function() {
-						return strip.show(argv.duration);
+						return strip.show(argv.delay);
 					})
 					.catch(function(error) {
 						console.log(error);

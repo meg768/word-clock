@@ -59,8 +59,8 @@ class App {
 
             
             _strip.begin();
-            _strip.colorize(16, 0, 0);
-            _strip.show(500);
+            _strip.colorize(8, 0, 0);
+            _strip.show(0);
 
             _hartBeat.blink(5, 100);
        
@@ -100,6 +100,11 @@ class App {
             _debug2.setState(LOW);
         }
 
+        void flush() {
+            _bufferIndex  = 0;
+            _bufferLength = 0;
+        }
+        
         int available() {
             return _bufferLength - _bufferIndex;
         }
@@ -135,18 +140,18 @@ class App {
             if ((_loop++ % 5000) == 0)
                 _hartBeat.toggleState();
 
-            if (available()) {
+            while (available()) {
                 _busy.setState(HIGH);
                 _status = NAK;
 
-                if (parseRequest() != ERR_OK)
+                if (parseRequest() != ERR_OK) {
+                    flush();
                     _error.blink(2, 50);
+                }
 
                 _status = ACK; 
                 _busy.setState(LOW);
 
-                _bufferIndex  = 0;
-                _bufferLength = 0;
             }
 
         };
