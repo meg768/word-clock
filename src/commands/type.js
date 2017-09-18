@@ -18,10 +18,19 @@ var Module = new function() {
 		args.help('help').alias('help', 'h');
 
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:'ABCDEFG'});
-		args.option('transition', {alias:'x', describe:'Transition effect', choices:['fade', 'wipe', 'set'], default:'fade'});
-		args.option('duration',   {alias:'d', describe:'Transition duration', default:50});
-		args.option('color',      {alias:'c', describe:'Color', default:"rgb(64,0,0)"});
-		args.option('step',       {alias:'s', describe:'Step', default:8});
+		args.option('color',      {alias:'c', describe:'Color'});
+		args.option('delay',      {alias:'s', describe:'Step', default:8});
+
+		args.check(function(argv) {
+
+			if (argv.color == undefined) {
+				argv.color = sprintf('hsl(%d, 100%%, 25%%)', 30 * random(12));
+			}
+			if (isArray(argv.color))
+				argv.color = argv.color[0];
+
+			return true;
+		});
 
 		args.wrap(null);
 	}
@@ -48,14 +57,13 @@ var Module = new function() {
 				letters.forEach(function(letter) {
 					if (letter == ' ') {
 						promise = promise.then(function() {
-							return strip.pause(100);
+							return strip.pause(300);
 						})
 					}
 					else {
 						var words = layout.getLayout(letter);
 
 						words.forEach(function(word) {
-							console.log(word);
 							promise = promise.then(function() {
 								return strip.colorize({
 									offset     : word.offset,
@@ -63,8 +71,9 @@ var Module = new function() {
 									color      : argv.color
 								});
 							});
+
 							promise = promise.then(function() {
-								return strip.show(argv.step);
+								return strip.show(argv.delay);
 							});
 
 							promise = promise.then(function() {
@@ -80,7 +89,7 @@ var Module = new function() {
 				});
 
 				promise = promise.then(function() {
-					return strip.show(argv.step);
+					return strip.show(argv.delay);
 				});
 
 				promise = promise.then(function() {
