@@ -7,6 +7,7 @@ var isString   = require('yow/is').isString;
 var config     = require('../scripts/config.js');
 var random     = require('yow/random');
 var isArray    = require('yow/is').isArray;
+var Color      = require('color');
 
 
 var Module = new function() {
@@ -31,6 +32,8 @@ var Module = new function() {
 
 			if (isArray(argv.color))
 				argv.color = argv.color[0];
+
+			argv.color = Color(argv.color);
 
 			return true;
 		});
@@ -83,7 +86,7 @@ var Module = new function() {
 								return strip.colorize({
 									offset     : word.offset,
 									length     : word.length,
-									color      : 'black'
+									color      : argv.color.darken(0.25);
 								});
 							});
 						});
