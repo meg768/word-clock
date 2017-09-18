@@ -117,6 +117,10 @@ var Module = new function() {
 					fn({status:'OK'});
 			});
 
+			socket.on('reset', function(fn) {
+				if (isFunction(fn))
+					fn({status:'OK'});
+			});
 
 			socket.on('colorize', function(options, fn) {
 				disableClock();
