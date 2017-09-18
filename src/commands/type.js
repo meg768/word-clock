@@ -18,7 +18,7 @@ var Module = new function() {
 		args.help('help').alias('help', 'h');
 
 		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:'ABCDEFG'});
-		args.option('color',      {alias:'c', describe:'Color'});
+		args.option('color',      {alias:'c', describe:'Color', default:undefined});
 		args.option('delay',      {alias:'s', describe:'Step', default:8});
 
 		args.check(function(argv) {
@@ -26,6 +26,7 @@ var Module = new function() {
 			if (argv.color == undefined) {
 				argv.color = sprintf('hsl(%d, 100%%, 25%%)', 30 * random(12));
 			}
+			
 			if (isArray(argv.color))
 				argv.color = argv.color[0];
 
