@@ -47,12 +47,13 @@ module.exports = function tellTime() {
     var minute = now.getMinutes();
     var hour   = now.getHours() % 12;
 
-    if (minute >= 25)
-        hour += 1;
 
     if (minutes[minute] == undefined) {
         minute = 5 * Math.floor((minute + 2.5) / 5);
     }
+
+    if (minute >= 25)
+        hour += 1;
 
     return minutes[minute] + hours[hour];
 
