@@ -96,8 +96,7 @@ module.exports = function() {
                 if (words.length == 1)
                     result.push(match);
                 else {
-                    //match.next = findAllWords(words.slice(1), Math.min(match.index + match.text.length + 1, Math.floor(match.index / _columns) + _columns));
-                    match.next = findAllWords(words.slice(1), match.index + match.text.length + 1);
+                    match.next = findAllWords(words.slice(1), Math.min(match.index + match.text.length + 1, Math.floor(match.index / _columns) * columns + _columns));
 
                     if (match.next.length > 0)
                         result.push(match);
