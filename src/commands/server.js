@@ -75,18 +75,21 @@ var Module = new function() {
 
 
                 return new Promise(function(resolve, reject) {
+					var now = new Date();
 					var Layout = require('../scripts/layout.js');
 					var layout = new Layout();
 
 					var words = layout.getLayout(tellTime());
 					var promise = strip.clear();
 
+					var hue = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
+
 					words.forEach(function(word) {
 						promise = promise.then(function() {
 							return strip.colorize({
 								offset     : word.offset,
 								length     : word.length,
-								color      : 'darkblue'
+								color      : sprintf('hsl(%d, 100%%, 50%%)', hue);
 							});
 						});
 					});
