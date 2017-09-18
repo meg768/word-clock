@@ -53,12 +53,14 @@ module.exports = function() {
 
     function findWord(word) {
         var regexp = new RegExp(word, "g");
-        var text = _layout.join("");
         var match, matches = [];
 
-        while ((match = regexp.exec(text)) != null) {
-            matches.push({text:word, index:match.index});
-        }
+        _layout.forEach(function(text) {
+            while ((match = regexp.exec(text)) != null) {
+                matches.push({text:word, index:match.index});
+            }
+
+        });
 
         return matches;
     }
