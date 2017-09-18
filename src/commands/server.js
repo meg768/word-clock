@@ -84,7 +84,7 @@ var Module = new function() {
                         resolve();
                     })
 
-                }
+                });
 
 			}
 
