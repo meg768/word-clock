@@ -63,9 +63,9 @@ var Module = new function() {
 								});
 							});
 							promise = promise.then(function() {
-								return strip.show(8);
+								return strip.show(16);
 							});
-							
+
 							promise = promise.then(function() {
 								return strip.colorize({
 									offset     : word.offset,
