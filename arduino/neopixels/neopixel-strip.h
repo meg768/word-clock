@@ -99,24 +99,33 @@ class NeopixelStrip : public Adafruit_NeoPixel {
                 }
             }
 
-            for (int32_t step = 0; step <= numSteps; step++) {
+            if (numSteps > 0) {
+                for (int32_t step = 0; step < numSteps; step++) {
+    
+                    RGB *rgb = _rgb.bytes();
+                    RGB *strip = _strip.bytes();
+    
+                    for (int i = 0; i < length; i++, rgb++, strip++) {
+                        int32_t pixelRed   = ((int32_t)rgb->red   + (step * ((int32_t)strip->red   - (int32_t)rgb->red))   / numSteps);
+                        int32_t pixelGreen = ((int32_t)rgb->green + (step * ((int32_t)strip->green - (int32_t)rgb->green)) / numSteps);
+                        int32_t pixelBlue  = ((int32_t)rgb->blue  + (step * ((int32_t)strip->blue  - (int32_t)rgb->blue))  / numSteps);
+    
+                        setPixelColor(i, pixelRed, pixelGreen, pixelBlue);
+                    }
+    
+                    Adafruit_NeoPixel::show();
+                }
+            }
 
-                RGB *rgb = _rgb.bytes();
+            if (1) {
                 RGB *strip = _strip.bytes();
 
-                for (int i = 0; i < length; i++, rgb++, strip++) {
-                    int32_t pixelRed   = ((int32_t)rgb->red   + (step * ((int32_t)strip->red   - (int32_t)rgb->red))   / numSteps);
-                    int32_t pixelGreen = ((int32_t)rgb->green + (step * ((int32_t)strip->green - (int32_t)rgb->green)) / numSteps);
-                    int32_t pixelBlue  = ((int32_t)rgb->blue  + (step * ((int32_t)strip->blue  - (int32_t)rgb->blue))  / numSteps);
-
-                    setPixelColor(i, pixelRed, pixelGreen, pixelBlue);
+                for (int i = 0; i < length; i++, strip++) {
+                    setPixelColor(i, strip->red, strip->green, strip->blue);
                 }
 
                 Adafruit_NeoPixel::show();
-                
-
             }
-                
 
         }
 

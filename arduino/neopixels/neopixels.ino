@@ -59,8 +59,10 @@ class App {
 
             
             _strip.begin();
-            _strip.colorize(8, 0, 0);
-            _strip.show(1);
+            _strip.colorize(0, 0, 16);
+            _strip.show(16);
+            _strip.colorize(0, 0, 0);
+            _strip.show(16);
 
             _hartBeat.blink(5, 100);
        

@@ -35,18 +35,19 @@ var Module = new function() {
 				length  : argv.size
 			});
 
-			strip.initialize().then(function() {
+			Promise.resolve().then(function() {
 
-				var promise = Promise.resolve();
+				var promise = strip.clear();
 				var Layout  = require('../scripts/layout.js');
 				var layout  = new Layout();
 
 				var letters = argv.text.split('');
 
+
 				letters.forEach(function(letter) {
 					if (letter == ' ') {
 						promise = promise.then(function() {
-							return strip.pause(argv.duration);
+							return strip.pause(100);
 						})
 					}
 					else {
@@ -58,25 +59,28 @@ var Module = new function() {
 								return strip.colorize({
 									offset     : word.offset,
 									length     : word.length,
-									color      : argv.color,
-									transition : argv.transition,
-									duration   : argv.duration
+									color      : argv.color
 								});
+							});
+							promise = promise.then(function() {
+								return strip.show(8);
 							});
 						});
 
 					}
 				});
 
-				promise.then(function() {
-					return strip.clear({transition:argv.transition, duration:500});
-				})
-				promise.then(function() {
+				promise = promise.then(function() {
+					return strip.show(16);
+				});
+
+				promise = promise.then(function() {
 					console.log('Done.');
-				})
-				.catch(function(error) {
+				});
+
+				promise = promise.catch(function(error) {
 					console.log(error);
-				})
+				});
 
 
 			});
