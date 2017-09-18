@@ -81,7 +81,7 @@ var Module = new function() {
 							});
 
 							promise = promise.then(function() {
-								var color = Color(argv.color).darken(0.50);
+								var color = Color(argv.color).darken(0.25);
 
 								return strip.colorize({
 									offset     : word.offset,
@@ -96,6 +96,14 @@ var Module = new function() {
 
 				promise = promise.then(function() {
 					return strip.show(argv.delay);
+				});
+
+				promise = promise.then(function() {
+					return strip.clear();
+				});
+
+				promise = promise.then(function() {
+					return strip.show(argv.delay * 2);
 				});
 
 				promise = promise.then(function() {
