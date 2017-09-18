@@ -59,7 +59,7 @@ module.exports = function() {
             var text = _layout[i];
 
             while ((match = regexp.exec(text)) != null) {
-                matches.push({text:word, index:match.index});
+                matches.push({text:word, index:i * _columns + match.index});
             }
 
         }
