@@ -81,7 +81,7 @@ var Module = new function() {
 							});
 
 							promise = promise.then(function() {
-								var color = Color(argv.color).darken(0.25);
+								var color = Color(argv.color).darken(0.75);
 
 								return strip.colorize({
 									offset     : word.offset,
