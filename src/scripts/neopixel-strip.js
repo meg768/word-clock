@@ -116,13 +116,12 @@ module.exports = function NeopixelStrip(options) {
 		});
 	};
 
-	_this.show = function(duration) {
-		duration = parseInt(duration);
-		var byteA = (duration >> 8) & 0xFF;
-		var byteB = duration & 0xFF;
-		var bytes = [CMD_SHOW, byteA, byteB];
-		console.log('BYTES!!!', bytes);
-		return _this.send(bytes);
+	_this.show = function(delay) {
+
+		var byteA = (parseInt(delay) >> 8) & 0xFF;
+		var byteB = parseInt(delay) & 0xFF;
+
+		return _this.send([CMD_SHOW, byteA, byteB]);
 
 	}
 	_this.initialize = function() {
