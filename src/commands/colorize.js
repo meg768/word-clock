@@ -69,11 +69,10 @@ var Module = new function() {
 								color      : argv.color
 							});
 						});
+						promise = promise.then(function() {
+							return strip.show(argv.delay);
+						});
 					});
-
-					promise = promise.then(function() {
-						return strip.show(argv.delay);
-					})
 
 					.then(function() {
 						console.log('Done.');
