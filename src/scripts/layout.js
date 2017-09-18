@@ -55,12 +55,14 @@ module.exports = function() {
         var regexp = new RegExp(word, "g");
         var match, matches = [];
 
-        _layout.forEach(function(text) {
+        for (var i = 0; i < _layout.length; i++) {
+            var text = _layout[i];
+
             while ((match = regexp.exec(text)) != null) {
                 matches.push({text:word, index:match.index});
             }
 
-        });
+        }
 
         return matches;
     }
