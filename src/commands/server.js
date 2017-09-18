@@ -95,9 +95,6 @@ var Module = new function() {
 						return strip.show(16);
 					});
 
-					promise.then(function() {
-						resolve();
-					})
 					.catch(function(error) {
 						console.log(error);
 					})
