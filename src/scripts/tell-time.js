@@ -1,6 +1,6 @@
 
 
-function tellTime() {
+module.exports = function tellTime() {
 
     var minutes = {
         0  : '',
@@ -58,4 +58,4 @@ function tellTime() {
 
 
 }
-console.log(tellTime());
+//console.log(tellTime());
