@@ -17,9 +17,9 @@ var Module = new function() {
 
 		args.help('help').alias('help', 'h');
 
-		args.option('text',       {alias:'T', describe:'Text strip to colorize', default:'ABCDEFG'});
-		args.option('color',      {alias:'C', describe:'Color', default:undefined});
-		args.option('delay',      {alias:'D', describe:'Delay', default:8});
+		args.option('text',       {alias:'t', describe:'Text strip to colorize', default:'ABCDEFG'});
+		args.option('color',      {alias:'c', describe:'Color', default:undefined});
+		args.option('delay',      {alias:'d', describe:'Delay', default:8});
 
 		args.check(function(argv) {
 
