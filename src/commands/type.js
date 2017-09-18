@@ -33,8 +33,6 @@ var Module = new function() {
 			if (isArray(argv.color))
 				argv.color = argv.color[0];
 
-			argv.color = Color(argv.color);
-
 			return true;
 		});
 
@@ -83,10 +81,12 @@ var Module = new function() {
 							});
 
 							promise = promise.then(function() {
+								var color = Color(argv.color).darken(0.25);
+
 								return strip.colorize({
 									offset     : word.offset,
 									length     : word.length,
-									color      : argv.color.darken(0.25)
+									color      : color
 								});
 							});
 						});
