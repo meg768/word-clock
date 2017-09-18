@@ -89,7 +89,7 @@ var Module = new function() {
 							return strip.colorize({
 								offset     : word.offset,
 								length     : word.length,
-								color      : sprintf('hsl(%d, 100%%, 50%%)', hue);
+								color      : sprintf('hsl(%d, 100%%, 50%%)', hue)
 							});
 						});
 					});
