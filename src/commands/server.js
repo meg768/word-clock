@@ -87,7 +87,7 @@ var Module = new function() {
 					time.forEach(function(item) {
 						timeText += item.text;
 					});
-					var words = layout.getLayout(time);
+					var words = layout.getLayout(timeText);
 					var promise = strip.clear();
 
 					console.log(time);
