@@ -82,10 +82,14 @@ var Module = new function() {
 					var tellTime = new TellTime();
 
 					tellTime.getText().then(function(time) {
+						var colors = {};
 						var timeText = time.map(function(item) {
 							return item.text;
 						}).join(' ');
 
+						time.forEach(function(x) {
+							colors[x.text] = x.color;
+						});
 						var words = layout.getLayout(timeText);
 						var promise = strip.clear();
 
@@ -98,7 +102,7 @@ var Module = new function() {
 								return strip.colorize({
 									offset     : word.offset,
 									length     : word.length,
-									color      : sprintf('hsl(%d, 100%%, 50%%)', hue)
+									color      : colors[word.text] //sprintf('hsl(%d, 100%%, 50%%)', hue)
 								});
 							});
 						});
