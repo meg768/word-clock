@@ -246,7 +246,7 @@ var Module = module.exports = function() {
 
                     var index     = state[word];
                     var hue       = 240;
-                    var luminance = index == undefined ? 10 : index * 50;
+                    var luminance = index == undefined ? 1 : index * 50;
                     var color     = sprintf('hsl(%d, 100%%, %d%%)', hue, parseInt(luminance));
 
                     return {
