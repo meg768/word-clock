@@ -4,6 +4,8 @@ var sprintf = require('yow/sprintf');
 
 var Module = module.exports = function() {
 
+    var _this = this;
+
     function getWeatherCondition(code) {
         // https://stackoverflow.com/questions/12142094/msn-weather-api-list-of-conditions
 
@@ -112,61 +114,60 @@ var Module = module.exports = function() {
         }
     }
 
-    function getSkyColors(text) {
-
+    function getWeatherState(text) {
 
 
         switch(text) {
             case 'Cloudy':
-                return {'MOLN': 100};
+                return {'MOLN': 1.0};
 
             case 'Mostly Cloudy':
-                return {'SOL': 25, 'MOLN':75};
+                return {'SOL': 0.25, 'MOLN':0.75};
 
             case 'Partly Cloudy':
-                return {'SOL': 75, 'MOLN':25};
+                return {'SOL': 0.75, 'MOLN':0.25};
 
 
             case 'Partly Sunny':
-                return {'SOL': 50, 'MOLN': 50};
+                return {'SOL': 0.50, 'MOLN': 0.50};
 
             case 'Mostly Sunny':
-                return {'SOL': 75, 'MOLN': 25};
+                return {'SOL': 0.75, 'MOLN': 0.25};
 
             case 'Clear':
             case 'Sunny':
-                return {'SOL':100};
+                return {'SOL':1.0};
 
             case 'Mostly Clear':
-                return {'SOL':75, 'MOLN':25};
+                return {'SOL':0.75, 'MOLN':0.25};
 
             case 'Rain':
-                return {'REGN':100, 'MOLN':100};
+                return {'REGN':1.0, 'MOLN':1.0};
 
             case 'Light Rain':
-                return {'REGN':50, 'MOLN':50};
+                return {'REGN':0.5, 'MOLN':0.5};
 
             case 'Rain Showers':
-                return {'REGN':50, 'MOLN':50};
+                return {'REGN':0.5, 'MOLN':0.5};
 
             case 'Fog':
-                return {'SOL': 25, 'MOLN': 25};
+                return {'SOL': 0.25, 'MOLN': 0.25};
 
             case 'T-Storms':
-                return {'MOLN': 100, 'REGN':50, 'VIND':100};
+                return {'MOLN': 1.0, 'REGN':0.5, 'VIND':1.0};
 
             case 'Snow':
-                return {'MOLN': 100, 'SNÖ':100};
+                return {'MOLN': 1.0, 'SNÖ':1.0};
 
             case 'Light Snow':
-                return {'MOLN': 50, 'SNÖ':50};
+                return {'MOLN': 0.5, 'SNÖ':0.5};
 
         }
 
 
         console.log(sprintf('Weather condition \'%s\' not defined.', text));
 
-        return {'REGN':100, 'MOLN':100, 'SNÖ':100, 'VIND':100, 'SOL':100};
+        return {'REGN':1.0, 'MOLN':1.0, 'SNÖ':1.0, 'VIND':1.0, 'SOL':1.0};
 
     }
 
@@ -188,8 +189,7 @@ var Module = module.exports = function() {
         });
     }
 
-
-    function getWeatherColors() {
+    function getForecast() {
 
         return new Promise(function(resolve, reject) {
             getWeather().then(function(weather) {
@@ -210,7 +210,7 @@ var Module = module.exports = function() {
                     var date = new Date(day.date);
 
                     // Just for debugging
-                    getSkyColors(day.skytextday);
+                    getWeatherState(day.skytextday);
 
                     if (date.valueOf() == today.valueOf())
                         forecastToday = day;
@@ -221,30 +221,64 @@ var Module = module.exports = function() {
                 });
 
 
-//                console.log(getSkyColors(current.skytext));
-//                console.log(getSkyColors(forecastToday.skytextday));
-//                console.log(getSkyColors(forecastTomorrow.skytextday));
-
-                resolve(getSkyColors(forecastTomorrow.skytextday));
+                resolve({
+                    current:current.skytext,
+                    today:forecastToday.skytextday,
+                    tomorrow:forecastTomorrow.skytextday
+                });
 
             })
             .catch(function(error) {
-                reject(error);;
+                reject(error);
+            })
+
+        });
+    }
+
+    _this.getText = function() {
+
+        return new Promise(function(resolve, reject) {
+
+            getForecast().then(function(forecast) {
+                var state = getWeatherState(forecast.tomorrow);
+                var words = "SOL VIND SNÖ MOLN REGN".split(' ');
+                var text  = words.map(function(word) {
+
+                    var index     = state[word];
+                    var hue       = 240;
+                    var luminance = index == undefined ? 10 : index * 50;
+                    var color     = sprintf('hsl(%d, 100%%, %d%%)', hue, parseInt(luminance));
+
+                    return {
+                        text  : word,
+                        color : color
+                    }
+                });
+                resolve(text);
+
+            })
+            .catch(function(error) {
+                reject(error);
             })
 
         });
     }
 
 
-    function init() {
-        getWeatherColors().then(function(weather) {
-            console.log(weather);
-        })
-        .catch(function(error) {
-            console.log(error);
-        })
-    }
-    init();
 };
+/*
+function test() {
+    var module = new Module();
 
-new Module();
+    module.getText().then(function(text) {
+        console.log(text);
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+
+}
+
+test();
+
+*/
