@@ -24,6 +24,7 @@ module.exports = function() {
     var _columns = _layout[0].length;
     var _rows    = _layout.length;
     var _this    = this;
+    var _cache   = {};
 
     _this.getLayout = function(text) {
         return findWords(text);

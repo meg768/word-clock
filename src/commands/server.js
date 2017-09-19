@@ -79,8 +79,11 @@ var Module = new function() {
 					var Layout = require('../scripts/layout.js');
 					var layout = new Layout();
 
-					var words = layout.getLayout(tellTime());
+					var time = tellTime();
+					var words = layout.getLayout(time);
 					var promise = strip.clear();
+
+					console.log(time);
 
 					var hue = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
 
