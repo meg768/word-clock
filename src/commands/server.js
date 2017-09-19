@@ -81,38 +81,44 @@ var Module = new function() {
 					var layout = new Layout();
 					var tellTime = new TellTime();
 
-					var time = tellTime.getText();
+					tellTime.getText().then(function(time) {
+						var timeText = time.map(function(item) {
+							return item.text;
+						}).join(' ');
 
-					var timeText = time.map(function(item) {
-						return item.text;
-					}).join(' ');
+						var words = layout.getLayout(timeText);
+						var promise = strip.clear();
 
-					var words = layout.getLayout(timeText);
-					var promise = strip.clear();
+						console.log(time);
 
-					console.log(time);
+						var hue = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
 
-					var hue = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
-
-					words.forEach(function(word) {
-						promise = promise.then(function() {
-							return strip.colorize({
-								offset     : word.offset,
-								length     : word.length,
-								color      : sprintf('hsl(%d, 100%%, 50%%)', hue)
+						words.forEach(function(word) {
+							promise = promise.then(function() {
+								return strip.colorize({
+									offset     : word.offset,
+									length     : word.length,
+									color      : sprintf('hsl(%d, 100%%, 50%%)', hue)
+								});
 							});
 						});
-					});
 
-					promise = promise.then(function() {
-						return strip.show(16);
+						promise = promise.then(function() {
+							return strip.show(16);
+						})
+						.catch(function(error) {
+							console.log(error);
+						})
+	                    .then(function() {
+	                        resolve();
+	                    })
+
+
 					})
 					.catch(function(error) {
-						console.log(error);
-					})
-                    .then(function() {
-                        resolve();
-                    })
+						reject(error);
+					});
+
 
                 });
 
