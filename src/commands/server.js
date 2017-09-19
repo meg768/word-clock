@@ -83,10 +83,10 @@ var Module = new function() {
 
 					var time = tellTime.getText();
 
-					var timeText = "";
-					time.forEach(function(item) {
-						timeText += item.text;
-					});
+					var timeText = time.map(function(item) {
+						return item.text;
+					}).join(' ');
+
 					var words = layout.getLayout(timeText);
 					var promise = strip.clear();
 
