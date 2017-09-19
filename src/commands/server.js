@@ -76,10 +76,17 @@ var Module = new function() {
 
                 return new Promise(function(resolve, reject) {
 					var now = new Date();
+					var TellTime = require('../scripts/tell-time.js')
 					var Layout = require('../scripts/layout.js');
 					var layout = new Layout();
+					var tellTime = new TellTime();
 
-					var time = tellTime();
+					var time = tellTime.getText();
+
+					var timeText = "";
+					time.forEach(function(item) {
+						timeText += item.text;
+					});
 					var words = layout.getLayout(time);
 					var promise = strip.clear();
 
