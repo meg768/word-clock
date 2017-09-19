@@ -76,7 +76,7 @@ var Module = new function() {
 
                 return new Promise(function(resolve, reject) {
 					var now = new Date();
-					var TellTime = require('../scripts/weather.js')
+					var TellTime = require('../scripts/tell-time.js')
 					var Layout = require('../scripts/layout.js');
 					var layout = new Layout();
 					var tellTime = new TellTime();
