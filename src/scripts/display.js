@@ -134,7 +134,7 @@ var Module = module.exports = function(strip) {
                 var index = lookupWord(word.text, cursor);
 
                 if (index == undefined)
-                    throw new Error('Invalid word.');
+                    throw new Error('Invalid word:', word.text);
 
                 layout.push({text:word.text, color:word.color, index:index});
 
