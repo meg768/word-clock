@@ -25,34 +25,17 @@ var Module = module.exports = function(strip) {
     var _this    = this;
 
     _this.clear = function() {
-        return strip.clear();
+        return strip.clear.apply(this, arguments);
     }
 
-    _this.show = function(delay) {
-        return strip.show(delay);
+    _this.show = function() {
+        return strip.show.apply(this, arguments);
     }
 
-    _this.fadeIn = function(delay) {
-        return strip.show(delay);
+    _this.colorize = function() {
+        return strip.colorize.apply(this, arguments);
     }
 
-    _this.fadeOut = function(delay) {
-        return new Promise(function(resolve, reject) {
-
-            strip.clear().then(function() {
-                return strip.show(delay);
-            })
-
-            .then(function() {
-                resolve();
-            })
-
-            .catch(function(error) {
-                reject(error);
-            })
-        });
-
-    }
 
 
     _this.draw = function(words) {
@@ -68,7 +51,7 @@ var Module = module.exports = function(strip) {
                     var col     = word.index % _columns;
                     var offset  = (row % 2) == 0 ? row * _columns + col : (row + 1) * _columns - col - word.text.length;
 
-                    return strip.colorize({
+                    return _this.colorize({
                         offset     : offset,
                         length     : word.text.length,
                         color      : word.color
