@@ -73,7 +73,7 @@ module.exports = class extends Animation {
 
 	}
 
-	function getCurrencyText() {
+	getCurrencyText() {
 
 		var id = {
 			'JPY': 108702,
