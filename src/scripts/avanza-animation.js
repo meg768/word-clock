@@ -75,6 +75,8 @@ module.exports = class extends Animation {
 
 
 	getText() {
+		var self = this;
+
 		return new Promise(function(resolve, reject) {
 			self.login().then(function() {
 				return self.getMarketIndex(108702);
