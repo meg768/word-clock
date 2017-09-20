@@ -107,6 +107,19 @@ var Module = module.exports = function(strip) {
 
     _this.computeLayout = function(words) {
 
+        if (isString(words)) {
+            words = words.split(' ');
+
+            // Ignore multiple spaces between words
+            words = words.filter(function(word){
+                return word.length > 0;
+            });
+
+            words = words.map(function(word) {
+                return {text:word, color:'red'}
+            });
+        }
+
         try {
             var layout = [];
 
@@ -128,18 +141,6 @@ var Module = module.exports = function(strip) {
                 });
             }
 
-            if (isString(words)) {
-                words = words.split(' ');
-
-                // Ignore multiple spaces between words
-                words = words.filter(function(word){
-                    return word.length > 0;
-                });
-
-                words = words.map(function(word) {
-                    return {text:word, color:'red'}
-                });
-            }
 
             var cursor = 0;
 
@@ -149,11 +150,7 @@ var Module = module.exports = function(strip) {
                 if (index == undefined)
                     throw new Error('Invalid word.');
 
-                var row     = Math.floor(index / _columns);
-                var col     = index % _columns;
-                var offset  = (row % 2) == 0 ? row * _columns + col : (row + 1) * _columns - col - word.text.length;
-
-                layout.push({text:word.text, color:word.color, row:row, col:col,    index:index, offset:offset});
+                layout.push({text:word.text, color:word.color, index:index});
 
                 cursor = Math.min(index + word.text.length + 1, Math.floor(index / _columns) * _columns + _columns);
             });
