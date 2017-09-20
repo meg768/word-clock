@@ -7,11 +7,7 @@ var prefixLogs = require('yow/logs').prefix;
 var config = require('../scripts/config.js');
 var io = require('socket.io-client');
 var Timer = require('yow/timer');
-//var SkyBightness = require('sky-brightness');
-//var SkyBightness = require('../scripts/sky-brightness.js');
 
-var tellTime = require('../scripts/tell-time.js');
-var Layout   = require('../scripts/layout.js');
 
 var Module = new function() {
 
