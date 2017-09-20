@@ -167,7 +167,10 @@ module.exports = class extends Animation {
                 reject(error);
             })
 
-        });
+        })
+        .catch(function(error) {
+            reject(error);
+        })
     }
 
     getText() {
