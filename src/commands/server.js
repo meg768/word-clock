@@ -71,6 +71,11 @@ var Module = new function() {
 
 			function showClock() {
 
+				var Animation = require('../scripts/weather.js');
+
+				var animation = new Animation();
+				animation.show(display)
+				/*
                 return new Promise(function(resolve, reject) {
 					var now = new Date();
 					var TellTime = require('../scripts/weather.js')
@@ -99,6 +104,7 @@ var Module = new function() {
                         resolve();
                     });
                 });
+				*/
 
 			}
 
