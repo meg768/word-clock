@@ -19,7 +19,7 @@ module.exports = class extends Animation {
 		this.cache     = {};
 
 		this.textProviderIndex  = 0;
-		this.textProviders      = [this.getIndexText, this.getCurrencyText];
+		this.textProviders      = [this.getIndexText.bind(this), this.getCurrencyText.bind(this)];
 
 	}
 
