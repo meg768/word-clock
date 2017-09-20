@@ -52,8 +52,6 @@ var Module = new function() {
 					var Display = require('../scripts/display.js');
 					var display = new Display(strip);
 
-					var words = layout.getLayout(argv.text);
-
 					display.fadeOut(argv.delay).then(function() {
 						return display.drawText(argv.text, argv.color);
 					})

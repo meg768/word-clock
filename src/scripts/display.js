@@ -65,6 +65,7 @@ var Module = module.exports = function(strip) {
     _this.draw = function(words) {
 
         return new Promise(function(resolve, reject) {
+            console.log('asdfasdfasdfasdfasdf');
             var layout = _this.computeLayout(words);
             var promise = Promise.resolve();
 
