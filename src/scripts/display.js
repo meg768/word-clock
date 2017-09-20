@@ -49,6 +49,8 @@ var Module = module.exports = function(strip) {
             var layout = _this.computeLayout(words);
             var promise = Promise.resolve();
 
+            console.log(JSON.stringify(words, null, 2));
+            
             layout.forEach(function(word) {
                 promise = promise.then(function() {
                     var row     = Math.floor(word.index / _columns);

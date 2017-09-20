@@ -87,12 +87,10 @@ module.exports = class extends Animation {
 
 			symbols.forEach(function(symbol) {
 				promise = promise.then(function() {
-					console.log('Getting currency', symbol.text);
 					return self.getMarketIndex(symbol.id);
 				});
 
 				promise = promise.then(function(result) {
-					console.log(symbol.text, result.changePercent);
 					var word = {};
 					word.text = symbol.text;
 					word.color = result.changePercent < 0 ? 'red' : 'blue';
