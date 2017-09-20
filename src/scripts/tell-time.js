@@ -7,10 +7,10 @@ var Animation = require('./animation.js');
 module.exports = class extends Animation {
 
 
-    constructor(...) {
-        super(...);
+    constructor() {
+        super();
     }
-    
+
     this.getText() {
 
         return new Promise(function(resolve, reject) {
