@@ -44,10 +44,8 @@ var Module = new function() {
 		try {
 			var Strip = require('../scripts/neopixel-strip.js');
 			var Display = require('../scripts/display.js');
-			var strip = new Strip({
-				address : argv.address,
-				length  : argv.size
-			});
+			var strip = new Strip();
+			var display = new Display(strip);
 
 			Promise.resolve().then(function() {
 
