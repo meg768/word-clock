@@ -1,11 +1,17 @@
 
 var sprintf = require('yow/sprintf');
 
-var Module = module.exports = function() {
+var Animation = require('./animation.js');
 
-    var _this = this;
 
-    _this.getText = function() {
+module.exports = class extends Animation {
+
+
+    constructor(...) {
+        super(...);
+    }
+    
+    this.getText() {
 
         return new Promise(function(resolve, reject) {
             var minutes = {
