@@ -24,6 +24,13 @@ var Module = module.exports = function(strip) {
     var _rows    = _layout.length;
     var _this    = this;
 
+    _this.clear = function() {
+        return strip.clear();
+    }
+
+    _this.show = function(delay) {
+        return strip.show(delay);
+    }
 
     _this.fadeIn = function(delay) {
         return strip.show(delay);
@@ -51,7 +58,7 @@ var Module = module.exports = function(strip) {
     _this.draw = function(words) {
 
         return new Promise(function(resolve, reject) {
-            console.log('asdfasdfasdfasdfasdf');
+
             var layout = _this.computeLayout(words);
             var promise = Promise.resolve();
 

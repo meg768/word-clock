@@ -46,15 +46,12 @@ var Module = new function() {
 
 		registerService().then(function() {
 			var Strip = require('../scripts/neopixel-strip.js');
+			var Display = require('../scripts/display.js')
 
-			var strip = new Strip({
-				address : argv.address,
-				length  : argv.size
-			});
-
+			var strip = new Strip();
+			var display = new Display(strip);
 			var socket = io.connect(argv.service);
 
-			//strip.initialize();
 
 			function disableClock() {
 				if (timer != undefined) {
@@ -71,59 +68,31 @@ var Module = new function() {
                 timer = setInterval(showClock, 1000 * argv.interval);
 			}
 
-			function showClock() {
 
+			function showClock() {
 
                 return new Promise(function(resolve, reject) {
 					var now = new Date();
 					var TellTime = require('../scripts/tell-time.js')
-					var Layout = require('../scripts/layout.js');
-					var layout = new Layout();
 					var tellTime = new TellTime();
 
-					tellTime.getText().then(function(time) {
-						var colors = {};
-						var timeText = time.map(function(item) {
-							return item.text;
-						}).join(' ');
+					tellTime.getText().then(function(words) {
+						return display.clear();
+					})
+					.then(function() {
+						return display.draw(words);
 
-						time.forEach(function(x) {
-							colors[x.text] = x.color;
-						});
-						var words = layout.getLayout(timeText);
-						var promise = strip.clear();
-
-						console.log(time);
-
-						var hue = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
-
-						words.forEach(function(word) {
-							promise = promise.then(function() {
-								return strip.colorize({
-									offset     : word.offset,
-									length     : word.length,
-									color      : colors[word.text] //sprintf('hsl(%d, 100%%, 50%%)', hue)
-								});
-							});
-						});
-
-						promise = promise.then(function() {
-							return strip.show(16);
-						})
-						.catch(function(error) {
-							console.log(error);
-						})
-	                    .then(function() {
-	                        resolve();
-	                    })
-
+					})
+					.then(function() {
+						return display.show(16);
 
 					})
 					.catch(function(error) {
-						reject(error);
-					});
-
-
+						console.log(error);
+					})
+                    .then(function() {
+                        resolve();
+                    });
                 });
 
 			}
