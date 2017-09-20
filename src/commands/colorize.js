@@ -6,7 +6,6 @@ var isFunction = require('yow/is').isFunction;
 var isString   = require('yow/is').isString;
 var isArray    = require('yow/is').isArray;
 var random     = require('yow/random');
-var config     = require('../scripts/config.js');
 
 
 var Module = new function() {
@@ -45,39 +44,23 @@ var Module = new function() {
 	function run(argv) {
 		try {
 			var Strip = require('../scripts/neopixel-strip.js');
-
-			var strip = new Strip({
-				address : argv.address,
-				length  : argv.size
-			});
+			var strip = new Strip();
 
 			Promise.resolve().then(function() {
 
 				if (isString(argv.text)) {
-					var Layout = require('../scripts/layout.js');
-					var layout = new Layout();
+					var Display = require('../scripts/display.js');
+					var display = new Display(strip);
 
 					var words = layout.getLayout(argv.text);
-					var promise = strip.clear();
 
-					promise = promise.then(function() {
-						return strip.show(argv.delay);
-					});
-
-					words.forEach(function(word) {
-						promise = promise.then(function() {
-							return strip.colorize({
-								offset     : word.offset,
-								length     : word.length,
-								color      : argv.color
-							});
-						});
-						promise = promise.then(function() {
-							return strip.show(argv.delay);
-						});
-					});
-
-					promise.then(function() {
+					display.fadeOut(argv.delay).then(function() {
+						return display.drawText(argv.text, argv.color);
+					})
+					.then(function() {
+						return display.fadeIn(argv.delay);
+					})
+					.then(function() {
 						console.log('Done.');
 					})
 					.catch(function(error) {

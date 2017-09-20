@@ -92,6 +92,23 @@ var Module = module.exports = function(strip) {
 
     }
 
+    _this.drawText = function(text, color) {
+
+        var words = words.split(' ');
+
+        // Ignore multiple spaces between words
+        words = words.filter(function(word){
+            return word.length > 0;
+        });
+
+        words = words.map(function(word) {
+            return {text:word, color:color}
+        });
+
+        return _this.draw(words);
+    }
+
+
     _this.computeLayout = function(words) {
 
         try {
@@ -157,4 +174,4 @@ var Module = module.exports = function(strip) {
 
 }
 
-new Module();
+//new Module();
