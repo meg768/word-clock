@@ -7,8 +7,8 @@ var Animation = require('./animation.js');
 module.exports = class extends Animation {
 
 
-    constructor() {
-        super();
+    constructor(display) {
+        super(display);
     }
 
     getText() {

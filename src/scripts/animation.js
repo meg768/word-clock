@@ -5,7 +5,12 @@ var sprintf = require('yow/sprintf');
 module.exports = class Animation {
 
 
-    constructor() {
+    constructor(display) {
+        this.display = display;
+    }
+
+    clear() {
+        return this.display.
     }
 
     getText() {
@@ -19,9 +24,10 @@ module.exports = class Animation {
 
     }
 
-    show(display) {
+    run() {
         var self = this;
-
+        var display = this.display;
+        
         return new Promise(function(resolve, reject) {
 
             self.getText().then(function(words) {

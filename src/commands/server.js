@@ -73,8 +73,8 @@ var Module = new function() {
 
 				var Animation = require('../scripts/tell-time.js');
 
-				var animation = new Animation();
-				animation.show(display);
+				var animation = new Animation(display);
+				animation.run();
 				/*
                 return new Promise(function(resolve, reject) {
 					var now = new Date();
