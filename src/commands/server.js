@@ -3,7 +3,6 @@
 var sprintf = require('yow/sprintf');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
-var config = require('../scripts/config.js');
 var io = require('socket.io-client');
 var Timer = require('yow/timer');
 
