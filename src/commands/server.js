@@ -79,7 +79,7 @@ var Module = new function() {
 						resolve();
 					})
 
-					.catch(function() {
+					.catch(function(error) {
 						console.log(error);
 						resolve();
 					})
