@@ -10,6 +10,9 @@ module.exports = class extends Animation {
 
     constructor(display) {
         super(display);
+
+        this.cache = undefined;
+        this.time  = undefined;
     }
 
     getWeatherState(text) {
@@ -77,6 +80,8 @@ module.exports = class extends Animation {
             // search:     location name or zipcode
             // degreeType: F or C
 
+            console.log('Fetching weather...');
+
             weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, function(error, result) {
                 if (error)
                     reject(error);
@@ -90,8 +95,17 @@ module.exports = class extends Animation {
     getForecast() {
 
         var self = this;
+        var now  = new Date();
+
+        if (self.time != undefined && self.cache != undefined) {
+            if (now.getTime() - self.time.getTime() < 10 * 1000) {
+                console.log('Using cached weather');
+                return Promise.resolve(self.cache);
+            }
+        }
 
         return new Promise(function(resolve, reject) {
+
             self.getWeather().then(function(weather) {
 
                 if (isArray(weather))
@@ -120,12 +134,14 @@ module.exports = class extends Animation {
                     }
                 });
 
-
-                resolve({
+                self.time  = new Date();
+                self.cache = {
                     current:current.skytext,
                     today:forecastToday.skytextday,
                     tomorrow:forecastTomorrow.skytextday
-                });
+                };
+
+                resolve(self.cache);
 
             })
             .catch(function(error) {
