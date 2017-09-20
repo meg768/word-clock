@@ -55,6 +55,7 @@ var Module = module.exports = function(strip) {
                     var col     = word.index % _columns;
                     var offset  = (row % 2) == 0 ? row * _columns + col : (row + 1) * _columns - col - word.text.length;
 
+                    console.log('Diaplayiunf', word.text);
                     return strip.colorize({
                         offset     : offset,
                         length     : word.text.length,
