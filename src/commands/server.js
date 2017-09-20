@@ -48,7 +48,8 @@ var Module = new function() {
 			var AvanzaAnimation = require('../scripts/avanza-animation');
 
 			var display = new Display();
-			var animations = [new AvanzaAnimation(display), new ClockAnimation(display), new WeatherAnimation(display)];
+			//var animations = [new AvanzaAnimation(display), new ClockAnimation(display), new WeatherAnimation(display)];
+			var animations = [new AvanzaAnimation(display)];
 			var socket = io.connect(argv.service);
 			var animationIndex = 0;
 
