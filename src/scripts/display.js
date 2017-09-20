@@ -29,7 +29,7 @@ var Module = module.exports = function(strip) {
         return new Promise(function(resolve, reject) {
 
             strip.clear().then(function() {
-                return strip.show(argv.delay);
+                return strip.show(delay);
             })
 
             .then(function() {
@@ -47,7 +47,7 @@ var Module = module.exports = function(strip) {
         return new Promise(function(resolve, reject) {
 
             strip.clear().then(function() {
-                return strip.show(argv.delay);
+                return strip.show(delay);
             })
 
             .then(function() {
