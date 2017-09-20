@@ -47,7 +47,7 @@ var Module = new function() {
 			var WeatherAnimation = require('../scripts/weather-animation');
 
 			var display = new Display();
-			var animations = [new ClockAnimation(display)];
+			var animations = [new ClockAnimation(display), new WeatherAnimation(display)];
 			var socket = io.connect(argv.service);
 			var animationIndex = 0;
 
@@ -79,7 +79,7 @@ var Module = new function() {
 						resolve();
 					})
 
-					.catch(function(error) {
+					.catch(function() {
 						console.log(error);
 						resolve();
 					})
