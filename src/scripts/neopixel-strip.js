@@ -10,6 +10,8 @@ module.exports = function NeopixelStrip(options) {
 	const ACK = 6;
 	const NAK = 21;
 
+	options = options || {};
+	
 	if (options.length == undefined)
 		options.length = process.env.NEOPIXEL_STRIP_LENGTH;
 
