@@ -16,21 +16,6 @@ module.exports = class extends Animation {
 		this.lastLogin = undefined;
 		this.avanza    = new Avanza();
 
-		var currency = {
-			'JPY': 108702,
-			'USD': 19000,
-			'CAD': 108701,
-			'GBP': 108703,
-			'NOK': 53293,
-			'DKK': 53292,
-			'EUR': 18998
-/*
-			'NIKKEI': 18997,
-			'OMX': 155585,
-			'HANGSENG': 18984
-			'DOWJONES': 3
-			*/
-		};
 	}
 
 	login() {
@@ -111,6 +96,22 @@ module.exports = class extends Animation {
 
 	}
 
+
+	getIndexText() {
+
+		return this.getMarketText([
+			{text: 'OMX',      id:155585}, // ??
+			{text: 'NASDAQ',   id:19006},
+			{text: 'DAX',      id:18981},
+			{text: 'DOWJONES', id:155667}, // ??
+			{text: 'HANGSENG', id:18984},
+			{text: 'USA',      id:155458},
+			{text: 'UK',       id:155698},
+			{text: 'BRIC',     id:134948},
+			{text: 'NIKKEI',   id:18997}
+		]);
+	}
+
 	getCurrencyText() {
 
 		return this.getMarketText([
@@ -120,48 +121,8 @@ module.exports = class extends Animation {
 			{text: 'GBP', id:108703},
 			{text: 'EUR', id:18998},
 			{text: 'DKK', id:53292},
-			{text: 'CAD', id:108701},
+			{text: 'CAD', id:108701}
 		]);
-	}
-
-	getCurrencyTextXX() {
-
-
-
-		var self = this;
-		var avanza = self.avanza;
-		var currencies = "NOK JPY USD GBP EUR DKK CAD".split(' ');
-
-		return new Promise(function(resolve, reject) {
-
-			var promise = Promise.resolve();
-			var words = [];
-
-			currencies.forEach(function(currency) {
-				promise = promise.then(function() {
-					console.log('Getting currency', currency);
-					return self.getMarketIndex(id[currency])
-				});
-
-				promise = promise.then(function(result) {
-					console.log(currency, result.changePercent);
-					var word = {};
-					word.text = currency;
-					word.color = result.changePercent < 0 ? 'red' : 'blue';
-					words.push(word);
-				});
-
-			});
-
-			promise.then(function() {
-				resolve(words);
-			})
-			.catch(function(error) {
-				reject(error);
-			})
-		})
-
-
 	}
 
 	getText() {
@@ -171,7 +132,7 @@ module.exports = class extends Animation {
 		return new Promise(function(resolve, reject) {
 
 			self.login().then(function() {
-				return self.getCurrencyText();
+				return self.getIndexText();
 			})
 			.then(function(text) {
 				resolve(text);
