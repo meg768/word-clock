@@ -12,8 +12,17 @@ module.exports = class extends Animation {
     }
 
     run() {
-        console.log('Displaying time.');
-        return this.displayText(this.getText());
+        return new Promise(function(resolve, reject) {
+            this.getText().then(function(words) {
+                return this.displayText(words);
+            })
+            .then(function() {
+                resolve();
+            })
+            .catch(function(error) {
+                reject(error);
+            });
+        });
     }
 
 
