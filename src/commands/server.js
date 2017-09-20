@@ -69,7 +69,7 @@ var Module = new function() {
                 return new Promise(function(resolve, reject) {
 
 					// Get next animation
-					var animation = animations[animationIndex];
+					var animation = animations[0];
 
 					timer.cancel();
 
