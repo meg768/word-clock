@@ -71,7 +71,7 @@ var Module = new function() {
 
 			function showClock() {
 
-				var Animation = require('../scripts/tell-time.js');
+				var Animation = require('../scripts/weather.js');
 
 				var animation = new Animation(display);
 				animation.run();
