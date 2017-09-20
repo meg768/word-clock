@@ -92,6 +92,7 @@ var Module = module.exports = function(strip) {
 
     _this.drawText = function(text, color) {
 
+        console.log('----------------------', text);
         var words = text.split(' ');
 
         // Ignore multiple spaces between words
