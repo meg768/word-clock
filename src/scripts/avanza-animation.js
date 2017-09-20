@@ -19,7 +19,7 @@ module.exports = class extends Animation {
 		this.cache     = {};
 
 		this.textProviderIndex  = 0;
-		this.textProviders      = [this.getIndexText, this.getCurrencyText];
+		this.textProviders      = [this.getRavarorText, this.getIndexText, this.getCurrencyText];
 
 	}
 
@@ -139,6 +139,20 @@ module.exports = class extends Animation {
 			{text: 'DKK', id:53292},
 			{text: 'CAD', id:108701}
 		]);
+	}
+
+	getRavarorText() {
+		return this.getMarketText([
+			{text: 'ZN',    id:18992},
+			{text: 'AU',    id:18986},
+			{text: 'AL',    id:18990},
+			{text: 'NI',    id:18996},
+			{text: 'CU',    id:18989},
+			{text: 'BRENT', id:155722},
+			{text: 'AG',    id:18991},
+			{text: 'PB',    id:18983}
+		]);
+
 	}
 
 	getText() {
