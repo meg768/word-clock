@@ -26,21 +26,7 @@ var Module = module.exports = function(strip) {
 
 
     _this.fadeIn = function(delay) {
-        return new Promise(function(resolve, reject) {
-
-            strip.clear().then(function() {
-                return strip.show(delay);
-            })
-
-            .then(function() {
-                resolve();
-            })
-
-            .catch(function(error) {
-                reject(error);
-            })
-        });
-
+        return strip.show(delay);
     }
 
     _this.fadeOut = function(delay) {
