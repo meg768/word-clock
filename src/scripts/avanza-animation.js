@@ -23,10 +23,11 @@ module.exports = class extends Animation {
 
 		var self = this;
 		var avanza = self.avanza;
-		var now = new Date();
 
 		// May we use cached weather?
         if (self.lastLogin != undefined) {
+			var now = new Date();
+
             if (now.getTime() - self.lastLogin.getTime() < 60 * 60 * 1000) {
 				console.log('Already logged in.');
                 return Promise.resolve();
