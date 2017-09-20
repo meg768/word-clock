@@ -11,7 +11,7 @@ module.exports = class extends Animation {
         super();
     }
 
-    this.getText() {
+    getText() {
 
         return new Promise(function(resolve, reject) {
             var minutes = {
