@@ -17,7 +17,7 @@ var Module = new function() {
 
 		args.help('help').alias('help', 'h');
 
-		args.option('service',   {alias:'n', describe:'Service name', default:config.service.url});
+		args.option('service',   {alias:'n', describe:'Service name', default:process.env.SERVICE_NAME});
 		args.option('interval',  {alias:'i', describe:'Upådate interval', default:10});
 
 		args.wrap(null);
