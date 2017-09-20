@@ -6,6 +6,7 @@ var isFunction = require('yow/is').isFunction;
 var prefixLogs = require('yow/logs').prefix;
 var config = require('../scripts/config.js');
 var io = require('socket.io-client');
+var Timer = require('yow/timer');
 //var SkyBightness = require('sky-brightness');
 //var SkyBightness = require('../scripts/sky-brightness.js');
 
@@ -40,71 +41,55 @@ var Module = new function() {
 	function run(argv) {
 
 
-		var timer = undefined;
+		var timer = new Timer();
 
 		prefixLogs();
 
 		registerService().then(function() {
 			var Strip = require('../scripts/neopixel-strip.js');
-			var Display = require('../scripts/display.js')
+			var Display = require('../scripts/display.js');
+			var ClockAnimation = require('../scripts/clock-animation');
+			var WeatherAnimation = require('../scripts/weather-animation');
 
 			var strip = new Strip();
 			var display = new Display(strip);
+			var animations = [new ClockAnimation(display), new WeatherAnimation(display)];
 			var socket = io.connect(argv.service);
+			var animationIndex = 0;
 
 
 			function disableClock() {
-				if (timer != undefined) {
-					console.log('Disabling clock...');
-					clearTimeout(timer);
-					timer = undefined;
-				}
+				timer.cancel();
 			}
 
 			function enableClock() {
 				disableClock();
 				showClock();
 
-                timer = setInterval(showClock, 1000 * argv.interval);
 			}
 
 
 			function showClock() {
 
-				var Animation = require('../scripts/weather.js');
 
-				var animation = new Animation(display);
-				animation.run();
-				/*
                 return new Promise(function(resolve, reject) {
-					var now = new Date();
-					var TellTime = require('../scripts/weather.js')
-					var tellTime = new TellTime();
 
-					tellTime.getText().then(function(words) {
+					// Get next animation
+					var animation = animations[animationIndex];
 
-						display.clear().then(function() {
-							return display.draw(words);
+					timer.cancel();
 
-						})
-						.then(function() {
-							return display.show(16);
-						})
-						.catch(function(error) {
-							console.log(error);
-						})
-						.then(function() {
-							resolve();
-						})
+					animation.run().then(function() {
+						animationIndex = (animationIndex + 1) % animations.length;
+						timer.setTimer(1000 * argv.interval, showClock);
+						resolve();
 					})
+
 					.catch(function() {
 						console.log(error);
+						resolve();
 					})
-                    .then(function() {
-                        resolve();
-                    });
                 });
-				*/
 
 			}
 
