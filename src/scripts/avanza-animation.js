@@ -146,7 +146,7 @@ module.exports = class extends Animation {
 		var avanza = self.avanza;
 
         return new Promise(function(resolve, reject) {
-            self.getText().then(function(words) {
+            self.getCurrencyText().then(function(words) {
                 return self.displayText(words);
             })
             .then(function() {
