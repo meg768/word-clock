@@ -149,7 +149,7 @@ module.exports = class extends Animation {
 
 			self.login().then(function() {
 				var provider = self.textProviders[self.textProviderIndex++ % self.textProviders.length];
-				return self.provider();
+				return provider();
 			})
 			.then(function(text) {
 				resolve(text);
