@@ -65,7 +65,6 @@ module.exports = class extends Animation {
 
 		return new Promise(function(resolve, reject) {
 			avanza.get(sprintf('/_mobile/market/index/%s', id)).then(function(result) {
-				console.log(result);
 				resolve(result);
 			})
 			.catch(function(error) {
@@ -127,11 +126,6 @@ module.exports = class extends Animation {
 
 		return new Promise(function(resolve, reject) {
 
-			resolve( [{
-				text:'FEM',
-				color:'red'
-			}]);
-			/*
 			self.login().then(function() {
 				return self.getCurrencyText();
 			})
@@ -141,7 +135,6 @@ module.exports = class extends Animation {
 			.catch(function(error) {
 				reject(error)
 			})
-			*/
 
 		});
 	}
