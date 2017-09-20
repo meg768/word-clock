@@ -77,18 +77,23 @@ var Module = new function() {
 					var tellTime = new TellTime();
 
 					tellTime.getText().then(function(words) {
-						return display.clear();
-					})
-					.then(function() {
-						return display.draw(words);
 
-					})
-					.then(function() {
-						return display.show(16);
+						display.clear().then(function() {
+							return display.draw(words);
 
+						})
+						.then(function() {
+							return display.show(16);
+						})
+						.catch(function(error) {
+							console.log(error);
+						})
+						.then(function() {
+							resolve();
+						})
 					})
-					.catch(function(error) {
-						console.log(error);
+					.catch(function() {
+						console.log(error);						
 					})
                     .then(function() {
                         resolve();
