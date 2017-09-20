@@ -28,7 +28,7 @@ var Module = module.exports = function(strip) {
     var _rows    = _layout.length;
     var _this    = this;
 
-    _this.clear = function()
+    _this.clear = function() {
         return strip.clear();
         return strip.clear.apply(this, arguments);
     }
