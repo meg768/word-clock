@@ -109,7 +109,6 @@ module.exports = class extends Animation {
 			});
 
 			promise.then(function() {
-				console.log(words);
 				resolve(words);
 			})
 			.catch(function(error) {
@@ -130,6 +129,7 @@ module.exports = class extends Animation {
 				return self.getCurrencyText();
 			})
 			.then(function(text) {
+				console.log('TEXT', text);
 				resolve(text);
 			})
 			.catch(function(error) {
