@@ -76,12 +76,9 @@ var Module = module.exports = function(strip) {
                         color      : word.color
                     });
                 });
-                promise = promise.then(function() {
-                    return strip.show(argv.delay);
-                });
             });
 
-            promise.then(function() {
+            promise = promise.then(function() {
                 resolve();
             })
             .catch(function(error) {
