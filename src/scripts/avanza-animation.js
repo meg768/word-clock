@@ -91,7 +91,7 @@ module.exports = class extends Animation {
 				});
 
 				promise = promise.then(function(result) {
-					console.log(currency, result.changePercent);
+					console.log(symbol.text, result.changePercent);
 					var word = {};
 					word.text = symbol.text;
 					word.color = result.changePercent < 0 ? 'red' : 'blue';
