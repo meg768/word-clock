@@ -71,10 +71,10 @@ var Module = new function() {
 
 			function showClock() {
 
-				var Animation = require('../scripts/weather.js');
+				var Animation = require('../scripts/animation.js');
 
 				var animation = new Animation();
-				animation.show(display)
+				animation.show(display);
 				/*
                 return new Promise(function(resolve, reject) {
 					var now = new Date();
