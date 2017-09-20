@@ -12,6 +12,7 @@ module.exports = class extends Animation {
     }
 
     run() {
+        cosnole.log('Displaying time.');
         return this.displayText(this.getText());
     }
 
