@@ -9,10 +9,6 @@ module.exports = class Animation {
         this.display = display;
     }
 
-    clear() {
-        return this.display.clear();
-    }
-
 
     displayText(words) {
         var self = this;
@@ -29,6 +25,7 @@ module.exports = class Animation {
             })
             .catch(function(error) {
                 console.log(error);
+                reject(error);
             })
             .then(function() {
                 resolve();
