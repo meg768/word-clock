@@ -153,7 +153,7 @@ var Module = module.exports = function(strip) {
                 var col     = index % _columns;
                 var offset  = (row % 2) == 0 ? row * _columns + col : (row + 1) * _columns - col - word.text.length;
 
-                layout.push({text:word.text, color:word.color, row:row, col:col, index:index, offset:offset});
+                layout.push({text:word.text, color:word.color, row:row, col:col,    index:index, offset:offset});
 
                 cursor = Math.min(index + word.text.length + 1, Math.floor(index / _columns) * _columns + _columns);
             });
@@ -297,7 +297,7 @@ var Module = module.exports = function(strip) {
         }
     }
 */
-    console.log(JSON.stringify(_this.computeLayoutEx("HALV FEM", 0, 168), null, 2));
+    console.log(JSON.stringify(_this.computeLayout("HALV FEM", 0, 168), null, 2));
 
 }
 
