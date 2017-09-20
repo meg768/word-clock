@@ -127,6 +127,11 @@ module.exports = class extends Animation {
 
 		return new Promise(function(resolve, reject) {
 
+			resolve( [{
+				text:'FEM'
+				color:'red'
+			}]);
+			/*
 			self.login().then(function() {
 				return self.getCurrencyText();
 			})
@@ -136,6 +141,7 @@ module.exports = class extends Animation {
 			.catch(function(error) {
 				reject(error)
 			})
+			*/
 
 		});
 	}
