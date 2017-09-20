@@ -15,6 +15,11 @@ module.exports = class extends Animation {
         this.time  = undefined;
     }
 
+    run() {
+        this.displayText(this.getText());
+    }
+
+
     getWeatherState(text) {
 
 

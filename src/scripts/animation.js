@@ -13,46 +13,32 @@ module.exports = class Animation {
         return this.display.clear();
     }
 
-    getText() {
-        return new Promise(function(resolve, reject) {
 
-            resolve([
-                {text: 'HALV', color:'red'},
-                {text: 'TRE', color:'blue'}
-            ]);
-        });
-
-    }
-
-    run() {
+    displayText(words) {
         var self = this;
         var display = this.display;
 
         return new Promise(function(resolve, reject) {
 
-            self.getText().then(function(words) {
+            display.clear().then(function() {
+                return display.draw(words);
 
-                display.clear().then(function() {
-                    return display.draw(words);
-
-                })
-                .then(function() {
-                    return display.show(16);
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
-                .then(function() {
-                    resolve();
-                })
             })
-            .catch(function() {
+            .then(function() {
+                return display.show(16);
+            })
+            .catch(function(error) {
                 console.log(error);
             })
             .then(function() {
                 resolve();
-            });
+            })
         });
+
+    }
+
+    run() {
+        return Promise.resolve();
     }
 }
 

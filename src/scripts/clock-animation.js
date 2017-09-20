@@ -11,6 +11,11 @@ module.exports = class extends Animation {
         super(display);
     }
 
+    run() {
+        this.displayText(this.getText());
+    }
+
+
     getText() {
 
         return new Promise(function(resolve, reject) {
