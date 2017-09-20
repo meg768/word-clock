@@ -29,17 +29,14 @@ var Module = module.exports = function(strip) {
     var _this    = this;
 
     _this.clear = function() {
-        return strip.clear();
         return strip.clear.apply(this, arguments);
     }
 
     _this.show = function(delay) {
-        return strip.show(delay);
         return strip.show.apply(this, arguments);
     }
 
     _this.colorize = function(options) {
-        return strip.colorize(options);
         return strip.colorize.apply(this, arguments);
     }
 
