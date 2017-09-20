@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/meg768/word-clock#readme",
   "dependencies": {
+    "avanza-mobile-client": "^1.0.30",
     "color": "^2.0.0",
     "dotenv": "^4.0.0",
     "i2c-bus": "^1.2.2",

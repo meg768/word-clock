@@ -45,25 +45,26 @@ var Module = new function() {
 			var Display = require('../scripts/display.js');
 			var ClockAnimation = require('../scripts/clock-animation');
 			var WeatherAnimation = require('../scripts/weather-animation');
+			var AvanzaAnimation = require('../scripts/avanza-animation');
 
 			var display = new Display();
-			var animations = [new ClockAnimation(display), new WeatherAnimation(display)];
+			var animations = [new AvanzaAnimation(display), ew ClockAnimation(display), new WeatherAnimation(display)];
 			var socket = io.connect(argv.service);
 			var animationIndex = 0;
 
 
-			function disableClock() {
+			function disableAnimations() {
 				timer.cancel();
 			}
 
-			function enableClock() {
-				disableClock();
-				showClock();
+			function enableAnimations() {
+				disableAnimations();
+				showAnimation();
 
 			}
 
 
-			function showClock() {
+			function showAnimation() {
 
 
                 return new Promise(function(resolve, reject) {
@@ -75,7 +76,7 @@ var Module = new function() {
 
 					animation.run().then(function() {
 						animationIndex = (animationIndex + 1) % animations.length;
-						timer.setTimer(1000 * argv.interval, showClock);
+						timer.setTimer(1000 * argv.interval, showAnimation);
 						resolve();
 					})
 
