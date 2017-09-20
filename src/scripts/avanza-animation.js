@@ -99,6 +99,7 @@ module.exports = class extends Animation {
 				promise = promise.then(function() {
 					console.log('Getting currency', currency);
 					self.getMarketIndex(id[currency]).then(function(result) {
+						console.log(currency, result.changePercent);
 						var word = {};
 						word.text = currency;
 						word.color = result.changePercent < 0 ? 'red' : 'blue';
@@ -109,6 +110,7 @@ module.exports = class extends Animation {
 			});
 
 			promise.then(function() {
+
 				resolve(words);
 			})
 			.catch(function(error) {
@@ -129,7 +131,6 @@ module.exports = class extends Animation {
 				return self.getCurrencyText();
 			})
 			.then(function(text) {
-				console.log('TEXT', text);
 				resolve(text);
 			})
 			.catch(function(error) {
