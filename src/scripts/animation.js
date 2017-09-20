@@ -2,7 +2,8 @@
 var isArray = require('yow/is').isArray;
 var sprintf = require('yow/sprintf');
 
-export default class  {
+module.exports = class Animation {
+
 
     constructor() {
     }
