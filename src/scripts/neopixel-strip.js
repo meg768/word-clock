@@ -11,6 +11,12 @@ module.exports = function NeopixelStrip(options) {
 	const NAK = 21;
 
 	if (options.length == undefined)
+		options.length = process.env.NEOPIXEL_STRIP_LENGTH;
+
+	if (options.address == undefined)
+		options.address = process.env.NEOPIXEL_I2C_ADDRESS;
+
+	if (options.length == undefined)
 		throw new Error('Neopixel strip length not defined');
 
 	if (options.address == undefined)

@@ -1,9 +1,8 @@
 
 var isArray = require('yow/is').isArray;
-var random = require('yow/random');
+var isString = require('yow/is').isString;
 
-
-module.exports = function() {
+var Module = module.exports = function(strip) {
 
     var _layout = [
         "ZNOKVARTIOJPY",
@@ -24,97 +23,138 @@ module.exports = function() {
     var _columns = _layout[0].length;
     var _rows    = _layout.length;
     var _this    = this;
-    var _cache   = {};
 
-    _this.getLayout = function(text) {
-        return findWords(text);
+
+    _this.fadeIn = function(delay) {
+        return new Promise(function(resolve, reject) {
+
+            strip.clear().then(function() {
+                return strip.show(argv.delay);
+            })
+
+            .then(function() {
+                resolve();
+            })
+
+            .catch(function(error) {
+                reject(error);
+            })
+        });
+
     }
 
-    function findWords(words) {
+    _this.fadeOut = function(delay) {
+        return new Promise(function(resolve, reject) {
 
-        var result = [];
-        var matches = findAllWords(words);
+            strip.clear().then(function() {
+                return strip.show(argv.delay);
+            })
 
-        while (matches && matches.length > 0) {
-            var match     = random(matches);
-            var text      = match.text;
-            var col       = match.index % _columns;
-            var row       = Math.floor(match.index / _columns);
-            var direction = (row % 2) == 0 ? 'right' : 'left';
-            var offset    = (row % 2) == 0 ? row * _columns + col : (row + 1) * _columns - col - text.length;
+            .then(function() {
+                resolve();
+            })
 
-            result.push({text:text, offset:offset, length:text.length, row:row, col:col, direction:direction});
+            .catch(function(error) {
+                reject(error);
+            })
+        });
 
-            matches = match.next;
-        }
-
-        return result;
     }
 
 
-    function findWord(word) {
-        var regexp = new RegExp(word, "g");
-        var match, matches = [];
+    _this.draw = function(words) {
 
-        for (var i = 0; i < _layout.length; i++) {
-            var text = _layout[i];
+        return new Promise(function(resolve, reject) {
+            var layout = _this.computeLayout(words);
+            var promise = Promise.resolve();
 
-            while ((match = regexp.exec(text)) != null) {
-                matches.push({text:word, index:i * _columns + match.index});
+            layout.forEach(function(word) {
+                promise = promise.then(function() {
+                    return strip.colorize({
+                        offset     : word.offset,
+                        length     : word.text.length,
+                        color      : word.color
+                    });
+                });
+                promise = promise.then(function() {
+                    return strip.show(argv.delay);
+                });
+            });
+
+            promise.then(function() {
+                resolve();
+            })
+            .catch(function(error) {
+                reject(error);
+            })
+
+        });
+
+    }
+
+    _this.computeLayout = function(words) {
+
+        try {
+            var layout = [];
+
+            function lookupWord(word, cursor) {
+                var regexp = new RegExp(word, "g");
+                var match, matches = [];
+
+                for (var i = 0; i < _layout.length; i++) {
+                    var text = _layout[i];
+
+                    while ((match = regexp.exec(text)) != null) {
+                        matches.push(i * _columns + match.index);
+                    }
+
+                }
+
+                return matches.find(function(index) {
+                    return index >= cursor;
+                });
             }
 
-        }
+            if (isString(words)) {
+                words = words.split(' ');
 
-        return matches;
-    }
+                // Ignore multiple spaces between words
+                words = words.filter(function(word){
+                    return word.length > 0;
+                });
 
+                words = words.map(function(word) {
+                    return {text:word, color:'red'}
+                });
+            }
 
-    function findAllWords(words, index) {
+            var cursor = 0;
 
-        var result = [];
+            words.forEach(function(word) {
+                var index = lookupWord(word.text, cursor);
 
-        if (index == undefined)
-            index = 0;
+                if (index == undefined)
+                    throw new Error('Invalid word.');
 
-        if (!isArray(words)) {
-            words = words.split(' ');
+                var row     = Math.floor(index / _columns);
+                var col     = index % _columns;
+                var offset  = (row % 2) == 0 ? row * _columns + col : (row + 1) * _columns - col - word.text.length;
 
-            // Ignore multiple spaces between words
-            words = words.filter(function(word){
-                return word.length > 0;
+                layout.push({text:word.text, color:word.color, row:row, col:col, index:index, offset:offset});
+
+                cursor = Math.min(index + word.text.length + 1, Math.floor(index / _columns) * _columns + _columns);
             });
 
-        }
-
-        if (words.length > 0) {
-            var matches = findWord(words[0]);
-
-            matches = matches.filter(function(match) {
-                return match.index >= index;
-            });
-
-            matches.forEach(function(match) {
-                if (words.length == 1)
-                    result.push(match);
-                else {
-                    match.next = findAllWords(words.slice(1), Math.min(match.index + match.text.length + 1, Math.floor(match.index / _columns) * _columns + _columns));
-
-                    if (match.next.length > 0)
-                        result.push(match);
-                }
-            });
-
+            return layout;
 
         }
-
-        return result;
+        catch(error) {
+            return [];
+        }
     }
 
+    console.log(JSON.stringify(_this.computeLayout("HALV FEM"), null, 2));
 
-
-
-    function init() {
-    }
-
-    init();
 }
+
+new Module();
