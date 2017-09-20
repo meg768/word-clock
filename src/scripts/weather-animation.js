@@ -98,7 +98,7 @@ module.exports = class extends Animation {
         var now  = new Date();
 
         if (self.time != undefined && self.cache != undefined) {
-            if (now.getTime() - self.time.getTime() < 10 * 1000) {
+            if (now.getTime() - self.time.getTime() < 60 * 1000) {
                 console.log('Using cached weather');
                 return Promise.resolve(self.cache);
             }
