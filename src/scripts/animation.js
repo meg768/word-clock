@@ -10,7 +10,7 @@ module.exports = class Animation {
     }
 
     clear() {
-        return this.display.
+        return this.display.clear();
     }
 
     getText() {
@@ -27,7 +27,7 @@ module.exports = class Animation {
     run() {
         var self = this;
         var display = this.display;
-        
+
         return new Promise(function(resolve, reject) {
 
             self.getText().then(function(words) {
