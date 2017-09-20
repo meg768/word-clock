@@ -109,6 +109,7 @@ module.exports = class extends Animation {
 			});
 
 			promise.then(function() {
+				console.log(words);
 				resolve(words);
 			})
 			.catch(function(error) {
