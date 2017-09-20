@@ -44,11 +44,12 @@ var Module = module.exports = function(strip) {
 
     _this.draw = function(words) {
 
-        console.log(words);
         return new Promise(function(resolve, reject) {
 
             var layout = _this.computeLayout(words);
             var promise = Promise.resolve();
+
+            console.log(words);
 
             layout.forEach(function(word) {
                 promise = promise.then(function() {
