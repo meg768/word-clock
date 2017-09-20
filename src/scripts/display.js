@@ -42,7 +42,7 @@ var Module = module.exports = function(strip) {
 
 
 
-    _this.draw = function(words) {
+    _this.drawWords = function(words) {
 
         return new Promise(function(resolve, reject) {
 
@@ -55,7 +55,7 @@ var Module = module.exports = function(strip) {
                     var col     = word.index % _columns;
                     var offset  = (row % 2) == 0 ? row * _columns + col : (row + 1) * _columns - col - word.text.length;
 
-                    return strip.colorize({
+                    return _this.colorize({
                         offset     : offset,
                         length     : word.text.length,
                         color      : word.color
@@ -87,7 +87,7 @@ var Module = module.exports = function(strip) {
             return {text:word, color:color}
         });
 
-        return _this.draw(words);
+        return _this.drawWords(words);
     }
 
 

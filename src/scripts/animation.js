@@ -17,7 +17,7 @@ module.exports = class Animation {
         return new Promise(function(resolve, reject) {
 
             display.clear().then(function() {
-                return display.draw(words);
+                return display.drawWords(words);
 
             })
             .then(function() {
