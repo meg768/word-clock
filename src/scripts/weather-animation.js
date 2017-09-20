@@ -92,21 +92,27 @@ module.exports = class extends Animation {
 
     getWeather() {
         return new Promise(function(resolve, reject) {
-            var weather = require('weather-js');
+            try {
+                var weather = require('weather-js');
 
-            // Options:
-            // search:     location name or zipcode
-            // degreeType: F or C
+                // Options:
+                // search:     location name or zipcode
+                // degreeType: F or C
 
-            console.log('Fetching weather...');
+                console.log('Fetching weather...');
 
-            weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, function(error, result) {
-                if (error)
-                    reject(error);
-                else
-                    resolve(result);
-            });
+                weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, function(error, result) {
+                    if (error)
+                        reject(error);
+                    else
+                        resolve(result);
+                });
 
+
+            }
+            catch(error) {
+                reject(error);
+            }
         });
     }
 
