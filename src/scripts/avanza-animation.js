@@ -74,11 +74,10 @@ module.exports = class extends Animation {
 
 	}
 
-	getMarketText(text, ids) {
+	getMarketText(symbols) {
 
 		var self = this;
 		var avanza = self.avanza;
-		var symbols = text.split(' ');
 
 		return new Promise(function(resolve, reject) {
 
@@ -87,14 +86,14 @@ module.exports = class extends Animation {
 
 			symbols.forEach(function(symbol) {
 				promise = promise.then(function() {
-					console.log('Getting currency', symbol);
-					return self.getMarketIndex(ids[symbol])
+					console.log('Getting currency', symbol.text);
+					return self.getMarketIndex(symbol.id);
 				});
 
 				promise = promise.then(function(result) {
 					console.log(currency, result.changePercent);
 					var word = {};
-					word.text = currency;
+					word.text = symbol.text;
 					word.color = result.changePercent < 0 ? 'red' : 'blue';
 					words.push(word);
 				});
@@ -112,29 +111,29 @@ module.exports = class extends Animation {
 
 	}
 
-	getCurrencyTextX() {
-
-		return getMarketText("NOK JPY USD GBP EUR DKK CAD", {
-			'JPY': 108702,
-			'USD': 19000,
-			'CAD': 108701,
-			'GBP': 108703,
-			'NOK': 53293,
-			'DKK': 53292,
-			'EUR': 18998
-		});
-	}
-
 	getCurrencyText() {
 
+		return getMarketText([
+			{text: 'NOK', id:53293},
+			{text: 'JPY', id:108702},
+			{text: 'USD', id:19000},
+			{text: 'GBP', id:108703},
+			{text: 'EUR', id:18998},
+			{text: 'DKK', id:53292},
+			{text: 'CAD', id:108701},
+		]);
+	}
+
+	getCurrencyTextXX() {
+
 		var id = {
-			'JPY': 108702,
-			'USD': 19000,
-			'CAD': 108701,
-			'GBP': 108703,
-			'NOK': 53293,
-			'DKK': 53292,
-			'EUR': 18998
+			'JPY': ,
+			'USD': ,
+			'CAD': ,
+			'GBP': ,
+			'NOK': ,
+			'DKK': ,
+			'EUR':
 		};
 
 		var self = this;
