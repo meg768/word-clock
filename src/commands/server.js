@@ -73,7 +73,7 @@ var Module = new function() {
 
                 return new Promise(function(resolve, reject) {
 					var now = new Date();
-					var TellTime = require('../scripts/tell-time.js')
+					var TellTime = require('../scripts/weather.js')
 					var tellTime = new TellTime();
 
 					tellTime.getText().then(function(words) {
@@ -93,7 +93,7 @@ var Module = new function() {
 						})
 					})
 					.catch(function() {
-						console.log(error);						
+						console.log(error);
 					})
                     .then(function() {
                         resolve();
@@ -163,7 +163,7 @@ var Module = new function() {
 
 
 	module.exports.command  = 'server [options]';
-	module.exports.describe = 'Run Neopixel lamp server';
+	module.exports.describe = 'Run Neopixel word clock';
 	module.exports.builder  = defineArgs;
 	module.exports.handler  = run;
 
