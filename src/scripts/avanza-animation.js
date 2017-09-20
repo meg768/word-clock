@@ -126,15 +126,7 @@ module.exports = class extends Animation {
 
 	getCurrencyTextXX() {
 
-		var id = {
-			'JPY': ,
-			'USD': ,
-			'CAD': ,
-			'GBP': ,
-			'NOK': ,
-			'DKK': ,
-			'EUR':
-		};
+
 
 		var self = this;
 		var avanza = self.avanza;
