@@ -42,13 +42,11 @@ var Module = new function() {
 		prefixLogs();
 
 		registerService().then(function() {
-			var Strip = require('../scripts/neopixel-strip.js');
 			var Display = require('../scripts/display.js');
 			var ClockAnimation = require('../scripts/clock-animation');
 			var WeatherAnimation = require('../scripts/weather-animation');
 
-			var strip = new Strip();
-			var display = new Display(strip);
+			var display = new Display();
 			var animations = [new ClockAnimation(display), new WeatherAnimation(display)];
 			var socket = io.connect(argv.service);
 			var animationIndex = 0;

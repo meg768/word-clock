@@ -1,9 +1,13 @@
 
-var isArray = require('yow/is').isArray;
+var isArray  = require('yow/is').isArray;
 var isString = require('yow/is').isString;
+var Strip    = require('../scripts/neopixel-strip.js');
 
 var Module = module.exports = function(strip) {
 
+    if (strip == undefined)
+        strip = new Strip();
+        
     var _layout = [
         "ZNOKVARTIOJPY",
         "SOLITETJUGOMX",
