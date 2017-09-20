@@ -23,6 +23,7 @@ module.exports = class extends Animation {
 
 		var self = this;
 		var avanza = self.avanza;
+		var now = new Date();
 
 		// May we use cached weather?
         if (self.lastLogin != undefined) {
