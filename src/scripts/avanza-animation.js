@@ -27,6 +27,7 @@ module.exports = class extends Animation {
 		// May we use cached weather?
         if (self.lastLogin != undefined) {
             if (now.getTime() - self.lastLogin.getTime() < 60 * 60 * 1000) {
+				console.log('Already logged in.');
                 return Promise.resolve();
             }
         }
@@ -42,7 +43,7 @@ module.exports = class extends Animation {
 			var credentials = {username: process.env.AVANZA_USERNAME, password:process.env.AVANZA_PASSWORD};
 
 			avanza.login(credentials).then(function() {
-				console.log('Login OK');
+				console.log('Avanza login OK.');
 				self.lastLogin = new Date();
 				resolve();
 			})
