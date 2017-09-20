@@ -112,7 +112,7 @@ module.exports = class extends Animation {
 
 	}
 
-	getCurrencyText() {
+	getCurrencyTextX() {
 
 		return getMarketText("NOK JPY USD GBP EUR DKK CAD", {
 			'JPY': 108702,
@@ -125,7 +125,7 @@ module.exports = class extends Animation {
 		});
 	}
 
-	getCurrencyTextX() {
+	getCurrencyText() {
 
 		var id = {
 			'JPY': 108702,
