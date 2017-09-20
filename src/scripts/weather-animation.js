@@ -16,7 +16,7 @@ module.exports = class extends Animation {
     }
 
     run() {
-        this.displayText(this.getText());
+        return this.displayText(this.getText());
     }
 
 
