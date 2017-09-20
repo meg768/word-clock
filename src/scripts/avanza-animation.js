@@ -19,7 +19,7 @@ module.exports = class extends Animation {
 		this.cache     = {};
 
 		this.textProviderIndex  = 0;
-		this.textProviders      = [this.getIndexText.bind(this), this.getCurrencyText.bind(this)];
+		this.textProviders      = [this.getIndexText, this.getCurrencyText];
 
 	}
 
@@ -149,7 +149,7 @@ module.exports = class extends Animation {
 
 			self.login().then(function() {
 				var provider = self.textProviders[self.textProviderIndex++ % self.textProviders.length];
-				return provider();
+				return provider.bind(this)();
 			})
 			.then(function(text) {
 				resolve(text);
