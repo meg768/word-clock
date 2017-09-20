@@ -2,119 +2,17 @@
 var isArray = require('yow/is').isArray;
 var sprintf = require('yow/sprintf');
 
-var Module = module.exports = function() {
+var Animation = require('./animation.js');
 
-    var _this = this;
 
-    function getWeatherCondition(code) {
-        // https://stackoverflow.com/questions/12142094/msn-weather-api-list-of-conditions
+module.exports = class extends Animation {
 
-        switch(parseInt(code)) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 17:
-            case 35:
-                return "Thunderstorm";
 
-            case 5:
-                return "Rain/Snow";
-
-            case 6:
-                return "Sleet/Snow";
-
-            case 7:
-                return "Rain/Sleet/Snow";
-
-            case 8:
-            case 9:
-                return "Icy";
-
-            case 10:
-                return "Rain/Sleet";
-
-            case 11:
-                return "Light rain";
-
-            case 12:
-                return "Rain";
-
-            case 13:
-                return "Light snow";
-
-            case 14:
-            case 16:
-            case 42:
-            case 43:
-                return "Snow";
-
-            case 15:
-                return "Blizzard";
-
-            case 18:
-            case 40:
-                return "Showers";
-
-            case 19:
-                return "Dust";
-
-            case 20:
-                return "Fog";
-
-            case 21:
-                return "Haze";
-
-            case 22:
-                return "Smoke";
-
-            case 23:
-            case 24:
-                return "Windy";
-
-            case 25:
-                return "Frigid";
-
-            case 26:
-                return "Cloudy";
-
-            case 27:
-            case 28:
-            case 29:
-            case 30:
-            case 33:
-            case 34:
-                return "Partly Sunny";
-
-            case 31:
-            case 32:
-                return "Clear";
-
-            case 36:
-                return "Hot";
-
-            case 37:
-            case 38:
-                return "Scattered thunderstorms";
-
-            case 39:
-                return "Scattered showers";
-
-            case 41:
-                return "Scattered snow showers";
-
-            case 45:
-            case 46:
-                return "Scattered rain showers";
-
-            case 47:
-                return "Scattered thunderstorms";
-
-        }
+    constructor(display) {
+        super(display);
     }
 
-    function getWeatherState(text) {
+    getWeatherState(text) {
 
 
         switch(text) {
@@ -171,7 +69,7 @@ var Module = module.exports = function() {
 
     }
 
-    function getWeather() {
+    getWeather() {
         return new Promise(function(resolve, reject) {
             var weather = require('weather-js');
 
@@ -189,10 +87,12 @@ var Module = module.exports = function() {
         });
     }
 
-    function getForecast() {
+    getForecast() {
+
+        var self = this;
 
         return new Promise(function(resolve, reject) {
-            getWeather().then(function(weather) {
+            self.getWeather().then(function(weather) {
 
                 if (isArray(weather))
                     weather = weather[0];
@@ -210,7 +110,7 @@ var Module = module.exports = function() {
                     var date = new Date(day.date);
 
                     // Just for debugging
-                    getWeatherState(day.skytextday);
+                    self.getWeatherState(day.skytextday);
 
                     if (date.valueOf() == today.valueOf())
                         forecastToday = day;
@@ -235,12 +135,14 @@ var Module = module.exports = function() {
         });
     }
 
-    _this.getText = function() {
+    getText() {
+
+        var self = this;
 
         return new Promise(function(resolve, reject) {
 
-            getForecast().then(function(forecast) {
-                var state = getWeatherState(forecast.tomorrow);
+            self.getForecast().then(function(forecast) {
+                var state = self.getWeatherState(forecast.tomorrow);
                 var words = "SOL VIND SNÖ MOLN REGN".split(' ');
                 var text  = words.map(function(word) {
 
