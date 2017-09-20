@@ -16,7 +16,7 @@ module.exports = class extends Animation {
 		this.lastLogin = undefined;
 		this.avanza    = new Avanza();
 
-		var ids = {
+		var currency = {
 			'JPY': 108702,
 			'USD': 19000,
 			'CAD': 108701,
@@ -73,32 +73,73 @@ module.exports = class extends Animation {
 
 	}
 
+	function getCurrencyText() {
 
-	getText() {
+		var id = {
+			'JPY': 108702,
+			'USD': 19000,
+			'CAD': 108701,
+			'GBP': 108703,
+			'NOK': 53293,
+			'DKK': 53292,
+			'EUR': 18998
+		};
+
 		var self = this;
+		var avanza = self.avanza;
+		var currencies = "NOK JPY USD GBP EUR DKK CAD".split(' ');
 
 		return new Promise(function(resolve, reject) {
-			self.login().then(function() {
-				return self.getMarketIndex(108702);
 
-			})
-			.then(function(price) {
-				var word = {};
-				word.text = 'JPY';
-				word.color = price.changePercent < 0 ? 'red' : 'blue';
+			var promise = Promise.resolve();
+			var words = [];
 
-				resolve([word]);
+			currencies.forEach(function(currency) {
+				promise = promise.then(function() {
+					self.getMarketIndex(id[currency]).then(function(price) {
+						var word = {};
+						word.text = currency;
+						word.color = price.changePercent < 0 ? 'red' : 'blue';
+						words.push(word);
+
+					})
+				});
+			});
+
+			promise.then(function() {
+				resolve(words);
 			})
 			.catch(function(error) {
 				reject(error);
 			})
 		})
 
+
+	}
+
+	getText() {
+		var self = this;
+		var avanza = self.avanza;
+
+		return new Promise(function(resolve, reject) {
+
+			self.login().then(function() {
+				return self.getCurrencyText();
+			})
+			.then(function(text) {
+				resolve(text);
+			})
+			.catch(function(error) {
+				reject(error)
+			})
+
+		});
 	}
 
 
 	run() {
-        var self = this;
+		var self = this;
+		var avanza = self.avanza;
 
         return new Promise(function(resolve, reject) {
             self.getText().then(function(words) {
