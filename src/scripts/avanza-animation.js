@@ -16,6 +16,10 @@ module.exports = class extends Animation {
 
 		this.lastLogin = undefined;
 		this.avanza    = new Avanza();
+		this.cache     = {};
+
+		this.textProviderIndex  = 0;
+		this.textProviders      = [this.getIndexText, this.getCurrencyText];
 
 	}
 
@@ -144,7 +148,8 @@ module.exports = class extends Animation {
 		return new Promise(function(resolve, reject) {
 
 			self.login().then(function() {
-				return self.getIndexText();
+				var provider = self.textProviders[self.textProviderIndex++ % self.textProviders.length];
+				return self.provider();
 			})
 			.then(function(text) {
 				resolve(text);
