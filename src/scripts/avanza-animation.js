@@ -128,7 +128,7 @@ module.exports = class extends Animation {
 		return new Promise(function(resolve, reject) {
 
 			resolve( [{
-				text:'FEM'
+				text:'FEM',
 				color:'red'
 			}]);
 			/*
