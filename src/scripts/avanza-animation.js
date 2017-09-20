@@ -98,19 +98,20 @@ module.exports = class extends Animation {
 			currencies.forEach(function(currency) {
 				promise = promise.then(function() {
 					console.log('Getting currency', currency);
-					self.getMarketIndex(id[currency]).then(function(result) {
-						console.log(currency, result.changePercent);
-						var word = {};
-						word.text = currency;
-						word.color = result.changePercent < 0 ? 'red' : 'blue';
-						words.push(word);
-
-					})
+					return self.getMarketIndex(id[currency])
 				});
+
+				promise = promise.then(function(result) {
+					console.log(currency, result.changePercent);
+					var word = {};
+					word.text = currency;
+					word.color = result.changePercent < 0 ? 'red' : 'blue';
+					words.push(word);
+				});
+
 			});
 
 			promise.then(function() {
-
 				resolve(words);
 			})
 			.catch(function(error) {
