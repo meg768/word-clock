@@ -107,6 +107,8 @@ var Module = module.exports = function(strip) {
             });
         }
 
+        console.log('Words', words);
+
         try {
             var layout = [];
 
@@ -146,7 +148,7 @@ var Module = module.exports = function(strip) {
 
         }
         catch(error) {
-            console.log(error);
+            console.log('------------------------', error);
             return [];
         }
     }
