@@ -49,7 +49,7 @@ var Module = module.exports = function(strip) {
             var layout = _this.computeLayout(words);
             var promise = Promise.resolve();
 
-            console.log(words);
+            console.log(words, layout);
 
             layout.forEach(function(word) {
                 promise = promise.then(function() {
