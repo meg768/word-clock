@@ -44,6 +44,7 @@ var Module = module.exports = function(strip) {
 
     _this.draw = function(words) {
 
+        console.log(words);
         return new Promise(function(resolve, reject) {
 
             var layout = _this.computeLayout(words);
