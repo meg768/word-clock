@@ -12,11 +12,11 @@ module.exports = function NeopixelStrip(options) {
 
 	options = options || {};
 
-	if (options.length == undefined)
-		options.length = process.env.NEOPIXEL_STRIP_LENGTH;
+	if (options.length == undefined && process.env.NEOPIXEL_STRIP_LENGTH != undefined)
+		options.length = parseInt(process.env.NEOPIXEL_STRIP_LENGTH);
 
-	if (options.address == undefined)
-		options.address = process.env.NEOPIXEL_I2C_ADDRESS;
+	if (options.address == undefined && process.env.NEOPIXEL_I2C_ADDRESS != undefined)
+		options.address = parseInt(process.env.NEOPIXEL_I2C_ADDRESS);
 
 	if (options.length == undefined)
 		throw new Error('Neopixel strip length not defined');
