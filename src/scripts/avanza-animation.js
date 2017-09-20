@@ -43,11 +43,12 @@ module.exports = class extends Animation {
 
 		return new Promise(function(resolve, reject) {
 
-			console.log('Loggin in to Avanza...');
+			console.log('Logging in to Avanza...');
 
 			var credentials = {username: process.env.AVANZA_USERNAME, password:process.env.AVANZA_PASSWORD};
 
 			avanza.login(credentials).then(function() {
+				console.log('Login OK');
 				self.lastLogin = new Date();
 				resolve();
 			})
@@ -96,6 +97,7 @@ module.exports = class extends Animation {
 
 			currencies.forEach(function(currency) {
 				promise = promise.then(function() {
+					console.log('Getting currency', currency);
 					self.getMarketIndex(id[currency]).then(function(result) {
 						var word = {};
 						word.text = currency;
