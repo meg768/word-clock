@@ -95,25 +95,25 @@ var Module = new function() {
 				// Register the service
 				socket.emit('i-am-the-provider');
 
-				enableClock();
+				enableAnimations();
 
 			});
 
 			socket.on('disconnect', function() {
 				debug('Disconnected from socket server.');
-				disableClock();
+				disableAnimations();
 			});
 
 
-			socket.on('enableClock', function(fn) {
-				enableClock();
+			socket.on('enableAnimations', function(fn) {
+				enableAnimations();
 
 				if (isFunction(fn))
 					fn({status:'OK'});
 			});
 
-			socket.on('disableClock', function(fn) {
-				disableClock();
+			socket.on('disableAnimations', function(fn) {
+				disableAnimations();
 
 				if (isFunction(fn))
 					fn({status:'OK'});
@@ -125,7 +125,7 @@ var Module = new function() {
 			});
 
 			socket.on('colorize', function(options, fn) {
-				disableClock();
+				disableAnimations();
 
 				strip.colorize(options).then(function(reply) {
 					socket.emit('color-changed', options);
