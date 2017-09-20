@@ -64,7 +64,7 @@ module.exports = class extends Animation {
 
 		return new Promise(function(resolve, reject) {
 			avanza.get(sprintf('/_mobile/market/index/%s', id)).then(function(result) {
-				resolve({name:result.name, price:result.lastPrice, change:result.changePercent});
+				resolve(result);
 			})
 			.catch(function(error) {
 				reject(error);
@@ -96,10 +96,10 @@ module.exports = class extends Animation {
 
 			currencies.forEach(function(currency) {
 				promise = promise.then(function() {
-					self.getMarketIndex(id[currency]).then(function(price) {
+					self.getMarketIndex(id[currency]).then(function(result) {
 						var word = {};
 						word.text = currency;
-						word.color = price.changePercent < 0 ? 'red' : 'blue';
+						word.color = result.changePercent < 0 ? 'red' : 'blue';
 						words.push(word);
 
 					})
