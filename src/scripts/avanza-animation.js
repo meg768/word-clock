@@ -74,7 +74,58 @@ module.exports = class extends Animation {
 
 	}
 
+	getMarketText(text, ids) {
+
+		var self = this;
+		var avanza = self.avanza;
+		var symbols = text.split(' ');
+
+		return new Promise(function(resolve, reject) {
+
+			var promise = Promise.resolve();
+			var words = [];
+
+			symbols.forEach(function(symbol) {
+				promise = promise.then(function() {
+					console.log('Getting currency', symbol);
+					return self.getMarketIndex(ids[symbol])
+				});
+
+				promise = promise.then(function(result) {
+					console.log(currency, result.changePercent);
+					var word = {};
+					word.text = currency;
+					word.color = result.changePercent < 0 ? 'red' : 'blue';
+					words.push(word);
+				});
+
+			});
+
+			promise.then(function() {
+				resolve(words);
+			})
+			.catch(function(error) {
+				reject(error);
+			})
+		})
+
+
+	}
+
 	getCurrencyText() {
+
+		return getMarketText("NOK JPY USD GBP EUR DKK CAD", {
+			'JPY': 108702,
+			'USD': 19000,
+			'CAD': 108701,
+			'GBP': 108703,
+			'NOK': 53293,
+			'DKK': 53292,
+			'EUR': 18998
+		});
+	}
+
+	getCurrencyTextX() {
 
 		var id = {
 			'JPY': 108702,
