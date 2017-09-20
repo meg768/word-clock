@@ -13,6 +13,7 @@ module.exports = class extends Animation {
 
 	constructor(display) {
 		super(display);
+
 		this.lastLogin = undefined;
 		this.avanza    = new Avanza();
 
@@ -22,6 +23,14 @@ module.exports = class extends Animation {
 
 		var self = this;
 		var avanza = self.avanza;
+
+		// May we use cached weather?
+        if (self.lastLogin != undefined) {
+            if (now.getTime() - self.lastLogin.getTime() < 60 * 60 * 1000) {
+                return Promise.resolve();
+            }
+        }
+
 
 		if (avanza.session.username != undefined)
 			return Promise.resolve();
