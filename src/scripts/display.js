@@ -150,9 +150,4 @@ var Module = module.exports = function(strip) {
         }
     }
 
-
-    console.log(JSON.stringify(_this.computeLayout("HALV FEM"), null, 2));
-
 }
-
-//new Module();
