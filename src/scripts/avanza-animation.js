@@ -113,7 +113,7 @@ module.exports = class extends Animation {
 
 	getCurrencyText() {
 
-		return getMarketText([
+		return this.getMarketText([
 			{text: 'NOK', id:53293},
 			{text: 'JPY', id:108702},
 			{text: 'USD', id:19000},
