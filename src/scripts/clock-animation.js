@@ -12,9 +12,11 @@ module.exports = class extends Animation {
     }
 
     run() {
+        var self = this;
+
         return new Promise(function(resolve, reject) {
-            this.getText().then(function(words) {
-                return this.displayText(words);
+            self.getText().then(function(words) {
+                return self.displayText(words);
             })
             .then(function() {
                 resolve();
