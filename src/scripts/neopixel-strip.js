@@ -11,7 +11,7 @@ module.exports = function NeopixelStrip(options) {
 	const NAK = 21;
 
 	options = options || {};
-	
+
 	if (options.length == undefined)
 		options.length = process.env.NEOPIXEL_STRIP_LENGTH;
 
@@ -24,6 +24,7 @@ module.exports = function NeopixelStrip(options) {
 	if (options.address == undefined)
 		throw new Error('I2C address not defined');
 
+	console.log(options)
 	const CMD_INITIALIZE    = 0x10;
 	const CMD_COLORIZE      = 0x11;
 	const CMD_SHOW          = 0x12;
