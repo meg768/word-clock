@@ -49,8 +49,6 @@ var Module = module.exports = function(strip) {
             var layout = _this.computeLayout(words);
             var promise = Promise.resolve();
 
-            console.log(words, layout);
-
             layout.forEach(function(word) {
                 promise = promise.then(function() {
                     var row     = Math.floor(word.index / _columns);
@@ -148,6 +146,7 @@ var Module = module.exports = function(strip) {
 
         }
         catch(error) {
+            console.log(error);
             return [];
         }
     }
