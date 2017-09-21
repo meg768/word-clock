@@ -32,11 +32,11 @@ var Module = module.exports = function(strip) {
         return strip.clear.apply(this, arguments);
     }
 
-    _this.show = function(delay) {
+    _this.show = function() {
         return strip.show.apply(this, arguments);
     }
 
-    _this.colorize = function(options) {
+    _this.colorize = function() {
         return strip.colorize.apply(this, arguments);
     }
 
@@ -50,7 +50,7 @@ var Module = module.exports = function(strip) {
             var promise = Promise.resolve();
 
             console.log(JSON.stringify(words, null, 2));
-            
+
             layout.forEach(function(word) {
                 promise = promise.then(function() {
                     var row     = Math.floor(word.index / _columns);
