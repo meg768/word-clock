@@ -72,13 +72,13 @@ var Module = new function() {
 					if (argv.length == undefined)
 						argv.length = argv.size;
 
-					strip.colorize({
+					display.colorize({
 						offset     : argv.offset,
 						length     : argv.length,
 						color      : argv.color
 					})
 					.then(function() {
-						return strip.show(argv.delay);
+						return display.show(argv.delay);
 					})
 					.catch(function(error) {
 						console.log(error);
