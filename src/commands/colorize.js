@@ -45,11 +45,11 @@ var Module = new function() {
 		try {
 
 			Promise.resolve().then(function() {
+				var Display = require('../scripts/display.js');
+				var Strip = require('../scripts/neopixel-strip.js');
+				var display = new Display(new Strip());
 
 				if (isString(argv.text)) {
-					var Display = require('../scripts/display.js');
-					var Strip = require('../scripts/neopixel-strip.js');
-					var display = new Display(new Strip());
 
 					display.clear().then(function() {
 						return display.show(argv.delay);
