@@ -48,7 +48,8 @@ var Module = new function() {
 
 				if (isString(argv.text)) {
 					var Display = require('../scripts/display.js');
-					var display = new Display();
+					var Strip = require('../scripts/neopixel-strip.js');
+					var display = new Display(new Strip());
 
 					display.clear().then(function() {
 						return display.show(argv.delay);
