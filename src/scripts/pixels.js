@@ -8,7 +8,21 @@ module.exports = function Pixels(width, height) {
 
 
 	var _this = this;
+	var _length = width * height;
 	var _pixels = new Uint32Array(width * height);
+
+	_this.clear() = function() {
+		for (var i = 0; i < length; i++)
+			_pixels[i] = 0;
+	}
+
+	_this.setPixelAtIndex = function(index, color) {
+		_pixels[index] = color;
+	}
+
+	_this.getPixelAtIndex = function(index) {
+		return _pixels[index];
+	}
 
 	_this.setPixel = function(x, y, color) {
 		_pixels[y * width + x] = color
@@ -27,6 +41,10 @@ module.exports = function Pixels(width, height) {
 	}
 
 	_this.getPixels = function() {
+		return _pixels;
+	}
+
+	this.toUint32Array = function() {
 		return _pixels;
 	}
 
