@@ -55,9 +55,6 @@ var Module = new function() {
 
 		neopixels.render(pixels);
 
-		setTimeout(function(){
-			console.log('Done');
-		}, 5000)
 
 		//do something when app is closing
 		//process.on('exit', exitHandler.bind(null,{cleanup:true}));
