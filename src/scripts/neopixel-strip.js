@@ -25,7 +25,7 @@ module.exports = function NeopixelStrip(options) {
 
 	_this.render = function(pixels) {
 
-		var display = new Uint32Array(_length);
+		var tmp = new Uint32Array(_length);
 		var numSteps = 25;
 
 		function sleep(milliseconds) {
@@ -53,9 +53,9 @@ module.exports = function NeopixelStrip(options) {
 				var green = (g1 + (step * (g2 - g1)) / numSteps);
 				var blue  = (b1 + (step * (b2 - b1)) / numSteps);
 
-				display[i] = (red << 16) | (green << 8) | blue;
+				tmp[i] = (red << 16) | (green << 8) | blue;
 			}
-			_strip.render(display);
+			_strip.render(tmp);
 			sleep(50);
 		}
 
@@ -63,56 +63,9 @@ module.exports = function NeopixelStrip(options) {
 		_pixels.set(pixels);
 
 		// Display the current buffer
-		display.set(_pixels);
+		tmp.set(_pixels);
 		_strip.render(display);
 
-	}
-
-	_this.rendeX = function(foo) {
-
-		var numSteps = 25;
-
-		console.log('Fading...');
-
-
-		for (var step = 0; step < numSteps; step++) {
-			var tmp = new Uint32Array(_length);
-
-			for (var i = 0; i < _length; i++) {
-				var rgb1 = _pixels[i];
-				var r1 = (rgb1 & 0xFF0000) >> 16;
-				var g1 = (rgb1 & 0x00FF00) >> 8;
-				var b1 = (rgb1 & 0x0000FF);
-
-				var rgb2 = foo[i];
-				var r2 = (rgb2 & 0xFF0000) >> 16;
-				var g2 = (rgb2 & 0x00FF00) >> 8;
-				var b2 = (rgb2 & 0x0000FF);
-
-				var red   = (r1 + (step * (r2 - r1)) / numSteps);
-				var green = (g1 + (step * (g2 - g1)) / numSteps);
-				var blue  = (b1 + (step * (b2 - b1)) / numSteps);
-
-				var color = (red << 16) || (green << 8) | blue;
-
-//				if (step == numSteps)
-					//console.log(rgb1.toString(16), rgb2.toString(16), color.toString(16));
-
-				tmp[i] = color;
-//				console.log(tmp[i].toString(16));
-			}
-
-
-			_strip.render(tmp);
-			sleep(50);
-		}
-
-		var tmp = new Uint32Array(_length);
-		tmp.set(foo);
-		_strip.render(tmp);
-
-		console.log('Setting...');
-		_pixels.set(foo);
 	}
 
 
