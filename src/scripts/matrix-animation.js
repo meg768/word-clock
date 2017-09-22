@@ -27,7 +27,7 @@ class Worm {
 
 
         if (y >= 0 && y < self.height)
-              pixels.setPixelHSL(x, y--, 360, 100, 50);
+              pixels.setPixelHSL(x, y--, 0, 100, 100);
 
 		for (var i = 0; i < length; i++) {
 			// Calculate brightness
@@ -40,7 +40,7 @@ class Worm {
 				luminance = 100;
 
             if (y >= 0 && y < self.height)
-                pixels.setPixelHSL(x, y--, hue, 100, luminance);
+                pixels.setPixelHSL(x, y--, hue, 100, luminance / 2);
 		}
 	}
 
