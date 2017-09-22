@@ -61,6 +61,7 @@ module.exports = function NeopixelStrip(options) {
 			sleep(50);
 		}
 
+		var tmp = new Uint32Array(_length);
 		tmp.set(pixels);
 		_strip.render(tmp);
 
