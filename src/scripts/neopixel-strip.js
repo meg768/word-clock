@@ -151,6 +151,7 @@ module.exports = function NeopixelStrip(options) {
 				var blue  = b1 + (step * (b2 - b1)) / numSteps;
 
 				display[i] = (red << 16) | (green << 8) | blue;
+				console.log(red, green, blue);
 			}
 			_strip.render(display);
 			sleep(50);
