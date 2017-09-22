@@ -134,19 +134,15 @@ module.exports = function NeopixelStrip(options) {
 				var g1 = (_rgb[i] & 0xFF) >> 8;
 				var b1 = (_rgb[i] & 0xFF);
 
-				var r2 = (_strip[i] & 0xFF) >> 16;
-				var g2 = (_strip[i] & 0xFF) >> 8;
-				var b2 = (_strip[i] & 0xFF);
+				var r2 = (_pixels[i] & 0xFF) >> 16;
+				var g2 = (_pixels[i] & 0xFF) >> 8;
+				var b2 = (_pixels[i] & 0xFF);
 
 				var red   = r1 + (step * (r2 - r1)) / numSteps;
 				var green = g1 + (step * (g2 - g1)) / numSteps;
 				var blue  = b1 + (step * (b2 - b1)) / numSteps;
 
-
 				display[i] = (red << 16) | (green << 8) | blue;
-
-
-
 			}
 			_strip.render(display);
 		}
