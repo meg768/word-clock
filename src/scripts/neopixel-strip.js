@@ -127,7 +127,7 @@ module.exports = function NeopixelStrip(options) {
 
 		var display =  new Uint32Array(_length);
 
-		for (var step = 0; step <= numSteps; step++) {
+		for (var step = 0; step < numSteps; step++) {
 
 			for (var i = 0; i < _length; i++) {
 				var r1 = (_rgb[i] & 0xFF) >> 16;
@@ -147,7 +147,9 @@ module.exports = function NeopixelStrip(options) {
 			_strip.render(display);
 		}
 
-		_rgb = display;
+		_strip.render(pixels);
+
+		_rgb = pixels.slice(0);
 
 		return Promise.resolve();
 	}
