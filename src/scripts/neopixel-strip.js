@@ -38,7 +38,8 @@ module.exports = function NeopixelStrip(options) {
 				var b1 = (rgb1 & 0x0000FF);
 
 				var rgb2 = pixels[i];
-				console.log(rgb2);
+				if (i == 0)
+					console.log(rgb2.toString(16));
 				var r2 = (rgb2 & 0xFF0000) >> 16;
 				var g2 = (rgb2 & 0x00FF00) >> 8;
 				var b2 = (rgb2 & 0x0000FF);
