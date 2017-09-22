@@ -17,7 +17,7 @@ module.exports = function NeopixelStrip(options) {
 	var _length        = _width * _height;
 	var _strip         = require('rpi-ws281x-native');
 	var _pixels        = new Uint32Array(_length);
-	var tmp = new Uint32Array(_length);
+	//var tmp = new Uint32Array(_length);
 
 	_this.length = _length;
 	_this.width  = _width;
