@@ -112,9 +112,9 @@ module.exports = function NeopixelStrip(options) {
 
 			for (var i = 0; i < length; i++) {
 				var x = (i + offset) % _width;
-				var y = Math.floor((i + offset) / _width)
+				var y = Math.floor((i + offset) / _width);
 
-				_pixels.setPixel(x, y, color)
+				_pixels.setPixel(x, y, color);
 			}
 
 			resolve();
@@ -174,7 +174,7 @@ module.exports = function NeopixelStrip(options) {
 
 		// Display the current buffer
 		_display.set(_pixels.getPixels());
-		_strip.render(display);
+		_strip.render(_display);
 
 		// Save rgb buffer
 		_rgb.setPixels(_pixels.getPixels());
