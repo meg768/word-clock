@@ -8,6 +8,7 @@ var Avanza     = require('avanza-mobile-client');
 var Animation  = require('./animation.js');
 var Layout     = require('./layout.js');
 var Pixels     = require('./pixels.js');
+var Color      = require('color');
 
 module.exports = class extends Animation {
 
