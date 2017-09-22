@@ -48,7 +48,7 @@ class Worm {
 
         self.length = self.height * 0.1 + self.height * 1.1 * random(100) / 100;
 		self.row    = -random(0, self.height * 2);
-        self.loops  = 1 + random(10);
+        self.loops  = random(5);
 		self.ticks  = 0;
 
 	}
