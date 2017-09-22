@@ -78,7 +78,7 @@ var Module = new function() {
 
 	}
 	function run(argv) {
-		console.loh('Initializing');
+		console.log('Initializing');
 		neopixels.init(169);
 		console.log('Waiting');
 		setTimeout(2000, foo);
