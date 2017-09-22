@@ -33,11 +33,12 @@ module.exports = function NeopixelStrip(options) {
 		var map = new Uint16Array(_length);
 
 	    for(var i = 0; i<map.length; i++) {
-	        var row = Math.floor(i/width), col = i % _width;
+	        var row = Math.floor(i / _width), col = i % _width;
 
 	        if((row % 2) === 0) {
 	            map[i] = i;
-	        } else {
+	        }
+			else {
 	            map[i] = (row+1) * _width - (col+1);
 	        }
 	    }
