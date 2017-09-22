@@ -13,7 +13,6 @@ module.exports = class Animation {
 
 
 
-
     run() {
         return new Promise(function(resolve, reject) {
             resolve();
