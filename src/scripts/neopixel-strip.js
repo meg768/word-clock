@@ -52,7 +52,7 @@ module.exports = function NeopixelStrip(options) {
 //				if (step == numSteps)
 					//console.log(rgb1.toString(16), rgb2.toString(16), color.toString(16));
 
-				tmp[i] = color;
+				tmp[i] = i;
 //				console.log(tmp[i].toString(16));
 			}
 
