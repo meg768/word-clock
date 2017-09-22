@@ -19,9 +19,9 @@ module.exports = function NeopixelStrip(options) {
 	var _height        = 13;
 	var _length        = _width * _height;
 	var _strip         = require('rpi-ws281x-native');
-	var _pixels        =  new Uint32Array(_length);
-	var _rgb           =  new Uint32Array(_length);
-
+	var _pixels        = new Uint32Array(_length);
+	var _rgb           = new Uint32Array(_length);
+	var _mapping       = new Uint16Array(_length);
 
 	function debug() {
 		if (_debug)
@@ -44,8 +44,19 @@ module.exports = function NeopixelStrip(options) {
 	        }
 	    }
 
-		_strip.setIndexMapping(map);
+		_mapping = map;
 	}
+
+	function remap(data) {
+
+		var tmp =  new Uint32Array(data.length);
+
+        for (var i = 0; i < data.length; i++) {
+            tmp[i] = data[_mapping[i]];
+        }
+
+        return tmp;
+    };
 
 	_this.pause = function(ms) {
 
@@ -123,9 +134,13 @@ module.exports = function NeopixelStrip(options) {
 		});
 	};
 
+	function render(data) {
+		_strip.render(remap(data));
+	}
+
 	_this.show = function(numSteps) {
 
-		var display =  new Uint32Array(_length);
+		var display = new Uint32Array(_length);
 
 		function sleep(milliseconds) {
 		  var start = new Date().getTime();
@@ -152,15 +167,15 @@ module.exports = function NeopixelStrip(options) {
 				var blue  = (b1 + (step * (b2 - b1)) / numSteps);
 
 				display[i] = (red << 16) | (green << 8) | blue;
-//				console.log(r2, g2, b2, red, green, blue,  (red << 16) | (green << 8) | blue);
+				console.log(r2, g2, b2, red, green, blue,  (red << 16) | (green << 8) | blue);
 			}
-			_strip.render(display);
+			render(display);
 			sleep(50);
 		}
 
-		_strip.render(_pixels);
+		render(_pixels);
 
-		_rgb = _pixels.slice(0);
+		_rgb.set(_pixels);
 
 		return Promise.resolve();
 	}
