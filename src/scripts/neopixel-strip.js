@@ -37,29 +37,33 @@ module.exports = function NeopixelStrip(options) {
 				}
 			}
 		}
-/*
-		for (var step = 0; step < numSteps; step++) {
 
-			for (var i = 0; i < _length; i++) {
+		if (options && options.fadeIn) {
+			var numSteps = options.fadeIn;
 
-				var r1 = (_pixels[i] & 0xFF0000) >> 16;
-				var g1 = (_pixels[i] & 0x00FF00) >> 8;
-				var b1 = (_pixels[i] & 0x0000FF);
+			for (var step = 0; step < numSteps; step++) {
 
-				var r2 = (pixels[i] & 0xFF0000) >> 16;
-				var g2 = (pixels[i] & 0x00FF00) >> 8;
-				var b2 = (pixels[i] & 0x0000FF);
+				for (var i = 0; i < _length; i++) {
 
-				var red   = (r1 + (step * (r2 - r1)) / numSteps);
-				var green = (g1 + (step * (g2 - g1)) / numSteps);
-				var blue  = (b1 + (step * (b2 - b1)) / numSteps);
+					var r1 = (_pixels[i] & 0xFF0000) >> 16;
+					var g1 = (_pixels[i] & 0x00FF00) >> 8;
+					var b1 = (_pixels[i] & 0x0000FF);
 
-				tmp[i] = (red << 16) | (green << 8) | blue;
+					var r2 = (pixels[i] & 0xFF0000) >> 16;
+					var g2 = (pixels[i] & 0x00FF00) >> 8;
+					var b2 = (pixels[i] & 0x0000FF);
+
+					var red   = (r1 + (step * (r2 - r1)) / numSteps);
+					var green = (g1 + (step * (g2 - g1)) / numSteps);
+					var blue  = (b1 + (step * (b2 - b1)) / numSteps);
+
+					tmp[i] = (red << 16) | (green << 8) | blue;
+				}
+				_strip.render(tmp);
+				sleep(50);
 			}
-			_strip.render(tmp);
-			sleep(50);
+
 		}
-*/
 		// Save rgb buffer
 		_pixels.set(pixels);
 
