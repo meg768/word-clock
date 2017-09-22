@@ -19,7 +19,6 @@ class Worm {
     }
 
     draw(pixels) {
-        var now    = getDate();
         var self   = this;
         var hue    = self.hue;
 		var x      = self.column;
@@ -88,7 +87,7 @@ module.exports = class Animation {
 
         return new Promise(function(resolve, reject) {
 
-            var pixels = new Pixels(self.strip.width, self.strip.height);
+            var pixels = new Pixels(self.strip.width, selfP.strip.height);
             var start = new Date();
             var worms = [];
 
