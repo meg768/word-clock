@@ -24,7 +24,7 @@ class Worm {
 		var x      = self.column;
 		var y      = self.row;
         var length = self.length;
-        var hue    = 120; //Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
+        var hue    = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
 
 
         if (y >= 0 && y < self.height)
