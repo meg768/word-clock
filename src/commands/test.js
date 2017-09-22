@@ -56,13 +56,13 @@ var Module = new function() {
 			pixels[i] = Color().hsl(i, 100, 50).rgbNumber();
 			neopixels.render(pixels);
 		}
-
+/*
 		for (var i = 0; i < 25; i++)
 			fill(Color().hsl(0, 100, i).rgbNumber());
 
 		for (var i = 25; i >= 0; i--)
 			fill(Color().hsl(0, 100, i).rgbNumber());
-
+*/
 		neopixels.render(pixels);
 
 
