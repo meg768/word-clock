@@ -25,7 +25,7 @@ module.exports = function NeopixelStrip(options) {
 	_this.render = function(pixels) {
 
 		var tmp = new Uint32Array(_length);
-		var numSteps = 100;
+		var numSteps = 200;
 
 		for (var step = 0; step < numSteps; step++) {
 
