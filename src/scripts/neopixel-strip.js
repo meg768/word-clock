@@ -23,7 +23,52 @@ module.exports = function NeopixelStrip(options) {
 	_this.width  = _width;
 	_this.height = _height;
 
-	_this.render = function(foo) {
+	_this.render = function(pixels) {
+
+		var display = new Uint32Array(_length);
+		var numSteps = 25;
+
+		function sleep(milliseconds) {
+		  var start = new Date().getTime();
+		  for (var i = 0; i < 1e7; i++) {
+		    if ((new Date().getTime() - start) > milliseconds){
+		      break;
+		    }
+		  }
+		}
+
+		for (var step = 0; step < numSteps; step++) {
+
+			for (var i = 0; i < _length; i++) {
+
+				var r1 = (_pixels[i] & 0xFF0000) >> 16;
+				var g1 = (_pixels[i] & 0x00FF00) >> 8;
+				var b1 = (_pixels[i] & 0x0000FF);
+
+				var r2 = (pixels[i] & 0xFF0000) >> 16;
+				var g2 = (pixels[i] & 0x00FF00) >> 8;
+				var b2 = (pixels[i] & 0x0000FF);
+
+				var red   = (r1 + (step * (r2 - r1)) / numSteps);
+				var green = (g1 + (step * (g2 - g1)) / numSteps);
+				var blue  = (b1 + (step * (b2 - b1)) / numSteps);
+
+				display[i] = (red << 16) | (green << 8) | blue;
+			}
+			_strip.render(display);
+			sleep(50);
+		}
+
+		// Save rgb buffer
+		_pixels.set(pixels);
+
+		// Display the current buffer
+		display.set(_pixels);
+		_strip.render(display);
+
+	}
+
+	_this.rendeX = function(foo) {
 
 		var numSteps = 25;
 
