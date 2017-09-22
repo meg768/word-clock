@@ -47,7 +47,8 @@ var Module = new function() {
 
 			var strip = new Strip();
 			//var animations = [new AvanzaAnimation(display), new ClockAnimation(display), new WeatherAnimation(display)];
-			var animations = [ new MatrixAnimation(strip), new WeatherAnimation(strip), new AvanzaAnimation(strip), new ClockAnimation(strip)];
+			//var animations = [ new MatrixAnimation(strip), new WeatherAnimation(strip), new AvanzaAnimation(strip), new ClockAnimation(strip)];
+			var animations = [ new MatrixAnimation(strip), new ClockAnimation(strip)];
 			//var animations = [ new MatrixAnimation(strip)];
 			var socket = io.connect(argv.service);
 			var animationIndex = 0;
