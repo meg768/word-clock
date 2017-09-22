@@ -4,6 +4,7 @@ var sprintf = require('yow/sprintf');
 var Animation = require('./animation.js');
 var Layout = require('./layout.js');
 var Strip = require('./neopixel-strip.js');
+var Pixels = require('./pixels.js');
 
 module.exports = class extends Animation {
 
