@@ -145,8 +145,8 @@ module.exports = function NeopixelStrip(options) {
 
 			var i = 0;
 
-			for (var x = 0; x < _width; x++) {
-				for (var y = 0; y < _height; y++) {
+			for (var y = 0; y < _height; y++) {
+				for (var x = 0; x < _width; x++) {
 
 					var rgb = _rgb.getPixel(x, y);
 					var r1 = (rgb & 0xFF0000) >> 16;
@@ -163,7 +163,7 @@ module.exports = function NeopixelStrip(options) {
 					var blue  = (b1 + (step * (b2 - b1)) / numSteps);
 
 					var color = red << 16 || green << 8 | blue;
-
+					
 					_display[i++] = color;
 				}
 			}
