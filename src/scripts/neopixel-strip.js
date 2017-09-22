@@ -29,16 +29,17 @@ module.exports = function NeopixelStrip(options) {
 
 		console.log('Fading...');
 
+
 		for (var step = 0; step < numSteps; step++) {
 			var tmp = new Uint32Array(_length);
 
 			for (var i = 0; i < _length; i++) {
-				var rgb1 = _pixels[i];
+				var rgb1 = pixels[i];
 				var r1 = (rgb1 & 0xFF0000) >> 16;
 				var g1 = (rgb1 & 0x00FF00) >> 8;
 				var b1 = (rgb1 & 0x0000FF);
 
-				var rgb2 = pixels[i];
+				var rgb2 = _pixels[i];
 				var r2 = (rgb2 & 0xFF0000) >> 16;
 				var g2 = (rgb2 & 0x00FF00) >> 8;
 				var b2 = (rgb2 & 0x0000FF);
@@ -52,7 +53,7 @@ module.exports = function NeopixelStrip(options) {
 //				if (step == numSteps)
 					//console.log(rgb1.toString(16), rgb2.toString(16), color.toString(16));
 
-				tmp[i] = i;
+				tmp[i] = color;
 //				console.log(tmp[i].toString(16));
 			}
 
