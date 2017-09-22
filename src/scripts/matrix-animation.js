@@ -5,6 +5,7 @@ var Color   = require('color');
 var random  = require('yow/random');
 
 var Pixels  = require('./pixels.js');
+
 class Worm {
 
     constructor(width, height, column) {
@@ -87,7 +88,7 @@ module.exports = class Animation {
 
         return new Promise(function(resolve, reject) {
 
-            var pixels = new Pixels(strip.width, strip.height);
+            var pixels = new Pixels(self.strip.width, self.strip.height);
             var start = new Date();
             var worms = [];
 
