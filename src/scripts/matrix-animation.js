@@ -12,6 +12,7 @@ class Worm {
         this.column = column;
         this.height = height;
         this.width  = width;
+        this.hue    = 0;
 
         this.reset();
 
@@ -46,8 +47,9 @@ class Worm {
 
     reset() {
         var self = this;
+        //_length = int(float(_height) * 0.1 + float(_height) * 1.1 * (float(rand() % 100) / 100.0));
 
-        self.length = self.height * 0.1 + self.height * 1.1 * random(100) / 100;
+        self.length = self.height; // * 0.1 + self.height * 1.1 * random(100) / 100;
 		self.row    = -random(0, self.height * 2);
         self.delay  = random(10);
 		self.ticks  = 0;
