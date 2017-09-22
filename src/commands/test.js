@@ -43,10 +43,10 @@ var Module = new function() {
 	function setPixel(index, color) {
 		pixels[index] = color;
 	}
-	function run(argv) {
-		neopixels.init(169);
 
+	function foo() {
 
+		console.log('Running');
 		pixels[0] = Color().hsl(240, 100, 50).rgbNumber();
 		neopixels.render(pixels);
 
@@ -74,6 +74,14 @@ var Module = new function() {
 
 		//catches uncaught exceptions
 		//process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
+
+
+	}
+	function run(argv) {
+		console.loh('Initializing');
+		neopixels.init(169);
+		console.log('Waiting');
+		setTimeout(2000, foo);
 
 	}
 
