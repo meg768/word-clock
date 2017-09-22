@@ -18,6 +18,7 @@ module.exports = function NeopixelStrip(options) {
 	var _strip         = require('rpi-ws281x-native');
 	var _rgb           = new Pixels(_width, _height);
 	var _pixels        = new Pixels(_width, _height);
+	var _display       = new Uint32Array(_length);
 
 	function debug() {
 		if (_debug)
@@ -123,9 +124,13 @@ module.exports = function NeopixelStrip(options) {
 	};
 
 
+	_this.render = function() {
+		_display.set(_pixels.getPixels());
+		_strip.render(_display);
+	}
+
 	_this.show = function(numSteps) {
 
-		var display = new Pixels(_width, _height);
 
 		function sleep(milliseconds) {
 		  var start = new Date().getTime();
@@ -137,6 +142,8 @@ module.exports = function NeopixelStrip(options) {
 		}
 
 		for (var step = 0; step < numSteps; step++) {
+
+			var i = 0;
 
 			for (var x = 0; x < _width; x++) {
 				for (var y = 0; y < _height; y++) {
@@ -155,20 +162,22 @@ module.exports = function NeopixelStrip(options) {
 					var green = (g1 + (step * (g2 - g1)) / numSteps);
 					var blue  = (b1 + (step * (b2 - b1)) / numSteps);
 
-					display.setPixelRGB(x, y, red, green, blue);
+					var color = red << 16 || green << 8 | blue;
+
+					_display[i++] = color;
 				}
 			}
 
-			_strip.render(display.getPixels());
+			_strip.render(_display);
 			sleep(50);
 		}
 
+		// Display the current buffer
+		_display.set(_pixels.getPixels());
+		_strip.render(display);
+
 		// Save rgb buffer
 		_rgb.setPixels(_pixels.getPixels());
-
-		// Display the current buffer
-		display.set(_pixels);
-		_strip.render(display);
 
 		return Promise.resolve();
 	}
