@@ -11,7 +11,7 @@ module.exports = function Pixels(width, height) {
 	var _length = width * height;
 	var _pixels = new Uint32Array(width * height);
 
-	_this.clear() = function() {
+	_this.clear = function() {
 		for (var i = 0; i < length; i++)
 			_pixels[i] = 0;
 	}
