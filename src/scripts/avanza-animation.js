@@ -6,13 +6,13 @@ var isString   = require('yow/is').isString;
 var Timer      = require('yow/timer');
 var Avanza     = require('avanza-mobile-client');
 var Animation  = require('./animation.js');
-
+var Layout     = require('./layout.js');
 
 module.exports = class extends Animation {
 
 
-	constructor(display) {
-		super(display);
+	constructor(strip) {
+		super(strip);
 
 		this.lastLogin = undefined;
 		this.avanza    = new Avanza();
@@ -173,6 +173,25 @@ module.exports = class extends Animation {
 		});
 	}
 
+	displayText(words) {
+        var self = this;
+
+
+        var pixels = new Pixels(13, 13);
+        var layout = new Layout();
+
+        words = layout.getTextLayout(words);
+
+        words.forEach(function(word) {
+            for (var i = 0; i < word.text.length; i++) {
+                pixels.setPixel(word.col + i, word.row, Color(word.color).rgbNumber());
+            }
+
+        });
+
+        self.strip.render(pixels.getPixels());
+
+    }
 
 	run() {
 		var self = this;
@@ -180,10 +199,8 @@ module.exports = class extends Animation {
 
         return new Promise(function(resolve, reject) {
             self.getText().then(function(words) {
-                return self.displayText(words);
-            })
-            .then(function() {
-                resolve();
+                self.displayText(words);
+				resolve();
             })
             .catch(function(error) {
                 reject(error);
