@@ -144,7 +144,7 @@ module.exports = function NeopixelStrip(options) {
 
 				display[i] = (red << 16) | (green << 8) | blue;
 			}
-			console.log('Rendering');
+			console.log('Rendering', i, _length);
 			_strip.render(display);
 		}
 
