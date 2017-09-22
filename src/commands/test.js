@@ -35,7 +35,7 @@ var Module = new function() {
 
 	function fill(color) {
 		for (var i = 0; i < 169; i++) {
-			pixel[i] = color;
+			pixels[i] = color;
 		}
 		neopixels.render(pixels);
 	}
@@ -44,7 +44,7 @@ var Module = new function() {
 		var pixels =  new Uint32Array(169);
 		neopixels.init(169);
 
-		
+
 		fill(Color().hsl(240, 100,2).rgbNumber());
 
 		neopixels.render(pixels);
