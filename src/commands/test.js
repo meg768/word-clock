@@ -3,7 +3,9 @@
 var sprintf = require('yow/sprintf');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
-
+var Color = require('color');
+var strip = require('rpi-ws281x-native');
+var neopixels = require('rpi-ws281x-native');
 
 var Module = new function() {
 
@@ -24,9 +26,28 @@ var Module = new function() {
 		});
 	}
 
+	function exitHandler(options, err) {
+		neopixels.reset();
+	    if (err) console.log(err.stack);
+	    if (options.exit) process.exit();
+	}
 
 	function run(argv) {
-		console.log(argv.text);
+		var pixels = new new Uint32Array(13);
+		neopixels.init(13);
+
+		pixels[0] = Color().hsl(240, 100,50).rgbNumber(); 
+
+		neopixels.render(pixels);
+
+		//do something when app is closing
+		//process.on('exit', exitHandler.bind(null,{cleanup:true}));
+
+		//catches ctrl+c event
+		//process.on('SIGINT', exitHandler.bind(null, {exit:true}));
+
+		//catches uncaught exceptions
+		//process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
 
 	}
 
