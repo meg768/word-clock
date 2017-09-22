@@ -11,6 +11,9 @@ module.exports = function Pixels(width, height) {
 	var _length = width * height;
 	var _pixels = new Uint32Array(width * height);
 
+	_this.width  = width;
+	_this.height = height;
+
 	_this.clear = function() {
 		for (var i = 0; i < _length; i++)
 			_pixels[i] = 0;
@@ -30,6 +33,10 @@ module.exports = function Pixels(width, height) {
 
 	_this.setPixelRGB = function(x, y, red, green, blue) {
  		_pixels[y * width + x] = (red << 16) | (green << 8) | blue;
+	}
+
+	_this.setPixelHSL = function(x, y, h, s, l) {
+		_pixels[y * width + x] = Color.hsl(h, s, l).rgbNumber();
 	}
 
 	_this.getPixel = function(x, y) {

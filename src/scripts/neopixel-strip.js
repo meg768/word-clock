@@ -37,7 +37,7 @@ module.exports = function NeopixelStrip(options) {
 				}
 			}
 		}
-
+/*
 		for (var step = 0; step < numSteps; step++) {
 
 			for (var i = 0; i < _length; i++) {
@@ -59,7 +59,7 @@ module.exports = function NeopixelStrip(options) {
 			_strip.render(tmp);
 			sleep(50);
 		}
-
+*/
 		// Save rgb buffer
 		_pixels.set(pixels);
 

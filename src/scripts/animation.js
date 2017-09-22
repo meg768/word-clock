@@ -2,18 +2,23 @@
 var isArray = require('yow/is').isArray;
 var sprintf = require('yow/sprintf');
 
+
 module.exports = class Animation {
 
 
     constructor(strip) {
         this.strip = strip;
+
     }
 
 
 
 
     run() {
-        return Promise.resolve();
+        return new Promise(function(resolve, reject) {
+            resolve();
+        });
+
     }
 }
 

@@ -1,0 +1,136 @@
+
+var isArray = require('yow/is').isArray;
+var sprintf = require('yow/sprintf');
+var Color   = require('color');
+var random  = require('yow/random');
+
+class Worm {
+
+    constructor(width, height, column) {
+        this.column = column;
+        this.height = height;
+        this.width  = width;
+
+        this.reset();
+
+
+    }
+
+    draw(pixels) {
+        var now    = getDate();
+        var self   = this;
+        var hue    = self.hue;
+		var x      = self.column;
+		var y      = self.row;
+        var length = self.length;
+
+
+        if (y >= 0 && y < self.height)
+		      pixels.setPixelRGB(x, y--, 255, 255, 255);
+
+		for (var i = 0; i < length; i++) {
+			// Calculate brightness
+			var luminance  = 100 - (100 * i) / length;
+
+			if (luminance < 0)
+				luminance = 0;
+
+			if (luminance > 100)
+				luminance = 100;
+
+            if (y >= 0 && y < self.height)
+                pixels.setPixelHSL(x, y--, hue, 100, luminance);
+		}
+	}
+
+    reset() {
+        var self = this;
+
+        self.length = self.height * 0.1 + self.height * 1.1 * random(100) / 100;
+		self.row    = -random(0, self.height * 2);
+        self.delay  = random(10);
+		self.ticks  = 0;
+	}
+
+
+    idle() {
+        var self = this;
+
+		self.ticks++;
+
+		if (self.ticks >= self.delay) {
+			self.ticks = 0;
+			self.row++;
+
+			if (self.row - self.length > self.height)
+				self.reset();
+
+		}
+
+	}
+
+}
+
+
+module.exports = class Animation {
+
+
+    constructor(strip) {
+        this.strip = strip;
+    }
+
+
+
+    run() {
+        var self = this;
+
+        return new Promise(function(resolve, reject) {
+
+            var pixels = new Pixels(strip.width, strip.height);
+            var start = new Date();
+            var worms = [];
+
+            for (var i = 0; i < self.strip.width; i++) {
+                var worm = new Worm(self.strip.width, self.strip.height, i);
+                worms.push(worm);
+            }
+
+
+            for (;;) {
+                var now = new Date();
+
+                if (now.getTime() - start.getTime() > 1000 * 10)
+                    break;
+
+                for (var i = 0; i < self.strip.width; i++) {
+        			worms[i].draw(pixels);
+        			worms[i].idle();
+        		}
+
+                self.strip.render(pixels.getPixels());
+
+            }
+
+            resolve();
+        });
+
+    }
+}
+
+
+/*
+function test() {
+    var module = new Module();
+
+    module.getText().then(function(text) {
+        console.log(text);
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+
+}
+
+test();
+
+*/
