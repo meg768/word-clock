@@ -2,13 +2,14 @@
 var sprintf = require('yow/sprintf');
 
 var Animation = require('./animation.js');
-
+var Layout = require('./layout.js');
+var Strip = require('./neopixel-strip.js');
 
 module.exports = class extends Animation {
 
 
-    constructor(display) {
-        super(display);
+    constructor(strip) {
+        super(strip);
     }
 
     run() {
@@ -25,6 +26,29 @@ module.exports = class extends Animation {
                 reject(error);
             });
         });
+    }
+
+    displayText(words) {
+        var self = this;
+
+        return new Promise(function(resolve, reject) {
+
+            var pixels = new Pixels(self.strip.width, self.strip.height);
+            var layout = new Layout();
+
+            words = layout.getTextLayout(words);
+
+            words.forEach(function(word) {
+                for (var i = 0; i < word.text.length; i++) {
+                    pixels.setPixel(word.col + i, word.row, Color(word.color).rgbNumber());
+                }
+
+            });
+
+            self.strip.render(pixels.getPixels());
+            resolve();
+        });
+
     }
 
 

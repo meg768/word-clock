@@ -5,34 +5,12 @@ var sprintf = require('yow/sprintf');
 module.exports = class Animation {
 
 
-    constructor(display) {
-        this.display = display;
+    constructor(strip) {
+        this.strip = strip;
     }
 
 
-    displayText(words) {
-        var self = this;
-        var display = this.display;
 
-        return new Promise(function(resolve, reject) {
-
-            display.clear().then(function() {
-                return display.drawWords(words);
-
-            })
-            .then(function() {
-                return display.show(16);
-            })
-            .catch(function(error) {
-                console.log(error);
-                reject(error);
-            })
-            .then(function() {
-                resolve();
-            })
-        });
-
-    }
 
     run() {
         return Promise.resolve();

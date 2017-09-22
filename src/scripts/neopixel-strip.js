@@ -20,6 +20,19 @@ module.exports = function NeopixelStrip(options) {
 	var _pixels        = new Pixels(_width, _height);
 	var _tmp           = new Uint32Array(_length);
 
+
+
+	_this.length = _length;
+	_this.width  = _width;
+	_this.height = _height;
+
+	_this.render = function(pixels) {
+		var tmp  = new Uint32Array(_length);
+		tmp.set(pixels);
+		_strip.render(tmp);
+	}
+
+
 	function debug() {
 		if (_debug)
 			console.log.apply(this, arguments);
