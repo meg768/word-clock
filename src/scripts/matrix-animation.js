@@ -4,6 +4,7 @@ var sprintf = require('yow/sprintf');
 var Color   = require('color');
 var random  = require('yow/random');
 
+var Pixels  = require('./pixels.js');
 class Worm {
 
     constructor(width, height, column) {
