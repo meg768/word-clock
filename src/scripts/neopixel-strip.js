@@ -27,7 +27,8 @@ module.exports = function NeopixelStrip(options) {
 	_this.height = _height;
 
 	_this.render = function(pixels) {
-		var tmp  = new Uint32Array(_length);
+		console.log('Rendering');
+		var tmp  = new Uint32Array(pixels.length);
 		tmp.set(pixels);
 		_strip.render(tmp);
 	}

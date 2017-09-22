@@ -7,6 +7,8 @@ var isObject = require('yow/is').isObject;
 module.exports = function Pixels(width, height) {
 
 
+	console.log('New pixels', width, height);
+	
 	var _this = this;
 	var _length = width * height;
 	var _pixels = new Uint32Array(width * height);
