@@ -40,7 +40,6 @@ var Module = new function() {
 
 
 		registerService().then(function() {
-			var Display = require('../scripts/display.js');
 			var ClockAnimation = require('../scripts/clock-animation');
 			var WeatherAnimation = require('../scripts/weather-animation');
 			var AvanzaAnimation = require('../scripts/avanza-animation');

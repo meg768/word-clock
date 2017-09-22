@@ -42,7 +42,6 @@ var Module = new function() {
 	function run(argv) {
 		try {
 			var Strip = require('../scripts/neopixel-strip.js');
-			var Display = require('../scripts/display.js');
 			var strip = new Strip();
 			var display = new Display(strip);
 
