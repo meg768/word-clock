@@ -6,6 +6,7 @@ var isFunction = require('yow/is').isFunction;
 var Color = require('color');
 var strip = require('rpi-ws281x-native');
 var neopixels = require('rpi-ws281x-native');
+var pixels =  new Uint32Array(169);
 
 var Module = new function() {
 
@@ -32,11 +33,19 @@ var Module = new function() {
 	    if (options.exit) process.exit();
 	}
 
-	function run(argv) {
-		var pixels =  new Uint32Array(13);
-		neopixels.init(13);
+	function fill(color) {
+		for (var i = 0; i < 169; i++) {
+			pixel[i] = color;
+		}
+		neopixels.render(pixels);
+	}
 
-		pixels[0] = Color().hsl(240, 100,50).rgbNumber();
+	function run(argv) {
+		var pixels =  new Uint32Array(169);
+		neopixels.init(169);
+
+		
+		fill(Color().hsl(240, 100,2).rgbNumber());
 
 		neopixels.render(pixels);
 
