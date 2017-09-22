@@ -17,6 +17,7 @@ module.exports = function NeopixelStrip(options) {
 	var _length        = _width * _height;
 	var _strip         = require('rpi-ws281x-native');
 	var _pixels        = new Uint32Array(_length);
+	var tmp = new Uint32Array(_length);
 
 	_this.length = _length;
 	_this.width  = _width;
@@ -24,7 +25,6 @@ module.exports = function NeopixelStrip(options) {
 
 	_this.render = function(pixels) {
 
-		var tmp = new Uint32Array(_length);
 		var numSteps = 25;
 
 		console.log('Fading...');
@@ -48,7 +48,7 @@ module.exports = function NeopixelStrip(options) {
 
 				var color = (red << 16) || (green << 8) | blue;
 
-				if (step == 0)
+				if (step == numSteps)
 					console.log(rgb1.toString(16), rgb2.toString(16), color.toString(16));
 
 				tmp[i] = color;
