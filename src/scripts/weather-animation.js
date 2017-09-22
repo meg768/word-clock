@@ -2,8 +2,10 @@
 var isArray = require('yow/is').isArray;
 var sprintf = require('yow/sprintf');
 
-var Animation = require('./animation.js');
-
+var Animation  = require('./animation.js');
+var Layout     = require('./layout.js');
+var Pixels     = require('./pixels.js');
+var Color      = require('color');
 
 module.exports = class extends Animation {
 
@@ -204,6 +206,39 @@ module.exports = class extends Animation {
                 reject(error);
             })
 
+        });
+    }
+
+    displayText(words) {
+        var self = this;
+
+        var pixels = new Pixels(13, 13);
+        var layout = new Layout();
+
+        words = layout.getTextLayout(words);
+
+        words.forEach(function(word) {
+            for (var i = 0; i < word.text.length; i++) {
+                pixels.setPixel(word.col + i, word.row, Color(word.color).rgbNumber());
+            }
+
+        });
+
+        self.strip.render(pixels.getPixels());
+
+    }
+
+	run() {
+		var self = this;
+
+        return new Promise(function(resolve, reject) {
+            self.getText().then(function(words) {
+                self.displayText(words);
+				resolve();
+            })
+            .catch(function(error) {
+                reject(error);
+            });
         });
     }
 

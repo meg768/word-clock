@@ -42,12 +42,12 @@ var Module = new function() {
 		registerService().then(function() {
 			var Display = require('../scripts/display.js');
 			var ClockAnimation = require('../scripts/clock-animation');
-			//var WeatherAnimation = require('../scripts/weather-animation');
+			var WeatherAnimation = require('../scripts/weather-animation');
 			var AvanzaAnimation = require('../scripts/avanza-animation');
 
 			var strip = new Strip();
 			//var animations = [new AvanzaAnimation(display), new ClockAnimation(display), new WeatherAnimation(display)];
-			var animations = [new AvanzaAnimation(strip), new ClockAnimation(strip)];
+			var animations = [ new WeatherAnimation(strip), new AvanzaAnimation(strip), new ClockAnimation(strip)];
 			var socket = io.connect(argv.service);
 			var animationIndex = 0;
 
