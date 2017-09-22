@@ -138,7 +138,7 @@ module.exports = function NeopixelStrip(options) {
 				var g2 = (_strip[i] & 0xFF) >> 8;
 				var b2 = (_strip[i] & 0xFF);
 
-				var red   = r1 + (step * (r2 - r1)  / numSteps;
+				var red   = r1 + (step * (r2 - r1)) / numSteps;
 				var green = g1 + (step * (g2 - g1)) / numSteps;
 				var blue  = b1 + (step * (b2 - b1)) / numSteps;
 
