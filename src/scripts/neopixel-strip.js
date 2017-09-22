@@ -129,7 +129,7 @@ module.exports = function NeopixelStrip(options) {
 
 		for (var step = 0; step <= numSteps; step++) {
 
-			for (var i = 0; i < length; i++) {
+			for (var i = 0; i < _length; i++) {
 				var r1 = (_rgb[i] & 0xFF) >> 16;
 				var g1 = (_rgb[i] & 0xFF) >> 8;
 				var b1 = (_rgb[i] & 0xFF);
