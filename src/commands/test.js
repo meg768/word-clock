@@ -33,10 +33,10 @@ var Module = new function() {
 	}
 
 	function run(argv) {
-		var pixels = new new Uint32Array(13);
+		var pixels =  new Uint32Array(13);
 		neopixels.init(13);
 
-		pixels[0] = Color().hsl(240, 100,50).rgbNumber(); 
+		pixels[0] = Color().hsl(240, 100,50).rgbNumber();
 
 		neopixels.render(pixels);
 
