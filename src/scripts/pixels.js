@@ -8,13 +8,13 @@ module.exports = function Pixels(width, height) {
 
 
 	console.log('New pixels', width, height);
-	
+
 	var _this = this;
 	var _length = width * height;
 	var _pixels = new Uint32Array(width * height);
 
 	_this.clear = function() {
-		for (var i = 0; i < length; i++)
+		for (var i = 0; i < _length; i++)
 			_pixels[i] = 0;
 	}
 
@@ -46,9 +46,14 @@ module.exports = function Pixels(width, height) {
 		return _pixels;
 	}
 
-	this.toUint32Array = function() {
+	_this.toUint32Array = function() {
 		return _pixels;
 	}
+
+	for (var i = 0; i < _length; i++)
+		_pixels[i] = 25;
+
+
 
 
 };
