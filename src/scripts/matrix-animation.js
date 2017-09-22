@@ -51,7 +51,7 @@ class Worm {
 
         self.length = self.height * 0.1 + self.height * 1.1 * random(100) / 100;
 		self.row    = -random(0, self.height * 2);
-        self.delay  = random(10);
+        self.loops  = 5 + random(15);
 		self.ticks  = 0;
 
 	}
@@ -62,7 +62,7 @@ class Worm {
 
 		self.ticks++;
 
-		if (self.ticks >= self.delay) {
+		if (self.ticks >= self.loops) {
 			self.ticks = 0;
 			self.row++;
 
