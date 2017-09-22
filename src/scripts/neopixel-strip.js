@@ -23,18 +23,19 @@ module.exports = function NeopixelStrip(options) {
 	_this.width  = _width;
 	_this.height = _height;
 
-	_this.render = function(pixels) {
+	_this.render = function(pixels, options) {
 
 		var tmp = new Uint32Array(_length);
-		var numSteps = 25;
+		var numSteps = 50;
 
 		function sleep(milliseconds) {
-		  var start = new Date().getTime();
-		  for (var i = 0; i < 1e7; i++) {
-		    if ((new Date().getTime() - start) > milliseconds){
-		      break;
-		    }
-		  }
+			var start = new Date().getTime();
+
+			for (var i = 0; i < 1e7; i++) {
+				if ((new Date().getTime() - start) > milliseconds){
+					break;
+				}
+			}
 		}
 
 		for (var step = 0; step < numSteps; step++) {

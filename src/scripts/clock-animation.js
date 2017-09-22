@@ -18,39 +18,28 @@ module.exports = class extends Animation {
         var self = this;
 
         return new Promise(function(resolve, reject) {
-            self.getText().then(function(words) {
-                return self.displayText(words);
-            })
-            .then(function() {
-                resolve();
-            })
-            .catch(function(error) {
-                reject(error);
-            });
+            self.displayText(self.getText());
         });
     }
 
     displayText(words) {
         var self = this;
 
-        return new Promise(function(resolve, reject) {
 
-            var pixels = new Pixels(13, 13);
-            var layout = new Layout();
+        var pixels = new Pixels(13, 13);
+        var layout = new Layout();
 
-            words = layout.getTextLayout(words);
+        words = layout.getTextLayout(words);
 
-            words.forEach(function(word) {
-                console.log(word);
-                for (var i = 0; i < word.text.length; i++) {
-                    pixels.setPixel(word.col + i, word.row, Color(word.color).rgbNumber());
-                }
+        words.forEach(function(word) {
+            console.log(word);
+            for (var i = 0; i < word.text.length; i++) {
+                pixels.setPixel(word.col + i, word.row, Color(word.color).rgbNumber());
+            }
 
-            });
-
-            self.strip.render(pixels.getPixels());
-            resolve();
         });
+
+        self.strip.render(pixels.getPixels());
 
     }
 
@@ -114,7 +103,7 @@ module.exports = class extends Animation {
             if (minute >= 25)
                 hour += 1;
 
-            resolve(sprintf('%s%s', minutes[minute], hours[hour]).split(' ').map(function(word){
+            return (sprintf('%s%s', minutes[minute], hours[hour]).split(' ').map(function(word){
                 return {
                     text : word,
                     color: sprintf('hsl(%d, 100%%, 50%%)', hue)
