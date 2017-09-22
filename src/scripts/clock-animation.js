@@ -30,7 +30,9 @@ module.exports = class extends Animation {
         var pixels = new Pixels(13, 13);
         var layout = new Layout();
 
+        console.log(words);
         words = layout.getTextLayout(words);
+        console.log(words);
 
         words.forEach(function(word) {
             for (var i = 0; i < word.text.length; i++) {
