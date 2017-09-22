@@ -100,6 +100,8 @@ module.exports = class Animation {
 
 
             for (;;) {
+                pixels.clear();
+                
                 var now = new Date();
 
                 if (now.getTime() - start.getTime() > 1000 * 10)
