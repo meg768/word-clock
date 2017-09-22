@@ -11,17 +11,13 @@ module.exports = function NeopixelStrip(options) {
 
 	options = options || {};
 
-	if (options.length == undefined && process.env.NEOPIXEL_STRIP_LENGTH != undefined)
-		options.length = parseInt(process.env.NEOPIXEL_STRIP_LENGTH);
-
-	if (options.length == undefined)
-		throw new Error('Neopixel strip length not defined');
-
 
 	var _this          = this;         // That
 	var _debug         = 1;            // Output log messages to console?
 
-	var _length        = options.length;
+	var _width         = 13;
+	var _height        = 13;
+	var _length        = _width * _height;
 	var _strip         = require('rpi-ws281x-native');
 	var _pixels        =  new Uint32Array(_length);
 
@@ -34,15 +30,15 @@ module.exports = function NeopixelStrip(options) {
 	function init() {
 		_strip.init(_length);
 
-		var map = new Uint16Array(width*height);
+		var map = new Uint16Array(_length);
 
 	    for(var i = 0; i<map.length; i++) {
-	        var row = Math.floor(i/width), col = i % width;
+	        var row = Math.floor(i/width), col = i % _width;
 
 	        if((row % 2) === 0) {
 	            map[i] = i;
 	        } else {
-	            map[i] = (row+1) * width - (col+1);
+	            map[i] = (row+1) * _width - (col+1);
 	        }
 	    }
 
