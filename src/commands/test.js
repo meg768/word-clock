@@ -41,11 +41,12 @@ var Module = new function() {
 	}
 
 	function run(argv) {
-		var pixels =  new Uint32Array(169);
 		neopixels.init(169);
 
 
-		fill(Color().hsl(240, 100,2).rgbNumber());
+		pixels[0] = Color().hsl(240, 100, 50).rgbNumber();
+		neopixels.render(pixels);
+		fill(Color().hsl(240, 100, 10).rgbNumber());
 
 		neopixels.render(pixels);
 
