@@ -105,7 +105,7 @@ module.exports = class Animation {
 
                 var now = new Date();
 
-                if (now.getTime() - start.getTime() > 1000 * 120)
+                if (now.getTime() - start.getTime() > 1000 * 60)
                     break;
 
                 for (var i = 0; i < self.strip.width; i++) {
