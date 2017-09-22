@@ -2,15 +2,12 @@ var Color = require('color');
 
 var isString = require('yow/is').isString;
 var isObject = require('yow/is').isObject;
-
+var Pixels = resuire('./pixels.js');
 
 module.exports = function NeopixelStrip(options) {
 
-	const ACK = 6;
-	const NAK = 21;
 
 	options = options || {};
-
 
 	var _this          = this;         // That
 	var _debug         = 1;            // Output log messages to console?
@@ -19,8 +16,8 @@ module.exports = function NeopixelStrip(options) {
 	var _height        = 13;
 	var _length        = _width * _height;
 	var _strip         = require('rpi-ws281x-native');
-	var _pixels        = new Uint32Array(_length);
-	var _rgb           = new Uint32Array(_length);
+	var _rgb           = new Pixels(_width, _height);
+	var _pixels        = new Pixels(_width, _height);
 
 	function debug() {
 		if (_debug)
@@ -113,7 +110,10 @@ module.exports = function NeopixelStrip(options) {
 
 
 			for (var i = 0; i < length; i++) {
-				_pixels[i + offset] = color;
+				var x = (i + offset) % _width;
+				var y = Math.floor((i + offset) / _width)
+
+				_pixels.setPixel(x, y, color)
 			}
 
 			resolve();
@@ -125,7 +125,7 @@ module.exports = function NeopixelStrip(options) {
 
 	_this.show = function(numSteps) {
 
-		var display = new Uint32Array(_length);
+		var display = new Pixels(_width, _height);
 
 		function sleep(milliseconds) {
 		  var start = new Date().getTime();
@@ -138,28 +138,33 @@ module.exports = function NeopixelStrip(options) {
 
 		for (var step = 0; step < numSteps; step++) {
 
-			for (var i = 0; i < _length; i++) {
+			for (var x = 0; x < _width; x++) {
+				for (var y = 0; y < _height; y++) {
 
-				var r1 = (_rgb[i] & 0xFF0000) >> 16;
-				var g1 = (_rgb[i] & 0x00FF00) >> 8;
-				var b1 = (_rgb[i] & 0x0000FF);
+					var rgb = _rgb.getPixel(x, y);
+					var r1 = (rgb & 0xFF0000) >> 16;
+					var g1 = (rgb & 0x00FF00) >> 8;
+					var b1 = (rgb & 0x0000FF);
 
-				var r2 = (_pixels[i] & 0xFF0000) >> 16;
-				var g2 = (_pixels[i] & 0x00FF00) >> 8;
-				var b2 = (_pixels[i] & 0x0000FF);
+					var pixel = _pixels.getPixel(x, y);
+					var r2 = (pixel & 0xFF0000) >> 16;
+					var g2 = (pixel & 0x00FF00) >> 8;
+					var b2 = (pixel & 0x0000FF);
 
-				var red   = (r1 + (step * (r2 - r1)) / numSteps);
-				var green = (g1 + (step * (g2 - g1)) / numSteps);
-				var blue  = (b1 + (step * (b2 - b1)) / numSteps);
+					var red   = (r1 + (step * (r2 - r1)) / numSteps);
+					var green = (g1 + (step * (g2 - g1)) / numSteps);
+					var blue  = (b1 + (step * (b2 - b1)) / numSteps);
 
-				display[i] = (red << 16) | (green << 8) | blue;
+					display.setPixelRGB(x, y, red, green, blue);
+				}
 			}
-			_strip.render(display);
+
+			_strip.render(display.getPixels());
 			sleep(50);
 		}
 
 		// Save rgb buffer
-		_rgb.set(_pixels);
+		_rgb.setPixels(_pixels.getPixels());
 
 		// Display the current buffer
 		display.set(_pixels);
