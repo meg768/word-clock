@@ -164,11 +164,11 @@ module.exports = function NeopixelStrip(options) {
 
 					var color = red << 16 || green << 8 | blue;
 
-					_display[i++] = color;
+					_tmp[i++] = color;
 				}
 			}
 
-			_strip.render(_display);
+			_strip.render(_tmp);
 			sleep(50);
 		}
 		// Save rgb buffer
