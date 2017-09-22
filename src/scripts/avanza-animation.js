@@ -7,6 +7,7 @@ var Timer      = require('yow/timer');
 var Avanza     = require('avanza-mobile-client');
 var Animation  = require('./animation.js');
 var Layout     = require('./layout.js');
+var Pixels     = require('./pixels.js');
 
 module.exports = class extends Animation {
 
