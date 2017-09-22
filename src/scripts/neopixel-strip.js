@@ -38,8 +38,6 @@ module.exports = function NeopixelStrip(options) {
 				var b1 = (rgb1 & 0x0000FF);
 
 				var rgb2 = pixels[i];
-				if (i == 0)
-					console.log(rgb2.toString(16));
 				var r2 = (rgb2 & 0xFF0000) >> 16;
 				var g2 = (rgb2 & 0x00FF00) >> 8;
 				var b2 = (rgb2 & 0x0000FF);
@@ -49,6 +47,9 @@ module.exports = function NeopixelStrip(options) {
 				var blue  = (b1 + (step * (b2 - b1)) / numSteps);
 
 				var color = (red << 16) || (green << 8) | blue;
+
+				if (i == 0)
+					console.log(rgb1.toString(16), rgb2.toString(16), color.toString(16));
 
 				tmp[i] = color;
 			}
