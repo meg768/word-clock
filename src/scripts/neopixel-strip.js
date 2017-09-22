@@ -16,21 +16,48 @@ module.exports = function NeopixelStrip(options) {
 	var _height        = 13;
 	var _length        = _width * _height;
 	var _strip         = require('rpi-ws281x-native');
-	var _rgb           = new Pixels(_width, _height);
-	var _pixels        = new Pixels(_width, _height);
+	var _pixels        = new Uint32Array(_length);
 	var _tmp           = new Uint32Array(_length);
-
-
 
 	_this.length = _length;
 	_this.width  = _width;
 	_this.height = _height;
 
 	_this.render = function(pixels) {
-		console.log('Rendering');
-		var tmp  = new Uint32Array(pixels.length);
-		tmp.set(pixels);
-		_strip.render(tmp);
+
+		var numSteps = 40;
+
+		for (var step = 0; step < numSteps; step++) {
+
+			for (var i = 0; i < _length; i++) {
+				var rgb1 = _pixels[i];
+				var r1 = (rgb1 & 0xFF0000) >> 16;
+				var g1 = (rgb1 & 0x00FF00) >> 8;
+				var b1 = (rgb1 & 0x0000FF);
+
+				var rgb2 = pixels[i];
+				var r2 = (rgb2 & 0xFF0000) >> 16;
+				var g2 = (rgb2 & 0x00FF00) >> 8;
+				var b2 = (rgb2 & 0x0000FF);
+
+				var red   = (r1 + (step * (r2 - r1)) / numSteps);
+				var green = (g1 + (step * (g2 - g1)) / numSteps);
+				var blue  = (b1 + (step * (b2 - b1)) / numSteps);
+
+				var color = red << 16 || green << 8 | blue;
+
+				_tmp[i] = color;
+			}
+
+
+			_strip.render(_tmp);
+			sleep(50);
+		}
+
+		_tmp.set(pixels);
+		_pixels.set(pixels);
+
+		_strip.render(_tmp);
 	}
 
 
@@ -58,93 +85,14 @@ module.exports = function NeopixelStrip(options) {
 		_strip.setIndexMapping(map);
 	}
 
-	_this.pause = function(ms) {
-
-		return new Promise(function(resolve, reject) {
-			setTimeout(resolve, ms);
-		});
-	}
-
-
-	_this.clear = function(options) {
-		return _this.colorize(Object.assign({}, options, {offset: 0, length: _length, color: 'black'}));
-	}
-
-	_this.colorize = function(options) {
-
-		return new Promise(function(resolve, reject) {
-			var red   = 0;
-			var green = 0;
-			var blue  = 0;
-
-			var length   = options.length;
-			var offset   = options.offset;
-			var duration = options.duration == undefined ? 300 : options.duration;
-
-			if (options.color != undefined) {
-				var color = options.color;
-
-				if (color.red != undefined && color.green != undefined && color.blue != undefined) {
-					red   = color.red;
-					green = color.green;
-					blue  = color.blue;
-				}
-				else {
-					try {
-						// Try to parse color
-						var color = Color(color);
-
-						// Convert to rgb
-						color = color.rgb();
-
-						red   = color.red();
-						green = color.green();
-						blue  = color.blue();
-
-					}
-					catch(error) {
-						return reject(error);
-					}
-
-				}
-
-			}
-			else {
-				red   = options.red != undefined ? options.red : red;
-				green = options.green != undefined ? options.green : green;
-				blue  = options.blue != undefined ? options.blue : blue;
-
-			}
-
-			// Round of decimal values, if any
-			red    = Math.round(red);
-			green  = Math.round(green);
-			blue   = Math.round(blue);
-
-			var color = red << 16 || green << 8 | blue;
-
-
-			for (var i = 0; i < length; i++) {
-				var x = (i + offset) % _width;
-				var y = Math.floor((i + offset) / _width);
-
-				_pixels.setPixel(x, y, color);
-			}
-
-			resolve();
-
-
-		});
-	};
-
 
 	function sleep(milliseconds) {
-	  var start = new Date().getTime();
-	  for (var i = 0; i < 1e7; i++) {
-		if ((new Date().getTime() - start) > milliseconds){
-		  break;
+		var start = new Date().getTime();
+		for (var i = 0; i < 1e7; i++) {
+			if ((new Date().getTime() - start) > milliseconds){
+				break;
+			}
 		}
-	  }
 	}
 /*
 	_this.render = function() {
@@ -158,6 +106,8 @@ module.exports = function NeopixelStrip(options) {
 	}
 
 */
+
+/*
 	_this.show = function(numSteps) {
 
 
@@ -201,6 +151,7 @@ module.exports = function NeopixelStrip(options) {
 		return Promise.resolve();
 	}
 
+*/
 
 	init();
 
