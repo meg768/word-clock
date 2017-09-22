@@ -152,7 +152,7 @@ module.exports = function NeopixelStrip(options) {
 
 				display[i] = (red << 16) | (green << 8) | blue;
 			}
-			sleep(1);
+			sleep(10);
 			_strip.render(display);
 		}
 
