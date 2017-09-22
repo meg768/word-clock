@@ -1,4 +1,3 @@
-var I2C = require('i2c-bus');
 var Color = require('color');
 
 var isString = require('yow/is').isString;
@@ -15,29 +14,18 @@ module.exports = function NeopixelStrip(options) {
 	if (options.length == undefined && process.env.NEOPIXEL_STRIP_LENGTH != undefined)
 		options.length = parseInt(process.env.NEOPIXEL_STRIP_LENGTH);
 
-	if (options.address == undefined && process.env.NEOPIXEL_I2C_ADDRESS != undefined)
-		options.address = parseInt(process.env.NEOPIXEL_I2C_ADDRESS);
-
 	if (options.length == undefined)
 		throw new Error('Neopixel strip length not defined');
-
-	if (options.address == undefined)
-		throw new Error('I2C address not defined');
-
-	console.log(options)
-	const CMD_INITIALIZE    = 0x10;
-	const CMD_COLORIZE      = 0x11;
-	const CMD_SHOW          = 0x12;
 
 
 	var _this          = this;         // That
 	var _debug         = 1;            // Output log messages to console?
-	var _timeout       = 30000;        // Read/write timeout in ms
-	var _retryInterval = 100;          // Milliseconds to wait before retrying read/write
 
 	var _length        = options.length;
-	var _address       = options.address;
-	var _wire          = I2C.openSync(1);
+	var _strip         = require('rpi-ws281x-native');
+	var _pixels        =  new Uint32Array(_length);
+
+	_strip.init(_length);
 
 	function debug() {
 		if (_debug)
@@ -108,153 +96,24 @@ module.exports = function NeopixelStrip(options) {
 			green  = Math.round(green);
 			blue   = Math.round(blue);
 
-			var bytes = [];
-			bytes = [CMD_COLORIZE, offset, length, red, green, blue];
+			var color = red << 16 || green << 8 | blue;
 
 
-			var startTime = new Date();
+			for (var i = 0; i < length; i++) {
+				_pixels[i] = color;
+			}
 
-			_this.send(bytes).then(function() {
-				var endTime = new Date();
-				resolve({offset:offset, length:length, transition: options.transition, duration:duration, color:{red:red, green:green, blue:blue}, time:endTime - startTime});
-			})
-			.catch(function(error){
-				reject(error);
-			});
+			resolve();
+
 
 		});
 	};
 
 	_this.show = function(delay) {
 
-		var byteA = (parseInt(delay) >> 8) & 0xFF;
-		var byteB = parseInt(delay) & 0xFF;
+		_strip.render(_pixels);
 
-		return _this.send([CMD_SHOW, byteA, byteB]);
-
-	}
-	_this.initialize = function() {
-		return _this.send([CMD_INITIALIZE, parseInt(_length)]);
-	}
-
-	_this.send = function(bytes, timestamp) {
-
-		if (timestamp == undefined)
-			timestamp = new Date();
-
-		return new Promise(function(resolve, reject) {
-
-			_this.write(bytes).then(function() {
-				return _this.waitForReply();
-			})
-			.catch(function(error) {
-				var now = new Date();
-
-				if (now.getTime() - timestamp.getTime() < _timeout) {
-
-					return _this.pause(_retryInterval).then(function() {
-						debug('send() failed, trying to send again...');
-						return _this.send(bytes, timestamp);
-					});
-				}
-				else {
-					throw new Error('Device timed out. Could not write to device');
-
-				}
-			})
-			.then(function() {
-				resolve();
-			})
-			.catch(function(error) {
-				reject(error);
-			});
-		});
-
-	};
-
-
-
-	_this.waitForReply = function(timestamp) {
-
-		if (timestamp == undefined)
-			timestamp = new Date();
-
-		return new Promise(function(resolve, reject) {
-
-			_this.read(1).then(function(bytes) {
-				return Promise.resolve(bytes.length > 0 && bytes[0] == ACK ? ACK : NAK);
-			})
-			.catch(function(error) {
-				// If read failure, assume we got back NAK
-				return Promise.resolve(NAK);
-			})
-			.then(function(status) {
-				if (status == ACK) {
-					return Promise.resolve();
-				}
-				else {
-					var now = new Date();
-
-					if (now.getTime() - timestamp.getTime() < _timeout) {
-						return _this.pause(_retryInterval).then(function() {
-							return _this.waitForReply(timestamp);
-						})
-					}
-					else
-						throw new Error('Device timed out.');
-				}
-			})
-
-			.then(function() {
-				resolve();
-			})
-			.catch(function(error) {
-				reject(error);
-			});
-
-		});
-
-	}
-
-
-	_this.write = function(data) {
-		return new Promise(function(resolve, reject) {
-			var buffer = new Buffer(data);
-
-			_wire.i2cWrite(options.address, data.length, buffer, function(error, bytes, buffer) {
-				if (error) {
-					console.log('write error', error);
-					reject(error);
-
-				}
-				else {
-					resolve();
-
-				}
-			});
-
-
-		});
-
-	}
-
-
-	_this.read = function(bytes) {
-		return new Promise(function(resolve, reject) {
-			var buffer = new Buffer(bytes);
-			_wire.i2cRead(options.address, bytes, buffer, function(error, bytes, buffer) {
-				if (error) {
-					reject(error)
-
-				}
-				else {
-					var array = Array.prototype.slice.call(buffer, 0);
-					resolve(array);
-
-				}
-			});
-		});
-
+		return Promise.resolve();
 	}
 
 
