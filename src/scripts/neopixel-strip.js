@@ -18,7 +18,7 @@ module.exports = function NeopixelStrip(options) {
 	var _strip         = require('rpi-ws281x-native');
 	var _rgb           = new Pixels(_width, _height);
 	var _pixels        = new Pixels(_width, _height);
-	var _display       = new Uint32Array(_length);
+	var _tmp           = new Uint32Array(_length);
 
 	function debug() {
 		if (_debug)
@@ -174,16 +174,9 @@ module.exports = function NeopixelStrip(options) {
 		// Save rgb buffer
 		_rgb.setPixels(_pixels.getPixels());
 
+		console.log(_pixels.getPixels().toString());
 		_strip.render(_pixels.getPixels());
-
-		return Promise.resolve();
-
-		// Display the current buffer
-		_display.set(_pixels.getPixels());
-		_strip.render(_display);
-
-		// Save rgb buffer
-		_rgb.setPixels(_pixels.getPixels());
+		console.log(_pixels.getPixels().toString());
 
 		return Promise.resolve();
 	}
