@@ -55,7 +55,8 @@ var Module = module.exports = function(strip) {
                 promise = promise.then(function() {
                     var row     = Math.floor(word.index / _columns);
                     var col     = word.index % _columns;
-                    var offset  = (row % 2) == 0 ? row * _columns + col : (row + 1) * _columns - col - word.text.length;
+                    //var offset  = (row % 2) == 0 ? row * _columns + col : (row + 1) * _columns - col - word.text.length;
+                    var offset  = row * _columns + col;
 
                     return _this.colorize({
                         offset     : offset,

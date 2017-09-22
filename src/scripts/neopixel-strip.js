@@ -25,13 +25,29 @@ module.exports = function NeopixelStrip(options) {
 	var _strip         = require('rpi-ws281x-native');
 	var _pixels        =  new Uint32Array(_length);
 
-	_strip.init(_length);
 
 	function debug() {
 		if (_debug)
 			console.log.apply(this, arguments);
 	}
 
+	function init() {
+		_strip.init(_length);
+
+		var map = new Uint16Array(width*height);
+
+	    for(var i = 0; i<map.length; i++) {
+	        var row = Math.floor(i/width), col = i % width;
+
+	        if((row % 2) === 0) {
+	            map[i] = i;
+	        } else {
+	            map[i] = (row+1) * width - (col+1);
+	        }
+	    }
+
+		_strip.setIndexMapping(map);
+	}
 
 	_this.pause = function(ms) {
 
@@ -117,5 +133,6 @@ module.exports = function NeopixelStrip(options) {
 	}
 
 
+	init();
 
 };
