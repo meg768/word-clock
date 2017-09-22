@@ -149,7 +149,7 @@ module.exports = function NeopixelStrip(options) {
 
 		_strip.render(pixels);
 
-		_rgb = pixels.slice(0);
+		_rgb = _pixels.slice(0);
 
 		return Promise.resolve();
 	}
