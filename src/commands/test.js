@@ -53,7 +53,7 @@ var Module = new function() {
 		for (var i = 0; i < 169; i++) {
 			if (i > 0)
 				pixels[i - 1] = 0;
-			pixels[i] = Color().hsl(i, 100, i).rgbNumber();
+			pixels[i] = Color().hsl(i, 100, 50).rgbNumber();
 			neopixels.render(pixels);
 		}
 
