@@ -146,7 +146,7 @@ module.exports = function NeopixelStrip(options) {
 		}
 	  }
 	}
-
+/*
 	_this.render = function() {
 
 		_tmp.set(_pixels.getPixels());
@@ -157,7 +157,7 @@ module.exports = function NeopixelStrip(options) {
 
 	}
 
-
+*/
 	_this.show = function(numSteps) {
 
 
