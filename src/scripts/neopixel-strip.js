@@ -135,6 +135,7 @@ module.exports = function NeopixelStrip(options) {
 		    }
 		  }
 		}
+
 		for (var step = 0; step < numSteps; step++) {
 
 			for (var i = 0; i < _length; i++) {
@@ -157,8 +158,12 @@ module.exports = function NeopixelStrip(options) {
 			sleep(50);
 		}
 
+		// Save rgb buffer
 		_rgb.set(_pixels);
-		_strip.render(_pixels);
+
+		// Display the current buffer
+		display.set(_pixels);
+		_strip.render(display);
 
 		return Promise.resolve();
 	}
