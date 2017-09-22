@@ -41,7 +41,7 @@ class Worm {
 				luminance = 100;
 
             if (y >= 0 && y < self.height)
-                pixels.setPixelHSL(x, y--, hue, 100, luminance / 2);
+                pixels.setPixelHSL(x, y--, hue, 100, luminance / 3);
 		}
 	}
 
