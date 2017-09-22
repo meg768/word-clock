@@ -100,7 +100,7 @@ module.exports = function NeopixelStrip(options) {
 
 
 			for (var i = 0; i < length; i++) {
-				_pixels[i] = color;
+				_pixels[i + offset] = color;
 			}
 
 			resolve();
