@@ -35,7 +35,7 @@ module.exports = class extends Animation {
 
         return new Promise(function(resolve, reject) {
 
-            var pixels = new Pixels(self.strip.width, self.strip.height);
+            var pixels = new Pixels(13, 13);
             var layout = new Layout();
 
             words = layout.getTextLayout(words);
@@ -43,6 +43,7 @@ module.exports = class extends Animation {
             words.forEach(function(word) {
                 console.log(word);
                 for (var i = 0; i < word.text.length; i++) {
+                    console.log(Color(word.color).rgbNumber());
                     pixels.setPixel(word.col + i, word.row, Color(word.color).rgbNumber());
                 }
 
