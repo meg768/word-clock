@@ -2,7 +2,7 @@ var Color = require('color');
 
 var isString = require('yow/is').isString;
 var isObject = require('yow/is').isObject;
-var Pixels = resuire('./pixels.js');
+var Pixels   = require('./pixels.js');
 
 module.exports = function NeopixelStrip(options) {
 
