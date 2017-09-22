@@ -42,6 +42,7 @@ module.exports = class extends Animation {
 
             words.forEach(function(word) {
                 for (var i = 0; i < word.text.length; i++) {
+                    console.log(word);
                     pixels.setPixel(word.col + i, word.row, Color(word.color).rgbNumber());
                 }
 
