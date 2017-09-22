@@ -224,7 +224,7 @@ module.exports = class extends Animation {
 
         });
 
-        self.strip.render(pixels.getPixels());
+        self.strip.render(pixels.getPixels(), {fadeIn:25});
 
     }
 
