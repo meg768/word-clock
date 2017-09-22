@@ -163,7 +163,7 @@ module.exports = function NeopixelStrip(options) {
 					var blue  = (b1 + (step * (b2 - b1)) / numSteps);
 
 					var color = red << 16 || green << 8 | blue;
-					
+
 					_display[i++] = color;
 				}
 			}
@@ -171,6 +171,12 @@ module.exports = function NeopixelStrip(options) {
 			_strip.render(_display);
 			sleep(50);
 		}
+		// Save rgb buffer
+		_rgb.setPixels(_pixels.getPixels());
+
+		_strip.render(_pixels.getPixels());
+
+		return Promise.resolve();
 
 		// Display the current buffer
 		_display.set(_pixels.getPixels());
