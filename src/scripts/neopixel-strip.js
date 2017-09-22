@@ -48,7 +48,7 @@ module.exports = function NeopixelStrip(options) {
 
 				var color = (red << 16) || (green << 8) | blue;
 
-				if (i == 0)
+				if (step == 0)
 					console.log(rgb1.toString(16), rgb2.toString(16), color.toString(16));
 
 				tmp[i] = color;
