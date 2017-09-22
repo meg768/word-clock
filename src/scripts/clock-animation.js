@@ -19,7 +19,7 @@ module.exports = class extends Animation {
 
         return new Promise(function(resolve, reject) {
             self.displayText(self.getText());
-            setTimeout(5000, resolve);
+            setTimeout(resolve, 5000);
         });
     }
 
