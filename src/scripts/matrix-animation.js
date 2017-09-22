@@ -12,7 +12,6 @@ class Worm {
         this.column = column;
         this.height = height;
         this.width  = width;
-        this.hue    = 0;
 
         this.reset();
 
@@ -21,10 +20,11 @@ class Worm {
 
     draw(pixels) {
         var self   = this;
-        var hue    = self.hue;
+        var now  = new Date();
 		var x      = self.column;
 		var y      = self.row;
         var length = self.length;
+        var hue    = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
 
 
         if (y >= 0 && y < self.height)
@@ -53,6 +53,7 @@ class Worm {
 		self.row    = -random(0, self.height * 2);
         self.delay  = random(10);
 		self.ticks  = 0;
+
 	}
 
 
@@ -115,7 +116,7 @@ module.exports = class Animation {
                 self.strip.render(pixels.getPixels());
 
             }
-            
+
             pixels.clear();
             self.strip.render(pixels.getPixels(), {fadeIn:20});
 
