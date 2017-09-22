@@ -76,7 +76,7 @@ var Module = new function() {
 
 					animation.run().then(function() {
 						animationIndex = (animationIndex + 1) % animations.length;
-						timer.setTimer(1000 * argv.interval, showAnimation);
+						timer.setTimer(0, showAnimation);
 						resolve();
 					})
 
