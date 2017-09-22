@@ -40,13 +40,15 @@ var Module = new function() {
 
 
 		registerService().then(function() {
-			var ClockAnimation = require('../scripts/clock-animation');
-			var WeatherAnimation = require('../scripts/weather-animation');
-			var AvanzaAnimation = require('../scripts/avanza-animation');
+			var ClockAnimation = require('../scripts/clock-animation.js');
+			var WeatherAnimation = require('../scripts/weather-animation.js');
+			var AvanzaAnimation = require('../scripts/avanza-animation.js');
+			var MatrixAnimation = require('../scripts/matrix-animation.js');
 
 			var strip = new Strip();
 			//var animations = [new AvanzaAnimation(display), new ClockAnimation(display), new WeatherAnimation(display)];
-			var animations = [ new WeatherAnimation(strip), new AvanzaAnimation(strip), new ClockAnimation(strip)];
+			//var animations = [ new WeatherAnimation(strip), new AvanzaAnimation(strip), new ClockAnimation(strip)];
+			var animations = [ new MatrixAnimation(strip)];
 			var socket = io.connect(argv.service);
 			var animationIndex = 0;
 
