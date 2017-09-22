@@ -40,12 +40,22 @@ var Module = new function() {
 		neopixels.render(pixels);
 	}
 
+	function setPixel(index, color) {
+		pixels[index] = color;
+	}
 	function run(argv) {
 		neopixels.init(169);
 
 
 		pixels[0] = Color().hsl(240, 100, 50).rgbNumber();
 		neopixels.render(pixels);
+
+		for (var i = 0; i < 169; i++) {
+			if (i > 0)
+				pixels[i - 1] = 0;
+			pixels[i] = Color().hsl(i, 100, i).rgbNumber();
+			neopixels.render(pixels);
+		}
 
 		for (var i = 0; i < 25; i++)
 			fill(Color().hsl(0, 100, i).rgbNumber());
