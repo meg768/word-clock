@@ -87,7 +87,7 @@ module.exports = class Animation {
 
         return new Promise(function(resolve, reject) {
 
-            var pixels = new Pixels(self.strip.width, selfP.strip.height);
+            var pixels = new Pixels(self.strip.width, self.strip.height);
             var start = new Date();
             var worms = [];
 
