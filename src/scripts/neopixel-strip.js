@@ -124,22 +124,29 @@ module.exports = function NeopixelStrip(options) {
 	};
 
 
-	_this.render = function() {
-		_display.set(_pixels.getPixels());
-		_strip.render(_display);
+	function sleep(milliseconds) {
+	  var start = new Date().getTime();
+	  for (var i = 0; i < 1e7; i++) {
+		if ((new Date().getTime() - start) > milliseconds){
+		  break;
+		}
+	  }
 	}
+
+	_this.render = function() {
+
+		_tmp.set(_pixels.getPixels());
+		_strip.render(_tmp);
+
+		// Save rgb buffer
+		_rgb.setPixels(_tmp);
+
+	}
+
 
 	_this.show = function(numSteps) {
 
 
-		function sleep(milliseconds) {
-		  var start = new Date().getTime();
-		  for (var i = 0; i < 1e7; i++) {
-		    if ((new Date().getTime() - start) > milliseconds){
-		      break;
-		    }
-		  }
-		}
 
 		for (var step = 0; step < numSteps; step++) {
 
@@ -174,9 +181,8 @@ module.exports = function NeopixelStrip(options) {
 		// Save rgb buffer
 		_rgb.setPixels(_pixels.getPixels());
 
-		console.log(_pixels.getPixels().toString());
-		_strip.render(_pixels.getPixels());
-		console.log(_pixels.getPixels().toString());
+		_tmp.set(_pixels.getPixels());
+		_strip.render(_tmp);
 
 		return Promise.resolve();
 	}
