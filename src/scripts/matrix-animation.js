@@ -26,9 +26,7 @@ class Worm {
         var length = self.length;
         var hue    = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
 
-
-        if (y >= 0 && y < self.height)
-            pixels.setPixelHSL(x, y--, hue, 100, 75);
+        pixels.setPixelHSL(x, y--, hue, 100, 75);
 
 		for (var i = 0; i < length; i++) {
 			// Calculate brightness
@@ -40,8 +38,7 @@ class Worm {
 			if (luminance > 100)
 				luminance = 100;
 
-            if (y >= 0 && y < self.height)
-                pixels.setPixelHSL(x, y--, hue, 100, luminance / 4);
+            pixels.setPixelHSL(x, y--, hue, 100, luminance / 4);
 		}
 	}
 
