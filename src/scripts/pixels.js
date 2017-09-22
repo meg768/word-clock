@@ -50,9 +50,6 @@ module.exports = function Pixels(width, height) {
 		return _pixels;
 	}
 
-	for (var i = 0; i < _length; i++)
-		_pixels[i] = 25;
-
 
 
 

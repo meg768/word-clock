@@ -45,9 +45,9 @@ var Module = new function() {
 		try {
 
 			Promise.resolve().then(function() {
-				var Display = require('../scripts/display.js');
+				var Layout = new Layout();
 				var Strip = require('../scripts/neopixel-strip.js');
-				var display = new Display(new Strip());
+				var strip = new Strip(13, 13);
 
 				if (isString(argv.text)) {
 
