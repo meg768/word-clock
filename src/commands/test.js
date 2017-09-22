@@ -46,7 +46,12 @@ var Module = new function() {
 
 		pixels[0] = Color().hsl(240, 100, 50).rgbNumber();
 		neopixels.render(pixels);
-		fill(Color().hsl(240, 100, 10).rgbNumber());
+
+		for (var i = 0; i < 25; i++)
+			fill(Color().hsl(0, 100, i).rgbNumber());
+
+		for (var i = 25; i >= 0; i--)
+			fill(Color().hsl(0, 100, i).rgbNumber());
 
 		neopixels.render(pixels);
 
