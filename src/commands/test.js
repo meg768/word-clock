@@ -37,6 +37,8 @@ class Buttons extends Events {
 
 		self.gpios.forEach(function(gpio) {
 			gpio.removeAllListeners();
+			gpio.disableInterrupt();
+			delete gpio;
 		});
 
 		self.removeAllListeners();
