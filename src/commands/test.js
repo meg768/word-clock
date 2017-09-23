@@ -59,7 +59,7 @@ var Module = new function() {
 	function run(argv) {
 
 		var buttons = new Buttons();
-
+		buttons.init();
 		buttons.on('change', function(name, level) {
 			console.log('change', name, level);
 		});
