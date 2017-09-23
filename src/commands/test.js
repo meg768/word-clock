@@ -7,7 +7,8 @@ var Events = require('events');
 
 class Buttons extends Events {
 
-	constructor() {
+	constructor(args) {
+		super(args);
 	}
 
 	init() {
