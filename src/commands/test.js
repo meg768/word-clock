@@ -61,7 +61,13 @@ var Module = new function() {
 		]);
 		buttons.listen();
 		buttons.on('Button 1', function(level) {
-			console.log('change', name, level);
+			console.log('change1', level);
+		});
+		buttons.on('Button 2', function(level) {
+			console.log('change2', level);
+		});
+		buttons.on('Button 3', function(level) {
+			console.log('change3', level);
 		});
 
 /*
