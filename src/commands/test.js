@@ -7,20 +7,21 @@ var Events = require('events');
 
 class Buttons extends Events {
 
-	constructor(buttons) {
+	constructor() {
 		super();
-		this.buttons = buttons;
+		this.buttons = [];
 		this.gpios   = [];
 	}
 
-	startListening() {
+	startListening(buttons) {
 		var self = this;
 
 		self.stopListening();
 
 		var Gpio = require('pigpio').Gpio;
 
-
+		self.buttons = buttons;
+		
 		self.buttons.forEach(function(button) {
 			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 
@@ -42,6 +43,9 @@ class Buttons extends Events {
 		});
 
 		self.removeAllListeners();
+
+		this.buttons = [];
+		this.gpios   = [];
 
 
 	}
