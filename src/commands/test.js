@@ -58,7 +58,7 @@ var Module = new function() {
 
 	function run(argv) {
 
-		var button = new Buttons();
+		var buttons = new Buttons();
 
 		buttons.on('change', function(name, level) {
 			console.log('change', name, level);
