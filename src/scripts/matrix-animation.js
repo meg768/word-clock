@@ -49,7 +49,7 @@ class Worm {
 		self.row    = -random(0, self.height * 2);
         self.loops  = random(3);
 		self.ticks  = 0;
-        self.lead   = random([55, 60, 65, 70]);
+        self.lead   = random([60, 60, 60, 60, 65, 65, 70]);
         self.hue    = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
 	}
 
