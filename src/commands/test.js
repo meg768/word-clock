@@ -38,8 +38,9 @@ class Buttons extends Events {
 		var self = this;
 
 		self.gpios.forEach(function(gpio) {
-			gpio.removeAllListeners();
+			//gpio.removeAllListeners();
 			gpio.disableInterrupt();
+			gpio.disableAlert();
 		});
 
 		self.removeAllListeners();
@@ -92,6 +93,8 @@ var Module = new function() {
 		});
 		buttons.on('Button 3', function(level) {
 			console.log('change3', level);
+
+			console.log('bye!');
 			buttons.stopListening();
 		});
 
