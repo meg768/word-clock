@@ -73,6 +73,7 @@ var Module = new function() {
 			{pin:  6, name:'Button 3'}
 		]);
 		buttons.start();
+		console.log('Ready!');
 		buttons.on('Button 1', function(level) {
 			console.log('change1', level);
 		});
