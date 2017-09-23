@@ -36,7 +36,7 @@ class Buttons extends Events {
 		var self = this;
 
 		self.gpios.forEach(function(gpio) {
-			grio.removeAllEventListeners();
+			gpio.removeAllEventListeners();
 		})
 
 
