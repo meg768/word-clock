@@ -3,8 +3,6 @@
 var sprintf = require('yow/sprintf');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
-var Color = require('color');
-var Gpio = require('pigpio').Gpio;
 
 var Module = new function() {
 
@@ -27,6 +25,7 @@ var Module = new function() {
 
 	}
 	function run(argv) {
+		var Gpio = require('pigpio').Gpio;
 		var button = new Gpio(4, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 
 		button.on('interrupt', function (level) {
