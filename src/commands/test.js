@@ -25,15 +25,24 @@ var Module = new function() {
 
 
 	function run(argv) {
+
+		var buttons = [
+			{pin: 19, name:'Button 1'},
+			{pin: 13, name:'Button 2'},
+			{pin:  6, name:'Button 3'},
+		];
+
 		var Gpio = require('pigpio').Gpio;
-		var button = new Gpio(13, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 
-		console.log('Value', button.digitalRead());
 
-		console.log('Waiting');
-		button.on('interrupt', function (level) {
-			console.log('Button pressed', level);
+		buttons.forEach(function(button) {
+			var button = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
+
+			button.on('interrupt', function (level) {
+				console.log('Button', button.name, 'pressed', level);
+			});
 		});
+
 	}
 
 
