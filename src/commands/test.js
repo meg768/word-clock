@@ -14,12 +14,11 @@ class Buttons extends Events {
 	}
 
 	startListening(buttons) {
+		var Gpio = require('pigpio').Gpio;
+
 		var self = this;
 
 		self.stopListening();
-
-		var Gpio = require('pigpio').Gpio;
-
 		self.buttons = buttons;
 
 		self.buttons.forEach(function(button) {
@@ -71,6 +70,8 @@ var Module = new function() {
 	}
 
 
+
+
 	function run(argv) {
 
 		var buttons = new Buttons();
@@ -94,25 +95,6 @@ var Module = new function() {
 			console.log('bye!');
 			buttons.stopListening();
 		});
-
-/*
-		var buttons = [
-			{pin: 19, name:'Button 1'},
-			{pin: 13, name:'Button 2'},
-			{pin:  6, name:'Button 3'}
-		];
-
-		var Gpio = require('pigpio').Gpio;
-
-
-		buttons.forEach(function(button) {
-			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
-
-			gpio.on('interrupt', function (level) {
-				console.log(button.name, level ? 'pressed' : 'released');
-			});
-		});
-*/
 	}
 
 
