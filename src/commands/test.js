@@ -84,7 +84,7 @@ var Module = new function() {
 		});
 		buttons.on('Button 3', function(level) {
 			console.log('change3', level);
-			buttons.stop();
+		//	buttons.stop();
 		});
 
 /*
