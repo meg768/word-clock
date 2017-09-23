@@ -39,7 +39,7 @@ class Buttons extends Events {
 			gpio.removeAllListeners();
 		});
 
-		selg.removeAllListeners();
+		self.removeAllListeners();
 
 
 	}
