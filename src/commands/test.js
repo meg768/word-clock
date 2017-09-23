@@ -16,7 +16,7 @@ class Buttons extends Events {
 	startListening() {
 		var self = this;
 
-		stopListening();
+		self.stopListening();
 
 		var Gpio = require('pigpio').Gpio;
 
