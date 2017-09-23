@@ -7,27 +7,23 @@ var Events = require('events');
 
 class Buttons extends Events {
 
-	constructor(args) {
-		super(args);
+	constructor(buttons) {
+		super();
+		this.buttons = buttons;
 	}
 
-	init() {
+	listen() {
 		var self = this;
-		var buttons = [
-			{pin: 19, name:'Button 1'},
-			{pin: 13, name:'Button 2'},
-			{pin:  6, name:'Button 3'}
-		];
+
 
 		var Gpio = require('pigpio').Gpio;
 
 
-		buttons.forEach(function(button) {
+		self.buttons.forEach(function(button) {
 			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 
 			gpio.on('interrupt', function (level) {
-				console.log(button.name, level ? 'pressed' : 'released');
-				self.emit('change', button.name, level)
+				self.emit(button.name, level)
 			});
 		});
 
@@ -58,11 +54,16 @@ var Module = new function() {
 
 	function run(argv) {
 
-		var buttons = new Buttons();
-		buttons.init();
-		buttons.on('change', function(name, level) {
+		var buttons = new Buttons({
+			{pin: 19, name:'Button 1'},
+			{pin: 13, name:'Button 2'},
+			{pin:  6, name:'Button 3'}
+		});
+		buttons.listen();
+		buttons.on('Button 1', function(level) {
 			console.log('change', name, level);
 		});
+
 /*
 		var buttons = [
 			{pin: 19, name:'Button 1'},
