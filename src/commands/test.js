@@ -39,7 +39,7 @@ var Module = new function() {
 			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 
 			gpio.on('interrupt', function (level) {
-				console.log('Button', button.name, level ? 'pressed' : 'released');
+				console.log(button.name, level ? 'pressed' : 'released');
 			});
 		});
 
