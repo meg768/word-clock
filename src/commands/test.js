@@ -29,7 +29,7 @@ var Module = new function() {
 		var button = new Gpio(4, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 
 		button.on('interrupt', function (level) {
-			led.digitalWrite(level);
+			console.log('Button pressed', level);
 		});
 	}
 
