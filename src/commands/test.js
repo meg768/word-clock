@@ -23,11 +23,12 @@ var Module = new function() {
 		});
 	}
 
-	}
+
 	function run(argv) {
 		var Gpio = require('pigpio').Gpio;
 		var button = new Gpio(4, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 
+		console.log('Waiting');
 		button.on('interrupt', function (level) {
 			console.log('Button pressed', level);
 		});
