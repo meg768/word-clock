@@ -29,7 +29,7 @@ var Module = new function() {
 		var button = new Gpio(4, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 
 		console.log('Value', button.digitalRead());
-		''
+
 		console.log('Waiting');
 		button.on('interrupt', function (level) {
 			console.log('Button pressed', level);
