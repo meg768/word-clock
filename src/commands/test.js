@@ -54,11 +54,11 @@ var Module = new function() {
 
 	function run(argv) {
 
-		var buttons = new Buttons({
+		var buttons = new Buttons([
 			{pin: 19, name:'Button 1'},
 			{pin: 13, name:'Button 2'},
 			{pin:  6, name:'Button 3'}
-		});
+		]);
 		buttons.listen();
 		buttons.on('Button 1', function(level) {
 			console.log('change', name, level);
