@@ -24,7 +24,7 @@ class Worm {
 		var y      = self.row;
         var length = self.length;
 
-        pixels.setPixelHSL(x, y--, self.hue, 100, self.lead);
+        pixels.setPixelHSL(x, y--, self.hue, 100, 60);
 
 		for (var i = 0; i < length; i++) {
 			// Calculate brightness
