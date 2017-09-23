@@ -3,7 +3,7 @@
 var sprintf = require('yow/sprintf');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
-var events = require('events');
+var Events = require('events');
 
 class Buttons extends Events {
 
