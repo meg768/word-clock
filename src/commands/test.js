@@ -10,9 +10,10 @@ class Buttons extends Events {
 	constructor(buttons) {
 		super();
 		this.buttons = buttons;
+		this.gpios   = [];
 	}
 
-	listen() {
+	start() {
 		var self = this;
 
 
@@ -22,10 +23,22 @@ class Buttons extends Events {
 		self.buttons.forEach(function(button) {
 			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 
+			self.gpios.push(gpio);
+
 			gpio.on('interrupt', function (level) {
 				self.emit(button.name, level)
 			});
 		});
+
+	}
+
+	stop() {
+		var self = this;
+
+		self.gpios.forEach(function(gpio) {
+			grio.removeAllEventListeners();
+		})
+
 
 	}
 
@@ -59,7 +72,7 @@ var Module = new function() {
 			{pin: 13, name:'Button 2'},
 			{pin:  6, name:'Button 3'}
 		]);
-		buttons.listen();
+		buttons.start();
 		buttons.on('Button 1', function(level) {
 			console.log('change1', level);
 		});
@@ -68,6 +81,7 @@ var Module = new function() {
 		});
 		buttons.on('Button 3', function(level) {
 			console.log('change3', level);
+			buttons.stop();
 		});
 
 /*
