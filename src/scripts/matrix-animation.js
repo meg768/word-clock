@@ -25,7 +25,7 @@ class Worm {
 		var y      = self.row;
         var length = self.length;
 
-        pixels.setPixelHSL(x, y--, self.hue, 100, 60);
+        pixels.setPixelHSL(x, y--, self.hue, 100, 70);
 
 		for (var i = 0; i < length; i++) {
 			// Calculate brightness
@@ -44,7 +44,6 @@ class Worm {
     reset() {
         var self   = this;
         var now    = new Date();
-        //_length = int(float(_height) * 0.1 + float(_height) * 1.1 * (float(rand() % 100) / 100.0));
 
         self.length = self.height * 0.1 + self.height * 1.1 * random(100) / 100;
 		self.row    = -random(0, self.height * 2);
@@ -81,8 +80,6 @@ module.exports = class extends Animation {
         super(strip);
 
         this.name = 'Matrix';
-
-        console.log('Matrix animation started.');
 
     }
 
