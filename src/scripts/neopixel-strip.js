@@ -114,8 +114,9 @@ module.exports = function NeopixelStrip(options) {
 		_strip.setIndexMapping(map);
 
 
-		function exitHandler(options, error) {
+		function panic(options, error) {
 			_strip.reset();
+			
 			if (error)
 				console.log(error);
 
@@ -125,15 +126,14 @@ module.exports = function NeopixelStrip(options) {
 
 
 		//do something when app is closing
-		process.on('exit', exitHandler.bind(null,{cleanup:true}));
+		process.on('exit', panic.bind(null,{cleanup:true}));
 
 		//catches ctrl+c event
-		process.on('SIGINT', exitHandler.bind(null, {exit:true}));
+		process.on('SIGINT', panic.bind(null, {exit:true}));
 
 		//catches uncaught exceptions
-		process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
+		process.on('uncaughtException', panic.bind(null, {exit:true}));
 
-		*/
 	}
 
 
