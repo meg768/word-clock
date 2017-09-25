@@ -116,11 +116,12 @@ module.exports = function NeopixelStrip(options) {
 
 		function panic(options, error) {
 			_strip.reset();
-			
-			if (error)
+
+/*			if (error)
 				console.log(error);
 
 			if (options && options.exit)
+			*/
 				process.exit();
 		}
 

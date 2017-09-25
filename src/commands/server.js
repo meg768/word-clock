@@ -89,7 +89,7 @@ var Module = new function() {
 
 					timer.cancel();
 
-					console.log('Starting animation "', animation.name, '...');
+					console.log('Starting animation "', animation.name, '"...');
 
 					animation.run().then(function() {
 						animationIndex = (animationIndex + 1) % animations.length;
