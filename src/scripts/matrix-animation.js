@@ -1,8 +1,9 @@
 
-var isArray = require('yow/is').isArray;
-var sprintf = require('yow/sprintf');
-var Color   = require('color');
-var random  = require('yow/random');
+var isArray   = require('yow/is').isArray;
+var sprintf   = require('yow/sprintf');
+var Color     = require('color');
+var random    = require('yow/random');
+var Animation = require('./animation.js');
 
 var Pixels  = require('./pixels.js');
 
@@ -73,14 +74,14 @@ class Worm {
 }
 
 
-module.exports = class Animation {
+module.exports = class extends Animation {
 
 
     constructor(strip) {
         super(strip);
 
         this.name = 'Matrix';
-        
+
         console.log('Matrix animation started.');
 
     }
