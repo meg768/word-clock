@@ -78,6 +78,9 @@ module.exports = class Animation {
 
     constructor(strip) {
         this.strip = strip;
+
+        console.log('Matrix animation started.');
+        
     }
 
 
