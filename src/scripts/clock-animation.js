@@ -15,6 +15,8 @@ module.exports = class extends Animation {
     }
 
     run() {
+
+        console.log('Running clock animation...');
         var self = this;
 
         return new Promise(function(resolve, reject) {
