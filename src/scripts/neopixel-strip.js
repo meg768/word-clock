@@ -112,12 +112,17 @@ module.exports = function NeopixelStrip(options) {
 	    }
 
 		_strip.setIndexMapping(map);
-/*
-		function exitHandler(options, err) {
+
+
+		function exitHandler(options, error) {
 			_strip.reset();
-			if (err) console.log(err.stack);
-			if (options.exit) process.exit();
+			if (error)
+				console.log(error);
+
+			if (options && options.exit)
+				process.exit();
 		}
+
 
 		//do something when app is closing
 		process.on('exit', exitHandler.bind(null,{cleanup:true}));
