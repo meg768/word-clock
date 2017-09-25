@@ -10,9 +10,10 @@ var Color      = require('color');
 module.exports = class extends Animation {
 
 
-    constructor(display) {
-        super(display);
+    constructor(strip) {
+        super(strip);
 
+        this.name  = 'Weather';
         this.cache = undefined;
         this.time  = undefined;
     }

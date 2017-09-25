@@ -16,6 +16,7 @@ module.exports = class extends Animation {
 	constructor(strip) {
 		super(strip);
 
+		this.name      = 'Avanza';
 		this.lastLogin = undefined;
 		this.avanza    = new Avanza();
 		this.cache     = {};
@@ -24,6 +25,7 @@ module.exports = class extends Animation {
 		this.textProviders      = [this.getRavarorText, this.getIndexText, this.getCurrencyText];
 
 	}
+
 
 	login() {
 

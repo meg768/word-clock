@@ -12,11 +12,13 @@ module.exports = class extends Animation {
 
     constructor(strip) {
         super(strip);
+
+        this.name = 'Clock';
     }
+
 
     run() {
 
-        console.log('Running clock animation...');
         var self = this;
 
         return new Promise(function(resolve, reject) {

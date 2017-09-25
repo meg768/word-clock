@@ -77,10 +77,12 @@ module.exports = class Animation {
 
 
     constructor(strip) {
-        this.strip = strip;
+        super(strip);
 
-        console.log('Matrix animation started.');
+        this.name = 'Matrix';
         
+        console.log('Matrix animation started.');
+
     }
 
 

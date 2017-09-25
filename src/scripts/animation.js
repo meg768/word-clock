@@ -8,9 +8,9 @@ module.exports = class Animation {
 
     constructor(strip) {
         this.strip = strip;
+        this.name  = 'None';
 
     }
-
 
 
     run() {
