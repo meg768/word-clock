@@ -27,7 +27,11 @@ var Module = new function() {
 
 		args.check(function(argv) {
 			if (argv.clock == undefined && argv.weather == undefined && argv.avanza == undefined && argv.matrix == undefined)
-				argv.clock = true;
+
+				argv.clock   = true;
+				argv.weather = true;
+				argv.avanza  = true;
+				argv.matrix  = true;
 
 			return true;
 		});
