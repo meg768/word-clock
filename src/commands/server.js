@@ -17,12 +17,18 @@ var Module = new function() {
 
 		args.help('help').alias('help', 'h');
 
-		args.option('service',   {alias:'n', describe:'Service name', default:process.env.SERVICE_NAME});
-		args.option('interval',  {alias:'i', describe:'Upådate interval', default:10});
+		args.option('service',   {alias:'n', describe:'Service name',           default:process.env.SERVICE_NAME});
+		args.option('clock',     {alias:'c', describe:'Run clock animation',    default:undefined});
+		args.option('weather',   {alias:'w', describe:'Run weather animation',  default:undefined});
+		args.option('avanza',    {alias:'a', describe:'Run avanza animation',   default:undefined});
+		args.option('matrix',    {alias:'m', describe:'Run matrix animation',   default:undefined});
 
 		args.wrap(null);
 
 		args.check(function(argv) {
+			if (arv.clock == undefined && argv.weather == undefined && argv.avanza == undefined && argv.matrix == undefined)
+				argv.clock = true;
+
 			return true;
 		});
 	}
@@ -37,22 +43,29 @@ var Module = new function() {
 
 		var timer = new Timer();
 
-
-
 		registerService().then(function() {
-			var ClockAnimation = require('../scripts/clock-animation.js');
+			var ClockAnimation   = require('../scripts/clock-animation.js');
 			var WeatherAnimation = require('../scripts/weather-animation.js');
-			var AvanzaAnimation = require('../scripts/avanza-animation.js');
-			var MatrixAnimation = require('../scripts/matrix-animation.js');
+			var AvanzaAnimation  = require('../scripts/avanza-animation.js');
+			var MatrixAnimation  = require('../scripts/matrix-animation.js');
 
-			var strip = new Strip();
-			//var animations = [new AvanzaAnimation(display), new ClockAnimation(display), new WeatherAnimation(display)];
-			var animations = [new ClockAnimation(strip), new WeatherAnimation(strip), new AvanzaAnimation(strip)];
-			//var animations = [ new MatrixAnimation(strip), new ClockAnimation(strip)];
-			//var animations = [ new MatrixAnimation(strip)];
-			//var animations = [new ClockAnimation(strip)];
-			var socket = io.connect(argv.service);
+			var strip          = new Strip();
+			var socket         = io.connect(argv.service);
 			var animationIndex = 0;
+			var animations     = [];
+
+			if (argv.matrix)
+				animations.push(new MatrixAnimation(strip));
+
+			if (argv.clock)
+				animations.push(new ClockAnimation(strip));
+
+			if (argv.avanza)
+				animations.push(new AvanzaAnimation(strip));
+
+			if (argv.weather)
+				animations.push(new AvanzaAnimation(strip));
+
 
 
 			function disableAnimations() {
