@@ -64,7 +64,7 @@ var Module = new function() {
 				animations.push(new AvanzaAnimation(strip));
 
 			if (argv.weather)
-				animations.push(new AvanzaAnimation(strip));
+				animations.push(new WeatherAnimation(strip));
 
 
 
