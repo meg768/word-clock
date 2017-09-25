@@ -112,7 +112,7 @@ module.exports = function NeopixelStrip(options) {
 	    }
 
 		_strip.setIndexMapping(map);
-
+/*
 		function exitHandler(options, err) {
 			_strip.reset();
 			if (err) console.log(err.stack);
@@ -127,6 +127,8 @@ module.exports = function NeopixelStrip(options) {
 
 		//catches uncaught exceptions
 		process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
+
+		*/
 	}
 
 
