@@ -17,7 +17,6 @@ var App = function() {
 			args.help();
 
 			args.option('size',      {alias:'S', describe:'Size of the Neopixel strip', default:process.env.NEOPIXEL_STRIP_LENGTH});
-			args.option('address',   {alias:'A', describe:'I2C bus address', default:process.env.NEOPIXEL_I2C_ADDRESS});
 			args.option('debug',     {alias:'D', describe:'Debug mode', default:false});
 
 			args.command(require('./src/commands/server.js'));

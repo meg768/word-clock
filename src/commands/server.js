@@ -26,7 +26,7 @@ var Module = new function() {
 		args.wrap(null);
 
 		args.check(function(argv) {
-			if (arv.clock == undefined && argv.weather == undefined && argv.avanza == undefined && argv.matrix == undefined)
+			if (argv.clock == undefined && argv.weather == undefined && argv.avanza == undefined && argv.matrix == undefined)
 				argv.clock = true;
 
 			return true;
