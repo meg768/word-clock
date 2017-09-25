@@ -113,7 +113,7 @@ module.exports = function NeopixelStrip(options) {
 
 		_strip.setIndexMapping(map);
 
-
+/*
 		function panic(options, error) {
 			_strip.reset();
 
@@ -134,7 +134,7 @@ module.exports = function NeopixelStrip(options) {
 
 		//catches uncaught exceptions
 		process.on('uncaughtException', panic.bind(null, {exit:true}));
-
+*/
 	}
 
 
