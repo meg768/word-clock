@@ -20,15 +20,14 @@ module.exports = class extends Animation {
 
 
     run() {
-        var self   = this;
-        var pixels = new Pixels(self.strip.width, self.strip.height);
+        var pixels = new Pixels(this.strip.width, this.strip.height);
 
         return new Promise((resolve, reject) => {
 
             console.log(this.options);
             pixels.clear();
 
-            var color = Color(self.options.color).rgbValue();
+            var color = Color(this.options.color).rgbNumber();
 
             for (var y = 0; y < pixels.height; y++) {
                 for (var x = 0; x < pixels.width; x++) {
@@ -36,7 +35,7 @@ module.exports = class extends Animation {
                 }
             }
 
-            self.strip.render(pixels.getPixels(), {fadeIn:20});
+            this.strip.render(pixels.getPixels(), {fadeIn:20});
 
             resolve();
         });
