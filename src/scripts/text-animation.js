@@ -23,7 +23,7 @@ module.exports = class extends Animation {
         var self   = this;
         var pixels = new Pixels(self.strip.width, self.strip.height);
 
-        return new Promise(resolve, reject) => {
+        return new Promise(resolve, reject) => ({
 
             console.log(this.options);
             pixels.clear();
@@ -39,7 +39,7 @@ module.exports = class extends Animation {
             self.strip.render(pixels.getPixels(), {fadeIn:20});
 
             resolve();
-        };
+        });
 
     }
 }
