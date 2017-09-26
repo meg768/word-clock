@@ -12,6 +12,12 @@ module.exports = class Animation {
 
     }
 
+    pause(ms) {
+        return new Promise(function(resolve, reject) {
+            setTimeout(resolve, ms); 
+        });
+    }
+
 
     run() {
         return new Promise(function(resolve, reject) {
