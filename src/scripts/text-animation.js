@@ -39,11 +39,11 @@ module.exports = class extends Animation {
             strip.render(pixels.getPixels(), {fadeIn:20});
 
             letters.forEach((letter) => {
-                var position = layout[letter][0];
+                var position = random(layout[letter]);
 
                 console.log(position);
                 pixels.setPixel(position.x, position.y, color);
-                strip.render(pixels.getPixels(), {fadeIn:20});
+                strip.render(pixels.getPixels(), {fadeIn:8});
                 pixels.setPixel(position.x, position.y, 0);
             });
 
