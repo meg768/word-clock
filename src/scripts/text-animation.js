@@ -31,7 +31,7 @@ module.exports = class extends Animation {
 
             for (var y = 0; y < pixels.height; y++) {
                 for (var x = 0; x < pixels.width; x++) {
-                    pixels.setPixelColor(x, y, color);
+                    pixels.setPixel(x, y, color);
                 }
             }
 
