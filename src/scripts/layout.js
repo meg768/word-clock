@@ -39,7 +39,7 @@ var Module = module.exports = function() {
                 var text = _layout[i];
 
                 while ((match = regexp.exec(text)) != null) {
-                    matches.push({row : i, column:match.index});
+                    matches.push({y : i, x:match.index});
                 }
 
             }
