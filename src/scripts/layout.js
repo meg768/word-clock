@@ -31,7 +31,7 @@ var Module = module.exports = function() {
         var letters = text.split('');
         var result  = {};
 
-        forEach((letter) => {
+        letters.forEach((letter) => {
             var regexp = new RegExp(letter, "g");
             var match, matches = [];
 
