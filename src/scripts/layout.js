@@ -47,7 +47,7 @@ var Module = module.exports = function() {
             result[letter] = matches;
         });
 
-        return matches;
+        return result;
     }
 
 
