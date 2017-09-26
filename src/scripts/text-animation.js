@@ -28,7 +28,7 @@ module.exports = class extends Animation {
 
             pixels.clear();
 
-            var color = Color(options.color).rgbValue();
+            var color = Color(self.options.color).rgbValue();
 
             for (var y = 0; y < pixels.height; y++) {
                 for (var x = 0; x < pixels.width; x++) {
