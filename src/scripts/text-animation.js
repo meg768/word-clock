@@ -5,7 +5,7 @@ var Color     = require('color');
 var random    = require('yow/random');
 var Animation = require('./animation.js');
 var Pixels    = require('./pixels.js');
-
+var Layout    = require('./layout.js');
 
 module.exports = class extends Animation {
 
@@ -21,10 +21,14 @@ module.exports = class extends Animation {
 
     run() {
         var pixels = new Pixels(this.strip.width, this.strip.height);
+        var layout = new Layout();
 
         return new Promise((resolve, reject) => {
 
             console.log(this.options);
+
+            var letters = layout.findLetters(options.text);
+            console.log('letters', letters);
             pixels.clear();
 
             var color = Color(this.options.color).rgbNumber();

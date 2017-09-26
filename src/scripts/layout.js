@@ -27,6 +27,29 @@ var Module = module.exports = function() {
     var _this    = this;
 
 
+    _this.findLetters(text) {
+        var letters = text.split('');
+        var result  = {};
+
+        forEach((letter) => {
+            var regexp = new RegExp(letter, "g");
+            var match, matches = [];
+
+            for (var i = 0; i < _layout.length; i++) {
+                var text = _layout[i];
+
+                while ((match = regexp.exec(text)) != null) {
+                    matches.push({row : i, column:match.index});
+                }
+
+            }
+
+            result[letter] = matches;
+        });
+
+        return matches;
+    }
+
 
     _this.getTextLayout = function(words) {
 
