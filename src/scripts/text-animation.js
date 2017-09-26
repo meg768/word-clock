@@ -35,16 +35,17 @@ module.exports = class extends Animation {
 
             console.log('letters', letters);
 
-            pixels.fill(color);
+            pixels.fill(0);
             strip.render(pixels.getPixels(), {fadeIn:20});
-/*
+
             letters.forEach((letter) => {
                 var position = layout[letter];
+                console.log(position);
                 pixels.setPixel(position.x, position.y, color);
                 strip.render(pixels.getPixels(), {fadeIn:20});
-//                pixels.setPixel(position.x, position.y, 0);
+                pixels.setPixel(position.x, position.y, 0);
             });
-*/
+
             pixels.clear();
             strip.render(pixels.getPixels(), {fadeIn:20});
 
