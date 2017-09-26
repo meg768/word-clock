@@ -23,6 +23,7 @@ var App = function() {
 			args.command(require('./src/commands/test.js'));
 			args.command(require('./src/commands/type.js'));
 			args.command(require('./src/commands/colorize.js'));
+			args.command(require('./src/commands/clock.js'));
 
 			args.wrap(null);
 			args.demand(1);
