@@ -20,18 +20,19 @@ module.exports = class extends Animation {
 
 
     run() {
-        var pixels = new Pixels(this.strip.width, this.strip.height);
-        var layout = new Layout();
+        var pixels  = new Pixels(this.strip.width, this.strip.height);
+        var layout  = new Layout();
+        var options = this.options;
 
         return new Promise((resolve, reject) => {
 
-            console.log(this.options);
+            console.log(options);
 
-            var letters = layout.lookupLetters(this.options.text);
+            var letters = layout.lookupLetters(options.text);
             console.log('letters', letters);
             pixels.clear();
 
-            var color = Color(this.options.color).rgbNumber();
+            var color = Color(options.color).rgbNumber();
 
             for (var y = 0; y < pixels.height; y++) {
                 for (var x = 0; x < pixels.width; x++) {
