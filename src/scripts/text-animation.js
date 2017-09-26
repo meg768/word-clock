@@ -43,7 +43,7 @@ module.exports = class extends Animation {
 
                 console.log(position);
                 pixels.setPixel(position.x, position.y, color);
-                strip.render(pixels.getPixels(), {fadeIn:8});
+                strip.render(pixels.getPixels(), {fadeIn:4});
                 pixels.setPixel(position.x, position.y, 0);
             });
 
