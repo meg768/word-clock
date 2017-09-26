@@ -27,7 +27,7 @@ module.exports = class extends Animation {
 
             console.log(this.options);
 
-            var letters = layout.findLetters(options.text);
+            var letters = layout.lookupLetters(options.text);
             console.log('letters', letters);
             pixels.clear();
 

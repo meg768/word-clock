@@ -27,7 +27,7 @@ var Module = module.exports = function() {
     var _this    = this;
 
 
-    _this.findLetters(text) {
+    _this.lookupLetters = function(text) {
         var letters = text.split('');
         var result  = {};
 
