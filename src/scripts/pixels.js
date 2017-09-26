@@ -14,9 +14,13 @@ module.exports = function Pixels(width, height) {
 	_this.width  = width;
 	_this.height = height;
 
-	_this.clear = function() {
+	_this.fill = function(color) {
 		for (var i = 0; i < _length; i++)
-			_pixels[i] = 0;
+			_pixels[i] = color;
+	}
+
+	_this.clear = function() {
+		_this.fill(0);
 	}
 
 	_this.setPixelAtIndex = function(index, color) {
