@@ -20,7 +20,7 @@ module.exports = function Pixels(width, height) {
 	}
 
 	_this.fillRGB = function(red, green, blue) {
-		fill((red << 16) | (green << 8) | blue);
+		_this.fill((red << 16) | (green << 8) | blue);
 	}
 
 	_this.clear = function() {
