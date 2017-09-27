@@ -87,7 +87,7 @@ module.exports = class extends Animation {
                     stars[index].draw(pixels);
                 }
 
-                strip.render(pixels.getPixels());
+                strip.render(pixels.getPixels(), {fadeIn:10});
 
                 if (stars[stars.length - 1].finished)
                     break;
