@@ -35,7 +35,7 @@ class Button extends Events {
 
 			// Released?
 			if (state == 0) {
-				events.push('pressed', now - time);
+				this.emit('pressed', now - time);
 			}
 
 		});
