@@ -36,6 +36,7 @@ class Buttons extends Events {
 		super();
 		this.buttons = [];
 		this.gpios   = [];
+
 	}
 
 	startListening(buttons) {
@@ -46,13 +47,16 @@ class Buttons extends Events {
 		self.stopListening();
 		self.buttons = buttons;
 
+		self.led = new Gpio(20, {mode: Gpio.OUTPUT});
+
 		self.buttons.forEach(function(button) {
-//			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
-			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, alert: true});
+			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
+//			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, alert: true});
 
 			self.gpios.push(gpio);
 
 			gpio.on('interrupt', function (level) {
+				self.led.digitalWrite(level);
 				self.emit(button.name, level)
 			});
 			gpio.on('alert', function (level, tick) {
