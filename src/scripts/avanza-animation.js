@@ -188,6 +188,9 @@ module.exports = class extends Animation {
 
         var lookup = display.lookupText(words.join(' '));
 
+		pixels.clear();
+		this.strip.render(pixels.getPixels(), {fadeIn:25});
+
 		if (lookup.length == symbols.length) {
 			for (var index = 0; index < symbols.length; index++) {
 				var symbol = symbols[index];
