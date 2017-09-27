@@ -82,7 +82,7 @@ module.exports = class extends Animation {
 
             positions.forEach((position) => {
                 pixels.setPixelHSL(position.x, position.y, hue, 100, 50);
-                strip.render(pixels.getPixels(), {fadeIn:5});
+                strip.render(pixels.getPixels(), {fadeIn:6});
                 pixels.setPixelHSL(position.x, position.y, hue, 100, 0);
             });
 
