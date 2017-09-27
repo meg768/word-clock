@@ -52,8 +52,52 @@ module.exports = class extends Animation {
     }
 
 
-
     run() {
+        var pixels   = new Pixels(this.strip.width, this.strip.height);
+        var display  = new Layout();
+        var options  = this.options;
+        var strip    = this.strip;
+
+        return new Promise((resolve, reject) => {
+
+            console.log(options);
+
+            var layout    = display.lookupLetters(options.text);
+            var hue       = Color(options.color).hue();
+            var letters   = options.text.split('');
+            var positions = [];
+
+            console.log('letters', letters);
+            console.log('layout', layout);
+
+            letters.forEach((letter) => {
+                var position = layout[letter].shift();
+                layout[letter].push(position);
+
+                positions.push(position);
+            });
+
+            pixels.fill(0);
+            strip.render(pixels.getPixels(), {fadeIn:20});
+
+            positions.forEach((position) => {
+                pixels.setPixelHSL(position.x, position.y, hue, 100, 50);
+                strip.render(pixels.getPixels(), {fadeIn:10});
+                pixels.setPixelHSL(position.x, position.y, hue, 100, 0);
+                strip.render(pixels.getPixels(), {fadeIn:10});
+            });
+
+
+//            pixels.clear();
+//            strip.render(pixels.getPixels(), {fadeIn:20});
+
+            resolve();
+        });
+
+    }
+
+
+    runX() {
         var pixels   = new Pixels(this.strip.width, this.strip.height);
         var display  = new Layout();
         var options  = this.options;
