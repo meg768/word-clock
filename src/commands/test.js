@@ -33,7 +33,7 @@ class Button extends Events {
 				if (now - this.time < 250)
 					events.push('click');
 				else if (now - this.time < 1000)
-					events.push('click');
+					events.push('long-click');
 			}
 
 
@@ -138,6 +138,10 @@ var Module = new function() {
 
 		button.on('click', () => {
 			console.log('click');
+		});
+
+		button.on('long-click', () => {
+			console.log('long-click');
 		});
 
 		/*
