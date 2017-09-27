@@ -28,7 +28,7 @@ class Star {
 
     idle() {
         if (this.index == this.loop) {
-            this.luminance = 50;
+            this.luminance = 100;
         }
         else {
             this.luminance = this.luminance * 0.2;
