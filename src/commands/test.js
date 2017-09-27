@@ -16,10 +16,10 @@ class Button extends Events {
 		this.state = 0;
 		this.time  = new Date();
 
-		gpio.on('interrupt', (state) => {
+		this.gpio.on('interrupt', (state) => {
 			this.state = state;
 			this.time  = new Date();
-			self.emit('change');
+			this.emit('change');
 		});
 
 	}
@@ -104,9 +104,11 @@ var Module = new function() {
 	function run(argv) {
 
 		var button = new Button(13);
+		var led = new Gpio(20, {mode: Gpio.OUTPUT});
 
 		button.on('change', () => {
 			console.log(button.state);
+			led.digitalWrite(button.state);
 		});
 
 		/*
