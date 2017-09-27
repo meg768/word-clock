@@ -30,9 +30,11 @@ class Button extends Events {
 
 			// Released?
 			if (state == 0) {
-				if (now - this.time < 100)
+				if (now - this.time < 200)
 					fireClick = true;
 			}
+
+
 			this.state = state;
 			this.time  = timestamp();
 			this.emit('change');
