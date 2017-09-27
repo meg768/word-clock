@@ -86,7 +86,7 @@ module.exports = class extends Animation {
                     stars[index].draw(pixels);
                 }
 
-                strip.render(pixels.getPixels(), {options:fadeIn:10});
+                strip.render(pixels.getPixels(), {fadeIn:10});
                 console.log('rendering');
 
                 if (stars[stars.length - 1].finished)
