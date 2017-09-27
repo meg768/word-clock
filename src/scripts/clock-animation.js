@@ -31,7 +31,7 @@ module.exports = class extends Animation {
         var pixels  = new Pixels(self.strip.width, self.strip.height);
         var display = new Layout();
         var text    = this.getTime();
-        var color   = this.getColor();
+        var hue     = this.getHue();
 
         var words   = display.lookupText(text);
 
@@ -46,7 +46,7 @@ module.exports = class extends Animation {
 
     }
 
-    getColor() {
+    getHue() {
         var now = new Date();
         return Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
     }
