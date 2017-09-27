@@ -77,7 +77,7 @@ module.exports = class extends Animation {
                 var position = random(layout[letters[index]]);
                 var star = new Star(position.x, position.y, hue, index);
 
-                stars.push(position);
+                stars.push(star);
             }
 
             for (;;) {
