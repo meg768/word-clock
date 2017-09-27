@@ -19,9 +19,7 @@ module.exports = class extends Animation {
 
     run() {
 
-        var self = this;
-
-        return new Promise(function(resolve, reject) {
+        return new Promise((resolve, reject) => {
             this.displayTime();
             setTimeout(resolve, 60000);
         });
