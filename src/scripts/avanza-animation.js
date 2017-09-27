@@ -178,22 +178,22 @@ module.exports = class extends Animation {
 	}
 
 	displaySymbols(symbols) {
-        var pixels = new Pixels(this.strip.width, this.strip.height);
-        var layout = new Layout();
-		var words  = [];
+        var pixels  = new Pixels(this.strip.width, this.strip.height);
+        var display = new Layout();
+		var words   = [];
 
 		symbols.forEach((symbol) => {
 			words.push(symbol.text);
 		});
 
-        var lookup = layout.lookupText(words.join(' '));
+        var lookup = display.lookupText(words.join(' '));
 
 		for (var index = 0; index < symbols.length; index++) {
 			var symbol = symbols[index];
-			var position = lookup[index];
+			var layout = lookup[index];
 
-			for (var i = 0; i < symbol.text.length; i++) {
-                pixels.setPixel(position.x + i, position.y, Color(symbol.color).rgbNumber());
+			for (var i = 0; i < layout.text.length; i++) {
+                pixels.setPixel(layout.x + i, layout.y, Color(symbol.color).rgbNumber());
             }
 
 		}
@@ -207,7 +207,8 @@ module.exports = class extends Animation {
 		var avanza = self.avanza;
 
         return new Promise((resolve, reject) => {
-            this.getSymbols().then(function(symbols) {
+
+            this.getSymbols().then((symbols) => {
                 this.displaySymbols(symbols);
 				setTimeout(resolve, 5000);
             })
