@@ -191,6 +191,9 @@ module.exports = class extends Animation {
 		pixels.clear();
 		this.strip.render(pixels.getPixels(), {fadeIn:25});
 
+		console.log('lookup', lookup);
+		console.log('symbols', symbols);
+		
 		if (lookup.length == symbols.length) {
 			for (var index = 0; index < symbols.length; index++) {
 				var symbol = symbols[index];
