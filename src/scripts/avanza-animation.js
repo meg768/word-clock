@@ -183,7 +183,7 @@ module.exports = class extends Animation {
 		var words   = [];
 
 		symbols.forEach((symbol) => {
-			words.push(symbol.text);
+			words.push(symbol.symbol);
 		});
 
         var lookup = display.lookupText(words.join(' '));
@@ -193,7 +193,7 @@ module.exports = class extends Animation {
 
 		console.log('lookup', lookup);
 		console.log('symbols', symbols);
-		
+
 		if (lookup.length == symbols.length) {
 			for (var index = 0; index < symbols.length; index++) {
 				var symbol = symbols[index];
