@@ -5,7 +5,6 @@ var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Events = require('events');
 
-/*
 class Button extends Events {
 
 	constructor(pin) {
@@ -13,22 +12,20 @@ class Button extends Events {
 
 		this.pin   = pin;
 		this.gpio  = new Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
-		this.level = 0;
+		this.state = 0;
+		this.time  = new Date();
 
-		gpio.on('interrupt', function (level) {
-			self.emit(button.name, level);
+		gpio.on('interrupt', (state) => {
+			this.state = state;
+			this.time  = new Date();
+			self.emit('change');
 		});
-
-		gpio.on('alert', function (level) {
-			console.log('ALERT!');
-		});
-
 
 	}
 
 };
 
-*/
+
 
 class Buttons extends Events {
 
@@ -59,9 +56,7 @@ class Buttons extends Events {
 				self.led.digitalWrite(level);
 				self.emit(button.name, level)
 			});
-			gpio.on('alert', function (level, tick) {
-				console.log('ALERT!', level, tick);
-			});
+
 		});
 
 	}
@@ -107,6 +102,13 @@ var Module = new function() {
 
 	function run(argv) {
 
+		var button = new Button(13);
+
+		button.on('change', () => {
+			console.log(button.state);
+		});
+
+		/*
 		var buttons = new Buttons();
 
 		buttons.startListening([
@@ -128,6 +130,7 @@ var Module = new function() {
 			console.log('bye!');
 			buttons.stopListening();
 		});
+		*/
 	}
 
 
