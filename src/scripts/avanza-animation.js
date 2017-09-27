@@ -189,11 +189,8 @@ module.exports = class extends Animation {
 
         var lookup = display.lookupText(words.join(' '));
 
-		pixels.clear();
+		pixels.fillRGB(255, 0, 0);
 		self.strip.render(pixels.getPixels(), {fadeIn:25});
-
-		console.log('lookup', lookup);
-		console.log('symbols', symbols);
 
 		if (lookup.length == symbols.length) {
 			for (var index = 0; index < symbols.length; index++) {
@@ -207,6 +204,11 @@ module.exports = class extends Animation {
 			}
 
 	        self.strip.render(pixels.getPixels(), {fadeIn:25});
+
+		}
+		else {
+			pixels.fillRGB(255, 0, 0);
+			self.strip.render(pixels.getPixels(), {fadeIn:25});
 
 		}
 

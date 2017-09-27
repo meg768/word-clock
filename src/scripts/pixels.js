@@ -19,6 +19,10 @@ module.exports = function Pixels(width, height) {
 			_pixels[i] = color;
 	}
 
+	_this.fillRGB = function(red, green, blue) {
+		fill((red << 16) | (green << 8) | blue);
+	}
+
 	_this.clear = function() {
 		_this.fill(0);
 	}
