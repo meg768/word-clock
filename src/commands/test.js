@@ -5,6 +5,30 @@ var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Events = require('events');
 
+
+class Button extends Events {
+
+	constructor(pin) {
+		super();
+
+		this.pin   = pin;
+		this.gpio  = new Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
+		this.level = 0;
+
+		gpio.on('interrupt', function (level) {
+			self.emit(button.name, level);
+		});
+
+		gpio.on('alert', function (level) {
+			console.log('ALERT!');
+		});
+
+
+	}
+
+};
+
+
 class Buttons extends Events {
 
 	constructor() {
@@ -28,6 +52,9 @@ class Buttons extends Events {
 
 			gpio.on('interrupt', function (level) {
 				self.emit(button.name, level)
+			});
+			gpio.on('alert', function (level) {
+				console.log('ALERT!');
 			});
 		});
 
