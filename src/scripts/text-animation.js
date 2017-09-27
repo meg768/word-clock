@@ -21,6 +21,7 @@ class Star {
     }
 
     draw(pixels) {
+        console.log(this.index, this.luminance);
         pixels.setPixelHSL(this.x, this.y, this.hue, 100, this.luminance);
     }
 
@@ -87,7 +88,6 @@ module.exports = class extends Animation {
                 }
 
                 strip.render(pixels.getPixels(), {fadeIn:10});
-                console.log('rendering');
 
                 if (stars[stars.length - 1].finished)
                     break;
