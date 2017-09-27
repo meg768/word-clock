@@ -23,27 +23,20 @@ class Button extends Events {
 		this.state = 0;
 		this.time  = timestamp();
 
-		this.gpio.on('interrupt', (state) => {
+		this.gpio.on('interrupt', (newState) => {
 
 			var now       = timestamp();
-			var events    = [];
+			var time      = this.time;
+			var state     = this.state;
 
-			// Released?
-			if (state == 0) {
-				if (now - this.time < 250)
-					events.push('click');
-				else if (now - this.time < 1000)
-					events.push('long-click');
-			}
-
-
-			this.state = state;
+			this.state = newState;
 			this.time  = now;
 			this.emit('change');
 
-			events.forEach((event) => {
-				this.emit(event);
-			});
+			// Released?
+			if (state == 0) {
+				events.push('pressed', now - time);
+			}
 
 		});
 
@@ -134,6 +127,10 @@ var Module = new function() {
 		button.on('change', () => {
 			console.log(button.state);
 			led.digitalWrite(button.state);
+		});
+
+		button.on('pressed', (duration) => {
+			console.log('pressed for', duration);
 		});
 
 		button.on('click', () => {
