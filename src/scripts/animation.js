@@ -6,15 +6,16 @@ var sprintf = require('yow/sprintf');
 module.exports = class Animation {
 
 
-    constructor(strip) {
-        this.strip = strip;
-        this.name  = 'None';
+    constructor(strip, options) {
+        this.strip   = strip;
+        this.name    = 'None';
+        this.options = options || {};
 
     }
 
     pause(ms) {
         return new Promise(function(resolve, reject) {
-            setTimeout(resolve, ms); 
+            setTimeout(resolve, ms);
         });
     }
 

@@ -22,33 +22,38 @@ module.exports = class extends Animation {
         var self = this;
 
         return new Promise(function(resolve, reject) {
-            self.displayText(self.getText());
+            displayTime();
             setTimeout(resolve, 60000);
         });
     }
 
-    displayText(words) {
+    displayTime() {
         var self = this;
 
+        var pixels  = new Pixels(self.strip.width, self.strip.height);
+        var display = new Layout();
+        var text    = this.getTime();
+        var color   = this.getColor();
 
-        var pixels = new Pixels(13, 13);
-        var layout = new Layout();
+        var words   = display.lookupText(text);
 
-        words = layout.getTextLayout(words);
-
-        words.forEach(function(word) {
+        words.forEach((word) => {
             for (var i = 0; i < word.text.length; i++) {
-                pixels.setPixel(word.col + i, word.row, Color(word.color).rgbNumber());
-            }
+                pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
 
+            }
         });
 
         self.strip.render(pixels.getPixels(), {fadeIn:25});
 
     }
 
+    getColor() {
+        var now = new Date();
+        return Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
+    }
 
-    getText() {
+    getTime() {
 
         var minutes = {
             0  : '',
@@ -88,7 +93,7 @@ module.exports = class extends Animation {
             9  : 'NIO',
             10 : 'TIO',
             11 : 'ELVA',
-            12 : 'TOLV',
+            12 : 'TOLV'
         };
 
 
@@ -96,8 +101,6 @@ module.exports = class extends Animation {
 
         var minute = now.getMinutes();
         var hour   = now.getHours() % 12;
-        var hue    = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
-
 
         if (minutes[minute] == undefined) {
             minute = 5 * Math.floor((minute + 2.5) / 5);
@@ -106,14 +109,6 @@ module.exports = class extends Animation {
         if (minute >= 25)
             hour += 1;
 
-        return (sprintf('%s%s', minutes[minute], hours[hour]).split(' ').map(function(word){
-            return {
-                text : word,
-                color: sprintf('hsl(%d, 100%%, 50%%)', hue)
-            }
-        }));
-
-
-
+        return sprintf('%s%s', minutes[minute], hours[hour]);
     }
 }
