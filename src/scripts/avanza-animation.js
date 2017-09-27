@@ -178,18 +178,19 @@ module.exports = class extends Animation {
 	}
 
 	displaySymbols(symbols) {
+		var self    = this;
         var pixels  = new Pixels(this.strip.width, this.strip.height);
         var display = new Layout();
 		var words   = [];
 
-		symbols.forEach((symbol) => {
+		symbols.forEach(function(symbol) {
 			words.push(symbol.symbol);
 		});
 
         var lookup = display.lookupText(words.join(' '));
 
 		pixels.clear();
-		this.strip.render(pixels.getPixels(), {fadeIn:25});
+		self.strip.render(pixels.getPixels(), {fadeIn:25});
 
 		console.log('lookup', lookup);
 		console.log('symbols', symbols);
@@ -205,7 +206,7 @@ module.exports = class extends Animation {
 
 			}
 
-	        this.strip.render(pixels.getPixels(), {fadeIn:25});
+	        self.strip.render(pixels.getPixels(), {fadeIn:25});
 
 		}
 
@@ -215,10 +216,10 @@ module.exports = class extends Animation {
 		var self = this;
 		var avanza = self.avanza;
 
-        return new Promise((resolve, reject) => {
+        return new Promise(function(resolve, reject) {
 
-            this.getSymbols().then((symbols) => {
-                this.displaySymbols(symbols);
+            self.getSymbols().then(function(symbols) {
+                self.displaySymbols(symbols);
 				setTimeout(resolve, 10000);
             })
 
