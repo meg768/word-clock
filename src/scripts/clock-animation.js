@@ -22,7 +22,7 @@ module.exports = class extends Animation {
         var self = this;
 
         return new Promise(function(resolve, reject) {
-            displayTime();
+            this.displayTime();
             setTimeout(resolve, 60000);
         });
     }
