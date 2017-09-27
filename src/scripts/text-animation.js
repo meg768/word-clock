@@ -21,7 +21,7 @@ class Star {
     }
 
     draw(pixels) {
-        pixels.setPixelHLS(this.x, this.y, this.hue, 100, this.luminance);
+        pixels.setPixelHSL(this.x, this.y, this.hue, 100, this.luminance);
     }
 
 
