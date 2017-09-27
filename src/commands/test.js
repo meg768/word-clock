@@ -5,7 +5,7 @@ var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Events = require('events');
 
-
+/*
 class Button extends Events {
 
 	constructor(pin) {
@@ -28,6 +28,7 @@ class Button extends Events {
 
 };
 
+*/
 
 class Buttons extends Events {
 
@@ -46,7 +47,7 @@ class Buttons extends Events {
 		self.buttons = buttons;
 
 		self.buttons.forEach(function(button) {
-			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
+			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_UP, edge: Gpio.EITHER_EDGE});
 
 			self.gpios.push(gpio);
 
