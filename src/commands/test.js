@@ -9,17 +9,37 @@ var Gpio = require('pigpio').Gpio;
 class Button extends Events {
 
 	constructor(pin) {
+
+
+		function timestamp() {
+			var date = new Date();
+			return date.valueOf();
+		}
+
 		super();
 
 		this.pin   = pin;
 		this.gpio  = new Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 		this.state = 0;
-		this.time  = new Date();
+		this.time  = timestamp();
 
 		this.gpio.on('interrupt', (state) => {
+
+			var now       = timestamp();
+			var fireClick = false;
+
+			// Released?
+			if (state == 0) {
+				if (now - this.time < 100)
+					fireClick = true;
+			}
 			this.state = state;
-			this.time  = new Date();
+			this.time  = timestamp();
 			this.emit('change');
+
+			if (fireClick)
+				this.emit('click');
+
 		});
 
 	}
@@ -109,6 +129,10 @@ var Module = new function() {
 		button.on('change', () => {
 			console.log(button.state);
 			led.digitalWrite(button.state);
+		});
+
+		button.on('click', () => {
+			console.log('click');
 		});
 
 		/*
