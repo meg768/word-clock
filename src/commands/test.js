@@ -23,6 +23,8 @@ class Button extends Events {
 		this.state = 0;
 		this.time  = timestamp();
 
+		var downTime = timestamp();
+
 		this.gpio.on('interrupt', (newState) => {
 
 			var now       = timestamp();
@@ -33,9 +35,13 @@ class Button extends Events {
 			this.time  = now;
 			this.emit('change');
 
+			if (state == 1) {
+				this.pressed = now;
+			}
 			// Released?
 			if (state == 0) {
-				this.emit('pressed', now - time);
+				this.released = now;
+				this.emit('pressed', now - this.pressed);
 			}
 
 		});
