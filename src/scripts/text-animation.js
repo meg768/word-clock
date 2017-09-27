@@ -64,7 +64,7 @@ module.exports = class extends Animation {
             console.log(options);
 
             var layout  = display.lookupLetters(options.text);
-            var hue     = Color(options.color).hue;
+            var hue     = Color(options.color).hue();
             var letters = options.text.split('');
             var stars   = [];
 
