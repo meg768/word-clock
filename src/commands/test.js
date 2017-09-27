@@ -26,21 +26,24 @@ class Button extends Events {
 		this.gpio.on('interrupt', (state) => {
 
 			var now       = timestamp();
-			var fireClick = false;
+			var events    = [];
 
 			// Released?
 			if (state == 0) {
-				if (now - this.time < 200)
-					fireClick = true;
+				if (now - this.time < 250)
+					events.push('click');
+				else if (now - this.time < 1000)
+					events.push('click');
 			}
 
 
 			this.state = state;
-			this.time  = timestamp();
+			this.time  = now;
 			this.emit('change');
 
-			if (fireClick)
-				this.emit('click');
+			events.forEach((event) => {
+				this.emit(event);
+			});
 
 		});
 
