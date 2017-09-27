@@ -21,7 +21,7 @@ class Star {
     }
 
     draw(pixels) {
-        console.log(this.index, this.luminance);
+        console.log(this.index, this.x, this.y, this.hue, this.luminance);
         pixels.setPixelHSL(this.x, this.y, this.hue, 100, this.luminance);
     }
 
