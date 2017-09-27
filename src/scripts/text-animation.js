@@ -75,7 +75,7 @@ module.exports = class extends Animation {
 
             for (var index = 0; index < letters.length; index++) {
                 var position = random(layout[letters[index]]);
-                var star = new Star(position.x, position.y, hue, index);
+                var star = new Star(position.x, position.y, index, hue);
 
                 stars.push(star);
             }
@@ -86,6 +86,7 @@ module.exports = class extends Animation {
                     stars[index].draw(pixels);
                 }
                 strip.render(pixels.getPixels());
+                console.log('rendering');
 
                 if (stars[stars.length - 1].finished)
                     break;
