@@ -31,7 +31,7 @@ class Star {
             this.luminance = 50;
         }
         else {
-            this.luminance = this.luminance * 0.8;
+            this.luminance = this.luminance * 0.2;
         }
 
         if (this.loop >= this.index && this.luminance < 1)
