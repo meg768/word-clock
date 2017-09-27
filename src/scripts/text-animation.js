@@ -68,7 +68,7 @@ module.exports = class extends Animation {
             var stars   = [];
 
             console.log('letters', letters);
-            console.log('layout', letters);
+            console.log('layout', layout);
 
             pixels.fill(0);
             strip.render(pixels.getPixels(), {fadeIn:20});
