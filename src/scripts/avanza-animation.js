@@ -157,7 +157,7 @@ module.exports = class extends Animation {
 
 	}
 
-	getText() {
+	getSymbols() {
 		var self = this;
 		var avanza = self.avanza;
 
@@ -177,21 +177,26 @@ module.exports = class extends Animation {
 		});
 	}
 
-	displayText(words) {
-        var self = this;
-
-
-        var pixels = new Pixels(13, 13);
+	displaySymbols(symbols) {
+        var pixels = new Pixels(this.strip.width, this.strip.height);
         var layout = new Layout();
+		var words  = [];
 
-        words = layout.getTextLayout(words);
+		symbols.forEach((symbol) => {
+			words.push(symbol.text);
+		});
 
-        words.forEach(function(word) {
-            for (var i = 0; i < word.text.length; i++) {
-                pixels.setPixel(word.col + i, word.row, Color(word.color).rgbNumber());
+        var lookup = layout.lookupText(words.join(' '));
+
+		for (var index = 0; index < symbols.length; index++) {
+			var symbol = symbols[index];
+			var position = lookup[index];
+
+			for (var i = 0; i < symbol.text.length; i++) {
+                pixels.setPixel(position.x + i, position.y, Color(symbol.color).rgbNumber());
             }
 
-        });
+		}
 
         self.strip.render(pixels.getPixels(), {fadeIn:25});
 
@@ -201,9 +206,9 @@ module.exports = class extends Animation {
 		var self = this;
 		var avanza = self.avanza;
 
-        return new Promise(function(resolve, reject) {
-            self.getText().then(function(words) {
-                self.displayText(words);
+        return new Promise((resolve, reject) => {
+            this.getSymbols().then(function(symbols) {
+                this.displaySymbols(symbols);
 				setTimeout(resolve, 5000);
             })
             .catch(function(error) {
