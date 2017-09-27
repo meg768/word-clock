@@ -22,7 +22,7 @@ module.exports = class extends Animation {
 		this.cache     = {};
 
 		this.textProviderIndex  = 0;
-		this.textProviders      = [this.getRavarorText, this.getIndexText, this.getCurrencyText];
+		this.textProviders      = [this.getRavaror, this.getIndex, this.getCurrency];
 
 	}
 
@@ -79,7 +79,7 @@ module.exports = class extends Animation {
 
 	}
 
-	getMarketText(symbols) {
+	getMarket(symbols) {
 
 		var self = this;
 		var avanza = self.avanza;
@@ -96,7 +96,7 @@ module.exports = class extends Animation {
 
 				promise = promise.then(function(result) {
 					var word = {};
-					word.text = symbol.text;
+					word.symbol = symbol.symbol;
 					word.color = result.changePercent < 0 ? 'red' : 'blue';
 					words.push(word);
 				});
@@ -115,44 +115,44 @@ module.exports = class extends Animation {
 	}
 
 
-	getIndexText() {
+	getIndex() {
 
-		return this.getMarketText([
-			{text: 'OMX',      id:155585}, // ??
-			{text: 'NASDAQ',   id:19006},
-			{text: 'DAX',      id:18981},
-			{text: 'DOWJONES', id:155667}, // ??
-			{text: 'HANGSENG', id:18984},
-			{text: 'USA',      id:155458},
-			{text: 'UK',       id:155698},
-			{text: 'BRIC',     id:134948},
-			{text: 'NIKKEI',   id:18997}
+		return this.getMarket([
+			{symbol: 'OMX',      id:155585}, // ??
+			{symbol: 'NASDAQ',   id:19006},
+			{symbol: 'DAX',      id:18981},
+			{symbol: 'DOWJONES', id:155667}, // ??
+			{symbol: 'HANGSENG', id:18984},
+			{symbol: 'USA',      id:155458},
+			{symbol: 'UK',       id:155698},
+			{symbol: 'BRIC',     id:134948},
+			{symbol: 'NIKKEI',   id:18997}
 		]);
 	}
 
-	getCurrencyText() {
+	getCurrency() {
 
-		return this.getMarketText([
-			{text: 'NOK', id:53293},
-			{text: 'JPY', id:108702},
-			{text: 'USD', id:19000},
-			{text: 'GBP', id:108703},
-			{text: 'EUR', id:18998},
-			{text: 'DKK', id:53292},
-			{text: 'CAD', id:108701}
+		return this.getMarket([
+			{symbol: 'NOK', id:53293},
+			{symbol: 'JPY', id:108702},
+			{symbol: 'USD', id:19000},
+			{symbol: 'GBP', id:108703},
+			{symbol: 'EUR', id:18998},
+			{symbol: 'DKK', id:53292},
+			{symbol: 'CAD', id:108701}
 		]);
 	}
 
-	getRavarorText() {
-		return this.getMarketText([
-			{text: 'ZN',    id:18992},
-			{text: 'AU',    id:18986},
-			{text: 'AL',    id:18990},
-			{text: 'NI',    id:18996},
-			{text: 'CU',    id:18989},
-			{text: 'BRENT', id:155722},
-			{text: 'AG',    id:18991},
-			{text: 'PB',    id:18983}
+	getRavaror() {
+		return this.getMarket([
+			{symbol: 'ZN',    id:18992},
+			{symbol: 'AU',    id:18986},
+			{symbol: 'AL',    id:18990},
+			{symbol: 'NI',    id:18996},
+			{symbol: 'CU',    id:18989},
+			{symbol: 'BRENT', id:155722},
+			{symbol: 'AG',    id:18991},
+			{symbol: 'PB',    id:18983}
 		]);
 
 	}
@@ -188,17 +188,20 @@ module.exports = class extends Animation {
 
         var lookup = display.lookupText(words.join(' '));
 
-		for (var index = 0; index < symbols.length; index++) {
-			var symbol = symbols[index];
-			var layout = lookup[index];
+		if (lookup.length == symbols.length) {
+			for (var index = 0; index < symbols.length; index++) {
+				var symbol = symbols[index];
+				var layout = lookup[index];
 
-			for (var i = 0; i < layout.text.length; i++) {
-                pixels.setPixel(layout.x + i, layout.y, Color(symbol.color).rgbNumber());
-            }
+				for (var i = 0; i < layout.text.length; i++) {
+	                pixels.setPixel(layout.x + i, layout.y, Color(symbol.color).rgbNumber());
+	            }
+
+			}
+
+	        this.strip.render(pixels.getPixels(), {fadeIn:25});
 
 		}
-
-        this.strip.render(pixels.getPixels(), {fadeIn:25});
 
     }
 
@@ -210,8 +213,9 @@ module.exports = class extends Animation {
 
             this.getSymbols().then((symbols) => {
                 this.displaySymbols(symbols);
-				setTimeout(resolve, 5000);
+				setTimeout(resolve, 10000);
             })
+
             .catch(function(error) {
                 reject(error);
             });
