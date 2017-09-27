@@ -29,17 +29,19 @@ class Button extends Events {
 
 			var now = timestamp();
 
+			if (state) {
+				this.pressed = now;
+			}
+			else {
+				this.released = now;
+			}
+
 			this.state = state;
 			this.time  = now;
 			this.emit('change');
 
-			if (state == 1) {
-				this.pressed = now;
-			}
-			// Released?
 			if (state == 0) {
-				this.released = now;
-				this.emit('pressed', now - this.pressed);
+				this.emit('click', now - this.pressed);
 			}
 
 		});
@@ -133,13 +135,10 @@ var Module = new function() {
 			led.digitalWrite(button.state);
 		});
 
-		button.on('pressed', (duration) => {
+		button.on('click', (duration) => {
 			console.log('pressed for', duration);
 		});
 
-		button.on('click', () => {
-			console.log('click');
-		});
 
 		button.on('long-click', () => {
 			console.log('long-click');
