@@ -25,13 +25,11 @@ class Button extends Events {
 
 		var downTime = timestamp();
 
-		this.gpio.on('interrupt', (newState) => {
+		this.gpio.on('interrupt', (state) => {
 
-			var now       = timestamp();
-			var time      = this.time;
-			var state     = this.state;
+			var now = timestamp();
 
-			this.state = newState;
+			this.state = state;
 			this.time  = now;
 			this.emit('change');
 
