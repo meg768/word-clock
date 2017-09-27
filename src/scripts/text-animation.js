@@ -74,7 +74,7 @@ module.exports = class extends Animation {
             strip.render(pixels.getPixels(), {fadeIn:20});
 
             for (var index = 0; index < letters.length; index++) {
-                var position = random(layout[letter[index]]);
+                var position = random(layout[letters[index]]);
                 var star = new Star(position.x, position.y, hue, index);
 
                 stars.push(position);
