@@ -4,6 +4,7 @@ var sprintf = require('yow/sprintf');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Events = require('events');
+var Gpio = require('pigpio').Gpio;
 
 class Button extends Events {
 
