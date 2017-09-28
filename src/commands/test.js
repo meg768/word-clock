@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var sprintf = require('yow/sprintf');
+var Timer = require('yow/timer');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Events = require('events');
@@ -21,27 +22,35 @@ class Button extends Events {
 		this.pin   = pin;
 		this.gpio  = new Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 		this.state = 0;
-		this.time  = timestamp();
-
-		var downTime = timestamp();
+		this.lastPressed = timestamp();
+		this.lastReleased = timestamp();
+		this.timer = new Timer();
 
 		this.gpio.on('interrupt', (state) => {
 
 			var now = timestamp();
 
-			if (state) {
-				this.pressed = now;
-			}
-			else {
-				this.released = now;
-			}
-
 			this.state = state;
-			this.time  = now;
-			this.emit('change');
+
+			this.emit('change', state);
 
 			if (state == 0) {
-				this.emit('click', now - this.pressed);
+				timer.cancel();
+
+				timer.setTimer(200, () => {
+					var now = timestamp();
+
+					if (this.lastReleased - now < 300)
+						this.emit('doubleClick', now - this.lastPressed);
+					else
+						this.emit('click', now - this.lastPressed);
+
+				});
+
+				this.lastReleased = now;
+			}
+			else {
+				this.lastPressed = now;
 			}
 
 		});
@@ -130,7 +139,7 @@ var Module = new function() {
 		var button = new Button(13);
 		var led = new Gpio(20, {mode: Gpio.OUTPUT});
 
-		button.on('change', () => {
+		button.on('change', (state) => {
 			console.log(button.state);
 			led.digitalWrite(button.state);
 		});
@@ -140,9 +149,6 @@ var Module = new function() {
 		});
 
 
-		button.on('long-click', () => {
-			console.log('long-click');
-		});
 
 		/*
 		var buttons = new Buttons();
