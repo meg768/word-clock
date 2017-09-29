@@ -18,23 +18,6 @@ module.exports = class extends Animation {
         this.time  = undefined;
     }
 
-    run() {
-        var self = this;
-
-        return new Promise(function(resolve, reject) {
-            self.getText().then(function(words) {
-                return self.displayText(words);
-            })
-            .then(function() {
-                resolve();
-            })
-            .catch(function(error) {
-                reject(error);
-            });
-        });
-    }
-
-
 
     getWeatherState(text) {
 
@@ -103,6 +86,7 @@ module.exports = class extends Animation {
                 // degreeType: F or C
 
                 console.log('Fetching weather...');
+                throw new Error('Inget väder!');
 
                 weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, function(error, result) {
                     try {
