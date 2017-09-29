@@ -57,7 +57,7 @@ var Module = new function() {
 			var socket         = io.connect(argv.service);
 			var animationIndex = 0;
 			var animations     = [];
-
+/*
 			if (argv.matrix)
 				animations.push(new MatrixAnimation(strip));
 
@@ -68,6 +68,7 @@ var Module = new function() {
 				animations.push(new AvanzaAnimation(strip));
 
 			if (argv.weather)
+			*/
 				animations.push(new WeatherAnimation(strip));
 
 
