@@ -86,7 +86,6 @@ module.exports = class extends Animation {
                 // degreeType: F or C
 
                 console.log('Fetching weather...');
-                throw new Error('Inget väder!');
 
                 weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, function(error, result) {
                     try {
