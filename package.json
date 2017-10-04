@@ -20,7 +20,6 @@
     "avanza-mobile-client": "^1.0.30",
     "color": "^2.0.0",
     "dotenv": "^4.0.0",
-    "i2c-bus": "^1.2.2",
     "pigpio": "^0.6.2",
     "rpi-ws281x-native": "^0.8.2",
     "socket.io-client": "^2.0.3",

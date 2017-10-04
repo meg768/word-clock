@@ -1,64 +1,54 @@
 # Word Clock
 
-Word Clock
-
+Word Clock as of 2017-10-03.
 
 ## Setting up the Pi Zero
 
-Update apt-get
+Visit https://www.raspberrypi.org/downloads to download latest version of Raspberry OS.
+Use Pi-Filler or other tool to create an SD-card with the latest image.
+
+###Update apt-get
+
+When all set up. Update apt-get.
 
 ````bash
 sudo apt-get update && sudo apt-get dist-upgrade
 ````
 
-Install Node and npm
-
-````bash
-wget -O - https://raw.githubusercontent.com/sdesalas/node-pi-zero/master/install-node-v6.9.1.sh | bash
-````
-
-Use raspi-config to set time zone, enable SSH and SPI.
+###Use raspi-config to set time zone, enable SSH.
 
 ````bash
 sudo raspi-config
 ````
 
-## Texts to display
+###Install Node and npm
 
-### Time
-- FEM/TIO/KVART/TJUGO/LITE
-- I/ÖVER
-- HALV
-- ETT/TVÅ/TRE/FYRA/FEM/SEX/SJU/ÅTTA/NIO/TIO
-- MÅ/TI/ON/TO/FR/LÖ/SÖ
+````bash
+wget -O - https://raw.githubusercontent.com/sdesalas/node-pi-zero/master/install-node-v6.9.1.sh | bash
+````
+
+###Install git and pigpio
+
+````bash
+sudo apt-get install git-core
+sudo apt-get install pigpio
+````
+
+###Clone repository
+
+````bash
+git clone https://github.com/meg768/word-clock.git
+````
+
+### Run it
+
+````bash
+cd word-clock
+npm install
+sudo node ./word-clock.js server
+````
 
 
-### Weather
-- REGN
-- SNÖ
-- SOL
-- MOLN
-- VIND
-
-### Stock Index
-- OMX
-- NASDAQ
-- DAX
-- DOWJONES
-- HANGSENG
-- USA
-- UK
-- BRIC
-- NIKKEI
-
-### Currency
-- EUR
-- USD
-- GBP
-- CAD
-- NOK
-- DKK
-- JPY
 
 ## Links
 - Powering lots of leds - http://www.eerkmans.nl/powering-lots-of-leds-from-arduino/
