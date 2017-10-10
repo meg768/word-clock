@@ -76,8 +76,8 @@ class Worm {
 module.exports = class extends Animation {
 
 
-    constructor(strip) {
-        super(strip);
+    constructor(strip, options) {
+        super(strip, options);
 
         this.name = 'Matrix';
 

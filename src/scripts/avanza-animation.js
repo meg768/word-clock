@@ -13,8 +13,8 @@ var Color      = require('color');
 module.exports = class extends Animation {
 
 
-	constructor(strip) {
-		super(strip);
+	constructor(strip, options) {
+		super(strip, options);
 
 		this.name      = 'Avanza';
 		this.lastLogin = undefined;
