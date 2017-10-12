@@ -49,7 +49,7 @@ module.exports = class Animation {
     loop() {
 
     }
-    
+
     run() {
         return new Promise(function(resolve, reject) {
             resolve();
