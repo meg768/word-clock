@@ -7,7 +7,7 @@ Word Clock as of 2017-10-03.
 Visit https://www.raspberrypi.org/downloads to download latest version of Raspberry OS.
 Use Pi-Filler or other tool to create an SD-card with the latest image.
 
-###Update apt-get
+### Update apt-get
 
 When all set up. Update apt-get.
 
@@ -27,14 +27,14 @@ sudo raspi-config
 wget -O - https://raw.githubusercontent.com/sdesalas/node-pi-zero/master/install-node-v6.9.1.sh | bash
 ````
 
-###Install git and pigpio
+### Install git and pigpio
 
 ````bash
 sudo apt-get install git-core
 sudo apt-get install pigpio
 ````
 
-###Clone repository
+### Clone repository
 
 ````bash
 git clone https://github.com/meg768/word-clock.git
