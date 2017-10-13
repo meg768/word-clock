@@ -38,6 +38,7 @@ var Module = new function() {
 
 		console.log('START');
 		btSerial.on('found', function(address, name) {
+			console.log('FOUND', name, address);
 		    btSerial.findSerialPortChannel(address, function(channel) {
 
 				console.log('FOUND', name, address, channel);
