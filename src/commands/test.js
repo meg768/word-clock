@@ -45,11 +45,12 @@ var Module = new function() {
 
 
 		device.findSerialPortChannel(address, function(channel){
-		  console.log('Found RFCOMM channel for serial port on %s: ', name, channel);
+		  console.log('Found RFCOMM channel for serial port on %s: ', channel);
 
 		  // make bluetooth connect to remote device
 		  Bluetooth.connect(address, channel, function(err, connection){
 		    if(err) return console.error(err);
+			console.log('OK!');
 		    connection.write(new Buffer('Hello!', 'utf-8'));
 		  });
 
