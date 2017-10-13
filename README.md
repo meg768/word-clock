@@ -7,6 +7,10 @@ Word Clock as of 2017-10-03.
 Visit https://www.raspberrypi.org/downloads to download latest version of Raspberry OS.
 Use Pi-Filler or other tool to create an SD-card with the latest image.
 
+### Enable SSH
+
+Create an empty file named ssh 
+
 ### Update apt-get
 
 When all set up. Update apt-get.
@@ -30,8 +34,7 @@ wget -O - https://raw.githubusercontent.com/sdesalas/node-pi-zero/master/install
 ### Install git and pigpio
 
 ````bash
-sudo apt-get install git-core
-sudo apt-get install pigpio
+sudo apt-get install git-core pigpio
 ````
 
 ### Clone repository
