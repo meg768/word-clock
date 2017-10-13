@@ -34,6 +34,7 @@ var Module = new function() {
 	function run(argv) {
 
 		var device = new Bluetooth.DeviceINQ();
+		var address = '20:73:00:3A:C3:07';
 
 		console.log('paired');
 		device.listPairedDevices(console.log);
@@ -42,7 +43,18 @@ var Module = new function() {
   			console.log('Found: ' + address + ' with name ' + name);
 		});
 
-		device.inquire();
+
+		device.findSerialPortChannel(address, function(channel){
+		  console.log('Found RFCOMM channel for serial port on %s: ', name, channel);
+
+		  // make bluetooth connect to remote device
+		  Bluetooth.connect(address, channel, function(err, connection){
+		    if(err) return console.error(err);
+		    connection.write(new Buffer('Hello!', 'utf-8'));
+		  });
+
+		});
+//		device.inquire();
 	}
 
 
