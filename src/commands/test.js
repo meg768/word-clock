@@ -34,6 +34,9 @@ var Module = new function() {
 	function run(argv) {
 
 		var device = new Bluetooth.DeviceINQ();
+
+		console.log('paired');
+		device.listPairedDevices(console.log);
 		console.log('Listening...');
 		device.on('found', function found(address, name) {
   			console.log('Found: ' + address + ' with name ' + name);
