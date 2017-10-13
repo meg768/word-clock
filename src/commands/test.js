@@ -34,8 +34,9 @@ var Module = new function() {
 	function run(argv) {
 
 
-		var btSerial = Bluetooth.BluetoothSerialPort();
+		var btSerial = new Bluetooth.BluetoothSerialPort();
 
+		console.log('START');
 		btSerial.on('found', function(address, name) {
 		    btSerial.findSerialPortChannel(address, function(channel) {
 
