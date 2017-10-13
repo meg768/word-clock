@@ -43,7 +43,7 @@ var Module = new function() {
   			console.log('Found: ' + address + ' with name ' + name);
 		});
 
-
+/*
 		device.findSerialPortChannel(address, function(channel){
 		  console.log('Found RFCOMM channel for serial port on %s: ', channel);
 
@@ -55,6 +55,7 @@ var Module = new function() {
 		  });
 
 		});
+		*/
 //		device.inquire();
 	}
 
