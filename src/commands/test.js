@@ -5,7 +5,7 @@ var Timer = require('yow/timer');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Events = require('events');
-var Bluetooth = require('node-bluetooth');
+var Bluetooth = require('bluetooth-serial-port');
 
 
 
@@ -33,30 +33,38 @@ var Module = new function() {
 
 	function run(argv) {
 
-		var device = new Bluetooth.DeviceINQ();
-		var address = '20:73:00:3A:C3:07';
 
-		console.log('paired');
-		device.listPairedDevices(console.log);
-		console.log('Listening...');
-		device.on('found', function found(address, name) {
-  			console.log('Found: ' + address + ' with name ' + name);
+		var btSerial = Bluetooth.BluetoothSerialPort();
+
+		btSerial.on('found', function(address, name) {
+		    btSerial.findSerialPortChannel(address, function(channel) {
+
+				console.log('FOUND', address, channel);
+				/*
+		        btSerial.connect(address, channel, function() {
+		            console.log('connected');
+
+		            btSerial.write(new Buffer('my data', 'utf-8'), function(err, bytesWritten) {
+		                if (err) console.log(err);
+		            });
+
+		            btSerial.on('data', function(buffer) {
+		                console.log(buffer.toString('utf-8'));
+		            });
+		        }, function () {
+		            console.log('cannot connect');
+		        });
+
+		        // close the connection when you're ready
+		        btSerial.close();
+				*/
+		    }, function() {
+		        console.log('found nothing');
+		    });
 		});
 
-/*
-		device.findSerialPortChannel(address, function(channel){
-		  console.log('Found RFCOMM channel for serial port on %s: ', channel);
+		btSerial.inquire();
 
-		  // make bluetooth connect to remote device
-		  Bluetooth.connect(address, channel, function(err, connection){
-		    if(err) return console.error(err);
-			console.log('OK!');
-		    connection.write(new Buffer('Hello!', 'utf-8'));
-		  });
-
-		});
-		*/
-//		device.inquire();
 	}
 
 
