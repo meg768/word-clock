@@ -18,6 +18,7 @@
   "homepage": "https://github.com/meg768/word-clock#readme",
   "dependencies": {
     "avanza-mobile-client": "^1.0.30",
+    "bluetooth-serial-port": "^2.1.5",
     "color": "^2.0.0",
     "dotenv": "^4.0.0",
     "node-bluetooth": "^1.1.3",
