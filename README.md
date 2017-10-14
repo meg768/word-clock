@@ -9,7 +9,12 @@ Use Pi-Filler or other tool to create an SD-card with the latest image.
 
 ### Enable SSH
 
-Create an empty file named ssh 
+Create an empty file named ssh and copy it to boot. From the Mac terminal
+enter this.
+
+````bash
+echo > /Volumes/boot/ssh
+````
 
 ### Update apt-get
 

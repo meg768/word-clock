@@ -33,39 +33,40 @@ var Module = new function() {
 
 	function run(argv) {
 
+		var BTSP = require('bluetooth-serial-port');
+		var serial = new BTSP.BluetoothSerialPort();
 
-		var btSerial = new Bluetooth.BluetoothSerialPort();
+		 	console.log('Started!');
 
-		console.log('START');
-		btSerial.on('found', function(address, name) {
-			console.log('FOUND', name, address);
-		    btSerial.findSerialPortChannel(address, function(channel) {
+		serial.on('found', function(address, name) {
 
-				console.log('FOUND', name, address, channel);
+		    // you might want to check the found address with the address of your
+		    // bluetooth enabled Arduino device here.
+
+		    serial.findSerialPortChannel(address, function(channel) {
+				console.log(address, channel);
 				/*
-		        btSerial.connect(address, channel, function() {
+		        serial.connect(bluetoothAddress, channel, function() {
 		            console.log('connected');
+		            process.stdin.resume();
+		            process.stdin.setEncoding('utf8');
+		            console.log('Press "1" or "0" and "ENTER" to turn on or off the light.')
 
-		            btSerial.write(new Buffer('my data', 'utf-8'), function(err, bytesWritten) {
-		                if (err) console.log(err);
+		            process.stdin.on('data', function (data) {
+		                serial.write(data);
 		            });
 
-		            btSerial.on('data', function(buffer) {
-		                console.log(buffer.toString('utf-8'));
+		            serial.on('data', function(data) {
+		                console.log('Received: ' + data);
 		            });
 		        }, function () {
 		            console.log('cannot connect');
 		        });
-
-		        // close the connection when you're ready
-		        btSerial.close();
 				*/
-		    }, function() {
-		        console.log('found nothing');
 		    });
 		});
 
-		btSerial.inquire();
+		serial.inquire();
 
 	}
 
