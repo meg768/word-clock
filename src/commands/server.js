@@ -111,8 +111,6 @@ var Module = new function() {
 
 					console.log('Starting animation', animation.name, '...');
 
-					animation.reset();
-
 					animation.run().then(function() {
 						animationIndex = (animationIndex + 1) % animations.length;
 					})

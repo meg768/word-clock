@@ -13,51 +13,71 @@ module.exports = class Animation {
         this.name      = 'None';
         this.options   = options || {};
         this.cancelled = false;
-        this.events    = new Events();
+        this.timeout   = 10000;
     }
 
-    pause(ms) {
-        var self = this;
 
-        return new Promise(function(resolve, reject) {
-            var timer = new Timer();
-            var resolved = false;
+    tick() {
 
-            function timeout() {
-                if (!resolved) {
-                    resolved = true;
-
-                    timer.cancel();
-                    self.events.removeAllListeners('cancel');
-
-                    resolve();
-                }
-            }
-
-            self.events.on('cancel', timeout);
-            timer.setTimer(ms, timeout);
-        });
     }
 
-    reset() {
+    start() {
         this.cancelled = false;
 
-    }
-
-    cancel() {
-        var self = this;
-
-        self.cancelled = true;
-        self.events.emit('cancel');
+        return Promise.resolve();
     }
 
     loop() {
+        return new Promise(function(resolve, reject) {
 
+            var start = new Date();
+
+            function loop() {
+
+                var now = new Date();
+
+                if (self.cancelled) {
+                    resolve();
+                }
+                else if (now - start > self.timeout) {
+                    resolve();
+                }
+                else {
+                    self.tick();
+                    setImmediate(loop);
+                }
+            }
+        });
+    }
+
+    stop() {
+        return Promise.resolve();
+    }
+
+
+    cancel() {
+        var self = this;
+        self.cancelled = true;
     }
 
     run() {
+        var self = this;
+
         return new Promise(function(resolve, reject) {
-            resolve();
+
+            self.start().then(function() {
+                return self.loop();
+            })
+            .then(function() {
+                return self.stop();
+            })
+            .then(function() {
+                resolve();
+            })
+            .catch(function(error) {
+                reject(error);
+            });
+
         });
 
     }

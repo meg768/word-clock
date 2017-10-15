@@ -17,23 +17,7 @@ module.exports = class extends Animation {
     }
 
 
-    run() {
-        var self = this;
-
-        return new Promise(function(resolve, reject) {
-            self.displayTime();
-
-            self.pause(10000).then(function() {
-                resolve();
-            })
-            .catch(function(error) {
-                reject(error);
-            })
-
-        });
-    }
-
-    displayTime() {
+    tick() {
         var self = this;
 
         var pixels  = new Pixels(self.strip.width, self.strip.height);

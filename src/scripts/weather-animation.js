@@ -219,16 +219,13 @@ module.exports = class extends Animation {
 
     }
 
-	run() {
+	start() {
 		var self = this;
 
         return new Promise(function(resolve, reject) {
             self.getText().then(function(words) {
                 self.displayText(words);
             })
-            .then(function() {
-				return self.pause(10000);	
-			})
             .then(function() {
 				resolve();
 			})

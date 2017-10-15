@@ -213,7 +213,8 @@ module.exports = class extends Animation {
 
     }
 
-	run() {
+
+	start() {
 		var self = this;
 		var avanza = self.avanza;
 
@@ -223,12 +224,8 @@ module.exports = class extends Animation {
                 self.displaySymbols(symbols);
             })
 			.then(function() {
-				return self.pause(10000);
-			})
-			.then(function() {
 				resolve();
 			})
-
             .catch(function(error) {
                 reject(error);
             });

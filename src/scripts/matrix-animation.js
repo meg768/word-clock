@@ -85,6 +85,33 @@ module.exports = class extends Animation {
     }
 
 
+    loop() {
+        var self = this;
+
+        return new Promise(function(resolve, reject) {
+
+            function loop() {
+
+                if (self.cancelled) {
+                    resolve();
+                }
+                else {
+                    pixels.clear();
+
+                    for (var i = 0; i < self.strip.width; i++) {
+            			worms[i].draw(pixels);
+            			worms[i].idle();
+            		}
+
+                    self.strip.render(pixels.getPixels());
+
+                    setImmediate(loop);
+                }
+
+            }
+        });
+
+    }
 
     run() {
         var self = this;
