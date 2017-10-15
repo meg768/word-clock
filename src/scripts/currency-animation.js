@@ -6,11 +6,12 @@ var isString   = require('yow/is').isString;
 var Timer      = require('yow/timer');
 var Avanza     = require('./avanza.js');
 var Animation  = require('./animation.js');
+var AvanzaAnimation  = require('./avanza-animation.js');
 var Layout     = require('./layout.js');
 var Pixels     = require('./pixels.js');
 var Color      = require('color');
 
-module.exports = class extends Animation {
+module.exports = class extends AvanzaAnimation {
 
 
 	constructor(strip, options) {
@@ -31,7 +32,7 @@ module.exports = class extends Animation {
 
 	}
 
-
+/*
 
 	displaySymbols(symbols) {
 		var self    = this;
@@ -73,7 +74,7 @@ console.log('OK!!');
 
     }
 
-
+*/
 	start() {
 
         return new Promise((resolve, reject) => {
