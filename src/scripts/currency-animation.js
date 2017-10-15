@@ -53,6 +53,7 @@ module.exports = class extends Animation {
 			for (var index = 0; index < symbols.length; index++) {
 				var symbol = symbols[index];
 				var layout = lookup[index];
+				console.log(symbol);
 
 				for (var i = 0; i < layout.text.length; i++) {
 					var color = symbol.change >= 0 ? 'blue' : 'red';
