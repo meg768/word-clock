@@ -91,7 +91,6 @@ module.exports = class AvanzaCache {
 				});
 
 				resolve(result);
-
 			})
 
 			.catch((error) =>  {
