@@ -81,12 +81,12 @@ module.exports = class AvanzaCache {
 				var promise = Promise.resolve();
 				var result  = [];
 
-				symbols.forEach(function(symbol) {
-					promise = promise.then(function() {
+				symbols.forEach((symbol) => {
+					promise = promise.then(() => {
 						return self.getMarketIndex(symbol.id);
 					});
 
-					promise = promise.then(function(data) {
+					promise = promise.then((data) => {
 						result.push({symbol:symbol.symbol, change:parseFloat(data.changePercent)});
 					});
 
