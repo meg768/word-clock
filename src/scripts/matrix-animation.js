@@ -119,3 +119,6 @@ module.exports = class extends Animation {
 
         this.strip.render(this.pixels.getPixels());
     }
+
+
+}
