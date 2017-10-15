@@ -22,36 +22,28 @@ module.exports = class extends Animation {
         var now  = new Date();
 
         if (now - self.timestamp > 10000) {
-            render();
+            console.log('Redrawing clock')
+            var pixels  = new Pixels(self.strip.width, self.strip.height);
+            var display = new Layout();
+            var text    = self.getTime();
+            var hue     = self.getHue();
+
+            var words   = display.lookupText(text);
+
+            words.forEach((word) => {
+                for (var i = 0; i < word.text.length; i++) {
+                    pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
+
+                }
+            });
+
+            self.strip.render(pixels.getPixels(), {fadeIn:25});
 
             self.timestamp = now;
         }
 
     }
 
-    render() {
-
-        var self = this;
-
-        console.log('Redrawing clock')
-        var pixels  = new Pixels(self.strip.width, self.strip.height);
-        var display = new Layout();
-        var text    = self.getTime();
-        var hue     = self.getHue();
-
-        var words   = display.lookupText(text);
-
-        words.forEach((word) => {
-            for (var i = 0; i < word.text.length; i++) {
-                pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
-
-            }
-        });
-
-        self.strip.render(pixels.getPixels(), {fadeIn:25});
-
-
-    }
 
     getHue() {
         var now = new Date();
