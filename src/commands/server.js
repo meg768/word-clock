@@ -75,9 +75,12 @@ var Module = new function() {
 
 
 			button.on('click', function() {
-				console.log('Cancelling animation');
-				if (currentAnimation)
+				console.log('Button click');
+				if (currentAnimation) {
+					console.log('Cancelling animation');
 					currentAnimation.cancel();
+
+				}
 
 			});
 
