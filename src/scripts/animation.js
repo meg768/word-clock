@@ -30,6 +30,7 @@ module.exports = class Animation {
 
     loop() {
         console.log('Running loop');
+        var self = this;
 
         return new Promise(function(resolve, reject) {
 
