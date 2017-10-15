@@ -146,12 +146,12 @@ var Module = new function() {
 		});
 
 
-		button.on('click', (duration) => {
-			console.log('pressed for', duration);
+		button6.on('click', (duration) => {
+			console.log('click', duration);
 		});
 
-		button.on('doubleClick', (duration) => {
-			console.log('dbl pressed for', duration);
+		button6.on('doubleClick', (duration) => {
+			console.log('doubleClick', duration);
 		});
 
 
