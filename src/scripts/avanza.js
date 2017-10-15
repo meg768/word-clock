@@ -72,8 +72,6 @@ module.exports = class AvanzaCache {
 
 	getMarket(symbols) {
 
-		var self = this;
-		var avanza = self.avanza;
 
 		return new Promise((resolve, reject) => {
 
@@ -83,7 +81,7 @@ module.exports = class AvanzaCache {
 
 				symbols.forEach((symbol) => {
 					promise = promise.then(() => {
-						return self.getMarketIndex(symbol.id);
+						return this.getMarketIndex(symbol.id);
 					});
 
 					promise = promise.then((data) => {
@@ -92,14 +90,14 @@ module.exports = class AvanzaCache {
 
 				});
 
-				return promise;
+				return result;
 
 			})
 
-			.then(function() {
+			.then((result) => {
 				resolve(result);
 			})
-			.catch(function(error) {
+			.catch((error) =>  {
 				reject(error);
 			})
 		})
