@@ -6,6 +6,7 @@ var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Events = require('events');
 var Pigpio = require('pigpio');
+var Gpio   = require('pigpio').Gpio;
 
 class Button extends Events {
 
@@ -20,7 +21,7 @@ class Button extends Events {
 		super();
 
 		this.pin      = pin;
-		this.gpio     = new Pigpio.Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
+		this.gpio     = new Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 		this.state    = 0;
 		this.pressed  = timestamp();
 		this.released = timestamp();
