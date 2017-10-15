@@ -35,9 +35,9 @@ class Button extends Events {
 			this.emit('change', state);
 
 			if (state == 0) {
-				timer.cancel();
+				this.timer.cancel();
 
-				timer.setTimer(200, () => {
+				this.timer.setTimer(200, () => {
 					var now = timestamp();
 
 					if (this.lastReleased - now < 300)
@@ -149,6 +149,9 @@ var Module = new function() {
 			console.log('pressed for', duration);
 		});
 
+		button.on('doubleClick', (duration) => {
+			console.log('dbl pressed for', duration);
+		});
 
 
 		/*
