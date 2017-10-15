@@ -114,7 +114,7 @@ module.exports = class extends Animation {
                     self.strip.render(pixels.getPixels());
 
                     if (!self.cancelled)
-                        process.nextTick(loop);
+                        setTimeout(loop, 0);
 
                 }
             }
