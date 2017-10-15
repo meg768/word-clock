@@ -220,11 +220,10 @@ module.exports = class extends Animation {
     }
 
 	start() {
-		var self = this;
 
-        return new Promise(function(resolve, reject) {
-            self.getText().then(function(words) {
-                self.displayText(words);
+        return new Promise((resolve, reject) => {
+            this.getText().then((words) => {
+                this.displayText(words);
             })
             .then(function() {
 				resolve();

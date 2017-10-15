@@ -13,57 +13,54 @@ module.exports = class extends Animation {
     constructor(strip, options) {
         super(strip, options);
 
-        this.name      = 'Clock';
-        this.timestamp = 0;
+        this.name       = 'Clock';
+        this.lastRender = 0;
     }
 
-    stop() {
-        var self = this;
 
-        return new Promise((resolve, reject) => {
-            super.stop().then(function() {
-                var pixels  = new Pixels(self.strip.width, self.strip.height);
-
-                if (self.cancelled)
-                    self.strip.render(pixels.getPixels());
-                else
-                    self.strip.render(pixels.getPixels(), {fadeIn:25});
-
-            })
-            .then(function() {
-                resolve();
-            })
-
-        });
-    }
 
     tick() {
-        var self = this;
-        var now  = new Date();
+        var now = new Date();
 
-        if (now - self.timestamp > 10000) {
-            console.log('Redrawing clock')
-            var pixels  = new Pixels(self.strip.width, self.strip.height);
-            var display = new Layout();
-            var text    = self.getTime();
-            var hue     = self.getHue();
-
-            var words   = display.lookupText(text);
-
-            words.forEach((word) => {
-                for (var i = 0; i < word.text.length; i++) {
-                    pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
-
-                }
-            });
-
-            self.strip.render(pixels.getPixels(), {fadeIn:25});
-
-            self.timestamp = now;
+        if (now - this.lastRender > 30000) {
+            render();
         }
 
     }
 
+    start() {
+        return new Promise((resolve, reject) => {
+            super.start().then(function() {
+                this.render();
+                resolve();
+            })
+            .catch(function(error) {
+                reject(error);
+            })
+        });
+    }
+
+    render(options) {
+        console.log('Redrawing clock');
+
+        var pixels  = new Pixels(self.strip.width, self.strip.height);
+        var display = new Layout();
+        var text    = this.getTime();
+        var hue     = this.getHue();
+
+        var words   = display.lookupText(text);
+
+        words.forEach((word) => {
+            for (var i = 0; i < word.text.length; i++) {
+                pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
+
+            }
+        });
+
+        this.strip.render(pixels.getPixels(), options);
+        this.lastRender = new Date();
+
+    }
 
     getHue() {
         var now = new Date();

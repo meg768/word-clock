@@ -215,13 +215,11 @@ module.exports = class extends Animation {
 
 
 	start() {
-		var self = this;
-		var avanza = self.avanza;
 
-        return new Promise(function(resolve, reject) {
+        return new Promise((resolve, reject) => {
 
-            self.getSymbols().then(function(symbols) {
-                self.displaySymbols(symbols);
+            this.getSymbols().then((symbols) => {
+                this.displaySymbols(symbols);
             })
 			.then(function() {
 				resolve();
