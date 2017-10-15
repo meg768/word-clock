@@ -16,35 +16,10 @@ module.exports = class extends Animation {
 	constructor(strip, options) {
 		super(strip, options);
 
-		this.name      = 'Avanza';
+		this.name      = 'Avanza Currency';
 		this.avanza    = new Avanza();
 
-		this.textProviderIndex  = 0;
-		this.textProviders      = [this.getRavaror, this.getIndex, this.getCurrency];
-
-	}
-
-
-
-
-	getIndex() {
-
-		return this.avanza.getMarket([
-			{symbol: 'OMX',      id:155585}, // ??
-			{symbol: 'NASDAQ',   id:19006},
-			{symbol: 'DAX',      id:18981},
-			{symbol: 'DOWJONES', id:155667}, // ??
-			{symbol: 'HANGSENG', id:18984},
-			{symbol: 'USA',      id:155458},
-			{symbol: 'UK',       id:155698},
-			{symbol: 'BRIC',     id:134948},
-			{symbol: 'NIKKEI',   id:18997}
-		]);
-	}
-
-	getCurrency() {
-
-		return this.avanza.getMarket([
+		this.symbols = ([
 			{symbol: 'NOK', id:53293},
 			{symbol: 'JPY', id:108702},
 			{symbol: 'USD', id:19000},
@@ -53,40 +28,10 @@ module.exports = class extends Animation {
 			{symbol: 'DKK', id:53292},
 			{symbol: 'CAD', id:108701}
 		]);
-	}
-
-	getRavaror() {
-		return this.avanza.getMarket([
-			{symbol: 'ZN',    id:18992},
-			{symbol: 'AU',    id:18986},
-			{symbol: 'AL',    id:18990},
-			{symbol: 'NI',    id:18996},
-			{symbol: 'CU',    id:18989},
-			{symbol: 'BRENT', id:155722},
-			{symbol: 'AG',    id:18991},
-			{symbol: 'PB',    id:18983}
-		]);
 
 	}
 
-	getSymbols() {
-		var self = this;
-		var avanza = self.avanza;
 
-		return new Promise(function(resolve, reject) {
-
-			var provider = self.textProviders[self.textProviderIndex++ % self.textProviders.length];
-			var caller = provider.bind(self);
-
-			caller.then(function(data) {
-				resolve(data);
-			})
-			.catch(function(error) {
-				reject(error)
-			})
-
-		});
-	}
 
 	displaySymbols(symbols) {
 		var self    = this;
@@ -130,10 +75,7 @@ module.exports = class extends Animation {
         return new Promise((resolve, reject) => {
 
 			super.start().then(() => {
-				return this.getSymbols();
-			})
-			.then((symbols) => {
-				this.displaySymbols(symbols);
+				this.displaySymbols(this.symbols);
 				resolve();
 			})
             .catch((error) => {

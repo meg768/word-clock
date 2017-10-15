@@ -50,9 +50,9 @@ var Module = new function() {
 
 		registerService().then(function() {
 			var ClockAnimation   = require('../scripts/clock-animation.js');
-			var WeatherAnimation = require('../scripts/weather-animation.js');
-			var AvanzaAnimation  = require('../scripts/avanza-animation.js');
-			var MatrixAnimation  = require('../scripts/matrix-animation.js');
+//			var WeatherAnimation = require('../scripts/weather-animation.js');
+			var CurrencyAnimation  = require('../scripts/currency-animation.js');
+	//		var MatrixAnimation  = require('../scripts/matrix-animation.js');
 
 			var button           = new Button(6);
 			var strip            = new Strip();
@@ -61,17 +61,12 @@ var Module = new function() {
 			var animations       = [];
 			var currentAnimation = undefined;
 
-			if (argv.matrix)
-				animations.push(new MatrixAnimation(strip));
+			//animations.push(new MatrixAnimation(strip));
 
-			if (argv.clock)
-				animations.push(new ClockAnimation(strip));
-
-			if (argv.avanza)
-				animations.push(new AvanzaAnimation(strip));
-
-			if (argv.weather)
-				animations.push(new WeatherAnimation(strip));
+			animations.push(new ClockAnimation(strip));
+			animations.push(new CurrencyAnimation(strip));
+			//animations.push(new AvanzaAnimation(strip));
+			//animations.push(new WeatherAnimation(strip));
 
 
 			console.log('Listening to button!');
