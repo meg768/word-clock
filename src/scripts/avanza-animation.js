@@ -17,6 +17,7 @@ module.exports = class extends Animation {
 		super(strip, options);
 
 		this.name = 'Avanza Animation';
+		this.avanza = new Avanza();
 
 	}
 
@@ -25,12 +26,11 @@ module.exports = class extends Animation {
 		return [];
 	}
 
-	render() {
+	render(symbols) {
 		var self    = this;
         var pixels  = new Pixels(this.strip.width, this.strip.height);
         var display = new Layout();
 		var words   = [];
-		var symbols = this.getSymbols();
 
 		console.log(symbols);
 
@@ -71,7 +71,10 @@ console.log('OK!!');
         return new Promise((resolve, reject) => {
 
 			super.start().then(() => {
-				this.render();
+				return this.avanza.getMarket(this.getSymbols());
+			})
+			.then((data) => {
+				this.render(data);
 				resolve();
 			})
             .catch((error) => {
