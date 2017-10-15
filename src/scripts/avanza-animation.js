@@ -23,6 +23,7 @@ module.exports = class extends Animation {
 
 
 	getSymbols() {
+		console.log('NO SYMBOLS');
 		return [];
 	}
 
@@ -32,7 +33,7 @@ module.exports = class extends Animation {
         var display = new Layout();
 		var words   = [];
 
-		console.log(symbols);
+		console.log('SYMBOLS', symbols);
 
 		symbols.forEach(function(symbol) {
 			words.push(symbol.symbol);
