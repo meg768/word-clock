@@ -51,7 +51,7 @@ module.exports = class Animation {
                     resolve();
                 }
                 else {
-                    self.tick();
+                    setImmediate(self.tick);
                     setImmediate(loop);
                 }
             }
