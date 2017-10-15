@@ -23,7 +23,6 @@ module.exports = class extends Animation {
 
 
 	getSymbols() {
-		console.log('NO SYMBOLS');
 		return [];
 	}
 
@@ -33,7 +32,6 @@ module.exports = class extends Animation {
         var display = new Layout();
 		var words   = [];
 
-		console.log('SYMBOLS', symbols);
 
 		symbols.forEach(function(symbol) {
 			words.push(symbol.symbol);
@@ -47,7 +45,6 @@ module.exports = class extends Animation {
 			for (var index = 0; index < symbols.length; index++) {
 				var symbol = symbols[index];
 				var layout = lookup[index];
-				console.log(symbol);
 
 				for (var i = 0; i < layout.text.length; i++) {
 					var color = parseFloat(symbol.change) >= 0 ? 'blue' : 'red';
@@ -55,7 +52,7 @@ module.exports = class extends Animation {
 	            }
 
 			}
-console.log('OK!!');
+
 	        self.strip.render(pixels.getPixels(), {fadeIn:10});
 
 		}
