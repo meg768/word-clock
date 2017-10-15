@@ -19,7 +19,6 @@ module.exports = class extends Animation {
 
     stop() {
         var self = this;
-        var parent = super;
 
         return new Promise((resolve, reject) => {
             super.stop().then(function() {
