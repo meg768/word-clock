@@ -32,7 +32,7 @@ class Worm {
 			// Calculate brightness
             var luminance = (length - i / length) / length;
 
-            pixels.setPixelHSL(x, y--, self.hue, 100, luminance * 100);
+            pixels.setPixelHSL(x, y--, self.hue, 100, luminance * 50);
 		}
 	}
 
