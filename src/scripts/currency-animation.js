@@ -1,15 +1,4 @@
-var sprintf    = require('yow/sprintf');
-var random     = require('yow/random');
-var Colors     = require('color-convert');
-var isArray    = require('yow/is').isArray;
-var isString   = require('yow/is').isString;
-var Timer      = require('yow/timer');
-var Avanza     = require('./avanza.js');
-var Animation  = require('./animation.js');
-var AvanzaAnimation  = require('./avanza-animation.js');
-var Layout     = require('./layout.js');
-var Pixels     = require('./pixels.js');
-var Color      = require('color');
+var AvanzaAnimation = require('./avanza-animation.js');
 
 module.exports = class extends AvanzaAnimation {
 
@@ -18,8 +7,6 @@ module.exports = class extends AvanzaAnimation {
 		super(strip, options);
 
 		this.name = 'Avanza Currency';
-
-
 	}
 
 	getSymbols() {
