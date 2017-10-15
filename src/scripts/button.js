@@ -36,7 +36,6 @@ module.exports = class Button extends Events {
 
 			var now = timestamp();
 
-			console.log('interrupt', state, time);
 			// Ignore if button already in current state
 			if (state != this.state) {
 

@@ -61,8 +61,8 @@ var Module = new function() {
 			var animations       = [];
 			var currentAnimation = undefined;
 
-			if (argv.matrix)
-				animations.push(new MatrixAnimation(strip));
+			//if (argv.matrix)
+				//animations.push(new MatrixAnimation(strip));
 
 			if (argv.clock)
 				animations.push(new ClockAnimation(strip));
