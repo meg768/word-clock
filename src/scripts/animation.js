@@ -81,28 +81,25 @@ module.exports = class Animation {
 
 
     cancel() {
-        var self = this;
-        console.log('Cancelling animation', self.name);
-        self.cancelled = true;
+        console.log('Cancelling animation', this.name);
+        this.cancelled = true;
     }
 
     run() {
-        var self = this;
 
-        return new Promise(function(resolve, reject) {
+        return new Promise((resolve, reject) => {
 
 
-            self.start().then(function() {
-
-                return self.loop();
+            this.start().then(() => {
+                return this.loop();
             })
-            .then(function() {
-                return self.stop();
+            .then(() => {
+                return this.stop();
             })
-            .then(function() {
+            .then(() => {
                 resolve();
             })
-            .catch(function(error) {
+            .catch((error) => {
                 reject(error);
             });
 
@@ -110,21 +107,3 @@ module.exports = class Animation {
 
     }
 }
-
-
-/*
-function test() {
-    var module = new Module();
-
-    module.getText().then(function(text) {
-        console.log(text);
-    })
-    .catch(function(error) {
-        console.log(error);
-    });
-
-}
-
-test();
-
-*/
