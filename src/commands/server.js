@@ -67,8 +67,8 @@ var Module = new function() {
 
 			animations.push(new ClockAnimation(strip));
 			animations.push(new CurrencyAnimation(strip));
-//			animations.push(new IndexAnimation(strip));
-	//		animations.push(new CommodityAnimation(strip));
+			animations.push(new IndexAnimation(strip));
+			animations.push(new CommodityAnimation(strip));
 			//animations.push(new AvanzaAnimation(strip));
 			//animations.push(new WeatherAnimation(strip));
 
