@@ -75,19 +75,7 @@ console.log('OK!!');
     }
 
 */
-	start() {
 
-        return new Promise((resolve, reject) => {
-
-			super.start().then(() => {
-				this.displaySymbols(this.symbols);
-				resolve();
-			})
-            .catch((error) => {
-                reject(error);
-            });
-        });
-    }
 
 
 };
