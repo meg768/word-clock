@@ -23,7 +23,7 @@ module.exports = class extends Animation {
         var now = new Date();
 
         if (now - this.lastRender > 30000) {
-            render();
+            this.render();
         }
 
     }
