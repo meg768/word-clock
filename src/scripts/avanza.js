@@ -13,7 +13,7 @@ module.exports = class AvanzaCache {
 		this.lastLogin = undefined;
 		this.avanza    = new Avanza();
 		this.cache     = {};
-
+		this.timeout   = 60 * 60 * 1000;
 
 	}
 
@@ -23,7 +23,7 @@ module.exports = class AvanzaCache {
         if (this.lastLogin != undefined) {
 			var now = new Date();
 
-            if (now.getTime() - this.lastLogin.getTime() < 60 * 60 * 1000) {
+            if (now.getTime() - this.lastLogin.getTime() < this.timeout) {
                 return Promise.resolve();
             }
         }
