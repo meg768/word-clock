@@ -17,8 +17,7 @@ module.exports = class extends AvanzaAnimation {
 	constructor(strip, options) {
 		super(strip, options);
 
-		this.name      = 'Avanza Currency';
-		this.avanza    = new Avanza();
+		this.name    = 'Avanza Currency';
 
 		this.symbols = ([
 			{symbol: 'NOK', id:53293},
@@ -31,50 +30,6 @@ module.exports = class extends AvanzaAnimation {
 		]);
 
 	}
-
-/*
-
-	displaySymbols(symbols) {
-		var self    = this;
-        var pixels  = new Pixels(this.strip.width, this.strip.height);
-        var display = new Layout();
-		var words   = [];
-
-		console.log(symbols);
-
-		symbols.forEach(function(symbol) {
-			words.push(symbol.symbol);
-		});
-
-        var lookup = display.lookupText(words.join(' '));
-
-		if (lookup.length == symbols.length) {
-			pixels.clear();
-
-			for (var index = 0; index < symbols.length; index++) {
-				var symbol = symbols[index];
-				var layout = lookup[index];
-				console.log(symbol);
-
-				for (var i = 0; i < layout.text.length; i++) {
-					var color = symbol.change >= 0 ? 'blue' : 'red';
-	                pixels.setPixel(layout.x + i, layout.y, Color(color).rgbNumber());
-	            }
-
-			}
-console.log('OK!!');
-	        self.strip.render(pixels.getPixels(), {fadeIn:10});
-
-		}
-		else {
-			pixels.fillRGB(255, 0, 0);
-			self.strip.render(pixels.getPixels(), {fadeIn:10});
-
-		}
-
-    }
-
-*/
 
 
 

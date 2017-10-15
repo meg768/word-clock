@@ -52,6 +52,7 @@ var Module = new function() {
 			var ClockAnimation   = require('../scripts/clock-animation.js');
 //			var WeatherAnimation = require('../scripts/weather-animation.js');
 			var CurrencyAnimation  = require('../scripts/currency-animation.js');
+			var IndexAnimation  = require('../scripts/index-animation.js');
 	//		var MatrixAnimation  = require('../scripts/matrix-animation.js');
 
 			var button           = new Button(6);
