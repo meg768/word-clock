@@ -74,6 +74,7 @@ var Module = new function() {
 				animations.push(new WeatherAnimation(strip));
 
 
+			button.start();
 			button.on('click', function() {
 				console.log('Button click');
 				if (currentAnimation) {
