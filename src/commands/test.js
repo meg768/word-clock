@@ -24,6 +24,7 @@ class Button extends Events {
 		this.state = 0;
 		this.lastPressed = timestamp();
 		this.lastReleased = timestamp();
+		this.clicks = 0;
 		this.timer = new Timer();
 
 		this.gpio.on('interrupt', (state) => {
@@ -39,18 +40,20 @@ class Button extends Events {
 
 
 				this.timer.setTimer(250, () => {
-					var now = timestamp();
 
-					if (now - this.lastReleased <= 500)
+					if (this.clicks >= 2)
 						this.emit('doubleClick', now - this.lastPressed);
 					else
 						this.emit('click', now - this.lastPressed);
+
+					this.clicks = 0;
 
 				});
 
 				this.lastReleased = now;
 			}
 			else {
+				this.clicks++;
 				this.lastPressed = now;
 			}
 
