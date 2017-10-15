@@ -88,7 +88,10 @@ class Buttons extends Events {
 		items.forEach(function(item) {
 			var button = new Button(item.pin);
 
+			button.start();
+
 			button.on('click', function(clicks, duration) {
+				console.log('click');
 				self.emit(item.name, clicks, duration);
 			});
 
@@ -135,6 +138,8 @@ var Module = new function() {
 	function run(argv) {
 
 		var buttons =  new Buttons();
+
+		console.log('button OK');
 
 		buttons.start([
 			{pin:6,  name:'upper'},
