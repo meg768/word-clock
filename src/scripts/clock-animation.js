@@ -15,6 +15,8 @@ module.exports = class extends Animation {
 
         this.name       = 'Clock';
         this.lastRender = 0;
+
+        setTiemout(20000);
     }
 
 
