@@ -30,6 +30,7 @@ module.exports = class Animation {
 
     loop() {
         console.log('Running loop');
+        var self = this;
 
         return new Promise((resolve, reject) => {
 
@@ -40,14 +41,14 @@ module.exports = class Animation {
                 console.log('.')
                 var now = new Date();
 
-                if (this.cancelled) {
+                if (self.cancelled) {
                     resolve();
                 }
-                else if (now - start > this.timeout) {
+                else if (now - start > self.timeout) {
                     resolve();
                 }
                 else {
-                    this.tick();
+                    self.tick();
                     setImmediate(loop);
                 }
             }
