@@ -80,39 +80,44 @@ module.exports = class extends Animation {
     constructor(strip, options) {
         super(strip, options);
 
-        this.name = 'Matrix';
+        this.pixels = new Pixels(this.strip.width, this.strip.height);
+        this.name   = 'Matrix';
+        this.worms  = [];
 
     }
 
 
-    loop() {
-        var self = this;
+    start() {
 
-        return new Promise(function(resolve, reject) {
+        return new Promise((resolve, reject) => {
+            super.start().then(() => {
 
-            function loop() {
+                this.worms = [];
 
-                if (self.cancelled) {
-                    resolve();
-                }
-                else {
-                    pixels.clear();
-
-                    for (var i = 0; i < self.strip.width; i++) {
-            			worms[i].draw(pixels);
-            			worms[i].idle();
-            		}
-
-                    self.strip.render(pixels.getPixels());
-
-                    setImmediate(loop);
+                for (var i = 0; i < this.strip.width; i++) {
+                    var worm = new Worm(this.strip.width, this.strip.height, i);
+                    this.worms.push(worm);
                 }
 
-            }
+                resolve();
+
+            })
+
+            .catch((error) => {
+                reject(error);
+            });
         });
-
     }
 
+    tick() {
+        for (var i = 0; i < this.worms.length; i++) {
+            this.worms[i].draw(this.pixels);
+            this.worms[i].idle();
+        }
+
+        this.strip.render(this.pixels.getPixels());
+    }
+/*
     run() {
         var self = this;
 
@@ -157,27 +162,11 @@ module.exports = class extends Animation {
             timer.setTimer(60000, cleanup);
             loop();
 
-/*
-            while (!self.cancelled) {
-                pixels.clear();
 
-                var now = new Date();
-
-                if (now.getTime() - start.getTime() > 1000 * 60)
-                    break;
-
-                for (var i = 0; i < self.strip.width; i++) {
-        			worms[i].draw(pixels);
-        			worms[i].idle();
-        		}
-
-                self.strip.render(pixels.getPixels());
-
-            }
-*/
         });
 
     }
+    */
 }
 
 
