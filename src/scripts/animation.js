@@ -24,10 +24,13 @@ module.exports = class Animation {
     start() {
         this.cancelled = false;
 
+        console.log('Starting animation...');
         return Promise.resolve();
     }
 
     loop() {
+        console.log('Running loop');
+
         return new Promise(function(resolve, reject) {
 
             var start = new Date();
@@ -51,11 +54,13 @@ module.exports = class Animation {
     }
 
     stop() {
+        console.log('Stopping animation');
         return Promise.resolve();
     }
 
 
     cancel() {
+        console.log('Cancelling animation');
         var self = this;
         self.cancelled = true;
     }
@@ -65,7 +70,9 @@ module.exports = class Animation {
 
         return new Promise(function(resolve, reject) {
 
+
             self.start().then(function() {
+
                 return self.loop();
             })
             .then(function() {
