@@ -19,9 +19,10 @@ module.exports = class extends Animation {
 
     stop() {
         var self = this;
+        var parent = super;
 
         return new Promise(function(resolve, reject) {
-            super.stop().then(function() {
+            parent.stop().then(function() {
                 var pixels  = new Pixels(self.strip.width, self.strip.height);
 
                 if (self.cancelled)
@@ -36,7 +37,7 @@ module.exports = class extends Animation {
 
         });
     }
-    
+
     tick() {
         var self = this;
         var now  = new Date();
