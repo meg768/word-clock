@@ -1,3 +1,5 @@
+var AvanzaAnimation = require('./avanza-animation.js');
+
 
 module.exports = class extends AvanzaAnimation {
 
@@ -5,9 +7,11 @@ module.exports = class extends AvanzaAnimation {
 	constructor(strip, options) {
 		super(strip, options);
 
-		this.name = 'Avanza Index';
+		this.name = 'Avanza Index Animation';
+	}
 
-		this.symbols = [
+	getSymbols() {
+		return ([
 			{symbol: 'OMX',      id:155585}, // ??
 			{symbol: 'NASDAQ',   id:19006},
 			{symbol: 'DAX',      id:18981},

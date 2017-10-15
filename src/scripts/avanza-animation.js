@@ -21,11 +21,16 @@ module.exports = class extends Animation {
 	}
 
 
-	displaySymbols(symbols) {
+	getSymbols() {
+		return [];
+	}
+
+	render() {
 		var self    = this;
         var pixels  = new Pixels(this.strip.width, this.strip.height);
         var display = new Layout();
 		var words   = [];
+		var symbols = this.getSymbols();
 
 		console.log(symbols);
 
@@ -66,7 +71,7 @@ console.log('OK!!');
         return new Promise((resolve, reject) => {
 
 			super.start().then(() => {
-				this.displaySymbols(this.symbols);
+				this.render();
 				resolve();
 			})
             .catch((error) => {
