@@ -30,7 +30,7 @@ module.exports = class extends Animation {
 
     start() {
         return new Promise((resolve, reject) => {
-            super.start().then(function() {
+            super.start().then(() => {
                 this.render();
                 resolve();
             })
