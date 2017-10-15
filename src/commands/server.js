@@ -71,12 +71,10 @@ var Module = new function() {
 			animations.push(new WeatherAnimation(strip));
 
 
-			console.log('Listening to button!');
 			button.start();
 			button.on('click', function() {
-				console.log('Button click');
+
 				if (currentAnimation) {
-					console.log('Cancelling animation');
 					currentAnimation.cancel();
 
 				}
@@ -105,8 +103,6 @@ var Module = new function() {
 					var animation = currentAnimation = animations[animationIndex];
 
 					timer.cancel();
-
-					console.log('Starting animation', animation.name, '...');
 
 					animation.run().then(function() {
 						animationIndex = (animationIndex + 1) % animations.length;
