@@ -3,6 +3,7 @@ var isArray   = require('yow/is').isArray;
 var sprintf   = require('yow/sprintf');
 var Color     = require('color');
 var random    = require('yow/random');
+var Timer     = require('yow/timer');
 var Animation = require('./animation.js');
 
 var Pixels  = require('./pixels.js');
@@ -93,18 +94,27 @@ module.exports = class extends Animation {
             var pixels = new Pixels(self.strip.width, self.strip.height);
             var start = new Date();
             var worms = [];
+            var timer = new Timer();
 
             for (var i = 0; i < self.strip.width; i++) {
                 var worm = new Worm(self.strip.width, self.strip.height, i);
                 worms.push(worm);
             }
 
-            var now = new Date();
+            function cleanup() {
+                timer.cancel();
+                pixels.clear();
+                self.strip.render(pixels.getPixels(), {fadeIn:20});
+                resolve();
+            }
 
             function loop() {
-                pixels.clear();
 
-                if (now.getTime() - start.getTime() < 1000 * 60) {
+                if (self.cancelled) {
+                    cleanup();
+                }
+                else {
+                    pixels.clear();
 
                     for (var i = 0; i < self.strip.width; i++) {
             			worms[i].draw(pixels);
@@ -113,13 +123,13 @@ module.exports = class extends Animation {
 
                     self.strip.render(pixels.getPixels());
 
-                    if (!self.cancelled)
-                        setTimeout(loop, 0);
-
+                    setImmediate(loop);
                 }
             }
 
+            timer.setTimer(60000, cleanup);
             loop();
+
 /*
             while (!self.cancelled) {
                 pixels.clear();
@@ -138,10 +148,6 @@ module.exports = class extends Animation {
 
             }
 */
-            pixels.clear();
-            self.strip.render(pixels.getPixels(), {fadeIn:20});
-
-            resolve();
         });
 
     }
