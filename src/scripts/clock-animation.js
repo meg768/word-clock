@@ -13,35 +13,43 @@ module.exports = class extends Animation {
     constructor(strip, options) {
         super(strip, options);
 
-        this.name = 'Clock';
+        this.name      = 'Clock';
+        this.timestamp = 0;
     }
 
-
     tick() {
+        var self = this;
+        var now  = new Date();
 
+        if (now - self.timestamp > 10000) {
+            render();
+
+            self.timestamp = now;
+        }
+
+    }
+
+    render() {
 
         var self = this;
 
-        function tick() {
-            var pixels  = new Pixels(self.strip.width, self.strip.height);
-            var display = new Layout();
-            var text    = self.getTime();
-            var hue     = self.getHue();
+        console.log('Redrawing clock')
+        var pixels  = new Pixels(self.strip.width, self.strip.height);
+        var display = new Layout();
+        var text    = self.getTime();
+        var hue     = self.getHue();
 
-            var words   = display.lookupText(text);
+        var words   = display.lookupText(text);
 
-            words.forEach((word) => {
-                for (var i = 0; i < word.text.length; i++) {
-                    pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
+        words.forEach((word) => {
+            for (var i = 0; i < word.text.length; i++) {
+                pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
 
-                }
-            });
+            }
+        });
 
-            self.strip.render(pixels.getPixels(), {fadeIn:25});
+        self.strip.render(pixels.getPixels(), {fadeIn:25});
 
-        }
-
-        setImmediate(tick);
 
     }
 
