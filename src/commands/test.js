@@ -91,7 +91,6 @@ class Buttons extends Events {
 			button.start();
 
 			button.on('click', function(clicks, duration) {
-				console.log('click');
 				self.emit(item.name, clicks, duration);
 			});
 
@@ -137,6 +136,7 @@ var Module = new function() {
 
 	function run(argv) {
 
+/*
 		var buttons =  new Buttons();
 
 		console.log('button OK');
@@ -154,7 +154,9 @@ var Module = new function() {
 			console.log('EXISTS');
 			buttons.stop();
 		});
-/*
+
+*/
+
 
 		var button = new Button(13);
 		var button6 = new Button(6);
@@ -163,23 +165,24 @@ var Module = new function() {
 
 		button.start();
 		button6.start();
-		button6.on('change', (state, timestamp) => {
-			console.log('button6', state, timestamp);
-		});
 
 
 		button6.on('click', (clicks, duration) => {
-			console.log('click', clicks, duration);
+			console.log('upper button', clicks, duration);
 		});
 
 		button.on('click', (clicks, duration) => {
-			button.stop();
-			button6.stop();
+			console.log('lower button', clicks, duration);
+			if (button6.state) {
+				console.log('exiting', clicks, duration);
+				button.stop();
+				button6.stop();
 
-			console.log('exiting', clicks, duration);
+			}
+
 		});
 
-*/
+
 
 		/*
 		var buttons = new Buttons();
