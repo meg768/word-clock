@@ -92,12 +92,14 @@ module.exports = class extends Animation {
         return new Promise((resolve, reject) => {
             super.start().then(() => {
 
-                this.worms = [];
+                var worms = [];
 
                 for (var i = 0; i < this.strip.width; i++) {
-                    var worm = new Worm(this.strip.width, this.strip.height, i);
-                    this.worms.push(worm);
+                    worms.push(new Worm(this.strip.width, this.strip.height, i));
                 }
+
+                this.pixels.clear();
+                this.worms = worms;
 
                 resolve();
 
@@ -117,72 +119,3 @@ module.exports = class extends Animation {
 
         this.strip.render(this.pixels.getPixels());
     }
-/*
-    run() {
-        var self = this;
-
-        return new Promise(function(resolve, reject) {
-
-            var pixels = new Pixels(self.strip.width, self.strip.height);
-            var start = new Date();
-            var worms = [];
-            var timer = new Timer();
-
-            for (var i = 0; i < self.strip.width; i++) {
-                var worm = new Worm(self.strip.width, self.strip.height, i);
-                worms.push(worm);
-            }
-
-            function cleanup() {
-                timer.cancel();
-                pixels.clear();
-                self.strip.render(pixels.getPixels(), {fadeIn:20});
-                resolve();
-            }
-
-            function loop() {
-
-                if (self.cancelled) {
-                    cleanup();
-                }
-                else {
-                    pixels.clear();
-
-                    for (var i = 0; i < self.strip.width; i++) {
-            			worms[i].draw(pixels);
-            			worms[i].idle();
-            		}
-
-                    self.strip.render(pixels.getPixels());
-
-                    setImmediate(loop);
-                }
-            }
-
-            timer.setTimer(60000, cleanup);
-            loop();
-
-
-        });
-
-    }
-    */
-}
-
-
-/*
-function test() {
-    var module = new Module();
-
-    module.getText().then(function(text) {
-        console.log(text);
-    })
-    .catch(function(error) {
-        console.log(error);
-    });
-
-}
-
-test();
-
-*/

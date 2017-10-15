@@ -215,7 +215,7 @@ module.exports = class extends Animation {
 
         });
 
-        self.strip.render(pixels.getPixels(), {fadeIn:25});
+        self.strip.render(pixels.getPixels(), {fadeIn:10});
 
     }
 
@@ -225,7 +225,7 @@ module.exports = class extends Animation {
             super.start().then(() => {
                 return this.getText();
             })
-            
+
             .then((words) => {
                 this.displayText(words);
                 resolve();
