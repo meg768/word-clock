@@ -139,7 +139,7 @@ var Module = new function() {
 		var button = new Button(13);
 		var led = new Gpio(20, {mode: Gpio.OUTPUT});
 
-		console.log('button');
+		console.log('button OK');
 		button.on('change', (state) => {
 			console.log(button.state);
 			led.digitalWrite(button.state);
