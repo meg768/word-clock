@@ -31,23 +31,28 @@ class Button extends Events {
 
 			var now = timestamp();
 
-			this.state = state;
-			this.timer.cancel();
+			// Ignore if button already in current state
+			if (state != this.state) {
 
-			this.emit('change', state, now);
+				this.state = state;
+				this.timer.cancel();
 
-			if (state == 0) {
-				this.clicks++;
+				this.emit('change', state, now);
 
-				this.timer.setTimer(250, () => {
-					this.emit('click', this.clicks, now - this.pressed);
-					this.clicks = 0;
-				});
+				if (state == 0) {
+					this.clicks++;
 
-				this.released = now;
-			}
-			else {
-				this.pressed = now;
+					this.timer.setTimer(250, () => {
+						this.emit('click', this.clicks, now - this.pressed);
+						this.clicks = 0;
+					});
+
+					this.released = now;
+				}
+				else {
+					this.pressed = now;
+				}
+
 			}
 
 		});
