@@ -77,7 +77,7 @@ module.exports = class AvanzaCache {
 
 		return new Promise((resolve, reject) => {
 
-			this.login().then() {
+			this.login().then(() >= {
 				var promise = Promise.resolve();
 				var result  = [];
 
@@ -90,11 +90,11 @@ module.exports = class AvanzaCache {
 						result.push({symbol:symbol.symbol, change:parseFloat(data.changePercent)});
 					});
 
-				});
+				};
 
 				return promise;
 
-			}
+			})
 
 			.then(function() {
 				resolve(result);
