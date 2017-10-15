@@ -75,23 +75,28 @@ module.exports = class AvanzaCache {
 		var self = this;
 		var avanza = self.avanza;
 
-		return new Promise(function(resolve, reject) {
+		return new Promise((resolve, reject) => {
 
-			var promise = Promise.resolve();
-			var result  = [];
+			this.login().then() {
+				var promise = Promise.resolve();
+				var result  = [];
 
-			symbols.forEach(function(symbol) {
-				promise = promise.then(function() {
-					return self.getMarketIndex(symbol.id);
+				symbols.forEach(function(symbol) {
+					promise = promise.then(function() {
+						return self.getMarketIndex(symbol.id);
+					});
+
+					promise = promise.then(function(data) {
+						result.push({symbol:symbol.symbol, change:parseFloat(data.changePercent)});
+					});
+
 				});
 
-				promise = promise.then(function(data) {
-					result.push({symbol:symbol.symbol, change:data.changePercent});
-				});
+				return promise;
 
-			});
+			}
 
-			promise.then(function() {
+			.then(function() {
 				resolve(result);
 			})
 			.catch(function(error) {
