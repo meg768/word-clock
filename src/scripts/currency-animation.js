@@ -55,7 +55,8 @@ module.exports = class extends Animation {
 				var layout = lookup[index];
 
 				for (var i = 0; i < layout.text.length; i++) {
-	                pixels.setPixel(layout.x + i, layout.y, Color(symbol.color).rgbNumber());
+					var color = symbol.change >= 0 ? 'blue' : 'red';
+	                pixels.setPixel(layout.x + i, layout.y, Color(color).rgbNumber());
 	            }
 
 			}
