@@ -100,7 +100,7 @@ module.exports = class extends Animation {
             }
 
 
-            for (;;) {
+            while (!self.cancelled) {
                 pixels.clear();
 
                 var now = new Date();

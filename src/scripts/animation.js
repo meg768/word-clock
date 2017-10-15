@@ -39,6 +39,11 @@ module.exports = class Animation {
         });
     }
 
+    reset() {
+        self.cancelled = false;
+
+    }
+
     cancel() {
         var self = this;
 

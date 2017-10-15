@@ -221,8 +221,13 @@ module.exports = class extends Animation {
 
             self.getSymbols().then(function(symbols) {
                 self.displaySymbols(symbols);
-				setTimeout(resolve, 10000);
             })
+			.then(function() {
+				return self.pause(10000);
+			})
+			.then(function() {
+				resolve();
+			})
 
             .catch(function(error) {
                 reject(error);

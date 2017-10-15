@@ -6,6 +6,7 @@ var isFunction = require('yow/is').isFunction;
 var io = require('socket.io-client');
 var Timer = require('yow/timer');
 var Strip = require('../scripts/neopixel-strip.js');
+var Button = require('../scripts/button.js');
 
 var Module = new function() {
 
@@ -53,10 +54,12 @@ var Module = new function() {
 			var AvanzaAnimation  = require('../scripts/avanza-animation.js');
 			var MatrixAnimation  = require('../scripts/matrix-animation.js');
 
-			var strip          = new Strip();
-			var socket         = io.connect(argv.service);
-			var animationIndex = 0;
-			var animations     = [];
+			var button           = new Button(6);
+			var strip            = new Strip();
+			var socket           = io.connect(argv.service);
+			var animationIndex   = 0;
+			var animations       = [];
+			var currentAnimation = undefined;
 
 			if (argv.matrix)
 				animations.push(new MatrixAnimation(strip));
@@ -69,6 +72,13 @@ var Module = new function() {
 
 			if (argv.weather)
 				animations.push(new WeatherAnimation(strip));
+
+
+			button.on('click', function() {
+				if (currentAnimation)
+					currentAnimation.cancel();
+
+			});
 
 
 
@@ -89,11 +99,13 @@ var Module = new function() {
                 return new Promise(function(resolve, reject) {
 
 					// Get next animation
-					var animation = animations[animationIndex];
+					var animation = currentAnimation = animations[animationIndex];
 
 					timer.cancel();
 
 					console.log('Starting animation', animation.name, '...');
+
+					animation.reset();
 
 					animation.run().then(function() {
 						animationIndex = (animationIndex + 1) % animations.length;
@@ -104,6 +116,8 @@ var Module = new function() {
 					})
 
 					.then(function() {
+						currentAnimation = undefined;
+
 						timer.setTimer(0, showAnimation);
 						resolve();
 

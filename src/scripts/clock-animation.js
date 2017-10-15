@@ -18,10 +18,18 @@ module.exports = class extends Animation {
 
 
     run() {
+        var self = this;
 
-        return new Promise((resolve, reject) => {
-            this.displayTime();
-            setTimeout(resolve, 60000);
+        return new Promise(function(resolve, reject) {
+            self.displayTime();
+
+            self.pause(10000).then(function() {
+                resolve();
+            })
+            .catch(function(error) {
+                reject(error);
+            })
+
         });
     }
 

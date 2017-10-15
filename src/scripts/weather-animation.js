@@ -225,8 +225,14 @@ module.exports = class extends Animation {
         return new Promise(function(resolve, reject) {
             self.getText().then(function(words) {
                 self.displayText(words);
-                setTimeout(resolve, 5000);
             })
+            .then(function() {
+				return self.pause(10000);	
+			})
+            .then(function() {
+				resolve();
+			})
+
             .catch(function(error) {
                 reject(error);
             });
