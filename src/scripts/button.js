@@ -35,11 +35,11 @@ module.exports = class Button extends Events {
 		this.pressed  = timestamp();
 		this.released = timestamp();
 
-		this.gpio.on('alert', (state) => {
+		this.gpio.on('alert', (state, time) => {
 
 			var now = timestamp();
 
-			console.log('alert');
+			console.log('alert', state, time);
 			// Ignore if button already in current state
 			if (state != this.state) {
 
