@@ -37,10 +37,10 @@ class Button extends Events {
 			if (state == 0) {
 				this.timer.cancel();
 
-				this.timer.setTimer(300, () => {
+				this.timer.setTimer(200, () => {
 					var now = timestamp();
 
-					if (now - this.lastPressed < 300)
+					if (now - this.lastPressed < 500)
 						this.emit('doubleClick', now - this.lastPressed);
 					else
 						this.emit('click', now - this.lastPressed);
