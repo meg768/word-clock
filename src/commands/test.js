@@ -137,7 +137,7 @@ var Module = new function() {
 	function run(argv) {
 
 		var button = new Button(13);
-		var button2 = new Button(6);
+		var button2 = new Button(19);
 
 		console.log('button OK');
 
