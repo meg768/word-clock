@@ -35,7 +35,7 @@ module.exports = class Animation {
             }
 
             self.events.on('cancel', timeout);
-            timer.setTimeout(ms, timeout);
+            timer.setTimer(ms, timeout);
         });
     }
 
