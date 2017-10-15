@@ -90,7 +90,11 @@ module.exports = class AvanzaCache {
 
 				});
 
-				resolve(result);
+				promise.then(() => {
+					console.log(result);
+					resolve(result);
+
+				});
 			})
 
 			.catch((error) =>  {
