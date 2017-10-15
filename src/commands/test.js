@@ -137,13 +137,14 @@ var Module = new function() {
 	function run(argv) {
 
 		var button = new Button(13);
-		var led = new Gpio(20, {mode: Gpio.OUTPUT});
+		var button2 = new Button(6);
 
 		console.log('button OK');
-		button.on('change', (state) => {
-			console.log(button.state);
-			led.digitalWrite(button.state);
+
+		button2.on('click', (state) => {
+			console.log('button2');
 		});
+
 
 		button.on('click', (duration) => {
 			console.log('pressed for', duration);
