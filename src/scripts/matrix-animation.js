@@ -42,7 +42,7 @@ class Worm {
 
         self.length = Math.floor(self.height * 0.1 + self.height * 0.5 * random(100) / 100);
 		self.row    = -self.length; //-random(0, self.height * 2);
-        self.loops  = random(4);
+        self.loops  = random([0, 0, 1, 2, 3, 4]);
 		self.ticks  = 0;
         self.hue    = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
 	}
