@@ -13,7 +13,7 @@ module.exports = class Animation {
         this.name      = 'None';
         this.options   = options || {};
         this.cancelled = false;
-        this.timeout   = 10000;
+        this.timeout   = 60000;
     }
 
 
