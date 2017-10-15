@@ -34,7 +34,7 @@ module.exports = class extends Animation {
                 this.render();
                 resolve();
             })
-            .catch(function(error) {
+            .catch((error) => {
                 reject(error);
             })
         });

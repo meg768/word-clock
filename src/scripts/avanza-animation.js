@@ -218,13 +218,14 @@ module.exports = class extends Animation {
 
         return new Promise((resolve, reject) => {
 
-            this.getSymbols().then((symbols) => {
-                this.displaySymbols(symbols);
-            })
-			.then(function() {
+			super.start().then(() => {
+				return this.getSymbols();
+			})
+			.then((symbols) => {
+				this.displaySymbols(symbols);
 				resolve();
 			})
-            .catch(function(error) {
+            .catch((error) => {
                 reject(error);
             });
         });

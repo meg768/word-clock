@@ -222,14 +222,16 @@ module.exports = class extends Animation {
 	start() {
 
         return new Promise((resolve, reject) => {
-            this.getText().then((words) => {
-                this.displayText(words);
+            super.start().then(() => {
+                return this.getText();
             })
-            .then(function() {
-				resolve();
-			})
+            
+            .then((words) => {
+                this.displayText(words);
+                resolve();
+            })
 
-            .catch(function(error) {
+            .catch((error) => {
                 reject(error);
             });
         });
