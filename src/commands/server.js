@@ -52,6 +52,7 @@ var Module = new function() {
 			var ClockAnimation   = require('../scripts/clock-animation.js');
 //			var WeatherAnimation = require('../scripts/weather-animation.js');
 			var CurrencyAnimation  = require('../scripts/currency-animation.js');
+			var CommodityAnimation  = require('../scripts/commodity-animation.js');
 			var IndexAnimation  = require('../scripts/index-animation.js');
 	//		var MatrixAnimation  = require('../scripts/matrix-animation.js');
 
@@ -67,6 +68,7 @@ var Module = new function() {
 			animations.push(new ClockAnimation(strip));
 			animations.push(new CurrencyAnimation(strip));
 			animations.push(new IndexAnimation(strip));
+			animations.push(new CommodityAnimation(strip));
 			//animations.push(new AvanzaAnimation(strip));
 			//animations.push(new WeatherAnimation(strip));
 
