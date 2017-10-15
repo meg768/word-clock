@@ -21,6 +21,8 @@ module.exports = class Button extends Events {
 		this.clicks   = 0;
 		this.timer    = new Timer();
 
+		this.gpio.enableInterrupt(Gpio.EITHER_EDGE);
+		this.gpio.enableAlert();
 
 	}
 
@@ -33,7 +35,7 @@ module.exports = class Button extends Events {
 		this.pressed  = timestamp();
 		this.released = timestamp();
 
-		this.gpio.on('interrupt', (state) => {
+		this.gpio.on('alert', (state) => {
 
 			var now = timestamp();
 
