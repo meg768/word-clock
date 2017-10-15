@@ -7,6 +7,10 @@ var isFunction = require('yow/is').isFunction;
 var Events = require('events');
 var Pigpio = require('pigpio');
 var Gpio   = require('pigpio').Gpio;
+var Button = require('../scripts/button.js');
+
+
+/*
 
 class Button extends Events {
 
@@ -111,7 +115,7 @@ class Buttons extends Events {
 
 };
 
-
+*/
 var Module = new function() {
 
 	function debug() {
