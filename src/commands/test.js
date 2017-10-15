@@ -72,6 +72,42 @@ class Button extends Events {
 };
 
 
+class Buttons extends Events {
+
+	constructor() {
+		super();
+
+		this.buttons = [];
+	}
+
+	start(items) {
+		var self = this;
+
+		self.stop();
+
+		items.forEach(function(item) {
+			var button = new Button(item.pin);
+
+			button.on('click', function(clicks, duration) {
+				self.emit(item.name, clicks, duration);
+			});
+
+			self.buttons.push(button);
+		});
+	}
+
+	stop() {
+		var self = this;
+
+		self.buttons.forEach(function(button) {
+			button.stop();
+		});
+
+		self.buttons = [];
+
+	}
+
+};
 
 
 var Module = new function() {
@@ -98,6 +134,23 @@ var Module = new function() {
 
 	function run(argv) {
 
+		var buttons =  new Buttons();
+
+		buttons.start([
+			{pin:6,  name:'upper'},
+			{pin:13, name:'lower'},
+		]);
+
+		buttons.on('upper', function(clicks, duration) {
+			console.log('upper', clicks, duration);
+		});
+
+		buttons.on('lower', function(clicks, duration) {
+			console.log('EXISTS');
+			buttons.stop();
+		});
+/*
+
 		var button = new Button(13);
 		var button6 = new Button(6);
 
@@ -121,7 +174,7 @@ var Module = new function() {
 			console.log('exiting', clicks, duration);
 		});
 
-
+*/
 
 		/*
 		var buttons = new Buttons();
