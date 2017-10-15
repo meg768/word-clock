@@ -25,8 +25,8 @@ module.exports = class extends Animation {
         function tick() {
             var pixels  = new Pixels(self.strip.width, self.strip.height);
             var display = new Layout();
-            var text    = this.getTime();
-            var hue     = this.getHue();
+            var text    = self.getTime();
+            var hue     = self.getHue();
 
             var words   = display.lookupText(text);
 
