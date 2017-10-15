@@ -21,8 +21,8 @@ module.exports = class extends Animation {
         var self = this;
         var parent = super;
 
-        return new Promise(function(resolve, reject) {
-            parent.stop().then(function() {
+        return new Promise((resolve, reject) => {
+            super.stop().then(function() {
                 var pixels  = new Pixels(self.strip.width, self.strip.height);
 
                 if (self.cancelled)
