@@ -40,7 +40,7 @@ module.exports = class extends Animation {
 		var words   = [];
 
 		console.log(symbols);
-		
+
 		symbols.forEach(function(symbol) {
 			words.push(symbol.symbol);
 		});
@@ -59,7 +59,7 @@ module.exports = class extends Animation {
 	            }
 
 			}
-
+console.log('OK!!');
 	        self.strip.render(pixels.getPixels(), {fadeIn:10});
 
 		}
