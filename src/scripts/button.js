@@ -39,6 +39,7 @@ module.exports = class Button extends Events {
 
 			var now = timestamp();
 
+			console.log('alert');
 			// Ignore if button already in current state
 			if (state != this.state) {
 
