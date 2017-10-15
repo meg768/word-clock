@@ -28,7 +28,6 @@ module.exports = class AvanzaCache {
 			var now = new Date();
 
             if (now.getTime() - self.lastLogin.getTime() < 60 * 60 * 1000) {
-				console.log('Already logged in.');
                 return Promise.resolve();
             }
         }
@@ -91,7 +90,6 @@ module.exports = class AvanzaCache {
 				});
 
 				promise.then(() => {
-					console.log(result);
 					resolve(result);
 
 				});
