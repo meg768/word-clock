@@ -40,7 +40,7 @@ module.exports = class Animation {
     }
 
     reset() {
-        self.cancelled = false;
+        this.cancelled = false;
 
     }
 
