@@ -18,23 +18,30 @@ module.exports = class extends Animation {
 
 
     tick() {
+
+
         var self = this;
 
-        var pixels  = new Pixels(self.strip.width, self.strip.height);
-        var display = new Layout();
-        var text    = this.getTime();
-        var hue     = this.getHue();
+        function tick() {
+            var pixels  = new Pixels(self.strip.width, self.strip.height);
+            var display = new Layout();
+            var text    = this.getTime();
+            var hue     = this.getHue();
 
-        var words   = display.lookupText(text);
+            var words   = display.lookupText(text);
 
-        words.forEach((word) => {
-            for (var i = 0; i < word.text.length; i++) {
-                pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
+            words.forEach((word) => {
+                for (var i = 0; i < word.text.length; i++) {
+                    pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
 
-            }
-        });
+                }
+            });
 
-        self.strip.render(pixels.getPixels(), {fadeIn:25});
+            self.strip.render(pixels.getPixels(), {fadeIn:25});
+
+        }
+
+        setImmediate(tick);
 
     }
 
