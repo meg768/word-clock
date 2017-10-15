@@ -18,7 +18,6 @@ module.exports = class extends Animation {
 
 
     tick() {
-        console.log('TICK');
         var self = this;
 
         var pixels  = new Pixels(self.strip.width, self.strip.height);

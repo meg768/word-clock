@@ -38,7 +38,6 @@ module.exports = class Animation {
 
             function loop() {
 
-                console.log('.')
                 var now = new Date();
 
                 if (self.cancelled) {
