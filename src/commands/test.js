@@ -104,8 +104,8 @@ var Module = new function() {
 		});
 
 		button.on('click', (clicks, duration) => {
-			button.disableInterrupt();
-			button6.disableInterrupt();
+			button.gpio.disableInterrupt();
+			button6.gpio.disableInterrupt();
 
 			console.log('exiting', clicks, duration);
 		});
