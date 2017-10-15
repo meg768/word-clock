@@ -3,6 +3,7 @@ var isArray = require('yow/is').isArray;
 var sprintf = require('yow/sprintf');
 var Timer   = require('yow/timer');
 var Events  = require('events')
+var Pixels  = require('./pixels.js');
 
 
 module.exports = class Animation {
