@@ -37,7 +37,7 @@ class Button extends Events {
 			this.timer.cancel();
 
 			if (state == 0) {
-
+				this.clicks++;
 
 				this.timer.setTimer(250, () => {
 
@@ -47,13 +47,11 @@ class Button extends Events {
 						this.emit('click', now - this.lastPressed);
 
 					this.clicks = 0;
-
 				});
 
 				this.lastReleased = now;
 			}
 			else {
-				this.clicks++;
 				this.lastPressed = now;
 			}
 
