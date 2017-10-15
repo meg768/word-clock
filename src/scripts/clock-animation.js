@@ -17,6 +17,26 @@ module.exports = class extends Animation {
         this.timestamp = 0;
     }
 
+    stop() {
+        var self = this;
+
+        return new Promise(function(resolve, reject) {
+            super.stop().then(function() {
+                var pixels  = new Pixels(self.strip.width, self.strip.height);
+
+                if (self.cancelled)
+                    self.strip.render(pixels.getPixels());
+                else
+                    self.strip.render(pixels.getPixels(), {fadeIn:25});
+
+            })
+            .then(function() {
+                resolve();
+            })
+
+        });
+    }
+    
     tick() {
         var self = this;
         var now  = new Date();

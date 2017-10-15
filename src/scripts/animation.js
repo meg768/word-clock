@@ -14,6 +14,8 @@ module.exports = class Animation {
         this.options   = options || {};
         this.cancelled = false;
         this.timeout   = 60000;
+        //this.pixels    = new Pixels(this.strip.width, this.strip.height);
+
     }
 
 
