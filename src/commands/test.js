@@ -60,6 +60,10 @@ class Button extends Events {
 
 	}
 
+	stopListening() {
+		this.gpio.disableInterrupt();
+	}
+
 };
 
 
@@ -104,8 +108,8 @@ var Module = new function() {
 		});
 
 		button.on('click', (clicks, duration) => {
-			button.gpio.disableInterrupt();
-			button6.gpio.disableInterrupt();
+			button.stopListening();
+			button6.gpio.stopListening();
 
 			console.log('exiting', clicks, duration);
 		});
