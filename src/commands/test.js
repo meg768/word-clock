@@ -32,7 +32,7 @@ class Button extends Events {
 
 			this.state = state;
 
-			this.emit('change', state);
+			this.emit('change', state, now);
 
 			if (state == 0) {
 				this.timer.cancel();
@@ -141,8 +141,8 @@ var Module = new function() {
 
 		console.log('button OK');
 
-		button6.on('change', (state) => {
-			console.log('button6');
+		button6.on('change', (state, timestamp) => {
+			console.log('button6', state, timestamp);
 		});
 
 
