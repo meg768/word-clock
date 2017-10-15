@@ -12,21 +12,27 @@ class Button extends Events {
 
 	constructor(pin) {
 
-
-		function timestamp() {
-			var date = new Date();
-			return date.valueOf();
-		}
-
 		super();
 
 		this.pin      = pin;
 		this.gpio     = new Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 		this.state    = 0;
-		this.pressed  = timestamp();
-		this.released = timestamp();
+		this.pressed  = 0;
+		this.released = 0;
 		this.clicks   = 0;
 		this.timer    = new Timer();
+
+
+	}
+
+	start() {
+		function timestamp() {
+			var date = new Date();
+			return date.valueOf();
+		}
+
+		this.pressed  = timestamp();
+		this.released = timestamp();
 
 		this.gpio.on('interrupt', (state) => {
 
@@ -57,10 +63,9 @@ class Button extends Events {
 			}
 
 		});
-
 	}
 
-	stopListening() {
+	stop() {
 		this.gpio.disableInterrupt();
 	}
 
@@ -98,6 +103,8 @@ var Module = new function() {
 
 		console.log('button OK');
 
+		button.start();
+		button6.start();
 		button6.on('change', (state, timestamp) => {
 			console.log('button6', state, timestamp);
 		});
@@ -108,8 +115,8 @@ var Module = new function() {
 		});
 
 		button.on('click', (clicks, duration) => {
-			button.stopListening();
-			button6.gpio.stopListening();
+			button.stop();
+			button6.stop();
 
 			console.log('exiting', clicks, duration);
 		});
