@@ -99,7 +99,27 @@ module.exports = class extends Animation {
                 worms.push(worm);
             }
 
+            function loop() {
+                pixels.clear();
 
+                var now = new Date();
+
+                if (now.getTime() - start.getTime() > 1000 * 60)
+                    break;
+
+                for (var i = 0; i < self.strip.width; i++) {
+        			worms[i].draw(pixels);
+        			worms[i].idle();
+        		}
+
+                self.strip.render(pixels.getPixels());
+
+                if (!self.cancelled)
+                    process.nextTick(loop);
+            }
+
+            loop();
+/*
             while (!self.cancelled) {
                 pixels.clear();
 
@@ -116,7 +136,7 @@ module.exports = class extends Animation {
                 self.strip.render(pixels.getPixels());
 
             }
-
+*/
             pixels.clear();
             self.strip.render(pixels.getPixels(), {fadeIn:20});
 
