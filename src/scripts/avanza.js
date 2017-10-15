@@ -55,19 +55,23 @@ module.exports = class AvanzaCache {
 
 	getMarketIndex(id) {
 
-		if (this.cache[id] != undefined)
-			resolve(this.cache[id]);
-
 		return new Promise((resolve, reject) => {
-			this.avanza.get(sprintf('/_mobile/market/index/%s', id)).then((result) => {
+			if (this.cache[id] != undefined)
+				resolve(this.cache[id]);
+			else {
+				this.avanza.get(sprintf('/_mobile/market/index/%s', id)).then((result) => {
 
-				this.cache[id] = result;
+					this.cache[id] = result;
 
-				resolve(result);
-			})
-			.catch((error) => {
-				reject(error);
-			});
+					resolve(result);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+
+			}
+
+
 		})
 
 	}
