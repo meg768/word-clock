@@ -43,7 +43,7 @@ module.exports = class extends Animation {
     render(options) {
         console.log('Redrawing clock');
 
-        var pixels  = new Pixels(self.strip.width, self.strip.height);
+        var pixels  = new Pixels(this.strip.width, this.strip.height);
         var display = new Layout();
         var text    = this.getTime();
         var hue     = this.getHue();
