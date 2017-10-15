@@ -19,40 +19,35 @@ class Button extends Events {
 
 		super();
 
-		this.pin   = pin;
-		this.gpio  = new Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
-		this.state = 0;
-		this.lastPressed = timestamp();
-		this.lastReleased = timestamp();
-		this.clicks = 0;
-		this.timer = new Timer();
+		this.pin      = pin;
+		this.gpio     = new Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
+		this.state    = 0;
+		this.pressed  = timestamp();
+		this.released = timestamp();
+		this.clicks   = 0;
+		this.timer    = new Timer();
 
 		this.gpio.on('interrupt', (state) => {
 
 			var now = timestamp();
 
 			this.state = state;
+			this.timer.cancel();
 
 			this.emit('change', state, now);
-			this.timer.cancel();
 
 			if (state == 0) {
 				this.clicks++;
 
 				this.timer.setTimer(250, () => {
-
-					if (this.clicks >= 2)
-						this.emit('doubleClick', now - this.lastPressed);
-					else
-						this.emit('click', now - this.lastPressed);
-
+					this.emit('click', this.clicks, now - this.pressed);
 					this.clicks = 0;
 				});
 
-				this.lastReleased = now;
+				this.released = now;
 			}
 			else {
-				this.lastPressed = now;
+				this.pressed = now;
 			}
 
 		});
@@ -148,13 +143,11 @@ var Module = new function() {
 		});
 
 
-		button6.on('click', (duration) => {
-			console.log('click', duration);
+		button6.on('click', (clicks, duration) => {
+			console.log('click', clicks, duration);
 		});
 
-		button6.on('doubleClick', (duration) => {
-			console.log('doubleClick', duration);
-		});
+
 
 
 		/*
