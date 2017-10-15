@@ -9,7 +9,6 @@ module.exports = class AvanzaCache {
 
 
 	constructor() {
-		super();
 
 		this.lastLogin = undefined;
 		this.avanza    = new Avanza();
