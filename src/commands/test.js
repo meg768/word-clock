@@ -5,8 +5,111 @@ var Timer = require('yow/timer');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Events = require('events');
-var Bluetooth = require('bluetooth-serial-port');
+var Gpio = require('pigpio').Gpio;
 
+class Button extends Events {
+
+	constructor(pin) {
+
+
+		function timestamp() {
+			var date = new Date();
+			return date.valueOf();
+		}
+
+		super();
+
+		this.pin   = pin;
+		this.gpio  = new Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
+		this.state = 0;
+		this.lastPressed = timestamp();
+		this.lastReleased = timestamp();
+		this.timer = new Timer();
+
+		this.gpio.on('interrupt', (state) => {
+
+			var now = timestamp();
+
+			this.state = state;
+
+			this.emit('change', state);
+
+			if (state == 0) {
+				timer.cancel();
+
+				timer.setTimer(200, () => {
+					var now = timestamp();
+
+					if (this.lastReleased - now < 300)
+						this.emit('doubleClick', now - this.lastPressed);
+					else
+						this.emit('click', now - this.lastPressed);
+
+				});
+
+				this.lastReleased = now;
+			}
+			else {
+				this.lastPressed = now;
+			}
+
+		});
+
+	}
+
+};
+
+
+
+class Buttons extends Events {
+
+	constructor() {
+		super();
+		this.buttons = [];
+		this.gpios   = [];
+
+	}
+
+	startListening(buttons) {
+		var Gpio = require('pigpio').Gpio;
+
+		var self = this;
+
+		self.stopListening();
+		self.buttons = buttons;
+
+		self.led = new Gpio(20, {mode: Gpio.OUTPUT});
+
+		self.buttons.forEach(function(button) {
+			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
+//			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, alert: true});
+
+			self.gpios.push(gpio);
+
+			gpio.on('interrupt', function (level) {
+				self.led.digitalWrite(level);
+				self.emit(button.name, level)
+			});
+
+		});
+
+	}
+
+	stopListening() {
+		var self = this;
+
+		self.gpios.forEach(function(gpio) {
+			gpio.disableInterrupt();
+			gpio.disableAlert();
+		});
+
+		this.buttons = [];
+		this.gpios   = [];
+
+
+	}
+
+}
 
 
 var Module = new function() {
@@ -33,41 +136,44 @@ var Module = new function() {
 
 	function run(argv) {
 
-		var BTSP = require('bluetooth-serial-port');
-		var serial = new BTSP.BluetoothSerialPort();
+		var button = new Button(13);
+		var led = new Gpio(20, {mode: Gpio.OUTPUT});
 
-		 	console.log('Started!');
-
-		serial.on('found', function(address, name) {
-
-		    // you might want to check the found address with the address of your
-		    // bluetooth enabled Arduino device here.
-
-		    serial.findSerialPortChannel(address, function(channel) {
-				console.log(address, channel);
-				/*
-		        serial.connect(bluetoothAddress, channel, function() {
-		            console.log('connected');
-		            process.stdin.resume();
-		            process.stdin.setEncoding('utf8');
-		            console.log('Press "1" or "0" and "ENTER" to turn on or off the light.')
-
-		            process.stdin.on('data', function (data) {
-		                serial.write(data);
-		            });
-
-		            serial.on('data', function(data) {
-		                console.log('Received: ' + data);
-		            });
-		        }, function () {
-		            console.log('cannot connect');
-		        });
-				*/
-		    });
+		console.log('button');
+		button.on('change', (state) => {
+			console.log(button.state);
+			led.digitalWrite(button.state);
 		});
 
-		serial.inquire();
+		button.on('click', (duration) => {
+			console.log('pressed for', duration);
+		});
 
+
+
+		/*
+		var buttons = new Buttons();
+
+		buttons.startListening([
+			{pin: 19, name:'Button 1'},
+			{pin: 13, name:'Button 2'},
+			{pin:  6, name:'Button 3'}
+		]);
+
+		console.log('Ready!');
+		buttons.on('Button 1', function(level) {
+			console.log('change1', level);
+		});
+		buttons.on('Button 2', function(level) {
+			console.log('change2', level);
+		});
+		buttons.on('Button 3', function(level) {
+			console.log('change3', level);
+
+			console.log('bye!');
+			buttons.stopListening();
+		});
+		*/
 	}
 
 
