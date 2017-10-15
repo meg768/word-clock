@@ -44,7 +44,7 @@ module.exports = function NeopixelStrip(options) {
 
 
 	process.on('SIGINT', function () {
-		_strip.render(new Uint32Array(_length););
+		_strip.render(new Uint32Array(_length));
 	});
 
 	_this.render = function(pixels, options) {
