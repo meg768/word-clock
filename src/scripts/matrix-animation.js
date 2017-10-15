@@ -46,7 +46,7 @@ class Worm {
         var self   = this;
         var now    = new Date();
 
-        self.length = Math.floor(self.height * 0.1 + self.height * 1.1 * random(100) / 100);
+        self.length = Math.floor(self.height * 0.1 + self.height * 0.9 * random(100) / 100);
 		self.row    = -self.length; //-random(0, self.height * 2);
         self.loops  = random(4);
 		self.ticks  = 0;
