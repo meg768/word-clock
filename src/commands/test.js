@@ -137,14 +137,10 @@ var Module = new function() {
 	function run(argv) {
 
 		var button = new Button(13);
-		var button19 = new Button(19);
 		var button6 = new Button(6);
 
 		console.log('button OK');
 
-		button19.on('change', (state) => {
-			console.log('button19');
-		});
 		button6.on('change', (state) => {
 			console.log('button6');
 		});
