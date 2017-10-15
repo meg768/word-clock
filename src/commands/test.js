@@ -173,7 +173,7 @@ var Module = new function() {
 
 		button.on('click', (clicks, duration) => {
 			console.log('lower button', clicks, duration);
-			if (button6.state) {
+			if (button6.state && clicks > 1) {
 				console.log('exiting', clicks, duration);
 				button.stop();
 				button6.stop();
