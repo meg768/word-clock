@@ -5,7 +5,7 @@ var Timer = require('yow/timer');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Events = require('events');
-var Gpio = require('pigpio').Gpio;
+var Pigpio = require('pigpio');
 
 class Button extends Events {
 
@@ -20,7 +20,7 @@ class Button extends Events {
 		super();
 
 		this.pin      = pin;
-		this.gpio     = new Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
+		this.gpio     = new Pigpio.Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 		this.state    = 0;
 		this.pressed  = timestamp();
 		this.released = timestamp();
@@ -63,56 +63,6 @@ class Button extends Events {
 
 
 
-class Buttons extends Events {
-
-	constructor() {
-		super();
-		this.buttons = [];
-		this.gpios   = [];
-
-	}
-
-	startListening(buttons) {
-		var Gpio = require('pigpio').Gpio;
-
-		var self = this;
-
-		self.stopListening();
-		self.buttons = buttons;
-
-		self.led = new Gpio(20, {mode: Gpio.OUTPUT});
-
-		self.buttons.forEach(function(button) {
-			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
-//			var gpio = new Gpio(button.pin, {mode: Gpio.INPUT, alert: true});
-
-			self.gpios.push(gpio);
-
-			gpio.on('interrupt', function (level) {
-				self.led.digitalWrite(level);
-				self.emit(button.name, level)
-			});
-
-		});
-
-	}
-
-	stopListening() {
-		var self = this;
-
-		self.gpios.forEach(function(gpio) {
-			gpio.disableInterrupt();
-			gpio.disableAlert();
-		});
-
-		this.buttons = [];
-		this.gpios   = [];
-
-
-	}
-
-}
-
 
 var Module = new function() {
 
@@ -152,6 +102,10 @@ var Module = new function() {
 			console.log('click', clicks, duration);
 		});
 
+		button.on('click', (clicks, duration) => {
+			console.log('exiting', clicks, duration);
+			Pigpio.terminate();
+		});
 
 
 
