@@ -20,34 +20,33 @@ module.exports = class AvanzaCache {
 
 	login() {
 
-		var self = this;
-		var avanza = self.avanza;
-
-		// May we use cached weather?
-        if (self.lastLogin != undefined) {
+        if (this.lastLogin != undefined) {
 			var now = new Date();
 
-            if (now.getTime() - self.lastLogin.getTime() < 60 * 60 * 1000) {
+            if (now.getTime() - this.lastLogin.getTime() < 60 * 60 * 1000) {
                 return Promise.resolve();
             }
         }
 
 
-		if (avanza.session.username != undefined)
+		if (this.avanza.session.username != undefined)
 			return Promise.resolve();
 
-		return new Promise(function(resolve, reject) {
+		return new Promise((resolve, reject) => {
 
 			console.log('Logging in to Avanza...');
 
 			var credentials = {username: process.env.AVANZA_USERNAME, password:process.env.AVANZA_PASSWORD};
 
-			avanza.login(credentials).then(function() {
+			this.avanza.login(credentials).then(function() {
 				console.log('Avanza login OK.');
-				self.lastLogin = new Date();
+
+				this.lastLogin = new Date();
+				this.cache     = {};
+
 				resolve();
 			})
-			.catch(function(error) {
+			.catch((error) => {
 				reject(error);
 			})
 
@@ -55,14 +54,18 @@ module.exports = class AvanzaCache {
 	}
 
 	getMarketIndex(id) {
-		var self = this;
-		var avanza = self.avanza;
 
-		return new Promise(function(resolve, reject) {
-			avanza.get(sprintf('/_mobile/market/index/%s', id)).then(function(result) {
+		if (this.cache[id] != undefined)
+			resolve(this.cache[id]);
+
+		return new Promise((resolve, reject) => {
+			this.avanza.get(sprintf('/_mobile/market/index/%s', id)).then((result) => {
+
+				this.cache[id] = result;
+
 				resolve(result);
 			})
-			.catch(function(error) {
+			.catch((error) => {
 				reject(error);
 			});
 		})
