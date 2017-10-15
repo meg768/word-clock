@@ -17,9 +17,13 @@ module.exports = class extends AvanzaAnimation {
 	constructor(strip, options) {
 		super(strip, options);
 
-		this.name    = 'Avanza Currency';
+		this.name = 'Avanza Currency';
 
-		this.symbols = ([
+
+	}
+
+	getSymbols() {
+		return ([
 			{symbol: 'NOK', id:53293},
 			{symbol: 'JPY', id:108702},
 			{symbol: 'USD', id:19000},
