@@ -30,15 +30,9 @@ class Worm {
 
 		for (var i = 0; i < length; i++) {
 			// Calculate brightness
-			var luminance  = 100 - (100 * i) / length;
+            var luminance = (length - i / length) / length;
 
-			if (luminance < 0)
-				luminance = 0;
-
-			if (luminance > 100)
-				luminance = 100;
-
-            pixels.setPixelHSL(x, y--, self.hue, 100, luminance / 4);
+            pixels.setPixelHSL(x, y--, self.hue, 100, index * 0.5);
 		}
 	}
 
@@ -48,7 +42,7 @@ class Worm {
 
         self.length = Math.floor(self.height * 0.1 + self.height * 0.5 * random(100) / 100);
 		self.row    = -self.length; //-random(0, self.height * 2);
-        self.loops  = random(4);
+        self.loops  = 4; //random(4);
 		self.ticks  = 0;
         self.hue    = Math.floor(360 * (((now.getHours() % 12) * 60) + now.getMinutes()) / (12 * 60));
 	}
