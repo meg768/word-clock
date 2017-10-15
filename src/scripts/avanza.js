@@ -90,7 +90,7 @@ module.exports = class AvanzaCache {
 						result.push({symbol:symbol.symbol, change:parseFloat(data.changePercent)});
 					});
 
-				};
+				});
 
 				return promise;
 
