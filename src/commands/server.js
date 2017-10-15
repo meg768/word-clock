@@ -54,7 +54,7 @@ var Module = new function() {
 			var CurrencyAnimation  = require('../scripts/currency-animation.js');
 			var CommodityAnimation  = require('../scripts/commodity-animation.js');
 			var IndexAnimation  = require('../scripts/index-animation.js');
-	//		var MatrixAnimation  = require('../scripts/matrix-animation.js');
+			var MatrixAnimation  = require('../scripts/matrix-animation.js');
 
 			var button           = new Button(6);
 			var strip            = new Strip();
@@ -63,13 +63,11 @@ var Module = new function() {
 			var animations       = [];
 			var currentAnimation = undefined;
 
-			//animations.push(new MatrixAnimation(strip));
-
+			animations.push(new MatrixAnimation(strip));
 			animations.push(new ClockAnimation(strip));
 			animations.push(new CurrencyAnimation(strip));
 			animations.push(new IndexAnimation(strip));
 			animations.push(new CommodityAnimation(strip));
-			//animations.push(new AvanzaAnimation(strip));
 			//animations.push(new WeatherAnimation(strip));
 
 
