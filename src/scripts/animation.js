@@ -51,6 +51,8 @@ module.exports = class Animation {
                     setImmediate(loop);
                 }
             }
+
+            loop();
         });
     }
 
