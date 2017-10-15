@@ -49,7 +49,7 @@ module.exports = class extends Animation {
 				console.log(symbol);
 
 				for (var i = 0; i < layout.text.length; i++) {
-					var color = symbol.change >= 0 ? 'blue' : 'red';
+					var color = parseFloat(symbol.change) >= 0 ? 'blue' : 'red';
 	                pixels.setPixel(layout.x + i, layout.y, Color(color).rgbNumber());
 	            }
 
