@@ -22,15 +22,19 @@ module.exports = class Animation {
     }
 
     start() {
-        this.cancelled = false;
+        var self = this;
 
-        console.log('Starting animation...');
+        console.log('Starting animation', self.name);
+
+        self.cancelled = false;
+
         return Promise.resolve();
     }
 
     loop() {
-        console.log('Running loop');
         var self = this;
+
+        console.log('Running loop', self.name);
 
         return new Promise((resolve, reject) => {
 
@@ -57,14 +61,15 @@ module.exports = class Animation {
     }
 
     stop() {
-        console.log('Stopping animation');
+        var self = this;
+        console.log('Stopping animation', self.name);
         return Promise.resolve();
     }
 
 
     cancel() {
-        console.log('Cancelling animation');
         var self = this;
+        console.log('Cancelling animation', self.name);
         self.cancelled = true;
     }
 
