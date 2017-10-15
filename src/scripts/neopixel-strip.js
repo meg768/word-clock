@@ -20,6 +20,8 @@ function exitHandler(options, err) {
 //catches uncaught exceptions
 //process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
 
+
+
 module.exports = function NeopixelStrip(options) {
 
 
@@ -35,9 +37,15 @@ module.exports = function NeopixelStrip(options) {
 	var _pixels        = new Uint32Array(_length);
 
 
+
 	_this.length = _length;
 	_this.width  = _width;
 	_this.height = _height;
+
+
+	process.on('SIGINT', function () {
+		_strip.render(new Uint32Array(_length););
+	});
 
 	_this.render = function(pixels, options) {
 
