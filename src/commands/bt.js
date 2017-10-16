@@ -46,7 +46,7 @@ var Module = new function() {
 		var address = '20:73:00:3A:C3:07';
 
 		device.findSerialPortChannel(address, function(channel){
-  			console.log('Found RFCOMM channel for serial port on %s: ', name, channel);
+  			console.log('Found RFCOMM channel for serial port on', channel);
 
   			// make bluetooth connect to remote device
   			BT.connect(address, channel, function(err, connection){
