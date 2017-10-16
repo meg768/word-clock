@@ -42,6 +42,19 @@ var Module = new function() {
 		.on('found', function found(address, name){
 		  console.log('Found: ' + address + ' with name ' + name);
 		}).inquire();
+
+		var address = '20:73:00:3A:C3:07';
+
+		device.findSerialPortChannel(address, function(channel){
+  			console.log('Found RFCOMM channel for serial port on %s: ', name, channel);
+
+  			// make bluetooth connect to remote device
+  			BT.connect(address, channel, function(err, connection){
+    			if(err) return console.error(err);
+    			connection.write(new Buffer('Hello!', 'utf-8'));
+  			});
+
+		});
 	}
 	function runXX(argv) {
 
