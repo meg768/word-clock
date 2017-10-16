@@ -5,7 +5,6 @@ var Timer = require('yow/timer');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Events = require('events');
-var Bluetooth = require('bluetooth-serial-port');
 
 
 
@@ -30,6 +29,7 @@ var Module = new function() {
 
 
 
+	
 
 	function run(argv) {
 
@@ -69,6 +69,7 @@ var Module = new function() {
 		serial.inquire();
 
 	}
+
 
 
 	module.exports.command  = 'bt [options]';
