@@ -65,6 +65,7 @@ var Module = new function() {
 
 		serial.on('found', function(address, name) {
 
+			console.log('FOUND', address, name);
 		    // you might want to check the found address with the address of your
 		    // bluetooth enabled Arduino device here.
 
