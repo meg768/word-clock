@@ -29,9 +29,16 @@ var Module = new function() {
 
 
 
-	
 
 	function run(argv) {
+
+		var BT = require('node-bluetooth');
+
+		var device = new BT.DeviceINQ();
+		device.listPairedDevices(console.log);
+
+	}
+	function runXX(argv) {
 
 		var BTSP = require('bluetooth-serial-port');
 		var serial = new BTSP.BluetoothSerialPort();
