@@ -37,6 +37,11 @@ var Module = new function() {
 		var device = new BT.DeviceINQ();
 		device.listPairedDevices(console.log);
 
+		device
+		.on('finished',  console.log.bind(console, 'finished'))
+		.on('found', function found(address, name){
+		  console.log('Found: ' + address + ' with name ' + name);
+		}).inquire();
 	}
 	function runXX(argv) {
 
