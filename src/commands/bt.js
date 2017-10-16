@@ -69,9 +69,16 @@ var Module = new function() {
 		    // you might want to check the found address with the address of your
 		    // bluetooth enabled Arduino device here.
 
+			function yes(channel) {
+				console.log('FOUND CHANNEL', channel);
+			}
+			function no() {
+				console.log('NO CHANNEL')
+			}
+			serial.findSerialPortChannel(address, yes, no);
+/*
 		    serial.findSerialPortChannel(address, function(channel) {
 				console.log(address, channel);
-				/*
 		        serial.connect(bluetoothAddress, channel, function() {
 		            console.log('connected');
 		            process.stdin.resume();
@@ -88,8 +95,9 @@ var Module = new function() {
 		        }, function () {
 		            console.log('cannot connect');
 		        });
-				*/
 		    });
+
+			*/
 		});
 
 		serial.inquire();
