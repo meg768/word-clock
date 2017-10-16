@@ -30,7 +30,7 @@ var Module = new function() {
 
 
 
-	function run(argv) {
+	function runXX(argv) {
 
 		var BT = require('node-bluetooth');
 
@@ -46,7 +46,7 @@ var Module = new function() {
 		var address = '20:73:00:3A:C3:07';
 
 		device.findSerialPortChannel(address, function(channel){
-  			console.log('Found RFCOMM channel for serial port on', channel);
+  			console.log('Found RFCOMM channel for serial port on', 	channel);
 
   			// make bluetooth connect to remote device
   			BT.connect(address, channel, function(err, connection){
@@ -56,7 +56,7 @@ var Module = new function() {
 
 		});
 	}
-	function runXX(argv) {
+	function run(argv) {
 
 		var BTSP = require('bluetooth-serial-port');
 		var serial = new BTSP.BluetoothSerialPort();
