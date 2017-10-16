@@ -25,6 +25,7 @@ var App = function() {
 			args.command(require('./src/commands/clock.js'));
 			args.command(require('./src/commands/text.js'));
 			args.command(require('./src/commands/avanza.js'));
+			args.command(require('./src/commands/bt.js'));
 
 			args.wrap(null);
 			args.demand(1);

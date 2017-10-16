@@ -71,8 +71,8 @@ var Module = new function() {
 	}
 
 
-	module.exports.command  = 'test [options]';
-	module.exports.describe = 'Test module';
+	module.exports.command  = 'bt [options]';
+	module.exports.describe = 'BT module';
 	module.exports.builder  = defineArgs;
 	module.exports.handler  = run;
 
