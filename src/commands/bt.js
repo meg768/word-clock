@@ -72,6 +72,7 @@ var Module = new function() {
 			}
 			serial.findSerialPortChannel(address, yes, no);
 
+/*
 		serial.on('found', function(address, name) {
 
 			console.log('FOUND', address, name);
@@ -85,7 +86,7 @@ var Module = new function() {
 				console.log('NO CHANNEL')
 			}
 			serial.findSerialPortChannel(address, yes, no);
-
+*/
 /*
 		    serial.findSerialPortChannel(address, function(channel) {
 				console.log(address, channel);
