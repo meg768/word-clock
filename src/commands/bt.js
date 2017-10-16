@@ -60,8 +60,17 @@ var Module = new function() {
 
 		var BTSP = require('bluetooth-serial-port');
 		var serial = new BTSP.BluetoothSerialPort();
+		var address = '20:73:00:3A:C3:07';
 
 		 	console.log('Started!');
+
+			function yes(channel) {
+				console.log('FOUND CHANNEL', channel);
+			}
+			function no() {
+				console.log('NO CHANNEL')
+			}
+			serial.findSerialPortChannel(address, yes, no);
 
 		serial.on('found', function(address, name) {
 
@@ -76,6 +85,7 @@ var Module = new function() {
 				console.log('NO CHANNEL')
 			}
 			serial.findSerialPortChannel(address, yes, no);
+
 /*
 		    serial.findSerialPortChannel(address, function(channel) {
 				console.log(address, channel);
@@ -97,11 +107,10 @@ var Module = new function() {
 		        });
 		    });
 
-			*/
 		});
 
 		serial.inquire();
-
+*/
 	}
 
 
