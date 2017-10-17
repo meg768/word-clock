@@ -20,6 +20,7 @@ module.exports = class AvanzaCache {
 
 	login() {
 
+
         if (this.lastLogin != undefined) {
 			var now = new Date();
 
@@ -38,7 +39,7 @@ module.exports = class AvanzaCache {
 
 			var credentials = {username: process.env.AVANZA_USERNAME, password:process.env.AVANZA_PASSWORD};
 
-			this.avanza.login(credentials).then(function() {
+			this.avanza.login(credentials).then(() => {
 				console.log('Avanza login OK.');
 
 				this.lastLogin = new Date();
