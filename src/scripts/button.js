@@ -9,7 +9,7 @@ var Gpio       = require('pigpio').Gpio;
 
 module.exports = class Button extends Events {
 
-	constructor(pin) {
+	constructor(pin, autoEnable = true) {
 
 		super();
 
@@ -21,9 +21,12 @@ module.exports = class Button extends Events {
 		this.clicks   = 0;
 		this.timer    = new Timer();
 
+		if (autoEnable)
+			this.enable();
+
 	}
 
-	start() {
+	enable() {
 		function timestamp() {
 			var date = new Date();
 			return date.valueOf();
@@ -63,7 +66,7 @@ module.exports = class Button extends Events {
 		});
 	}
 
-	stop() {
+	disable() {
 		this.gpio.disableInterrupt();
 	}
 

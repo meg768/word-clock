@@ -3,7 +3,6 @@
 var sprintf = require('yow/sprintf');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
-var io = require('socket.io-client');
 var Timer = require('yow/timer');
 var Strip = require('../scripts/neopixel-strip.js');
 var Button = require('../scripts/button.js');
@@ -18,7 +17,6 @@ var Module = new function() {
 
 		args.help('help').alias('help', 'h');
 
-		args.option('service',   {alias:'n', describe:'Service name',           default:process.env.SERVICE_NAME});
 		args.option('clock',     {alias:'c', describe:'Run clock animation',    default:undefined});
 		args.option('weather',   {alias:'w', describe:'Run weather animation',  default:undefined});
 		args.option('avanza',    {alias:'a', describe:'Run avanza animation',   default:undefined});
@@ -49,16 +47,16 @@ var Module = new function() {
 		var timer = new Timer();
 
 		registerService().then(function() {
-			var ClockAnimation   = require('../scripts/clock-animation.js');
-			var WeatherAnimation = require('../scripts/weather-animation.js');
+			var ClockAnimation     = require('../scripts/clock-animation.js');
+			var WeatherAnimation   = require('../scripts/weather-animation.js');
 			var CurrencyAnimation  = require('../scripts/currency-animation.js');
-			var CommodityAnimation  = require('../scripts/commodity-animation.js');
-			var IndexAnimation  = require('../scripts/index-animation.js');
-			var MatrixAnimation  = require('../scripts/matrix-animation.js');
+			var CommodityAnimation = require('../scripts/commodity-animation.js');
+			var IndexAnimation     = require('../scripts/index-animation.js');
+			var MatrixAnimation    = require('../scripts/matrix-animation.js');
 
-			var button           = new Button(6);
+			var upperButton      = new Button(6);
+			var lowerButton      = new Button(13);
 			var strip            = new Strip();
-			var socket           = io.connect(argv.service);
 			var animationIndex   = 0;
 			var animations       = [];
 			var currentAnimation = undefined;
@@ -71,15 +69,22 @@ var Module = new function() {
 			animations.push(new WeatherAnimation(strip));
 
 
-			button.start();
-			button.on('click', function() {
+			upperButton.on('click', () => {
 
 				if (currentAnimation) {
 					currentAnimation.cancel();
-
 				}
 
 			});
+
+			lowerButton.on('click', () => {
+
+				if (currentAnimation) {
+					currentAnimation.cancel();
+				}
+
+			});
+
 
 
 
@@ -97,22 +102,22 @@ var Module = new function() {
 			function showAnimation() {
 
 
-                return new Promise(function(resolve, reject) {
+                return new Promise((resolve, reject) => {
 
 					// Get next animation
 					var animation = currentAnimation = animations[animationIndex];
 
 					timer.cancel();
 
-					animation.run().then(function() {
+					animation.run().then(() => {
 						animationIndex = (animationIndex + 1) % animations.length;
 					})
 
-					.catch(function(error) {
+					.catch((error) => {
 						console.log(error);
 					})
 
-					.then(function() {
+					.then(() => {
 						currentAnimation = undefined;
 
 						timer.setTimer(0, showAnimation);
@@ -123,59 +128,6 @@ var Module = new function() {
 
 			}
 
-
-			socket.on('connect', function() {
-				debug('Connected to socket server.');
-
-				// Register the service
-				socket.emit('i-am-the-provider');
-
-				enableAnimations();
-
-			});
-
-			socket.on('disconnect', function() {
-				debug('Disconnected from socket server.');
-				disableAnimations();
-			});
-
-
-			socket.on('enableAnimations', function(fn) {
-				enableAnimations();
-
-				if (isFunction(fn))
-					fn({status:'OK'});
-			});
-
-			socket.on('disableAnimations', function(fn) {
-				disableAnimations();
-
-				if (isFunction(fn))
-					fn({status:'OK'});
-			});
-
-			socket.on('reset', function(fn) {
-				if (isFunction(fn))
-					fn({status:'OK'});
-			});
-
-			socket.on('colorize', function(options, fn) {
-				disableAnimations();
-
-				strip.colorize(options).then(function(reply) {
-					socket.emit('color-changed', options);
-
-					if (isFunction(fn))
-						fn({status:'OK', reply:reply});
-				})
-
-				.catch(function(error) {
-					console.error(error);
-
-					if (isFunction(fn))
-						fn({error: error.message});
-				});
-			})
 
 		});
 
