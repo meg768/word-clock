@@ -60,6 +60,7 @@ var Module = new function() {
 			var animationIndex   = 0;
 			var animations       = [];
 			var currentAnimation = undefined;
+			var state            = 0;
 
 			animations.push(new MatrixAnimation(strip));
 			animations.push(new ClockAnimation(strip));
@@ -67,8 +68,6 @@ var Module = new function() {
 			animations.push(new IndexAnimation(strip));
 			animations.push(new CommodityAnimation(strip));
 			animations.push(new WeatherAnimation(strip));
-
-			console.log('OK');
 
 			upperButton.on('click', () => {
 
@@ -84,14 +83,15 @@ var Module = new function() {
 					currentAnimation.cancel();
 				}
 
+
 			});
 
 
 
 
 			function disableAnimations() {
-				timer.cancel();
 			}
+
 
 			function enableAnimations() {
 				disableAnimations();
@@ -108,10 +108,7 @@ var Module = new function() {
 					// Get next animation
 					var animation = currentAnimation = animations[animationIndex];
 
-					timer.cancel();
-
 					animation.run().then(() => {
-						animationIndex = (animationIndex + 1) % animations.length;
 					})
 
 					.catch((error) => {
@@ -119,9 +116,10 @@ var Module = new function() {
 					})
 
 					.then(() => {
+						animationIndex = (animationIndex + 1) % animations.length;
 						currentAnimation = undefined;
 
-						timer.setTimer(0, showAnimation);
+						setTimeout(showAnimation, 0);
 						resolve();
 
 					})
