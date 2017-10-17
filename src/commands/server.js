@@ -129,6 +129,8 @@ var Module = new function() {
 
 			}
 
+			enableAnimations();
+
 
 		});
 
