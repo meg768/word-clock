@@ -68,6 +68,7 @@ var Module = new function() {
 			animations.push(new CommodityAnimation(strip));
 			animations.push(new WeatherAnimation(strip));
 
+			console.log('OK');
 
 			upperButton.on('click', () => {
 
