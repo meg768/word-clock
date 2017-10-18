@@ -52,7 +52,7 @@ var Module = new function() {
 			var CurrencyAnimation  = require('../scripts/currency-animation.js');
 			var CommodityAnimation = require('../scripts/commodity-animation.js');
 			var IndexAnimation     = require('../scripts/index-animation.js');
-			var MatrixAnimation    = require('../scripts/matrix-animation.js');
+			//var MatrixAnimation    = require('../scripts/matrix-animation.js');
 
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
@@ -62,7 +62,7 @@ var Module = new function() {
 			var currentAnimation = undefined;
 			var state            = 0;
 
-			animations.push(new MatrixAnimation(strip));
+			//animations.push(new MatrixAnimation(strip));
 			animations.push(new ClockAnimation(strip));
 			animations.push(new CurrencyAnimation(strip));
 			animations.push(new IndexAnimation(strip));
