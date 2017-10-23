@@ -11,7 +11,7 @@ module.exports = class Animation extends Events {
 
     constructor(strip, options) {
         super();
-        
+
         this.options   = Object.assign({}, {timeout:10000}, options);
         this.strip     = strip;
         this.name      = 'None';
@@ -78,6 +78,8 @@ module.exports = class Animation extends Events {
                 this.strip.render(pixels.getPixels(), {fadeIn:10});
 
             resolve();
+
+            this.emit('stopped');
         });
     }
 

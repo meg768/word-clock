@@ -84,9 +84,9 @@ var Module = new function() {
 			lowerButton.on('click', () => {
 
 				if (currentAnimation) {
-//					currentAnimation.once('stopped', () => {
-//						this.runAnimation(new BlankAnimation(strip, {timeout:-1}));
-//					});
+					currentAnimation.once('stopped', () => {
+						this.runAnimation(new BlankAnimation(strip, {timeout:-1}));
+					});
 
 					currentAnimation.cancel();
 				}
