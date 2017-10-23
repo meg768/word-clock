@@ -52,6 +52,7 @@ var Module = new function() {
 			var CurrencyAnimation  = require('../scripts/currency-animation.js');
 			var CommodityAnimation = require('../scripts/commodity-animation.js');
 			var IndexAnimation     = require('../scripts/index-animation.js');
+			var BlankAnimation     = require('../scripts/animation.js');
 			//var MatrixAnimation    = require('../scripts/matrix-animation.js');
 
 			var upperButton      = new Button(6);
@@ -96,6 +97,35 @@ var Module = new function() {
 			function enableAnimations() {
 				disableAnimations();
 				showAnimation();
+
+			}
+
+			function showAnimation(animation) {
+
+
+                return new Promise((resolve, reject) => {
+
+					if (animation == undefined)
+						animation = new BlankAnimation(strip);
+					// Get next animation
+					var animation = currentAnimation = animations[animationIndex];
+
+					animation.run().then(() => {
+					})
+
+					.catch((error) => {
+						console.log(error);
+					})
+
+					.then(() => {
+						animationIndex = (animationIndex + 1) % animations.length;
+						currentAnimation = undefined;
+
+						setTimeout(showAnimation, 0);
+						resolve();
+
+					})
+                });
 
 			}
 
