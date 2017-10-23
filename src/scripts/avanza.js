@@ -116,7 +116,6 @@ module.exports = class AvanzaCache {
 				});
 
 				promise.then(() => {
-					console.log(result);
 					resolve(result);
 
 				});
