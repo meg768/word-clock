@@ -76,7 +76,7 @@ var Module = new function() {
 					currentAnimation.cancel();
 				}
 				else {
-					this.runNextAnimation();
+					runNextAnimation();
 				}
 
 			});
@@ -142,7 +142,7 @@ var Module = new function() {
 					// Get next animation
 					var animation = animations[animationIndex];
 
-					this.runAnimation(animation).then(() => {
+					runAnimation(animation).then(() => {
 					})
 
 					.catch((error) => {
