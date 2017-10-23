@@ -74,19 +74,31 @@ module.exports = class AvanzaCache {
 
 	}
 
+	prepareCache() {
+
+	}
+
 	getMarket(symbols) {
 
 
 		return new Promise((resolve, reject) => {
 
 			this.login().then(() => {
+
 				var promise = Promise.resolve();
 				var result  = [];
 				var now     = new Date();
+				var open    = new Date();
 
-				// Time to clear cache?
-	            if (this.cacheTime == undefined || now.getTime() - this.cacheTime.getTime() > 3 * 60 * 1000) {
-					console.log('Clearing cache...');
+				open.setHours(9);
+				open.setMinutes(0);
+				open.setSeconds(0);
+				open.setMilliseconds(0);
+
+				// Clear cache if not fetched data since opening or if cached data is older than some amount of time
+				// Ignor day of week...
+	            if (this.cacheTime == undefined || (this.cacheTime.getTime() <= open.getTime() && open.getTime() <= now.getTime()) || (now.getTime() - this.cacheTime.getTime() > 3 * 60 * 1000)) {
+					console.log('Clearing Avanza cache...');
 	                this.cache = {};
 					this.cacheTime = now;
 	            }
