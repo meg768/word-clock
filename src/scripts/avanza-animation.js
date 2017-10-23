@@ -82,5 +82,9 @@ module.exports = class extends Animation {
         });
     }
 
+	stop() {
+		return super.stop();
+	}
+
 
 };
