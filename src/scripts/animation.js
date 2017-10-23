@@ -28,13 +28,18 @@ module.exports = class Animation extends Events {
     }
 
     start() {
-        var self = this;
+        console.log('Starting animation', this.name);
 
-        console.log('Starting animation', self.name);
+        return new Promise((resolve, reject) => {
 
-        self.cancelled = false;
+            this.cancelled = false;
 
-        return Promise.resolve();
+            resolve();
+
+            this.emit('started');
+
+        });
+
     }
 
     loop() {
