@@ -75,12 +75,19 @@ var Module = new function() {
 				if (currentAnimation) {
 					currentAnimation.cancel();
 				}
+				else {
+					this.runNextAnimation();
+				}
 
 			});
 
 			lowerButton.on('click', () => {
 
 				if (currentAnimation) {
+//					currentAnimation.once('stopped', () => {
+//						this.runAnimation(new BlankAnimation(strip, {timeout:-1}));
+//					});
+
 					currentAnimation.cancel();
 				}
 
@@ -96,19 +103,19 @@ var Module = new function() {
 
 			function enableAnimations() {
 				disableAnimations();
-				showAnimation();
+				runNextAnimation();
 
 			}
 
-			function showAnimation(animation) {
+			function runAnimation(animation) {
 
 
                 return new Promise((resolve, reject) => {
 
 					if (animation == undefined)
-						animation = new BlankAnimation(strip);
-					// Get next animation
-					var animation = currentAnimation = animations[animationIndex];
+						animation = new BlankAnimation(strip, {timeout:-1});
+
+					currentAnimation = animation;
 
 					animation.run().then(() => {
 					})
@@ -118,10 +125,7 @@ var Module = new function() {
 					})
 
 					.then(() => {
-						animationIndex = (animationIndex + 1) % animations.length;
 						currentAnimation = undefined;
-
-						setTimeout(showAnimation, 0);
 						resolve();
 
 					})
@@ -130,15 +134,15 @@ var Module = new function() {
 			}
 
 
-			function showAnimation() {
+			function runNextAnimation() {
 
 
                 return new Promise((resolve, reject) => {
 
 					// Get next animation
-					var animation = currentAnimation = animations[animationIndex];
+					var animation = animations[animationIndex];
 
-					animation.run().then(() => {
+					this.runAnimation(animation).then(() => {
 					})
 
 					.catch((error) => {
@@ -147,9 +151,8 @@ var Module = new function() {
 
 					.then(() => {
 						animationIndex = (animationIndex + 1) % animations.length;
-						currentAnimation = undefined;
+						setTimeout(runNextAnimation, 0);
 
-						setTimeout(showAnimation, 0);
 						resolve();
 
 					})

@@ -4,22 +4,21 @@ var sprintf = require('yow/sprintf');
 var Timer   = require('yow/timer');
 var Events  = require('events')
 var Pixels  = require('./pixels.js');
+var Events  = require('EventEmitter');
 
-
-module.exports = class Animation {
+module.exports = class Animation extends Events {
 
 
     constructor(strip, options) {
+        this.options   = Object.assign({}, {timeout:10000}, options);
         this.strip     = strip;
         this.name      = 'None';
-        this.options   = options || {};
         this.cancelled = false;
-        this.timeout   = 10000;
 
     }
 
     setTiemout(ms) {
-        this.timeout = ms;
+        this.options.timeout = ms;
     }
 
     tick() {
@@ -52,7 +51,7 @@ module.exports = class Animation {
                 if (self.cancelled) {
                     resolve();
                 }
-                else if (now - start > self.timeout) {
+                else if (self.options.timeout >= 0 && now - start > self.options.timeout) {
                     resolve();
                 }
                 else {

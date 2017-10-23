@@ -74,9 +74,7 @@ module.exports = class AvanzaCache {
 
 	}
 
-	prepareCache() {
 
-	}
 
 	getMarket(symbols) {
 
