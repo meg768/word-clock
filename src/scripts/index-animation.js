@@ -12,10 +12,10 @@ module.exports = class extends AvanzaAnimation {
 
 	getSymbols() {
 		return ([
-			{symbol: 'OMX',      id:155585}, // ??
+			{symbol: 'OMX',      id:19002},
 			{symbol: 'NASDAQ',   id:19006},
 			{symbol: 'DAX',      id:18981},
-			{symbol: 'DOWJONES', id:155667}, // ??
+			{symbol: 'DOWJONES', id:18985},
 			{symbol: 'HANGSENG', id:18984},
 			{symbol: 'USA',      id:155458},
 			{symbol: 'UK',       id:155698},
