@@ -10,6 +10,8 @@ module.exports = class Animation extends Events {
 
 
     constructor(strip, options) {
+        super();
+        
         this.options   = Object.assign({}, {timeout:10000}, options);
         this.strip     = strip;
         this.name      = 'None';
