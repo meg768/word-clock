@@ -24,8 +24,6 @@ var Module = new function() {
 		var strip     = new Strip();
 		var animation = new Animation(strip);
 
-		console.log('Starting animation', animation.name, '...');
-
 		animation.run().then(function() {
 			console.log('Done.');
 		})
