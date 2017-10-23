@@ -86,7 +86,7 @@ module.exports = class AvanzaCache {
 				var now     = new Date();
 
 				// Time to clear cache?
-	            if (this.lastFetch == undefined || now.getTime() - this.lastFetch.getTime() > 15 * 60 * 1000) {
+	            if (this.lastFetch == undefined || now.getTime() - this.lastFetch.getTime() > 5 * 60 * 1000) {
 					console.log('Clearing cache...');
 	                this.cache = {};
 	            }
