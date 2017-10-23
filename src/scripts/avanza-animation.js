@@ -49,7 +49,7 @@ module.exports = class extends Animation {
 				for (var i = 0; i < layout.text.length; i++) {
 
 
-					symbol.change = random([symbol.change, symbol.change, symbol.change, 2.5, 3.5]);
+					symbol.change = random([symbol.change, symbol.change, symbol.change, 2.1, 2.6, 3.1]);
 
 					var change     = Math.max(-2, Math.min(2, symbol.change));
 					var hue        = change >= 0 ? 240 : 0;
@@ -58,6 +58,9 @@ module.exports = class extends Animation {
 
 					if (Math.abs(symbol.change) > 2)
 						luminance = 60;
+
+					if (Math.abs(symbol.change) > 2.5)
+						luminance = 70;
 
 					if (Math.abs(symbol.change) > 3)
 						luminance = 80;
