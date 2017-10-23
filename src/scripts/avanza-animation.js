@@ -47,10 +47,10 @@ module.exports = class extends Animation {
 				var layout = lookup[index];
 
 				for (var i = 0; i < layout.text.length; i++) {
-					var change     = Math.max(-3, Math.min(3, symbol.change));
+					var change     = Math.max(-2, Math.min(2, symbol.change));
 					var hue        = change >= 0 ? 240 : 0;
 					var saturation = 100;
-					var luminance  = 10 + (Math.abs(change) / 3) * 40;
+					var luminance  = 10 + (Math.abs(change) / 2) * 40;
 
 	                pixels.setPixelHSL(layout.x + i, layout.y, hue, saturation, luminance);
 	            }
