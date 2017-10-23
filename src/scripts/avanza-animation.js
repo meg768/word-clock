@@ -46,7 +46,7 @@ module.exports = class extends Animation {
 				var symbol = symbols[index];
 				var layout = lookup[index];
 
-				symbol.change = random([-1, 1]) * random(4.0);
+				symbol.change = random([-1, 1]) * Math.random() * 4;
 console.log(symbol.change);
 				var change     = Math.max(-2, Math.min(2, symbol.change));
 				var hue        = change >= 0 ? 240 : 0;
