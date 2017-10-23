@@ -72,6 +72,8 @@ var Module = new function() {
 
 			upperButton.on('click', () => {
 
+				console.log('Upper button pressed!');
+
 				if (currentAnimation) {
 					currentAnimation.cancel();
 				}
@@ -82,6 +84,8 @@ var Module = new function() {
 			});
 
 			lowerButton.on('click', () => {
+
+				console.log('Lower button pressed!');
 
 				if (currentAnimation) {
 					currentAnimation.once('stopped', () => {
