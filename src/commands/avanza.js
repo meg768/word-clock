@@ -2,7 +2,7 @@ var sprintf = require('yow/sprintf');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Strip = require('../scripts/neopixel-strip.js');
-var Animation = require('../scripts/avanza-animation.js');
+var Animation = require('../scripts/index-animation.js');
 
 var Module = new function() {
 
