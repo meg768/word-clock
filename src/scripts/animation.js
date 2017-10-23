@@ -4,7 +4,7 @@ var sprintf = require('yow/sprintf');
 var Timer   = require('yow/timer');
 var Events  = require('events')
 var Pixels  = require('./pixels.js');
-var Events  = require('EventEmitter');
+var Events  = require('events');
 
 module.exports = class Animation extends Events {
 
