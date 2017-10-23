@@ -50,7 +50,7 @@ module.exports = class extends Animation {
 					var change     = Math.max(-1.5, Math.min(1.5, symbol.change));
 					var hue        = change >= 0 ? 240 : 0;
 					var saturation = 100;
-					var luminance  = 10 + (Math.abs(change) / 1.5) * 40;
+					var luminance  = 5 + (Math.abs(change) / 1.5) * 45;
 
 	                pixels.setPixelHSL(layout.x + i, layout.y, hue, saturation, luminance);
 	            }
