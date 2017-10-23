@@ -80,7 +80,7 @@ module.exports = class Animation extends Events {
             if (this.cancelled)
                 this.strip.render(pixels.getPixels());
             else
-                this.strip.render(pixels.getPixels(), {fadeIn:10});
+                this.strip.render(pixels.getPixels(), {fadeIn:5});
 
             resolve();
 
