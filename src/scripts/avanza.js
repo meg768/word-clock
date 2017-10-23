@@ -10,8 +10,8 @@ module.exports = class AvanzaCache {
 
 	constructor() {
 
-		this.lastLogin = undefined;
-		this.lastFetch = undefined;
+		this.loginTime = undefined;
+		this.cacheTime = undefined;
 		this.avanza    = new Avanza();
 		this.cache     = {};
 	}
@@ -20,14 +20,13 @@ module.exports = class AvanzaCache {
 	login() {
 
 
-        if (this.lastLogin != undefined) {
+        if (this.loginTime != undefined) {
 			var now = new Date();
 
-            if (now.getTime() - this.lastLogin.getTime() < 60 * 60 * 1000) {
+            if (now.getTime() - this.loginTime.getTime() < 60 * 60 * 1000) {
                 return Promise.resolve();
             }
         }
-
 
 		if (this.avanza.session.username != undefined)
 			return Promise.resolve();
@@ -41,7 +40,7 @@ module.exports = class AvanzaCache {
 			this.avanza.login(credentials).then(() => {
 				console.log('Avanza login OK.');
 
-				this.lastLogin = new Date();
+				this.loginTime = new Date();
 
 				resolve();
 			})
@@ -86,12 +85,12 @@ module.exports = class AvanzaCache {
 				var now     = new Date();
 
 				// Time to clear cache?
-	            if (this.lastFetch == undefined || now.getTime() - this.lastFetch.getTime() > 5 * 60 * 1000) {
+	            if (this.cacheTime == undefined || now.getTime() - this.cacheTime.getTime() > 3 * 60 * 1000) {
 					console.log('Clearing cache...');
 	                this.cache = {};
+					this.cacheTime = now;
 	            }
 
-				this.lastFetch = now;
 
 				symbols.forEach((symbol) => {
 					promise = promise.then(() => {
