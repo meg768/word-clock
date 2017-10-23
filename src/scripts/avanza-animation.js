@@ -47,14 +47,17 @@ module.exports = class extends Animation {
 				var layout = lookup[index];
 
 				for (var i = 0; i < layout.text.length; i++) {
-					var color = parseFloat(symbol.change) >= 0 ? 'blue' : 'red';
-	                pixels.setPixel(layout.x + i, layout.y, Color(color).rgbNumber());
+					var change     = Math.max(-1.5, Math.min(1.5, symbol.change));
+					var hue        = change >= 0 ? 240 : 0;
+					var saturation = 100;
+					var luminance  = 10 + (Math.abs(change) / 1.5) * 40;
+
+	                pixels.setPixelHSL(layout.x + i, layout.y, hue, saturation, luminance);
 	            }
 
 			}
 
-//	        self.strip.render(pixels.getPixels(), {fadeIn:10});
-			self.strip.render(pixels.getPixels());
+	        self.strip.render(pixels.getPixels(), {fadeIn:10});
 
 		}
 		else {
