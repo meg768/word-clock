@@ -69,7 +69,7 @@ network={
 	ssid="network"
 	psk="password"
 }
-````bash
+````
 
 ## wpa_supplicant
 
