@@ -89,7 +89,8 @@ var Module = new function() {
 
 				if (currentAnimation) {
 					currentAnimation.once('stopped', () => {
-						this.runAnimation(new BlankAnimation(strip, {timeout:-1}));
+						console.log('ANIMATION IS STOPPED!');
+						runAnimation(new BlankAnimation(strip, {timeout:-1}));
 					});
 
 					currentAnimation.cancel();

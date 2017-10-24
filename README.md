@@ -56,9 +56,31 @@ npm install
 sudo node ./word-clock.js server
 ````
 
+````bash
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+````
+
+````bash
+country=GB
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+	ssid="network"
+	psk="password"
+}
+````bash
+
+## wpa_supplicant
+
+Disconnect
+
+	wpa_cli disconnect -i wlan0
+
 
 
 ## Links
+- Send files to RPI over Bluetooth - https://www.raspberrypi.org/forums/viewtopic.php?p=963751#p963751
 - Powering lots of leds - http://www.eerkmans.nl/powering-lots-of-leds-from-arduino/
 - Adafruit Neopixel Library - https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library
 - I2C Communication between Raspberry and Arduino - https://oscarliang.com/raspberry-pi-arduino-connected-i2c/
