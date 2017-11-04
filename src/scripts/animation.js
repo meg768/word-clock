@@ -12,12 +12,13 @@ module.exports = class Animation extends Events {
     constructor(strip, options) {
         super();
 
-        this.options   = Object.assign({}, {priority:'normal'}, options);
-        this.strip     = strip;
-        this.name      = 'None';
+        this.options = Object.assign({}, {priority:'normal'}, options);
+        this.strip = strip;
+        this.name = 'None';
         this.cancelled = false;
-        this.tick      = 0;
-        this.pixels    = new Pixels(strip.width, strip.height);
+        self.renderFrequency = 0;
+        this.renderTime = 0;
+        this.pixels = new Pixels(strip.width, strip.height);
 
 
     }
@@ -31,8 +32,8 @@ module.exports = class Animation extends Events {
 
         return new Promise((resolve, reject) => {
 
-            this.cancelled = false;
-            this.tick      = 0;
+            this.cancelled  = false;
+            this.renderTime = 0;
 
             resolve();
 
@@ -88,9 +89,9 @@ module.exports = class Animation extends Events {
                 else {
                     var now = new Date();
 
-                    if (self.options.renderFrequency == undefined || now - self.tick >= self.options.renderFrequency) {
+                    if (self.renderFrequency == 0 || now - self.renderTime >= self.renderFrequency) {
                         self.render();
-                        self.tick = now;
+                        self.renderTime = now;
                     }
 
                     setImmediate(loop);

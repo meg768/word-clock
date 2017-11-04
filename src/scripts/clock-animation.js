@@ -11,8 +11,9 @@ module.exports = class extends Animation {
 
 
     constructor(strip, options) {
-        super(strip, Object.assign({renderFrequency:15 * 1000}, options));
+        super(strip, Object.assign({}, options));
 
+        this.renderFrequency = 15 * 1000;
         this.name = 'Clock';
 
     }

@@ -16,8 +16,9 @@ module.exports = class extends Animation {
 
 
 	constructor(strip, options) {
-		super(strip, Object.assign({renderFrequency:60 * 1000 * 15}, options));
+		super(strip, Object.assign({}, options));
 
+		this.renderFrequency = 60 * 1000 * 15;
 		this.name    = 'Avanza Animation';
 		this.symbols = [];
 		this.avanza  = avanzaCache;

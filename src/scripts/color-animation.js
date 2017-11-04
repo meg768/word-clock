@@ -15,9 +15,10 @@ module.exports = class extends Animation {
 
 
 	constructor(strip, options) {
-		super(strip, Object.assign({renderFrequency:60000, color:'blue'}, options));
+		super(strip, Object.assign({color:'blue'}, options));
 
 		this.name  = 'Color animation';
+		this.renderFrequency = 60000;
 		this.color = 'blue';
 
 		try {
