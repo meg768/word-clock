@@ -9,6 +9,8 @@ var Animation  = require('./animation.js');
 function debug() {
     console.log.apply(this, arguments);
 }
+
+
 module.exports = class extends Animation {
 
 

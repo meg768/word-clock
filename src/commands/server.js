@@ -7,6 +7,11 @@ var Timer = require('yow/timer');
 var Strip = require('../scripts/neopixel-strip.js');
 var Button = require('../scripts/button.js');
 
+function debug() {
+    console.log.apply(this, arguments);
+}
+
+
 var Module = new function() {
 
 	function debug() {
@@ -95,6 +100,10 @@ var Module = new function() {
 
 				animationQueue.enqueue(animation);
             }
+
+			animationQueue.on('idle', () => {
+				debug('Idle...');
+			});
 
 			runNextAnimation();
 
