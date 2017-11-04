@@ -57,7 +57,7 @@ var Module = new function() {
 
 			//var MatrixAnimation    = require('../scripts/matrix-animation.js');
 
-			var animations       = [ClockAnimation, BlankAnimation];
+			var animations       = [ClockAnimation, IndexAnimation, BlankAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Strip();
@@ -102,6 +102,9 @@ var Module = new function() {
 
 			function runNextAnimation() {
 
+				if (animationQueue.currentAnimation) {
+					animationQueue.currentAnimation.cancel();
+				}
 
                 return new Promise((resolve, reject) => {
 
@@ -127,7 +130,7 @@ var Module = new function() {
 
 			}
 
-			runAnimation(new ClockAnimation(strip, {duration:-1, priority:'!'}));
+			runNextAnimation():
 
 
 		});

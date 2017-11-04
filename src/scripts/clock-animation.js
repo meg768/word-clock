@@ -11,7 +11,7 @@ module.exports = class extends Animation {
 
 
     constructor(strip, options) {
-        super(strip, Object.assign({renderFrequency:3000}, options));
+        super(strip, Object.assign({renderFrequency:30000}, options));
 
         this.name = 'Clock';
 
@@ -20,10 +20,8 @@ module.exports = class extends Animation {
 
 
     render() {
-        console.log('Redrawing clock');
-
-        var pixels  = new Pixels(this.strip.width, this.strip.height);
         var display = new Layout();
+        var pixels  = this.pixels;
         var text    = this.getTime();
         var hue     = this.getHue();
 
