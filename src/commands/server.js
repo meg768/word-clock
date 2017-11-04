@@ -68,6 +68,7 @@ var Module = new function() {
 			var strip            = new Strip();
 			var animationIndex   = -1;
 			var state            = 'on';
+			var duration         = 5000;
 			var animationQueue   = new AnimationQueue();
 
 
@@ -78,12 +79,12 @@ var Module = new function() {
 			lowerButton.on('click', () => {
 
 				if (state == 'on') {
-					animationQueue.enqueue(new ColorAnimation(strip, {color:'black', duration:-1, priority:'!'}));
+					animationQueue.enqueue(new ColorAnimation(strip, {color:'black', duration:duration, priority:'!'}));
 				}
 				else {
 					var Animation = animations[animationIndex % animations.length];
 
-					animationQueue.enqueue(new Animation(strip, {duration:-1, priority:'!'}));
+					animationQueue.enqueue(new Animation(strip, {duration:duration, priority:'!'}));
 				}
 
 				state = (state == 'on') ? 'off' : 'on';
@@ -96,13 +97,14 @@ var Module = new function() {
 
 				// Get next animation
 				var Animation = animations[animationIndex % animations.length];
-				var animation = new Animation(strip, {duration:-1, priority:'!'});
+				var animation = new Animation(strip, {duration:duration, priority:'!'});
 
 				animationQueue.enqueue(animation);
             }
 
 			animationQueue.on('idle', () => {
-				debug('Idle...');
+				debug('Idle. Running next animation');
+				runNextAnimation();
 			});
 
 			runNextAnimation();
