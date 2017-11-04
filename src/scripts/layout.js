@@ -4,8 +4,6 @@ var isString = require('yow/is').isString;
 
 var Module = module.exports = function() {
 
-
-
     var _layout = [
         "ZNOKVARTIOJPY",
         "SOLITETJUGOMX",
