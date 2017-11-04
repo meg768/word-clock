@@ -134,7 +134,7 @@ var Module = new function() {
 
 			setup.on('connecting', () => {
 				debug('Connecting to Wi-Fi...');
-                runAnimation(new ColorAnimation(strip, {priority:'!', color:'orange', duration:-1}));
+                runAnimation(new ColorAnimation(strip, {priority:'!', color:'yellow', duration:-1}));
 			});
 
             setup.on('discoverable', () => {
