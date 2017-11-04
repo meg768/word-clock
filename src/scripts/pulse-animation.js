@@ -22,6 +22,7 @@ module.exports = class extends Animation {
         this.name = 'Pulse Animation';
         this.renderFrequency = this.options.interval;
         this.color = Color('red').rgbNumber();
+        this.tick  = 0;
 
         if (isString(this.options.color)) {
             try {
@@ -39,6 +40,7 @@ module.exports = class extends Animation {
 
 
     start() {
+        this.tick = 0;
         return super.start();
     }
 
