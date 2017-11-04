@@ -96,39 +96,18 @@ var Module = new function() {
 				if (animation == undefined)
 					animation = new BlankAnimation(strip, {duration:-1, priority:'!'});
 
-				return animationQueue.enqueue(animation);
+				animationQueue.enqueue(animation);
 			}
 
 
 			function runNextAnimation() {
 
-				if (animationQueue.currentAnimation) {
-					animationQueue.currentAnimation.cancel();
-				}
+				// Get next animation
+				var Animation = animations[animationIndex];
+				var animation = new Animation(strip, {duration:-1, priority:'!'});
 
-                return new Promise((resolve, reject) => {
-
-					// Get next animation
-					var Animation = animations[animationIndex];
-					var animation = new Animation(strip, {duration:-1, priority:'!'});
-
-					runAnimation(animation).then(() => {
-					})
-
-					.catch((error) => {
-						console.log(error);
-					})
-
-					.then(() => {
-						animationIndex = (animationIndex + 1) % animations.length;
-						setTimeout(runNextAnimation, 0);
-
-						resolve();
-
-					})
-                });
-
-			}
+				animationQueue.enqueue(animation);
+            }
 
 			runNextAnimation();
 
