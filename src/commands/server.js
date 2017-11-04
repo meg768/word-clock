@@ -62,24 +62,34 @@ var Module = new function() {
 			var lowerButton      = new Button(13);
 			var strip            = new Strip();
 			var animationIndex   = 0;
-			var state            = 0;
+			var state            = 'on';
 			var animationQueue   = new AnimationQueue();
 
 
-			upperButton.on('click', () => {
+			upperButton.on('click', (clicks) => {
 
-				console.log('Upper button pressed!');
+				if (clicks > 1) {
+					animationQueue.enqueue(new MatrixAnimation(strip, {duration:-1, priority:'!'}));
+				}
+				else {
+					runNextAnimation();
 
-				runNextAnimation();
+				}
 
 			});
 
 			lowerButton.on('click', () => {
 
-				console.log('Lower button pressed!');
-
 				animationIndex = 0;
-				animationQueue.enqueue(new ColorAnimation(strip, {color:'black', duration:-1, priority:'!'}));
+
+				if (state == 'on') {
+					animationQueue.enqueue(new ColorAnimation(strip, {color:'black', duration:-1, priority:'!'}));
+					state = 'off';
+				}
+				else {
+					runNextAnimation();
+					state = 'on';
+				}
 
 			});
 

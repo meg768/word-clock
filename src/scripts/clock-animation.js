@@ -11,7 +11,7 @@ module.exports = class extends Animation {
 
 
     constructor(strip, options) {
-        super(strip, Object.assign({renderFrequency:30000}, options));
+        super(strip, Object.assign({renderFrequency:15 * 1000}, options));
 
         this.name = 'Clock';
 
@@ -27,6 +27,8 @@ module.exports = class extends Animation {
 
         var words   = display.lookupText(text);
 
+        pixels.clear();
+
         words.forEach((word) => {
             for (var i = 0; i < word.text.length; i++) {
                 pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
@@ -35,7 +37,6 @@ module.exports = class extends Animation {
         });
 
         this.strip.render(pixels.getPixels());
-
     }
 
     getHue() {
