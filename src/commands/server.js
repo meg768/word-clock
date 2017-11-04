@@ -53,17 +53,17 @@ var Module = new function() {
 			var CommodityAnimation = require('../scripts/commodity-animation.js');
 			var IndexAnimation     = require('../scripts/index-animation.js');
 			var ColorAnimation     = require('../scripts/color-animation.js');
-			var animationQueue     = require('../scripts/animation-queue.js');
+			var AnimationQueue     = require('../scripts/animation-queue.js');
 
 			//var MatrixAnimation    = require('../scripts/matrix-animation.js');
 
-			var animations       = [ClockAnimation, IndexAnimation, ColorAnimation];
+			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Strip();
 			var animationIndex   = 0;
 			var state            = 0;
-			var animationQueue   = new animationQueue();
+			var animationQueue   = new AnimationQueue();
 
 
 			upperButton.on('click', () => {
@@ -78,6 +78,8 @@ var Module = new function() {
 
 				console.log('Lower button pressed!');
 
+				animationIndex = 0;
+				animationQueue.enqueue(new ColorAnimation(strip, {color:'black', duration:-1, priority:'!'}));
 
 			});
 
