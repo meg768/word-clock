@@ -43,8 +43,8 @@ module.exports = class extends Animation {
     }
 
     render() {
-        pixels.fill((this.tick % 2) == 0 ? this.color : 0);
-        strip.render(pixels.getPixels(), {fadeIn:this.options.delay});
+        this.pixels.fill((this.tick % 2) == 0 ? this.color : 0);
+        this.strip.render(this.pixels.getPixels(), {fadeIn:this.options.delay});
     }
 
 
