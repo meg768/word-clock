@@ -55,9 +55,9 @@ var Module = new function() {
 			var ColorAnimation     = require('../scripts/color-animation.js');
 			var AnimationQueue     = require('../scripts/animation-queue.js');
 
-			//var MatrixAnimation    = require('../scripts/matrix-animation.js');
+			var MatrixAnimation    = require('../scripts/matrix-animation.js');
 
-			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
+			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, MatrixAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Strip();
