@@ -89,17 +89,6 @@ var Module = new function() {
 
 
 
-
-
-			function runAnimation(animation) {
-
-				if (animation == undefined)
-					animation = new BlankAnimation(strip, {duration:-1, priority:'!'});
-
-				animationQueue.enqueue(animation);
-			}
-
-
 			function runNextAnimation() {
 
 				// Get next animation
