@@ -21,6 +21,7 @@ module.exports = class extends Animation {
         this.options   = Object.assign({}, {interval:1000, delay:1000}, this.options);
         this.name      = 'Pulse Animation';
         this.time      = undefined;
+        this.counter   = 0;
         this.color     = Color('red').rgbNumber();
 
         if (isString(this.options.color)) {
@@ -38,6 +39,10 @@ module.exports = class extends Animation {
     }
 
 
+    start() {
+        this.counter = 0;
+        return super.start();
+    }
 
     render() {
         var now = new Date();
@@ -47,12 +52,7 @@ module.exports = class extends Animation {
 
         if (this.time == undefined || now - this.time > this.options.interval) {
 
-            pixels.fill(this.color);
-            strip.render(pixels.getPixels(), {fadeIn:this.options.delay});
-
-
-
-            pixels.fill(0);
+            pixels.fill((this.counter % 2) == 0 ? this.color : 0);
             strip.render(pixels.getPixels(), {fadeIn:this.options.delay});
 
             this.time = now;
