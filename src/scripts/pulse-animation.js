@@ -50,9 +50,9 @@ module.exports = class extends Animation {
             this.pixels.fill((this.tick % 2) == 0 ? this.color : 0);
             this.strip.render(this.pixels.getPixels(), {fadeIn:this.options.delay});
 
-            this.tick = 0;
+            this.tick++;
         }
-        
+
         catch(error) {
             console.log(error);
         }
