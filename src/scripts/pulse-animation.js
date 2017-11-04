@@ -18,11 +18,10 @@ module.exports = class extends Animation {
     constructor(strip, options) {
         super(strip, options);
 
-        this.options   = Object.assign({}, {interval:500, delay:500}, this.options);
-        this.name      = 'Pulse Animation';
-        this.time      = 0;
-        this.tick      = 0;
-        this.color     = Color('red').rgbNumber();
+        this.options = Object.assign({}, {interval:500, delay:500}, this.options);
+        this.name = 'Pulse Animation';
+        this.renderFrequency = this.options.interval;
+        this.color = Color('red').rgbNumber();
 
         if (isString(this.options.color)) {
             try {
@@ -40,27 +39,12 @@ module.exports = class extends Animation {
 
 
     start() {
-        this.tick = 0;
-        this.time = 0;
-
         return super.start();
     }
 
     render() {
-        var now = new Date();
-
-        var pixels = this.pixels;
-        var strip  = this.strip;
-
-        if (now - this.time > this.options.interval) {
-
-            pixels.fill((this.tick % 2) == 0 ? this.color : 0);
-            strip.render(pixels.getPixels(), {fadeIn:this.options.delay});
-
-            this.tick++;
-            this.time = now;
-        }
-
+        pixels.fill((this.tick % 2) == 0 ? this.color : 0);
+        strip.render(pixels.getPixels(), {fadeIn:this.options.delay});
     }
 
 
