@@ -46,8 +46,11 @@ module.exports = class extends Animation {
 
     render() {
         try {
-            debug('Rendering pulse', this.color);
-            this.pixels.fill((this.tick % 2) == 0 ? this.color : 0);
+            var color = (this.tick % 2) == 0 ? this.color : 0;
+
+            debug('Rendering pulse', color);
+
+            this.pixels.fill(color);
             this.strip.render(this.pixels.getPixels(), {fadeIn:this.options.delay});
 
             this.tick++;
