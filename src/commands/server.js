@@ -6,6 +6,7 @@ var isFunction = require('yow/is').isFunction;
 var Timer = require('yow/timer');
 var Strip = require('../scripts/neopixel-strip.js');
 var Button = require('../scripts/button.js');
+var WifiSetup = require('../scripts/wifi-setup.js');
 
 function debug() {
     console.log.apply(this, arguments);
@@ -120,7 +121,29 @@ var Module = new function() {
 				runNextAnimation();
 			});
 
-			runNextAnimation();
+
+			var setup = new WifiSetup('/boot/bluetooth/wifi.json');
+
+			setup.on('connecting', () => {
+				debug('Connecting to Wi-Fi...');
+                enqueue(new PulseAnimation(strip, {priority:'!', color:'orange', duration:-1}));
+			});
+
+            setup.on('discoverable', () => {
+				debug('Raspberry now discoverable.');
+                enqueue(new PulseAnimation(strip, {priority:'!', color:'blue', duration:-1}));
+			});
+
+            setup.on('wifi-changed', () => {
+			});
+
+			setup.on('ready', () => {
+				debug('Ready!');
+				runNextAnimation();
+			});
+
+
+			setup.setup();
 
 
 		});
