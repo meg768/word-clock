@@ -55,6 +55,7 @@ module.exports = class extends Animation {
             pixels.fill((this.counter % 2) == 0 ? this.color : 0);
             strip.render(pixels.getPixels(), {fadeIn:this.options.delay});
 
+            this.counter++;
             this.time = now;
         }
 
