@@ -80,20 +80,19 @@ var Module = new function() {
 
 			lowerButton.on('click', () => {
 
-				animationIndex = 0;
-
 				if (state == 'on') {
 					animationQueue.enqueue(new ColorAnimation(strip, {color:'black', duration:-1, priority:'!'}));
 					state = 'off';
 				}
 				else {
-					runNextAnimation();
+					var Animation = animations[animationIndex % animations.length];
+
+					animationQueue.enqueue(new Animation(strip, {duration:-1, priority:'!'}));
+
 					state = 'on';
 				}
 
 			});
-
-
 
 
 			function runNextAnimation() {
