@@ -4,6 +4,7 @@ var isString      = require('yow/is').isString;
 var Events        = require('events');
 var child_process = require('child_process');
 var Watch         = require('watch');
+var Path          = require('path');
 
 function debug() {
     console.log.apply(this, arguments);
