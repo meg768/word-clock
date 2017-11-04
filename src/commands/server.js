@@ -65,7 +65,7 @@ var Module = new function() {
 			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
-			var strip            = new Strip();
+			var strip            = new Strip({width:13, height:13});
 			var animationIndex   = -1;
 			var state            = 'on';
 			var duration         = -1;
@@ -74,6 +74,9 @@ var Module = new function() {
 			upperButton.on('click', (clicks) => {
 
 				if (state == 'on') {
+					// Reset animation index
+					animationIndex = 0;
+
 					// Turn off
 					animationQueue.enqueue(new ColorAnimation(strip, {color:'black', duration:-1, priority:'!'}));
 				}
