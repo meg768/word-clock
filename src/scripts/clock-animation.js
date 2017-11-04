@@ -19,19 +19,6 @@ module.exports = class extends Animation {
 
 
 
-
-    start() {
-        return new Promise((resolve, reject) => {
-            super.start().then(() => {
-                this.render();
-                resolve();
-            })
-            .catch((error) => {
-                reject(error);
-            })
-        });
-    }
-
     render() {
         console.log('Redrawing clock');
 
@@ -49,7 +36,7 @@ module.exports = class extends Animation {
             }
         });
 
-        this.strip.render(pixels.getPixels(), options);
+        this.strip.render(pixels.getPixels());
 
     }
 
