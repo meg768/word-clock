@@ -44,6 +44,7 @@ module.exports = class extends Animation {
 
     render() {
         try {
+            debug('Rendering pulse', this.color);
             this.pixels.fill((this.tick % 2) == 0 ? this.color : 0);
             this.strip.render(this.pixels.getPixels(), {fadeIn:this.options.delay});
 
