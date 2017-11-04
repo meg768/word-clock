@@ -61,47 +61,38 @@ var Module = new function() {
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Strip();
-			var animationIndex   = 0;
+			var animationIndex   = -1;
 			var state            = 'on';
 			var animationQueue   = new AnimationQueue();
 
 
 			upperButton.on('click', (clicks) => {
-
-				if (clicks > 1) {
-					animationQueue.enqueue(new MatrixAnimation(strip, {duration:-1, priority:'!'}));
-				}
-				else {
-					runNextAnimation();
-
-				}
-
+				runNextAnimation();
 			});
 
 			lowerButton.on('click', () => {
 
 				if (state == 'on') {
 					animationQueue.enqueue(new ColorAnimation(strip, {color:'black', duration:-1, priority:'!'}));
-					state = 'off';
 				}
 				else {
 					var Animation = animations[animationIndex % animations.length];
 
 					animationQueue.enqueue(new Animation(strip, {duration:-1, priority:'!'}));
-
-					state = 'on';
 				}
 
+				state = (state == 'on') ? 'off' : 'on';
 			});
 
 
 			function runNextAnimation() {
 
+				animationIndex = (animationIndex + 1) % animations.length;
+
 				// Get next animation
 				var Animation = animations[animationIndex % animations.length];
 				var animation = new Animation(strip, {duration:-1, priority:'!'});
 
-				animationIndex = (animationIndex + 1) % animations.length;
 				animationQueue.enqueue(animation);
             }
 
