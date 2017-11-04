@@ -16,7 +16,7 @@ module.exports = class Animation extends Events {
         this.strip = strip;
         this.name = 'None';
         this.cancelled = false;
-        self.renderFrequency = 0;
+        this.renderFrequency = 0;
         this.renderTime = 0;
         this.pixels = new Pixels(strip.width, strip.height);
 
