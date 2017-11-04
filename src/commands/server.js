@@ -52,12 +52,12 @@ var Module = new function() {
 			var CurrencyAnimation  = require('../scripts/currency-animation.js');
 			var CommodityAnimation = require('../scripts/commodity-animation.js');
 			var IndexAnimation     = require('../scripts/index-animation.js');
-			var BlankAnimation     = require('../scripts/animation.js');
+			var ColorAnimation     = require('../scripts/color-animation.js');
 			var animationQueue     = require('../scripts/animation-queue.js');
 
 			//var MatrixAnimation    = require('../scripts/matrix-animation.js');
 
-			var animations       = [ClockAnimation, IndexAnimation, BlankAnimation];
+			var animations       = [ClockAnimation, IndexAnimation, ColorAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Strip();
