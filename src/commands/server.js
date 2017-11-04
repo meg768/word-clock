@@ -125,6 +125,12 @@ var Module = new function() {
 
 			var setup = new WifiSetup('/boot/bluetooth/wifi.json');
 
+			animationQueue.on('idle', () => {
+				debug('Idle. Running next animation');
+				runNextAnimation();
+			});
+
+
 			setup.on('connecting', () => {
 				debug('Connecting to Wi-Fi...');
                 runAnimation(new PulseAnimation(strip, {priority:'!', color:'orange', duration:-1}));
@@ -140,11 +146,6 @@ var Module = new function() {
 
 			setup.on('ready', () => {
 				debug('Ready!');
-
-				animationQueue.on('idle', () => {
-					debug('Idle. Running next animation');
-					runNextAnimation();
-				});
 
 
 				runNextAnimation();

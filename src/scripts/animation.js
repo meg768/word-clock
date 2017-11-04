@@ -6,19 +6,23 @@ var Events  = require('events')
 var Pixels  = require('./pixels.js');
 var Events  = require('events');
 
+function debug() {
+    console.log.apply(this, arguments);
+}
+
 module.exports = class Animation extends Events {
 
 
     constructor(strip, options) {
         super();
 
-        this.options = Object.assign({}, {priority:'normal'}, options);
-        this.strip = strip;
-        this.name = 'None';
-        this.cancelled = false;
+        this.options         = Object.assign({}, {priority:'normal'}, options);
+        this.strip           = strip;
+        this.name            = 'None';
+        this.cancelled       = false;
         this.renderFrequency = 0;
-        this.renderTime = 0;
-        this.pixels = new Pixels(strip.width, strip.height);
+        this.renderTime      = 0;
+        this.pixels          = new Pixels(strip.width, strip.height);
 
 
     }
@@ -28,13 +32,14 @@ module.exports = class Animation extends Events {
     }
 
     start() {
-        console.log('Starting animation', this.name);
+        debug('Starting animation', this.name);
 
         return new Promise((resolve, reject) => {
 
             this.cancelled  = false;
             this.renderTime = 0;
 
+            debug('Animation', this.name, 'started.');
             resolve();
 
             this.emit('started');
@@ -44,7 +49,7 @@ module.exports = class Animation extends Events {
     }
 
     stop() {
-        console.log('Stopping animation', this.name);
+        debug('Stopping animation', this.name);
 
         return new Promise((resolve, reject) => {
 
@@ -54,6 +59,7 @@ module.exports = class Animation extends Events {
 
             }
 
+            debug('Animation', this.name, 'stopped.');
             resolve();
 
             this.emit('stopped');
@@ -63,7 +69,7 @@ module.exports = class Animation extends Events {
     loop() {
         var self = this;
 
-        console.log('Running loop', self.name);
+        debug('Running loop', self.name);
 
         return new Promise((resolve, reject) => {
 
@@ -105,7 +111,7 @@ module.exports = class Animation extends Events {
 
 
     cancel() {
-        console.log('Cancelling animation', this.name);
+        debug('Cancelling animation', this.name);
         this.cancelled = true;
     }
 
