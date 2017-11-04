@@ -62,13 +62,13 @@ var Module = new function() {
 
 			var MatrixAnimation    = require('../scripts/matrix-animation.js');
 
-			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, MatrixAnimation];
+			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Strip();
 			var animationIndex   = -1;
 			var state            = 'on';
-			var duration         = 5000;
+			var duration         = 10000;
 			var animationQueue   = new AnimationQueue();
 
 
@@ -79,11 +79,14 @@ var Module = new function() {
 			lowerButton.on('click', () => {
 
 				if (state == 'on') {
-					animationQueue.enqueue(new ColorAnimation(strip, {color:'black', duration:duration, priority:'!'}));
+					// Turn off
+					animationQueue.enqueue(new ColorAnimation(strip, {color:'black', duration:-1, priority:'!'}));
 				}
 				else {
-					var Animation = animations[animationIndex % animations.length];
+					// Switch duration mode, loop or static
+					duration = (duration < 0) ? 10000 : -1;
 
+					var Animation = animations[animationIndex % animations.length];
 					animationQueue.enqueue(new Animation(strip, {duration:duration, priority:'!'}));
 				}
 
