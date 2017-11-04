@@ -123,6 +123,11 @@ var Module = new function() {
 
 			}
 
+			animationQueue.on('idle', () => {
+				debug('Idle. Running next animation');
+				runNextAnimation();
+			});
+
 			function startup() {
 				/*
 
