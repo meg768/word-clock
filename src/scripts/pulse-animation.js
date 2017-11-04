@@ -20,8 +20,8 @@ module.exports = class extends Animation {
 
         this.options   = Object.assign({}, {interval:1000, delay:1000}, this.options);
         this.name      = 'Pulse Animation';
-        this.time      = undefined;
-        this.counter   = 0;
+        this.time      = 0;
+        this.tick      = 0;
         this.color     = Color('red').rgbNumber();
 
         if (isString(this.options.color)) {
@@ -40,7 +40,9 @@ module.exports = class extends Animation {
 
 
     start() {
-        this.counter = 0;
+        this.tick = 0;
+        this.time = 0;
+
         return super.start();
     }
 
@@ -50,12 +52,12 @@ module.exports = class extends Animation {
         var pixels = this.pixels;
         var strip  = this.strip;
 
-        if (this.time == undefined || now - this.time > this.options.interval) {
+        if (now - this.time > this.options.interval) {
 
-            pixels.fill((this.counter % 2) == 0 ? this.color : 0);
+            pixels.fill((this.tick % 2) == 0 ? this.color : 0);
             strip.render(pixels.getPixels(), {fadeIn:this.options.delay});
 
-            this.counter++;
+            this.tick++;
             this.time = now;
         }
 
