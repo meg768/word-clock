@@ -10,7 +10,7 @@ var Layout     = require('./layout.js');
 var Pixels     = require('./pixels.js');
 var Color      = require('color');
 
-var avanza = new Avanza();
+var avanzaCache = new Avanza();
 
 module.exports = class extends Animation {
 
@@ -18,8 +18,9 @@ module.exports = class extends Animation {
 	constructor(strip, options) {
 		super(strip, Object.assign({renderFrequency:60 * 1000 * 15}, options));
 
-		this.name = 'Avanza Animation';
+		this.name    = 'Avanza Animation';
 		this.symbols = [];
+		this.avanza  = avanzaCache;
 
 	}
 
@@ -30,7 +31,7 @@ module.exports = class extends Animation {
 
 	render() {
 
-		var promise = avanza.getMarket(this.getSymbols());
+		var promise = this.avanza.getMarket(this.getSymbols());
 
 		promise.then((symbols) => {
 
