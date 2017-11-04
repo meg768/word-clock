@@ -32,7 +32,7 @@ module.exports = class extends Animation {
 	render() {
 		debug('Setting color', this.color)
 		this.pixels.fill(this.color);
-		this.strip.render(this.pixels.getPixels(), {fadeIn:10});
+		this.strip.render(this.pixels.getPixels());
 
     }
 
