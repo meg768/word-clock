@@ -122,11 +122,6 @@ var Module = new function() {
 
 			}
 
-			animationQueue.on('idle', () => {
-				debug('Idle. Running next animation');
-				runNextAnimation();
-			});
-
 
 			var setup = new WifiSetup('/boot/bluetooth/wifi.json');
 
@@ -145,6 +140,13 @@ var Module = new function() {
 
 			setup.on('ready', () => {
 				debug('Ready!');
+
+				animationQueue.on('idle', () => {
+					debug('Idle. Running next animation');
+					runNextAnimation();
+				});
+
+
 				runNextAnimation();
 			});
 
