@@ -50,6 +50,7 @@ module.exports = function NeopixelStrip(options) {
 
 			for (var step = 0; step < numSteps; step++) {
 
+
 				for (var i = 0; i < _length; i++) {
 
 					var r1 = (_pixels[i] & 0xFF0000) >> 16;
@@ -66,8 +67,11 @@ module.exports = function NeopixelStrip(options) {
 
 					tmp[i] = (red << 16) | (green << 8) | blue;
 				}
-				_strip.render(tmp);
-				setImmediate(function(){});
+
+				setImmediate(function() {
+					_strip.render(tmp);
+					
+				});
 			}
 
 			var now = new Date();
