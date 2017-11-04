@@ -70,12 +70,7 @@ var Module = new function() {
 
 				console.log('Upper button pressed!');
 
-				if (animationQueue.currentAnimation) {
-					animationQueue.currentAnimation.cancel();
-				}
-				else {
-					runNextAnimation();
-				}
+				runNextAnimation();
 
 			});
 
