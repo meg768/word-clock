@@ -123,38 +123,45 @@ var Module = new function() {
 
 			}
 
+			function startup() {
+				/*
 
-			var setup = new WifiSetup('/boot/bluetooth/wifi.json');
+				var setup = new WifiSetup('/boot/bluetooth/wifi.json');
 
-			animationQueue.on('idle', () => {
-				debug('Idle. Running next animation');
+				animationQueue.on('idle', () => {
+					debug('Idle. Running next animation');
+					runNextAnimation();
+				});
+
+
+				setup.on('connecting', () => {
+					debug('Connecting to Wi-Fi...');
+	                runAnimation(new ColorAnimation(strip, {priority:'!', color:'white', duration:-1}));
+				});
+
+	            setup.on('discoverable', () => {
+					debug('Raspberry now discoverable.');
+	                runAnimation(new ColorAnimation(strip, {priority:'!', color:'blue', duration:-1}));
+				});
+
+	            setup.on('wifi-changed', () => {
+				});
+
+				setup.on('ready', () => {
+					debug('Ready!');
+
+
+					runNextAnimation();
+				});
+
+
+				setup.setup();
+				*/
+
 				runNextAnimation();
-			});
+			}
 
-
-			setup.on('connecting', () => {
-				debug('Connecting to Wi-Fi...');
-                runAnimation(new ColorAnimation(strip, {priority:'!', color:'white', duration:-1}));
-			});
-
-            setup.on('discoverable', () => {
-				debug('Raspberry now discoverable.');
-                runAnimation(new ColorAnimation(strip, {priority:'!', color:'blue', duration:-1}));
-			});
-
-            setup.on('wifi-changed', () => {
-			});
-
-			setup.on('ready', () => {
-				debug('Ready!');
-
-
-				runNextAnimation();
-			});
-
-
-			setup.setup();
-
+			startup();
 
 		});
 
