@@ -71,7 +71,7 @@ module.exports = function NeopixelStrip(options) {
 				// for a Pi Zero so that every step takes 1 millisecond
 				//Sleep.usleep(380);
 
-				Sleep.usleep(1) //36);
+			//	Sleep.usleep(1) //36);
 
 			}
 

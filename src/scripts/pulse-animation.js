@@ -18,7 +18,7 @@ module.exports = class extends Animation {
     constructor(strip, options) {
         super(strip, options);
 
-        this.options   = Object.assign({}, {interval:1000, delay:1000}, this.options);
+        this.options   = Object.assign({}, {interval:1000, delay:100}, this.options);
         this.name      = 'Pulse Animation';
         this.time      = undefined;
         this.color     = Color('red').rgbNumber();
