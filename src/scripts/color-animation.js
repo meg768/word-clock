@@ -1,6 +1,6 @@
 var sprintf    = require('yow/sprintf');
 var random     = require('yow/random');
-var Colors     = require('color-convert');
+var Color      = require('color');
 var isArray    = require('yow/is').isArray;
 var isString   = require('yow/is').isString;
 var Animation  = require('./animation.js');
@@ -22,6 +22,7 @@ module.exports = class extends Animation {
 			this.color = Color(this.options.color).rgbNumber();
 		}
 		catch(error) {
+			console.log(error);
 			this.color = 'red';
 		}
 	}
