@@ -11,23 +11,14 @@ module.exports = class extends Animation {
 
 
     constructor(strip, options) {
-        super(strip, options);
+        super(strip, Object.assign({renderFrequency:3000}, options));
 
-        this.name       = 'Clock';
-        this.lastRender = 0;
-
-    }
-
-
-
-    tick() {
-        var now = new Date();
-
-        if (now - this.lastRender > 30000) {
-            this.render();
-        }
+        this.name = 'Clock';
 
     }
+
+
+
 
     start() {
         return new Promise((resolve, reject) => {
@@ -41,30 +32,24 @@ module.exports = class extends Animation {
         });
     }
 
-    render(options) {
-        var now = new Date();
+    render() {
+        console.log('Redrawing clock');
 
-        if (now - this.lastRender > 30000) {
-            console.log('Redrawing clock');
+        var pixels  = new Pixels(this.strip.width, this.strip.height);
+        var display = new Layout();
+        var text    = this.getTime();
+        var hue     = this.getHue();
 
-            var pixels  = new Pixels(this.strip.width, this.strip.height);
-            var display = new Layout();
-            var text    = this.getTime();
-            var hue     = this.getHue();
+        var words   = display.lookupText(text);
 
-            var words   = display.lookupText(text);
+        words.forEach((word) => {
+            for (var i = 0; i < word.text.length; i++) {
+                pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
 
-            words.forEach((word) => {
-                for (var i = 0; i < word.text.length; i++) {
-                    pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
+            }
+        });
 
-                }
-            });
-
-            this.strip.render(pixels.getPixels(), options);
-            this.lastRender = new Date();
-        }
-
+        this.strip.render(pixels.getPixels(), options);
 
     }
 

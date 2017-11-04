@@ -16,14 +16,12 @@ module.exports = class Animation extends Events {
         this.strip     = strip;
         this.name      = 'None';
         this.cancelled = false;
+        this.tick      = 0;
         this.pixels    = new Pixels(strip.width, strip.height);
 
 
     }
 
-    setTimeout(ms) {
-        this.options.timeout = ms;
-    }
 
     render() {
     }
@@ -34,6 +32,7 @@ module.exports = class Animation extends Events {
         return new Promise((resolve, reject) => {
 
             this.cancelled = false;
+            this.tick      = 0;
 
             resolve();
 
@@ -87,7 +86,13 @@ module.exports = class Animation extends Events {
                     resolve();
                 }
                 else {
-                    self.render();
+                    var now = new Date();
+
+                    if (self.options.renderFrequency == undefined || now - self.tick >= self.options.renderFrequency) {
+                        self.render();
+                        self.tick = now;
+                    }
+
                     setImmediate(loop);
                 }
             }
