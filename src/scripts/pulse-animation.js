@@ -50,9 +50,7 @@ module.exports = class extends Animation {
             pixels.fill(this.color);
             strip.render(pixels.getPixels(), {fadeIn:this.options.delay});
 
-            if (this.options.length && this.options.length > 0) {
-                Sleep.msleep(this.options.length);
-            }
+
 
             pixels.fill(0);
             strip.render(pixels.getPixels(), {fadeIn:this.options.delay});
