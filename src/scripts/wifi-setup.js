@@ -2,7 +2,7 @@
 var fs            = require('fs');
 var isString      = require('yow/is').isString;
 var Events        = require('events');
-var child_process = require('child_process');
+var ChildProcess  = require('child_process');
 var Watch         = require('watch');
 var Path          = require('path');
 
@@ -74,7 +74,7 @@ class WiFiConnection {
 
         return new Promise((resolve, reject) => {
 
-            child_process.exec(sprintf('wpa_cli -i %s %s', this.iface, command), (error, stdout, stderr) => {
+            ChildProcess.exec(sprintf('wpa_cli -i %s %s', this.iface, command), (error, stdout, stderr) => {
                 if (error)
                     reject(error);
                 else {
@@ -348,7 +348,7 @@ module.exports = class WifiSetup extends Events {
                 // Disable Bluetooth
                 debug('Disabling Bluetooth...');
 
-                child_process.exec('sudo hciconfig hci0 noscan', (error, stdout, stderr) => {
+                ChildProcess.exec('sudo hciconfig hci0 noscan', (error, stdout, stderr) => {
                 });
 
             }
@@ -357,7 +357,7 @@ module.exports = class WifiSetup extends Events {
                 // Enable Bluetooth
                 debug('Enabling Bluetooth...');
 
-                child_process.exec('sudo hciconfig hci0 piscan', (error, stdout, stderr) => {
+                ChildProcess.exec('sudo hciconfig hci0 piscan', (error, stdout, stderr) => {
                     if (!error) {
                         if (timeout != undefined)
                             setTimeout(disable, timeout);
