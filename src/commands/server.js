@@ -87,9 +87,10 @@ var Module = new function() {
 			function runNextAnimation() {
 
 				// Get next animation
-				var Animation = animations[animationIndex];
+				var Animation = animations[animationIndex % animations.length];
 				var animation = new Animation(strip, {duration:-1, priority:'!'});
 
+				animationIndex = (animationIndex + 1) % animations.length;
 				animationQueue.enqueue(animation);
             }
 
