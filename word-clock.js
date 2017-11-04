@@ -20,12 +20,6 @@ var App = function() {
 			args.option('debug',     {alias:'D', describe:'Debug mode', default:false});
 
 			args.command(require('./src/commands/server.js'));
-			args.command(require('./src/commands/test.js'));
-			args.command(require('./src/commands/colorize.js'));
-			args.command(require('./src/commands/clock.js'));
-			args.command(require('./src/commands/text.js'));
-			args.command(require('./src/commands/avanza.js'));
-			args.command(require('./src/commands/bt.js'));
 
 			args.wrap(null);
 			args.demand(1);
