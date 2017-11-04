@@ -17,7 +17,8 @@ module.exports = class extends Animation {
 		super(strip, options);
 
 		this.name = 'Avanza Animation';
-		this.avanza = new Avanza();
+		this.avanza  = new Avanza();
+		this.symbols = [];
 
 	}
 
@@ -26,11 +27,12 @@ module.exports = class extends Animation {
 		return [];
 	}
 
-	render(symbols) {
+	render() {
 		var self    = this;
         var pixels  = new Pixels(this.strip.width, this.strip.height);
         var display = new Layout();
 		var words   = [];
+		var symbols = this.symbols;
 
 
 		symbols.forEach(function(symbol) {
@@ -53,7 +55,6 @@ module.exports = class extends Animation {
 				var hue        = change >= 0 ? 240 : 0;
 				var saturation = 100;
 				var luminance  = 10 + (Math.abs(change) / 2) * 40;
-
 
 				if (Math.abs(symbol.change) > 2)
 					luminance = 60;
@@ -89,7 +90,7 @@ module.exports = class extends Animation {
 				return this.avanza.getMarket(this.getSymbols());
 			})
 			.then((data) => {
-				this.render(data);
+				this.symbols = data;
 				resolve();
 			})
             .catch((error) => {
@@ -98,9 +99,6 @@ module.exports = class extends Animation {
         });
     }
 
-	stop() {
-		return super.stop();
-	}
 
 
 };

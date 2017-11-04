@@ -12,19 +12,20 @@ module.exports = class Animation extends Events {
     constructor(strip, options) {
         super();
 
-        this.options   = Object.assign({}, {timeout:10000}, options);
+        this.options   = Object.assign({}, {priority:'normal'}, options);
         this.strip     = strip;
         this.name      = 'None';
         this.cancelled = false;
+        this.pixels    = new Pixels(strip.width, strip.height);
+
 
     }
 
-    setTiemout(ms) {
+    setTimeout(ms) {
         this.options.timeout = ms;
     }
 
-    tick() {
-
+    render() {
     }
 
     start() {
@@ -40,6 +41,23 @@ module.exports = class Animation extends Events {
 
         });
 
+    }
+
+    stop() {
+        console.log('Stopping animation', this.name);
+
+        return new Promise((resolve, reject) => {
+
+            if (!this.cancelled) {
+                this.pixels.clear();
+                this.strip.render(this.pixels.getPixels(), {fadeIn:10});
+
+            }
+
+            resolve();
+
+            this.emit('stopped');
+        });
     }
 
     loop() {
@@ -58,33 +76,23 @@ module.exports = class Animation extends Events {
                 if (self.cancelled) {
                     resolve();
                 }
-                else if (self.options.timeout >= 0 && now - start > self.options.timeout) {
+                else if (self.options.duration == undefined) {
+
+                    // If no duration specified, render only once and stop
+                    self.render();
+
+                    resolve();
+                }
+                else if (self.options.duration >= 0 && now - start > self.options.duration) {
                     resolve();
                 }
                 else {
-                    self.tick();
+                    self.render();
                     setImmediate(loop);
                 }
             }
 
             loop();
-        });
-    }
-
-    stop() {
-        console.log('Stopping animation', this.name);
-
-        return new Promise((resolve, reject) => {
-            var pixels = new Pixels(this.strip.width, this.strip.height);
-
-            if (this.cancelled)
-                this.strip.render(pixels.getPixels());
-            else
-                this.strip.render(pixels.getPixels(), {fadeIn:5});
-
-            resolve();
-
-            this.emit('stopped');
         });
     }
 
@@ -106,11 +114,11 @@ module.exports = class Animation extends Events {
             .then(() => {
                 return this.stop();
             })
+            .catch((error) => {
+                console.log(error);
+            })
             .then(() => {
                 resolve();
-            })
-            .catch((error) => {
-                reject(error);
             });
 
         });

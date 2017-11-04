@@ -53,29 +53,25 @@ var Module = new function() {
 			var CommodityAnimation = require('../scripts/commodity-animation.js');
 			var IndexAnimation     = require('../scripts/index-animation.js');
 			var BlankAnimation     = require('../scripts/animation.js');
+			var animationQueue     = require('../scripts/animation-queue.js');
+
 			//var MatrixAnimation    = require('../scripts/matrix-animation.js');
 
+			var animations       = [ClockAnimation, BlankAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Strip();
 			var animationIndex   = 0;
-			var animations       = [];
-			var currentAnimation = undefined;
 			var state            = 0;
+			var animationQueue   = new animationQueue();
 
-			//animations.push(new MatrixAnimation(strip));
-			animations.push(new ClockAnimation(strip));
-			animations.push(new CurrencyAnimation(strip));
-			animations.push(new IndexAnimation(strip));
-			animations.push(new CommodityAnimation(strip));
-			animations.push(new WeatherAnimation(strip));
 
 			upperButton.on('click', () => {
 
 				console.log('Upper button pressed!');
 
-				if (currentAnimation) {
-					currentAnimation.cancel();
+				if (animationQueue.currentAnimation) {
+					animationQueue.currentAnimation.cancel();
 				}
 				else {
 					runNextAnimation();
@@ -87,55 +83,20 @@ var Module = new function() {
 
 				console.log('Lower button pressed!');
 
-				if (currentAnimation) {
-					currentAnimation.once('stopped', () => {
-						console.log('ANIMATION IS STOPPED!');
-						runAnimation(new BlankAnimation(strip, {timeout:-1}));
-					});
-
-					currentAnimation.cancel();
-				}
-
 
 			});
 
 
 
 
-			function disableAnimations() {
-			}
 
-
-			function enableAnimations() {
-				disableAnimations();
-				runNextAnimation();
-
-			}
 
 			function runAnimation(animation) {
 
+				if (animation == undefined)
+					animation = new BlankAnimation(strip, {duration:-1, priority:'!'});
 
-                return new Promise((resolve, reject) => {
-
-					if (animation == undefined)
-						animation = new BlankAnimation(strip, {timeout:-1});
-
-					currentAnimation = animation;
-
-					animation.run().then(() => {
-					})
-
-					.catch((error) => {
-						console.log(error);
-					})
-
-					.then(() => {
-						currentAnimation = undefined;
-						resolve();
-
-					})
-                });
-
+				return animationQueue.enque(animation);
 			}
 
 
@@ -145,7 +106,8 @@ var Module = new function() {
                 return new Promise((resolve, reject) => {
 
 					// Get next animation
-					var animation = animations[animationIndex];
+					var Animation = animations[animationIndex];
+					var animation = new Animation(strip, {duration:-1, priority:'!'});
 
 					runAnimation(animation).then(() => {
 					})
@@ -165,7 +127,7 @@ var Module = new function() {
 
 			}
 
-			enableAnimations();
+			runAnimation(new ClockAnimation(strip, {duration:-1, priority:'!'}));
 
 
 		});

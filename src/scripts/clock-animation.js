@@ -43,24 +43,29 @@ module.exports = class extends Animation {
     }
 
     render(options) {
-        console.log('Redrawing clock');
+        var now = new Date();
 
-        var pixels  = new Pixels(this.strip.width, this.strip.height);
-        var display = new Layout();
-        var text    = this.getTime();
-        var hue     = this.getHue();
+        if (now - this.lastRender > 30000) {
+            console.log('Redrawing clock');
 
-        var words   = display.lookupText(text);
+            var pixels  = new Pixels(this.strip.width, this.strip.height);
+            var display = new Layout();
+            var text    = this.getTime();
+            var hue     = this.getHue();
 
-        words.forEach((word) => {
-            for (var i = 0; i < word.text.length; i++) {
-                pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
+            var words   = display.lookupText(text);
 
-            }
-        });
+            words.forEach((word) => {
+                for (var i = 0; i < word.text.length; i++) {
+                    pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
 
-        this.strip.render(pixels.getPixels(), options);
-        this.lastRender = new Date();
+                }
+            });
+
+            this.strip.render(pixels.getPixels(), options);
+            this.lastRender = new Date();
+        }
+
 
     }
 

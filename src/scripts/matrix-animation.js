@@ -104,7 +104,7 @@ module.exports = class extends Animation {
         });
     }
 
-    tick() {
+    render() {
         for (var i = 0; i < this.worms.length; i++) {
             this.worms[i].draw(this.pixels);
             this.worms[i].idle();
