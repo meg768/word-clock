@@ -6,6 +6,9 @@ var isString   = require('yow/is').isString;
 var Animation  = require('./animation.js');
 
 
+function debug() {
+    console.log.apply(this, arguments);
+}
 module.exports = class extends Animation {
 
 
@@ -26,6 +29,7 @@ module.exports = class extends Animation {
 
 
 	render() {
+		debug('Setting color', this.color)
 		this.pixels.fill(this.color);
 		this.strip.render(this.pixels.getPixels(), {fadeIn:10});
 
