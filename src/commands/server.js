@@ -71,7 +71,7 @@ var Module = new function() {
 			var duration         = -1;
 			var animationQueue   = new AnimationQueue();
 
-			upperButton.on('click', () => {
+			upperButton.on('click', (clicks) => {
 
 				if (state == 'on') {
 					// Turn off
@@ -89,7 +89,14 @@ var Module = new function() {
 			});
 
 			lowerButton.on('click', (clicks) => {
-				runNextAnimation();
+				if (clicks > 1) {
+					animationQueue.enqueue(new MatrixAnimation(strip, {duration:-1, priority:'!'}));
+
+				}
+				else {
+					runNextAnimation();
+
+				}
 			});
 
 
