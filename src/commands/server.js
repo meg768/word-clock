@@ -96,7 +96,7 @@ var Module = new function() {
 				if (animation == undefined)
 					animation = new BlankAnimation(strip, {duration:-1, priority:'!'});
 
-				return animationQueue.enque(animation);
+				return animationQueue.enqueue(animation);
 			}
 
 
