@@ -68,15 +68,10 @@ var Module = new function() {
 			var strip            = new Strip();
 			var animationIndex   = -1;
 			var state            = 'on';
-			var duration         = 10000;
+			var duration         = -1;
 			var animationQueue   = new AnimationQueue();
 
-
-			upperButton.on('click', (clicks) => {
-				runNextAnimation();
-			});
-
-			lowerButton.on('click', () => {
+			upperButton.on('click', () => {
 
 				if (state == 'on') {
 					// Turn off
@@ -92,6 +87,11 @@ var Module = new function() {
 
 				state = (state == 'on') ? 'off' : 'on';
 			});
+
+			lowerButton.on('click', (clicks) => {
+				runNextAnimation();
+			});
+
 
 
 			function runNextAnimation() {
