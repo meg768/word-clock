@@ -130,7 +130,7 @@ var Module = new function() {
 
 			}
 
-			runNextAnimation():
+			runNextAnimation();
 
 
 		});
