@@ -76,12 +76,12 @@ module.exports = class extends Animation {
 
 				}
 
-		        self.strip.render(pixels.getPixels(), {fadeIn:5});
+		        self.strip.render(pixels.getPixels(), {fadeInX:1});
 
 			}
 			else {
 				pixels.fillRGB(255, 0, 0);
-				self.strip.render(pixels.getPixels(), {fadeIn:5});
+				self.strip.render(pixels.getPixels(), {fadeInX:1});
 
 			}
 
