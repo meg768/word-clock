@@ -16,10 +16,11 @@ module.exports = class extends Animation {
 
 
 	constructor(strip, options) {
-		super(strip, Object.assign({renderFrequency:10000}, options));
+		super(strip, Object.assign({renderFrequency:60 * 1000 * 15}, options));
 
 		this.name = 'Avanza Animation';
 		this.symbols = [];
+		this.avanza = new Avanza();
 
 	}
 
@@ -33,7 +34,6 @@ module.exports = class extends Animation {
 		var promise = avanza.getMarket(this.getSymbols());
 
 		promise.then((symbols) => {
-			console.log('Fetching avanza stuff...');
 
 			var self    = this;
 	        var pixels  = this.pixels;
