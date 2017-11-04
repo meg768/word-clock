@@ -20,7 +20,6 @@ module.exports = class extends Animation {
 
 		this.name = 'Avanza Animation';
 		this.symbols = [];
-		this.avanza = new Avanza();
 
 	}
 
