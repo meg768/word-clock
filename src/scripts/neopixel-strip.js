@@ -15,7 +15,7 @@ module.exports = function NeopixelStrip(options) {
 		throw new Error('Width and height of strip must be specified.');
 
 	var _this          = this;         // That
-	var _debug         = 0;            // Output log messages to console?
+	var _debug         = 1;            // Output log messages to console?
 
 	var _width         = options.width;
 	var _height        = options.height;
