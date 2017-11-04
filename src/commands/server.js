@@ -64,7 +64,8 @@ var Module = new function() {
 
 		registerService().then(function() {
 
-			var animations       = [PulseAnimation, ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
+//			var animations       = [PulseAnimation, ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
+			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Strip({width:13, height:13});
