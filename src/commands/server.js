@@ -121,7 +121,6 @@ var Module = new function() {
 
 				var setup = new WifiSetup('/boot/bluetooth/wifi.json');
 
-
 				setup.on('connecting', () => {
 					debug('Connecting to Wi-Fi...');
                     runAnimation(new TextAnimation(strip, {priority:'!', color:'blue', text:'PLEASE WAIT', duration:-1}));
