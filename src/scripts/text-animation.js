@@ -40,12 +40,21 @@ module.exports = class extends Animation {
     render() {
         var strip  = this.strip;
         var pixels = this.pixels;
-        var letter = this.letters[this.index % this.letters.length];
+        var position = undefined;
 
-        var positions = this.layout[letter];
+        if (this.index < this.letters.length) {
+            var letter = this.letters[this.index++];
+            var positions = this.layout[letter];
 
-        if (positions.length > 0) {
-            var position = random(positions);
+            if (positions.length > 0)
+                position = random(positions);
+
+        }
+        else {
+            this.index = 0;
+        }
+
+        if (position) {
 
             pixels.fill(0);
             strip.render(pixels.getPixels(), {fadeIn:100});
@@ -60,7 +69,6 @@ module.exports = class extends Animation {
             strip.render(pixels.getPixels(), {fadeIn:100});
         }
 
-        this.index++;
 
     }
 
