@@ -30,12 +30,14 @@ module.exports = function NeopixelStrip(options) {
 	_this.height = _height;
 
 
-
-
-	process.on('SIGINT', function () {
+	function exit() {
 		_strip.render(new Uint32Array(_length));
 		process.exit();
-	});
+
+	}
+	process.on('SIGUSR1', exit);
+	process.on('SIGUSR2', exit);
+	process.on('SIGINT' , exit);
 
 	_this.render = function(pixels, options) {
 
