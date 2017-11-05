@@ -7,7 +7,7 @@ var Pixels  = require('./pixels.js');
 var Events  = require('events');
 
 function debug() {
-    console.log.apply(this, arguments);
+    //console.log.apply(this, arguments);
 }
 
 module.exports = class Animation extends Events {
