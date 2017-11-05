@@ -129,12 +129,12 @@ var Module = new function() {
 
 				setup.on('connecting', () => {
 					debug('Connecting to Wi-Fi...');
-	                runAnimation(new PulseAnimation(strip, {priority:'!', color:'blue', duration:-1}));
+                    runAnimation(new TextAnimation(strip, {priority:'!', color:'orange', text:'CONNECTING TO WIFI', duration:-1}));
 				});
 
 	            setup.on('discoverable', () => {
 					debug('Raspberry now discoverable.');
-	                runAnimation(new ColorAnimation(strip, {priority:'!', color:'blue', duration:-1}));
+                    runAnimation(new TextAnimation(strip, {priority:'!', color:'blue', text:'BLUETOOTH ON', duration:-1}));
 				});
 
 	            setup.on('wifi-changed', () => {
