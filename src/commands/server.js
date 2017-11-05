@@ -52,8 +52,7 @@ var Module = new function() {
 
 		registerService().then(function() {
 
-//			var animations       = [PulseAnimation, ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
-			var animations       = [ClockAnimation, TextAnimation];
+			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Strip({width:13, height:13});
@@ -84,9 +83,8 @@ var Module = new function() {
 
 			lowerButton.on('click', (clicks) => {
 				if (clicks > 1) {
-                    runAnimation(new TextAnimation(strip, {priority:'!', color:'orange', text:'CONNECTING TO WIFI', duration:-1}));
 
-			//		runAnimation(new MatrixAnimation(strip, {duration:-1, priority:'!'}));
+					runAnimation(new MatrixAnimation(strip, {duration:-1, priority:'!'}));
 
 				}
 				else {
@@ -131,7 +129,7 @@ var Module = new function() {
 
 				setup.on('connecting', () => {
 					debug('Connecting to Wi-Fi...');
-                    runAnimation(new TextAnimation(strip, {priority:'!', color:'orange', text:'CONNECTING TO WIFI', duration:-1}));
+                    runAnimation(new TextAnimation(strip, {priority:'!', color:'blue', text:'CONNECTING TO WIFI', duration:-1}));
 				});
 
 	            setup.on('discoverable', () => {
