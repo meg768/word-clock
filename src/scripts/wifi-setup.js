@@ -399,7 +399,7 @@ module.exports = class WifiSetup extends Events {
             if (config && isString(config.ssid)) {
                 this.emit('connecting');
 
-                return wifi.connectToNetwork(config.ssid, config.password, 30000).then(() => {
+                return wifi.connectToNetwork(config.ssid, config.password, 60000).then(() => {
                     return true;
                 })
                 .catch((error) => {
