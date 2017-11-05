@@ -7,50 +7,62 @@ var Animation = require('./animation.js');
 var Pixels    = require('./pixels.js');
 var Layout    = require('./layout.js');
 
+function debug() {
+    console.log.apply(this, arguments);
+}
 
 module.exports = class extends Animation {
 
 
     constructor(strip, options) {
-        super(strip, options);
+        super(strip, Object.assign({text:'ABCDEFG', color:'blue'}, options));
 
         this.name = 'Text';
+        this.color = 'blue';
+        this.renderFrequency = 1000;
+
+        var display  = new Layout();
+
+        this.layout  = display.lookupLetters(this.options.text);
+        this.letters = this.options.text.split('');
+        this.index   = 0;
+
+		try {
+			this.color = Color(this.options.color).rgbNumber();
+		}
+		catch(error) {
+			console.log(error);
+			this.color = 'red';
+		}
     }
 
 
-    run() {
-        var pixels   = new Pixels(this.strip.width, this.strip.height);
-        var display  = new Layout();
-        var options  = this.options;
-        var strip    = this.strip;
+    render() {
+        var strip  = this.strip;
+        var pixels = this.pixels;
+        var letter = this.letters[this.index % this.letters.length];
 
-        return new Promise((resolve, reject) => {
+        var positions = this.layout.filter((item) => {
+            return item.text == letter;
+        });
 
-            var layout    = display.lookupLetters(options.text);
-            var hue       = Color(options.color).hue();
-            var letters   = options.text.split('');
-            var positions = [];
-
-            letters.forEach((letter) => {
-                var position = layout[letter].shift();
-                layout[letter].push(position);
-
-                positions.push(position);
-            });
+        if (positions.length > 0) {
+            var position = random(positions);
 
             pixels.fill(0);
             strip.render(pixels.getPixels(), {fadeIn:10});
 
-            positions.forEach((position) => {
-                pixels.setPixelHSL(position.x, position.y, hue, 100, 50);
-                strip.render(pixels.getPixels(), {fadeIn:6});
-                pixels.setPixelHSL(position.x, position.y, hue, 100, 0);
-            });
-
+            pixels.setPixel(position.x, position.y, this.color);
             strip.render(pixels.getPixels(), {fadeIn:10});
 
-            resolve();
-        });
+        }
+        else {
+            pixels.fill(0);
+            strip.render(pixels.getPixels(), {fadeIn:10});
+            strip.render(pixels.getPixels(), {fadeIn:10});
+        }
+
+        this.index++;
 
     }
 

@@ -17,6 +17,7 @@ var ColorAnimation     = require('../scripts/color-animation.js');
 var AnimationQueue     = require('../scripts/animation-queue.js');
 var PulseAnimation     = require('../scripts/pulse-animation.js')
 var MatrixAnimation    = require('../scripts/matrix-animation.js');
+var TextAnimation      = require('../scripts/text-animation.js');
 
 function debug() {
     console.log.apply(this, arguments);
@@ -52,7 +53,7 @@ var Module = new function() {
 		registerService().then(function() {
 
 //			var animations       = [PulseAnimation, ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
-			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
+			var animations       = [ClockAnimation, TextAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Strip({width:13, height:13});
