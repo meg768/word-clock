@@ -52,7 +52,7 @@ var Module = new function() {
 		registerService().then(function() {
 
 //			var animations       = [PulseAnimation, ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
-			var animations       = [ColorAnimation, ClockAnimation]; //, IndexAnimation, CommodityAnimation, CurrencyAnimation];
+			var animations       = [PulseAnimation, ColorAnimation, ClockAnimation]; //, IndexAnimation, CommodityAnimation, CurrencyAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Strip({width:13, height:13});
@@ -116,7 +116,7 @@ var Module = new function() {
 			});
 
 			function startup() {
-				/*
+
 
 				var setup = new WifiSetup('/boot/bluetooth/wifi.json');
 
@@ -148,12 +148,11 @@ var Module = new function() {
 
 
 				setup.setup();
-				*/
 
-				runNextAnimation();
 			}
 
-			startup();
+            runNextAnimation();
+			//startup();
 
 		});
 
