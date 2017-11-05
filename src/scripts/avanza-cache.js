@@ -95,7 +95,7 @@ module.exports = class AvanzaCache {
 
 				// Clear cache if not fetched data since opening or if cached data is older than some amount of time
 				// Ignor day of week...
-	            if (this.cacheTime == undefined || (this.cacheTime.getTime() <= open.getTime() && open.getTime() <= now.getTime()) || (now.getTime() - this.cacheTime.getTime() > 3 * 60 * 1000)) {
+	            if (this.cacheTime == undefined || (this.cacheTime.getTime() <= open.getTime() && open.getTime() <= now.getTime()) || (now.getTime() - this.cacheTime.getTime() > 15 * 60 * 1000)) {
 					console.log('Clearing Avanza cache...');
 	                this.cache = {};
 					this.cacheTime = now;

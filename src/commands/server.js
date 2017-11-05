@@ -133,8 +133,6 @@ var Module = new function() {
 
 				setup.on('ready', () => {
 					debug('Ready!');
-
-
 					runNextAnimation();
 				});
 
@@ -143,7 +141,6 @@ var Module = new function() {
 
 			}
 
-            //runNextAnimation();
 			startup();
 
 		});
