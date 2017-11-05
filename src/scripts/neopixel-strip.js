@@ -35,10 +35,11 @@ module.exports = function NeopixelStrip(options) {
 		process.exit();
 
 	}
+	
 	process.on('SIGUSR1', exit);
 	process.on('SIGUSR2', exit);
-	process.on('SIGINT' , exit);
-	process.on('SIGTERM' , exit);
+	process.on('SIGINT', exit);
+	process.on('SIGTERM', exit);
 
 	_this.render = function(pixels, options) {
 
