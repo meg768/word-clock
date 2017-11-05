@@ -42,9 +42,7 @@ module.exports = class extends Animation {
         var pixels = this.pixels;
         var letter = this.letters[this.index % this.letters.length];
 
-        var positions = this.layout.filter((item) => {
-            return item.text == letter;
-        });
+        var positions = this.layout[letter];
 
         if (positions.length > 0) {
             var position = random(positions);
