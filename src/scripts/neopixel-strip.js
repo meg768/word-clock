@@ -5,6 +5,9 @@ var isString = require('yow/is').isString;
 var isObject = require('yow/is').isObject;
 var Pixels   = require('./pixels.js');
 
+function debug() {
+	// console.log.apply(this, arguments);
+}
 
 module.exports = function NeopixelStrip(options) {
 
@@ -15,7 +18,6 @@ module.exports = function NeopixelStrip(options) {
 		throw new Error('Width and height of strip must be specified.');
 
 	var _this          = this;         // That
-	var _debug         = 1;            // Output log messages to console?
 
 	var _width         = options.width;
 	var _height        = options.height;
@@ -28,10 +30,7 @@ module.exports = function NeopixelStrip(options) {
 	_this.height = _height;
 
 
-	function debug() {
-		if (_debug)
-			console.log.apply(this, arguments);
-	}
+
 
 	process.on('SIGINT', function () {
 		_strip.render(new Uint32Array(_length));
