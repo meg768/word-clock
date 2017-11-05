@@ -84,7 +84,9 @@ var Module = new function() {
 
 			lowerButton.on('click', (clicks) => {
 				if (clicks > 1) {
-					runAnimation(new MatrixAnimation(strip, {duration:-1, priority:'!'}));
+                    runAnimation(new TextAnimation(strip, {priority:'!', color:'orange', text:'CONNECTING TO WIFI', duration:-1}));
+
+			//		runAnimation(new MatrixAnimation(strip, {duration:-1, priority:'!'}));
 
 				}
 				else {
