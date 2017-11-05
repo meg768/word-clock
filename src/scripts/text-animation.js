@@ -19,7 +19,7 @@ module.exports = class extends Animation {
 
         this.name = 'Text';
         this.color = 'blue';
-        this.renderFrequency = 1000;
+        this.renderFrequency = 500;
 
         var display  = new Layout();
 
@@ -48,16 +48,16 @@ module.exports = class extends Animation {
             var position = random(positions);
 
             pixels.fill(0);
-            strip.render(pixels.getPixels(), {fadeIn:10});
+            strip.render(pixels.getPixels(), {fadeIn:100});
 
             pixels.setPixel(position.x, position.y, this.color);
-            strip.render(pixels.getPixels(), {fadeIn:10});
+            strip.render(pixels.getPixels(), {fadeIn:100});
 
         }
         else {
             pixels.fill(0);
-            strip.render(pixels.getPixels(), {fadeIn:10});
-            strip.render(pixels.getPixels(), {fadeIn:10});
+            strip.render(pixels.getPixels(), {fadeIn:100});
+            strip.render(pixels.getPixels(), {fadeIn:100});
         }
 
         this.index++;
