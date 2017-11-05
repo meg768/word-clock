@@ -26,9 +26,6 @@ function debug() {
 
 var Module = new function() {
 
-	function debug() {
-		console.log.apply(this, arguments);
-	}
 
 	function defineArgs(args) {
 

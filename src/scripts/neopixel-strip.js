@@ -35,7 +35,7 @@ module.exports = function NeopixelStrip(options) {
 		process.exit();
 
 	}
-	
+
 	process.on('SIGUSR1', exit);
 	process.on('SIGUSR2', exit);
 	process.on('SIGINT', exit);
@@ -44,7 +44,6 @@ module.exports = function NeopixelStrip(options) {
 	_this.render = function(pixels, options) {
 
 		var tmp = new Uint32Array(_length);
-		var numSteps = 50;
 
 		if (options && options.fadeIn) {
 			var factor   = 0.17;
@@ -52,8 +51,6 @@ module.exports = function NeopixelStrip(options) {
 			var timer    = new Date();
 
 			for (var step = 0; step < numSteps; step++) {
-
-
 				for (var i = 0; i < _length; i++) {
 
 					var r1 = (_pixels[i] & 0xFF0000) >> 16;
