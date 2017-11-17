@@ -8,7 +8,6 @@ var isArray    = require('yow/is').isArray;
 var isString   = require('yow/is').isString;
 
 
-
 function debug() {
     console.log.apply(this, arguments);
 }
@@ -36,9 +35,9 @@ module.exports = class extends Animation {
 
 
 	render() {
-		debug('Setting color', this.color)
+		debug('Setting color', this.color);
 		this.pixels.fill(this.color);
-		this.strip.render(this.pixels.getPixels());
+		this.pixels.render();
 
     }
 

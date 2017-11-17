@@ -38,7 +38,7 @@ module.exports = class extends Animation {
             }
         });
 
-        this.strip.render(pixels.getPixels());
+        pixels.render();
     }
 
     getHue() {

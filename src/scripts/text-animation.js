@@ -59,17 +59,17 @@ module.exports = class extends Animation {
         if (position) {
 
             pixels.fill(0);
-            strip.render(pixels.getPixels(), {fadeIn:100});
+            pixels.render({transition:'fade', duration:100});
 
             pixels.setPixel(position.x, position.y, this.color);
-            strip.render(pixels.getPixels(), {fadeIn:100});
+            pixels.render({transition:'fade', duration:100});
 
         }
         else {
             pixels.fill(0);
-            strip.render(pixels.getPixels(), {fadeIn:100});
-            strip.render(pixels.getPixels(), {fadeIn:100});
-        }
+            pixels.render({transition:'fade', duration:100});
+            pixels.render({transition:'fade', duration:100});
+    }
 
 
     }
