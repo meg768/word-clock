@@ -49,7 +49,7 @@ module.exports = class extends Animation {
             var color = (this.tick % 2) == 0 ? this.color : 0;
 
             this.pixels.fill(color);
-            this.strip.render(this.pixels.getPixels(), {fadeIn:this.options.delay});
+            this.pixels.render({transition:'fade', duration:this.options.delay});
 
             this.tick++;
         }

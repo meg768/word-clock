@@ -74,7 +74,6 @@ module.exports = class extends Animation {
     constructor(strip, options) {
         super(strip, options);
 
-        this.pixels = new Pixels(this.strip.width, this.strip.height);
         this.name   = 'Matrix';
         this.worms  = [];
 
@@ -111,7 +110,7 @@ module.exports = class extends Animation {
             this.worms[i].idle();
         }
 
-        this.strip.render(this.pixels.getPixels());
+        this.pixels.render();
     }
 
 
