@@ -1,10 +1,11 @@
+var Strip     = require('rpi-neopixels').Strip;
+var Animation = require('rpi-neopixels').Animation;
+var Pixels  = require('rpi-neopixels').Pixels;
 
 var isArray = require('yow/is').isArray;
 var sprintf = require('yow/sprintf');
 
-var Animation  = require('./animation.js');
 var Layout     = require('./layout.js');
-var Pixels     = require('./pixels.js');
 var Color      = require('color');
 
 module.exports = class extends Animation {

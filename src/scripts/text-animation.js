@@ -1,10 +1,12 @@
+var Strip     = require('rpi-neopixels').Strip;
+var Animation = require('rpi-neopixels').Animation;
+var Pixels  = require('rpi-neopixels').Pixels;
 
 var isArray   = require('yow/is').isArray;
 var sprintf   = require('yow/sprintf');
 var Color     = require('color');
 var random    = require('yow/random');
-var Animation = require('./animation.js');
-var Pixels    = require('./pixels.js');
+
 var Layout    = require('./layout.js');
 
 function debug() {

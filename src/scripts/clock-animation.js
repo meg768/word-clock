@@ -1,9 +1,10 @@
 
 var sprintf = require('yow/sprintf');
 
-var Animation = require('./animation.js');
+var Strip     = require('rpi-neopixels').Strip;
+var Animation = require('rpi-neopixels').Animation;
+
 var Layout    = require('./layout.js');
-var Strip     = require('./neopixel-strip.js');
 var Pixels    = require('./pixels.js');
 var Color     = require('color');
 

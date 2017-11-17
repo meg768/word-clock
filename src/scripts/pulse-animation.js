@@ -2,11 +2,11 @@
 var sprintf  = require('yow/sprintf');
 var isString = require('yow/is').isString;
 
-var Animation = require('./animation.js');
-var Strip     = require('./neopixel-strip.js');
-var Pixels    = require('./pixels.js');
+var Strip     = require('rpi-neopixels').Strip;
+var Animation = require('rpi-neopixels').Animation;
+var Pixels  = require('rpi-neopixels').Pixels;
+
 var Color     = require('color');
-var Sleep     = require('sleep');
 
 function debug() {
     console.log.apply(this, arguments);

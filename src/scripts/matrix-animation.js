@@ -6,7 +6,9 @@ var random    = require('yow/random');
 var Timer     = require('yow/timer');
 var Animation = require('./animation.js');
 
-var Pixels  = require('./pixels.js');
+var Strip     = require('rpi-neopixels').Strip;
+var Animation = require('rpi-neopixels').Animation;
+var Pixels  = require('rpi-neopixels').Pixels;
 
 class Worm {
 
