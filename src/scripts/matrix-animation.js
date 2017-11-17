@@ -4,11 +4,10 @@ var sprintf   = require('yow/sprintf');
 var Color     = require('color');
 var random    = require('yow/random');
 var Timer     = require('yow/timer');
-var Animation = require('./animation.js');
 
 var Strip     = require('rpi-neopixels').Strip;
 var Animation = require('rpi-neopixels').Animation;
-var Pixels  = require('rpi-neopixels').Pixels;
+var Pixels    = require('rpi-neopixels').Pixels;
 
 class Worm {
 
