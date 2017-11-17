@@ -8,7 +8,8 @@ var Button = require('../scripts/button.js');
 
 var Wifi = require('rpi-wifi-connection');
 var Strip = require('rpi-neopixels').Strip;
-var AnimationQueue     = require('rpi-neopixels').AnimationQueue;
+var AnimationQueue = require('rpi-neopixels').AnimationQueue;
+var Monitor = require('rpi-obex-monitor');
 
 var ClockAnimation     = require('../scripts/clock-animation.js');
 var WeatherAnimation   = require('../scripts/weather-animation.js');
@@ -171,7 +172,7 @@ var Module = new function() {
 
             })
 
-	
+
 
 		});
 
