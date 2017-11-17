@@ -21,7 +21,6 @@ var MatrixAnimation    = require('../scripts/matrix-animation.js');
 var TextAnimation      = require('../scripts/text-animation.js');
 
 function debug() {
-    console.log.apply(this, arguments);
 }
 
 
@@ -48,12 +47,21 @@ var Module = new function() {
 
 		var timer = new Timer();
 
+        if (argv.debug) {
+            debug = function() {
+                console.log.apply(this, arguments);
+            }
+        }
+
 		registerService().then(function() {
 
 			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
-			var strip            = new Strip({width:13, height:13, debug:true});
+			var strip            = new Strip({width:13, height:13, debug:argv.debug});
+            var wifi             = new Wifi({debug:argv.debug});
+            var monitor          = new Monitor({debug:argv.debug});
+
 			var animationIndex   = -1;
 			var state            = 'on';
 			var duration         = -1;
@@ -114,35 +122,56 @@ var Module = new function() {
 				runNextAnimation();
 			});
 
-			function startup() {
 
+            monitor.on('upload', (fileName, content) => {
 
-				var setup = new WifiSetup('/boot/bluetooth/wifi.json');
+                // The file has already been deleted.
+                // File contents is in the contents parameter.
+                debug('File uploaded', Path.join(monitor.path, fileName));
 
-				setup.on('connecting', () => {
-					debug('Connecting to Wi-Fi...');
-                    runAnimation(new TextAnimation(strip, {priority:'!', color:'blue', text:'PLEASE WAIT', duration:-1}));
-				});
+                try {
+                    var json = JSON.parse(content);
 
-	            setup.on('discoverable', () => {
-					debug('Raspberry now discoverable.');
+                    if (json.ssid != undefined) {
+                        debug('Connecting to network', json.ssid, '...');
+                        runAnimation(new TextAnimation(strip, {priority:'!', color:'blue', text:'PLEASE WAIT', duration:-1}));
+
+                        wifi.connect({ssid:json.ssid, psk:json.password}).then(() => {
+                            debug('Connected to network.');
+                            runNextAnimation();
+                        })
+                        .catch((error) => {
+                            runAnimation(new PulseAnimation(strip, {priority:'!', color:'blue', duration:-1}));
+                            console.log(error);
+                        });
+
+                    }
+                }
+                catch(error) {
+                    debug('Invalid file contents');
+                }
+            });
+
+            monitor.enableBluetooth();
+
+            // Start monitoring. Stop by calling stop()
+            monitor.start();
+
+            wifi.getState().then((connected) => {
+                if (connected) {
+                    runNextAnimation();
+                }
+                else {
                     runAnimation(new TextAnimation(strip, {priority:'!', color:'blue', text:'BLUETOOTH ON', duration:-1}));
-				});
+                }
 
-	            setup.on('wifi-changed', () => {
-				});
+            })
+            .catch(() => {
+                runAnimation(new TextAnimation(strip, {priority:'!', color:'blue', text:'BLUETOOTH ON', duration:-1}));
 
-				setup.on('ready', () => {
-					debug('Ready!');
-					runNextAnimation();
-				});
+            })
 
-
-				setup.setup();
-
-			}
-
-			startup();
+	
 
 		});
 
