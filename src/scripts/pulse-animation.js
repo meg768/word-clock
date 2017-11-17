@@ -29,7 +29,7 @@ module.exports = class extends Animation {
                 this.color = Color(this.options.color).rgbNumber();
             }
             catch (error) {
-                console.log('Invalid color value.');
+                debug('Invalid color value.');
 
             }
         }

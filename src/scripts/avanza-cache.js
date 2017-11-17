@@ -5,6 +5,11 @@ var isString   = require('yow/is').isString;
 var Timer      = require('yow/timer');
 var Avanza     = require('avanza-mobile-client');
 
+function debug() {
+	console.log.apply(this, arguments);
+}
+
+
 module.exports = class AvanzaCache {
 
 
@@ -33,12 +38,12 @@ module.exports = class AvanzaCache {
 
 		return new Promise((resolve, reject) => {
 
-			console.log('Logging in to Avanza...');
+			debug('Logging in to Avanza...');
 
 			var credentials = {username: process.env.AVANZA_USERNAME, password:process.env.AVANZA_PASSWORD};
 
 			this.avanza.login(credentials).then(() => {
-				console.log('Avanza login OK.');
+				debug('Avanza login OK.');
 
 				this.loginTime = new Date();
 
@@ -96,7 +101,7 @@ module.exports = class AvanzaCache {
 				// Clear cache if not fetched data since opening or if cached data is older than some amount of time
 				// Ignor day of week...
 	            if (this.cacheTime == undefined || (this.cacheTime.getTime() <= open.getTime() && open.getTime() <= now.getTime()) || (now.getTime() - this.cacheTime.getTime() > 15 * 60 * 1000)) {
-					console.log('Clearing Avanza cache...');
+					debug('Clearing Avanza cache...');
 	                this.cache = {};
 					this.cacheTime = now;
 	            }

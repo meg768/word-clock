@@ -8,6 +8,10 @@ var sprintf = require('yow/sprintf');
 var Layout     = require('./layout.js');
 var Color      = require('color');
 
+function debug() {
+	console.log.apply(this, arguments);
+}
+
 module.exports = class extends Animation {
 
 
@@ -86,7 +90,7 @@ module.exports = class extends Animation {
                 // search:     location name or zipcode
                 // degreeType: F or C
 
-                console.log('Fetching weather...');
+                debug('Fetching weather...');
 
                 weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, function(error, result) {
                     try {
@@ -240,19 +244,3 @@ module.exports = class extends Animation {
 
 
 };
-/*
-function test() {
-    var module = new Module();
-
-    module.getText().then(function(text) {
-        console.log(text);
-    })
-    .catch(function(error) {
-        console.log(error);
-    });
-
-}
-
-test();
-
-*/
