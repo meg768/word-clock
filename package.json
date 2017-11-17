@@ -24,9 +24,7 @@
     "rpi-neopixels": "^1.0.24",
     "rpi-obex-monitor": "^1.0.11",
     "rpi-wifi-connection": "^1.0.6",
-    "rpi-ws281x-native": "^0.8.2",
     "sleep": "^5.1.1",
-    "watch": "^1.0.2",
     "weather-js": "^2.0.0",
     "yargs": "^8.0.2",
     "yow": "^1.0.84"
