@@ -1,4 +1,5 @@
 var Animation   = require('rpi-neopixels').Animation;
+var Pixels      = require('rpi-neopixels').Pixels;
 
 var sprintf     = require('yow/sprintf');
 var random      = require('yow/random');
@@ -8,7 +9,6 @@ var isString    = require('yow/is').isString;
 var Timer       = require('yow/timer');
 var AvanzaCache = require('./avanza-cache.js');
 var Layout      = require('./layout.js');
-var Pixels      = require('./pixels.js');
 var Color       = require('color');
 
 var avanzaCache = new AvanzaCache();
