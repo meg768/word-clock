@@ -5,9 +5,7 @@ var Color     = require('color');
 var random    = require('yow/random');
 var Timer     = require('yow/timer');
 
-var Strip     = require('rpi-neopixels').Strip;
 var Animation = require('rpi-neopixels').Animation;
-var Pixels    = require('rpi-neopixels').Pixels;
 
 class Worm {
 
@@ -71,8 +69,8 @@ class Worm {
 module.exports = class extends Animation {
 
 
-    constructor(strip, options) {
-        super(strip, options);
+    constructor(pixels, options) {
+        super(pixels, options);
 
         this.name   = 'Matrix';
         this.worms  = [];
@@ -87,8 +85,8 @@ module.exports = class extends Animation {
 
                 var worms = [];
 
-                for (var i = 0; i < this.strip.width; i++) {
-                    worms.push(new Worm(this.strip.width, this.strip.height, i));
+                for (var i = 0; i < this.pixels.width; i++) {
+                    worms.push(new Worm(this.pixels.width, this.pixels.height, i));
                 }
 
                 this.pixels.clear();

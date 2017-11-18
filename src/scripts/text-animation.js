@@ -1,6 +1,4 @@
-var Strip     = require('rpi-neopixels').Strip;
 var Animation = require('rpi-neopixels').Animation;
-var Pixels  = require('rpi-neopixels').Pixels;
 
 var isArray   = require('yow/is').isArray;
 var sprintf   = require('yow/sprintf');
@@ -16,8 +14,8 @@ function debug() {
 module.exports = class extends Animation {
 
 
-    constructor(strip, options) {
-        super(strip, Object.assign({text:'ABCDEFG', color:'blue'}, options));
+    constructor(pixels, options) {
+        super(pixels, Object.assign({text:'ABCDEFG', color:'blue'}, options));
 
         this.name = 'Text';
         this.color = 'blue';
@@ -40,7 +38,6 @@ module.exports = class extends Animation {
 
 
     render() {
-        var strip  = this.strip;
         var pixels = this.pixels;
         var position = undefined;
 

@@ -61,7 +61,7 @@ var Module = new function() {
 			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
-			var strip            = new Strip({width:13, height:13, debug:argv.debug});
+			var strip            = new Matrix({width:13, height:13, debug:argv.debug});
             var wifi             = new Wifi({debug:argv.debug});
             var monitor          = new Monitor({debug:argv.debug});
 

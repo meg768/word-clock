@@ -4,8 +4,8 @@ var AvanzaAnimation = require('./avanza-animation.js');
 module.exports = class extends AvanzaAnimation {
 
 
-	constructor(strip, options) {
-		super(strip, options);
+	constructor(pixels, options) {
+		super(pixels, options);
 
 		this.name = 'Avanza Index Animation';
 	}

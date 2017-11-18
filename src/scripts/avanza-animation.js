@@ -1,5 +1,4 @@
 var Animation   = require('rpi-neopixels').Animation;
-var Pixels      = require('rpi-neopixels').Pixels;
 
 var sprintf     = require('yow/sprintf');
 var random      = require('yow/random');
@@ -16,8 +15,8 @@ var avanzaCache = new AvanzaCache();
 module.exports = class extends Animation {
 
 
-	constructor(strip, options) {
-		super(strip, Object.assign({}, options));
+	constructor(pixels, options) {
+		super(pixels, Object.assign({}, options));
 
 		this.renderFrequency = 60 * 1000 * 15;
 		this.name    = 'Avanza Animation';

@@ -1,11 +1,7 @@
 
-var sprintf  = require('yow/sprintf');
-var isString = require('yow/is').isString;
-
-var Strip     = require('rpi-neopixels').Strip;
+var sprintf   = require('yow/sprintf');
+var isString  = require('yow/is').isString;
 var Animation = require('rpi-neopixels').Animation;
-var Pixels  = require('rpi-neopixels').Pixels;
-
 var Color     = require('color');
 
 function debug() {
@@ -15,8 +11,8 @@ function debug() {
 module.exports = class extends Animation {
 
 
-    constructor(strip, options) {
-        super(strip, options);
+    constructor(pixels, options) {
+        super(pixels, options);
 
         this.options = Object.assign({}, {interval:500, delay:500}, this.options);
         this.name = 'Pulse Animation';

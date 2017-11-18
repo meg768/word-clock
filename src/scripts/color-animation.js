@@ -1,4 +1,3 @@
-var Strip     = require('rpi-neopixels').Strip;
 var Animation = require('rpi-neopixels').Animation;
 
 var sprintf    = require('yow/sprintf');
@@ -16,8 +15,8 @@ function debug() {
 module.exports = class extends Animation {
 
 
-	constructor(strip, options) {
-		super(strip, Object.assign({color:'blue'}, options));
+	constructor(pixels, options) {
+		super(pixels, Object.assign({color:'blue'}, options));
 
 		this.name  = 'Color animation';
 		this.renderFrequency = 60000;

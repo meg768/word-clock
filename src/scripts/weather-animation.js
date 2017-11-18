@@ -1,6 +1,4 @@
-var Strip     = require('rpi-neopixels').Strip;
 var Animation = require('rpi-neopixels').Animation;
-var Pixels  = require('rpi-neopixels').Pixels;
 
 var isArray = require('yow/is').isArray;
 var sprintf = require('yow/sprintf');
@@ -15,8 +13,8 @@ function debug() {
 module.exports = class extends Animation {
 
 
-    constructor(strip, options) {
-        super(strip, options);
+    constructor(pixels, options) {
+        super(pixels, options);
 
         this.name  = 'Weather';
         this.cache = undefined;
