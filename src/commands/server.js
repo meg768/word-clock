@@ -7,7 +7,7 @@ var Timer = require('yow/timer');
 var Button = require('../scripts/button.js');
 
 var Wifi = require('rpi-wifi-connection');
-var Strip = require('rpi-neopixels').Strip;
+var Matrix = require('rpi-neopixels').Matrix;
 var AnimationQueue = require('rpi-neopixels').AnimationQueue;
 var Monitor = require('rpi-obex-monitor');
 
