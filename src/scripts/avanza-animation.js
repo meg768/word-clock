@@ -76,13 +76,11 @@ module.exports = class extends Animation {
 		            }
 
 				}
-
-		        pixels.render();
-
+				pixels.render({transition:'fade', duration:200});
 			}
 			else {
 				pixels.fillRGB(255, 0, 0);
-				pixels.render();
+				pixels.render({transition:'fade', duration:200});
 
 			}
 
