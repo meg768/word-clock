@@ -36,7 +36,7 @@ module.exports = class extends Animation {
 	render() {
 		debug('Setting color', this.color);
 		this.pixels.fill(this.color);
-        pixels.render({transition:'fade', duration:200});
+        this.pixels.render({transition:'fade', duration:200});
 
     }
 
