@@ -72,17 +72,15 @@ var Module = new function() {
 
 			upperButton.on('click', (clicks) => {
 
+				// Reset animation index
+				animationIndex = 0;
+
 				if (state == 'on') {
-					// Reset animation index
-					animationIndex = 0;
 
 					// Turn off
 					runAnimation(new ColorAnimation(strip, {color:'black', duration:-1, priority:'!'}));
 				}
 				else {
-					// Switch duration mode, loop or static
-					duration = (duration < 0) ? 10000 : -1;
-
 					var Animation = animations[animationIndex % animations.length];
 					runAnimation(new Animation(strip, {duration:duration, priority:'!'}));
 				}
@@ -91,14 +89,24 @@ var Module = new function() {
 			});
 
 			lowerButton.on('click', (clicks) => {
-				if (clicks > 1) {
+				switch (clicks) {
+					case 1: {
+						runNextAnimation();
+						break;
+					}
+					case 2: {
+						// Switch duration mode, loop or static
+						duration = (duration < 0) ? 10000 : -1;
+						animationIndex = 0;
 
-					runAnimation(new MatrixAnimation(strip, {duration:-1, priority:'!'}));
-
-				}
-				else {
-					runNextAnimation();
-
+						var Animation = animations[animationIndex % animations.length];
+						runAnimation(new Animation(strip, {duration:duration, priority:'!'}));
+						break;
+					}
+					case 3: {
+						runAnimation(new MatrixAnimation(strip, {duration:-1, priority:'!'}));
+						break;
+					}
 				}
 			});
 
