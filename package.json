@@ -1,6 +1,6 @@
 {
   "name": "word-clock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Word Clock",
   "main": "word-clock.js",
   "scripts": {
@@ -25,6 +25,7 @@
     "rpi-obex-monitor": "^1.0.11",
     "rpi-wifi-connection": "^1.0.6",
     "sleep": "^5.1.1",
+    "pigpio-button": "^1.0.6",
     "weather-js": "^2.0.0",
     "yargs": "^8.0.2",
     "yow": "^1.0.84"

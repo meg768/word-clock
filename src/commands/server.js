@@ -4,7 +4,7 @@ var sprintf = require('yow/sprintf');
 var isObject = require('yow/is').isObject;
 var isFunction = require('yow/is').isFunction;
 var Timer = require('yow/timer');
-var Button = require('../scripts/button.js');
+var Button = require('pigpio-button');
 
 var Wifi = require('rpi-wifi-connection');
 var Matrix = require('rpi-neopixels').Matrix;

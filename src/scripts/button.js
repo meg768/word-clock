@@ -1,4 +1,3 @@
-
 var sprintf    = require('yow/sprintf');
 var Timer      = require('yow/timer');
 var isObject   = require('yow/is').isObject;
@@ -9,19 +8,24 @@ var Gpio       = require('pigpio').Gpio;
 
 module.exports = class Button extends Events {
 
-	constructor(pin, autoEnable = true) {
+	constructor(options) {
 
 		super();
 
-		this.pin      = pin;
-		this.gpio     = new Gpio(pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
+		options = Object.assign({}, options);
+
+		if (options.pin == undefined)
+			throw new Error('Must supply a pin for the button.');
+
+		this.pin      = options.pin;
+		this.gpio     = new Gpio(this.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 		this.state    = 0;
 		this.pressed  = 0;
 		this.released = 0;
 		this.clicks   = 0;
 		this.timer    = new Timer();
 
-		if (autoEnable)
+		if (options.autoEnable)
 			this.enable();
 
 	}
