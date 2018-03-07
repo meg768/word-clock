@@ -36,6 +36,8 @@ sudo raspi-config
 wget -O - https://raw.githubusercontent.com/sdesalas/node-pi-zero/master/install-node-v6.9.1.sh | bash
 ````
 
+See https://github.com/sdesalas/node-pi-zero for later versions.
+
 ### Install git and pigpio
 
 ````bash
@@ -55,27 +57,6 @@ cd word-clock
 npm install
 sudo node ./word-clock.js server
 ````
-
-````bash
-sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
-````
-
-````bash
-country=GB
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-
-network={
-	ssid="network"
-	psk="password"
-}
-````
-
-## wpa_supplicant
-
-Disconnect
-
-	wpa_cli disconnect -i wlan0
 
 
 
