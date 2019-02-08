@@ -4,7 +4,10 @@
   "description": "Word Clock",
   "main": "word-clock.js",
   "scripts": {
-		"commit": "git add -A && git commit -m '-' && git push",
+    "commit": "git add -A && git commit -m '-' && git push",
+		"goto-github": "open https://github.com/meg768/word-clock",
+		"goto-npm": "open https://www.npmjs.com/package/word-clock",
+    
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
