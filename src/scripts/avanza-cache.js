@@ -43,8 +43,9 @@ module.exports = class AvanzaCache {
 			debug('Logging in to Avanza...');
 
 			var credentials = {username: process.env.AVANZA_USERNAME, password:process.env.AVANZA_PASSWORD};
+			credentials = {ssid: '19660622-3995'};
 
-			this.avanza.login(credentials).then(() => {
+			this.avanza.loginWithBankID(credentials).then(() => {
 				debug('Avanza login OK.');
 
 				this.loginTime = new Date();
