@@ -52,6 +52,7 @@ module.exports = class AvanzaCache {
 				resolve();
 			})
 			.catch((error) => {
+				debug(error.message);
 				reject(error);
 			})
 
