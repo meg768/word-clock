@@ -6,7 +6,7 @@ var Timer      = require('yow/timer');
 var Avanza     = require('avanza-mobile-client');
 
 function debug() {
-	//console.log.apply(this, arguments);
+	console.log.apply(this, arguments);
 }
 
 
@@ -15,6 +15,7 @@ module.exports = class AvanzaCache {
 
 	constructor() {
 
+		debug('New Avanza cache!');
 		this.loginTime = undefined;
 		this.cacheTime = undefined;
 		this.avanza    = new Avanza();
@@ -24,6 +25,7 @@ module.exports = class AvanzaCache {
 
 	login() {
 
+		debug('Logging in!');
 
         if (this.loginTime != undefined) {
 			var now = new Date();

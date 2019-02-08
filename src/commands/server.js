@@ -125,7 +125,7 @@ var Module = new function() {
             }
 
 			function runAnimation(animation) {
-				debug('Starting animation', animation.name);
+				debug('Starting animation', animation.name); 
 				animationQueue.enqueue(animation);
 
 			}
