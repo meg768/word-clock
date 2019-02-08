@@ -4,6 +4,7 @@
   "description": "Word Clock",
   "main": "word-clock.js",
   "scripts": {
+		"commit": "git add -A && git commit -m '-' && git push",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

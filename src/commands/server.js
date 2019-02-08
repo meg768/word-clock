@@ -91,6 +91,7 @@ var Module = new function() {
 			lowerButton.on('click', (clicks) => {
 				switch (clicks) {
 					case 1: {
+						debug('Running next animation...');
 						runNextAnimation();
 						break;
 					}
