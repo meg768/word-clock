@@ -20,6 +20,7 @@ var App = function() {
 			args.option('debug',     {alias:'D', describe:'Debug mode', default:false});
 
 			args.command(require('./src/commands/server.js'));
+			args.command(require('./src/commands/rain.js'));
 
 			args.wrap(null);
 			args.demand(1);
