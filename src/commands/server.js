@@ -62,8 +62,8 @@ var Module = new function() {
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Matrix({width:13, height:13, debug:argv.debug});
-            var wifi             = new Wifi({debug:argv.debug});
-            var monitor          = undefined; //new Monitor({debug:argv.debug});
+            //var wifi             = new Wifi({debug:argv.debug});
+            //var monitor          = undefined; //new Monitor({debug:argv.debug});
 
 			var animationIndex   = -1;
 			var state            = 'on';
@@ -135,6 +135,7 @@ var Module = new function() {
 				runNextAnimation();
 			});
 
+			/*
 			if (monitor) {
 				monitor.on('upload', (fileName, content) => {
 
@@ -185,7 +186,9 @@ var Module = new function() {
                 runAnimation(new TextAnimation(strip, {priority:'!', color:'blue', text:'BLUETOOTH ON', duration:-1}));
 
             })
+			*/
 
+			runNextAnimation();
 
 
 		});
