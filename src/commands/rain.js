@@ -32,8 +32,8 @@ var Module = new function() {
         }
 
 
-		var strip            = new Matrix({width:13, height:13, debug:argv.debug});
-		var animation        = new MatrixAnimation(strip, {duration:-1, priority:'!'});
+		var strip            = new Matrix({width:13, height:13, debug:true});
+		var animation        = new MatrixAnimation(strip, {duration:-1, priority:'!', debug:true});
 
 		return animation.run();
 
