@@ -41,8 +41,8 @@ var Module = new function() {
 	}
 
 
-	module.exports.command  = 'server [options]';
-	module.exports.describe = 'Run Neopixel word clock';
+	module.exports.command  = 'rain [options]';
+	module.exports.describe = 'Make it rain';
 	module.exports.builder  = defineArgs;
 	module.exports.handler  = run;
 
