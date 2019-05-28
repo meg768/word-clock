@@ -4,11 +4,11 @@
   "description": "Word Clock",
   "main": "word-clock.js",
   "scripts": {
-		"goto-github": "open https://github.com/meg768/word-clock",
-		"goto-npm": "open https://www.npmjs.com/package/word-clock",
-    "git-pull": "git pull",
-    "git-commit": "git add -A && git commit -m '-' && git push",
-    "git-revert": "git reset --hard HEAD"
+		"goto-github": "make goto-github",
+		"goto-npm": "make goto-npm",
+    "git-pull": "make git-pull",
+    "git-commit": "make git-commit",
+    "git-revert": "make git-revert"
   },
   "repository": {
     "type": "git",
