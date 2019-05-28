@@ -21,6 +21,7 @@ var App = function() {
 
 			//args.command(require('./src/commands/server.js'));
 			args.command(require('./src/commands/rain.js'));
+			args.command(require('./src/commands/boring.js'));
 
 			args.wrap(null);
 			args.demand(1);
