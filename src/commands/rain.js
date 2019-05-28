@@ -21,11 +21,27 @@ var Module = new function() {
 		});
 	}
 
+	function mapping(width, height) {
+		
+		var map = new Uint16Array(width * height);
+
+		for (var i = 0; i < map.length; i++) {
+			var row = Math.floor(i / width), col = i % width;
+	
+			if ((row % 2) === 0) {
+				map[i] = i;
+			}
+			else {
+				map[i] = (row+1) * width - (col+1);
+			}
+		}
+	
+	}
 
 	function run(argv) {
 
 
-		Neopixels.configure({width:13, height:13, debug:true});
+		Neopixels.configure({map:mapping(13, 13), width:13, height:13, debug:true});
 
         if (argv.debug) {
             debug = function() {
