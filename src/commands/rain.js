@@ -41,7 +41,7 @@ var Module = new function() {
 	function run(argv) {
 
 
-		Neopixels.configure({map:mapping(13, 13), width:13, height:13, debug:true});
+		Neopixels.configure({map:mapping(13, 13), width:13, height:13, stripType:'grb', debug:true});
 
         if (argv.debug) {
             debug = function() {
