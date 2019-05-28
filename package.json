@@ -4,7 +4,7 @@
   "description": "Word Clock",
   "main": "word-clock.js",
   "scripts": {
-    "commit": "git add -A && git commit -m '-' && git push",
+    "git-commit": "git add -A && git commit -m '-' && git push",
 		"goto-github": "open https://github.com/meg768/word-clock",
 		"goto-npm": "open https://www.npmjs.com/package/word-clock",
     
