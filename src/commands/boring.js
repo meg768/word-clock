@@ -42,7 +42,7 @@ var Module = new function() {
 
 		Neopixels.configure({map:mapping(13, 13), width:13, height:13, stripType:'grb', debug:true});
 
-		var pixels = new Neopixels();
+		var pixels = new Neopixels.Pixels();
 		var offset = 0;
 
         setInterval(() => {
