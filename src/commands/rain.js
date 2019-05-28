@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 
-var Matrix = require('rpi-neopixels').Matrix;
+var Neopixels = require('rpi-neopixels');
 var MatrixAnimation = require('../scripts/matrix-animation.js');
 
 function debug() {
@@ -25,6 +25,8 @@ var Module = new function() {
 	function run(argv) {
 
 
+		Neopixels.configure({width:13, height:13, debug:true});
+
         if (argv.debug) {
             debug = function() {
                 console.log.apply(this, arguments);
@@ -32,8 +34,8 @@ var Module = new function() {
         }
 
 
-		var strip            = new Matrix({width:13, height:13, debug:true});
-		var animation        = new MatrixAnimation(strip, {duration:-1, priority:'!', debug:true});
+		var strip     = new Neopixels.Pixels();
+		var animation = new MatrixAnimation(strip, {duration:-1, priority:'!', debug:true});
 
 		return animation.run();
 
