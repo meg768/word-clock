@@ -25,7 +25,7 @@
     "color": "^2.0.0",
     "dotenv": "^4.0.0",
     "pigpio": "^0.6.2",
-    "rpi-neopixels": "^1.0.53",
+    "rpi-neopixels": "^1.0.57",
     "rpi-obex-monitor": "^1.0.11",
     "rpi-wifi-connection": "^1.0.6",
     "sleep": "^5.1.1",
