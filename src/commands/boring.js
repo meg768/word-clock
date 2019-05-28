@@ -34,6 +34,8 @@ var Module = new function() {
 				map[i] = (row+1) * width - (col+1);
 			}
 		}
+
+		return map;
 	
 	}
 
