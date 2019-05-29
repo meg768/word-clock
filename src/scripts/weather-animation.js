@@ -207,7 +207,7 @@ module.exports = class extends Animation {
     displayText(words) {
         var self = this;
 
-        var pixels = new Pixels(13, 13);
+        var pixels = this.pixels;
         var layout = new Layout();
 
         words = layout.getTextLayout(words);
