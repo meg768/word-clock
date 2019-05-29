@@ -59,9 +59,10 @@ var Module = new function() {
 			var lowerButton      = new Button(13);
 			var strip            = new Neopixels.Pixels();
 
+			var defaultDuration  = 10000;
 			var animationIndex   = -1;
 			var state            = 'on';
-			var duration         = 5000;
+			var duration         = defaultDuration;
 			var animationQueue   = new AnimationQueue();
 
 			upperButton.on('click', (clicks) => {
@@ -91,7 +92,7 @@ var Module = new function() {
 					}
 					case 2: {
 						// Switch duration mode, loop or static
-						duration = (duration < 0) ? 10000 : -1;
+						duration = (duration < 0) ? defaultDuration : -1;
 						animationIndex = 0;
 
 						var Animation = animations[animationIndex % animations.length];
