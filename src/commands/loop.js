@@ -3,7 +3,7 @@
 var Timer = require('yow/timer');
 var Button = require('pigpio-button');
 
-var Neopixels = require('rpi-neopixels');
+var Neopixels = require('../scripts/neopixels.js');
 var AnimationQueue = require('rpi-animations').Queue;
 
 var ClockAnimation     = require('../scripts/clock-animation.js');
@@ -40,8 +40,6 @@ var Module = new function() {
 
 	function run(argv) {
 
-
-		Neopixels.configure({width:13, height:13, map:'alternating-matrix', stripType:'grb', debug:argv.debug});
 
 		var timer = new Timer();
 

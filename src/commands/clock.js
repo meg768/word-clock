@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 
-var Neopixels = require('rpi-neopixels');
+var Neopixels = require('../scripts/neopixels.js');
 var ClockAnimation = require('../scripts/clock-animation.js');
 
 function debug() {
@@ -23,9 +23,6 @@ var Module = new function() {
 
 
 	function run(argv) {
-
-
-		Neopixels.configure({map:'alternating-matrix', width:13, height:13, stripType:'grb', debug:true});
 
         if (argv.debug) {
             debug = function() {

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 
-var Neopixels = require('rpi-neopixels');
+var Neopixels = require('../scripts/neopixels.js');
 
 function debug() {
 }
@@ -41,8 +41,6 @@ var Module = new function() {
 
 	function run(argv) {
 
-
-		Neopixels.configure({map:'alternating-matrix', width:13, height:13, stripType:'grb', debug:true});
 
 		var pixels = new Neopixels.Pixels();
 		var offset = 0;
