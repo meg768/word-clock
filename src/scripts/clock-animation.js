@@ -111,6 +111,6 @@ module.exports = class extends Animation {
         if (minute >= 25)
             hour += 1;
 
-        return sprintf('%s%s%s', minutes[minute], hours[hour], days[day]);
+        return sprintf('%s %s %s', minutes[minute], hours[hour], days[day]);
     }
 }
