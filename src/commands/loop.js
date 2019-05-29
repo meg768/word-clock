@@ -54,7 +54,7 @@ var Module = new function() {
 		registerService().then(function() {
 
 
-			var animations       = [ClockAnimation, IndexAnimation/*, CommodityAnimation, CurrencyAnimation*/];
+			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Neopixels.Pixels();
@@ -138,7 +138,7 @@ var Module = new function() {
 	}
 
 
-	module.exports.command  = 'server [options]';
+	module.exports.command  = 'loop [options]';
 	module.exports.describe = 'Run Neopixel word clock';
 	module.exports.builder  = defineArgs;
 	module.exports.handler  = run;

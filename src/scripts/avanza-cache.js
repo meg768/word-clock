@@ -6,7 +6,7 @@ var Timer      = require('yow/timer');
 var Avanza     = require('avanza-mobile-client');
 
 function debug() {
-	console.log.apply(this, arguments);
+//	console.log.apply(this, arguments);
 }
 
 
