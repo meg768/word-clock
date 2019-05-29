@@ -1,4 +1,4 @@
-var Neopixels = require('../index.js');
+var Neopixels = require('rpi-neopixels');
 
 function configure() {
 
