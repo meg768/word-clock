@@ -1,17 +1,10 @@
 #!/usr/bin/env node
 
-var sprintf = require('yow/sprintf');
-var isObject = require('yow/is').isObject;
-var isFunction = require('yow/is').isFunction;
 var Timer = require('yow/timer');
 var Button = require('pigpio-button');
 
-var Wifi = require('rpi-wifi-connection');
-var Matrix = require('rpi-neopixels').Matrix;
+var Neopixels = require('rpi-neopixels');
 var AnimationQueue = require('rpi-neopixels').AnimationQueue;
-var Monitor = require('rpi-obex-monitor');
-
-var Path = require('path');
 
 var ClockAnimation     = require('../scripts/clock-animation.js');
 var WeatherAnimation   = require('../scripts/weather-animation.js');
@@ -48,6 +41,8 @@ var Module = new function() {
 	function run(argv) {
 
 
+		Neopixels.configure({width:13, height:13, map:'alternating-matrix', debug:argv.debug});
+		
 		var timer = new Timer();
 
         if (argv.debug) {
@@ -58,12 +53,11 @@ var Module = new function() {
 
 		registerService().then(function() {
 
+
 			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
-			var strip            = new Matrix({width:13, height:13, debug:argv.debug});
-            //var wifi             = new Wifi({debug:argv.debug});
-            //var monitor          = undefined; //new Monitor({debug:argv.debug});
+			var strip            = new Neopixels.Pixels();
 
 			var animationIndex   = -1;
 			var state            = 'on';
