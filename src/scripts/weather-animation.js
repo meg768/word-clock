@@ -15,9 +15,9 @@ module.exports = class extends Animation {
 
     constructor(pixels, options) {
         super(options);
-        
+
         this.pixels = pixels;
-        this.name  = 'Weather';
+        this.name  = 'Weather Animation';
         this.cache = undefined;
         this.time  = undefined;
     }

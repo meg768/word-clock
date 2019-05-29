@@ -15,21 +15,24 @@ module.exports = class extends Animation {
 
 
     constructor(pixels, options) {
-        super(Object.assign({text:'ABCDEFG', color:'blue'}, options));
+        var {text = 'ABCDEFG', color = 'blue', ...other} = options;
+
+        super(other);
 
         this.pixels = pixels;
-        this.name = 'Text';
-        this.color = 'blue';
+        this.name = 'Text Animation';
+        this.color = color;
+        this.text = text;
         this.renderFrequency = 500;
 
         var display  = new Layout();
 
         this.layout  = display.lookupLetters(this.options.text);
-        this.letters = this.options.text.split('');
+        this.letters = this.text.split('');
         this.index   = 0;
 
 		try {
-			this.color = Color(this.options.color).rgbNumber();
+			this.color = Color(this.color).rgbNumber();
 		}
 		catch(error) {
 			console.log(error);
