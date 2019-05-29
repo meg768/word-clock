@@ -18,7 +18,7 @@ module.exports = class extends Animation {
 	constructor(pixels, options) {
 		super(options);
 
-		this.pixels = pixels
+		this.pixels = pixels;
 		this.renderFrequency = 60 * 1000 * 15;
 		this.name    = 'Avanza Animation';
 		this.symbols = [];
