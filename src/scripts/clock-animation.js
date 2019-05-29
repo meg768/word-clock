@@ -1,9 +1,7 @@
 
 var sprintf = require('yow/sprintf');
 var Animation = require('rpi-animations').Animation;
-
-var Layout    = require('./layout.js');
-var Color     = require('color');
+var Layout = require('./layout.js');
 
 module.exports = class extends Animation {
 
@@ -17,9 +15,7 @@ module.exports = class extends Animation {
 
     }
 
-
-
-    renderWords(words, h = 0, s = 100, l = 50) {
+    drawWords(words, h = 0, s = 100, l = 50) {
         words.forEach((word) => {
             for (var i = 0; i < word.text.length; i++) {
                 this.pixels.setPixelHSL(word.x + i, word.y, h, s, l);
@@ -41,8 +37,8 @@ module.exports = class extends Animation {
 
         this.pixels.clear();
 
-        this.renderWords(timeWords, this.getHue(), 100, 50);
-        this.renderWords(dayWords, 0, 100, 100);
+        this.drawWords(timeWords, this.getHue(), 100, 50);
+        this.drawWords(dayWords, 0, 100, 100);
         
         this.pixels.render({transition:'fade', duration:200});
     }
