@@ -21,7 +21,7 @@ module.exports = class extends Animation {
 
     renderWords(words, h = 0, s = 100, l = 50) {
         words.forEach((word) => {
-            pixels.setPixelHSL(word.x + i, word.y, h, s, l);
+            this.pixels.setPixelHSL(word.x + i, word.y, h, s, l);
         });
     }
 
