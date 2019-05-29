@@ -54,8 +54,7 @@ var Module = new function() {
 		registerService().then(function() {
 
 
-			//var animations       = [ClockAnimation, WeatherAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
-			var animations       = [ClockAnimation];
+			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, WeatherAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var strip            = new Neopixels.Pixels();
