@@ -41,7 +41,7 @@ var Module = new function() {
 	function run(argv) {
 
 
-		Neopixels.configure({width:13, height:13, map:'alternating-matrix', debug:argv.debug});
+		Neopixels.configure({width:13, height:13, map:'alternating-matrix', stripType:'grb', debug:argv.debug});
 
 		var timer = new Timer();
 
