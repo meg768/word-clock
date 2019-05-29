@@ -71,8 +71,6 @@ var Module = new function() {
 				animationIndex = 0;
 
 				if (state == 'on') {
-
-					// Turn off
 					runAnimation(new ColorAnimation(strip, {color:'black', duration:-1, priority:'!'}));
 				}
 				else {

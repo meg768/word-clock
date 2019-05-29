@@ -1,10 +1,5 @@
 var Animation = require('rpi-animations').Animation;
-
-var sprintf    = require('yow/sprintf');
-var random     = require('yow/random');
-var Color      = require('color');
-var isArray    = require('yow/is').isArray;
-var isString   = require('yow/is').isString;
+var Color = require('color');
 
 
 function debug() {
@@ -24,7 +19,7 @@ module.exports = class extends Animation {
 		this.color = 'blue';
 
 		try {
-			this.color = Color(this.options.color).rgbNumber();
+			this.color = Color(this.color).rgbNumber();
 		}
 		catch(error) {
 			console.log(error);
