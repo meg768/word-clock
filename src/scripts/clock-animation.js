@@ -19,26 +19,30 @@ module.exports = class extends Animation {
 
 
 
-    render() {
-        var display = new Layout();
-        var pixels  = this.pixels;
-        var hue     = this.getHue();
-
-        var words = display.lookupText(this.getTime());
-
-        pixels.clear();
-
+    renderWords(words, h = 0, s = 100, l = 50) {
         words.forEach((word) => {
-            for (var i = 0; i < word.text.length; i++) {
-                pixels.setPixelHSL(word.x + i, word.y, hue, 100, 50);
+            pixels.setPixelHSL(word.x + i, word.y, h, s, l);
+        });
+    }
 
-            }
+    render() {
+        var layout = new Layout();
+
+        var timeWords = layout.lookupText(this.getTime());
+        var dayWords  = layout.lookupText('KKEI ' + this.getDay());
+
+        // A hack so we may only light upp the bottom row
+        // Remove the word KKEI from words
+        dayWords = dayWords.filter((word) => {
+            return word.text != 'KKEI';
         });
 
-        words = display.lookupText('KKEI ' + this.getDay());
+        this.pixels.clear();
 
-        console.log(words);
-        pixels.render({transition:'fade', duration:200});
+        this.renderWords(timeWords, this.getHue(), 100, 50);
+        this.renderWords(dayWords, 0, 100, 100);
+        
+        this.pixels.render({transition:'fade', duration:200});
     }
 
     getHue() {
