@@ -25,8 +25,6 @@ module.exports = class AvanzaCache {
 
 	login() {
 
-		debug('Logging in!');
-
         if (this.loginTime != undefined) {
 			var now = new Date();
 
