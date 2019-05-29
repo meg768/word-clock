@@ -27,7 +27,7 @@ module.exports = class extends Animation {
 
         var display  = new Layout();
 
-        this.layout  = display.lookupLetters(this.options.text);
+        this.layout  = display.lookupLetters(this.text);
         this.letters = this.text.split('');
         this.index   = 0;
 
