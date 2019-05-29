@@ -1,4 +1,4 @@
-var Animation   = require('rpi-neopixels').Animation;
+var Animation   = require('rpi-animations').Animation;
 
 var sprintf     = require('yow/sprintf');
 var random      = require('yow/random');
@@ -16,8 +16,9 @@ module.exports = class extends Animation {
 
 
 	constructor(pixels, options) {
-		super(pixels, Object.assign({}, options));
+		super(options);
 
+		this.pixels = pixels
 		this.renderFrequency = 60 * 1000 * 15;
 		this.name    = 'Avanza Animation';
 		this.symbols = [];

@@ -5,7 +5,7 @@ var Color     = require('color');
 var random    = require('yow/random');
 var Timer     = require('yow/timer');
 
-var Animation = require('rpi-neopixels').Animation;
+var Animation = require('rpi-animations').Animation;
 
 class Worm {
 
@@ -70,8 +70,9 @@ module.exports = class extends Animation {
 
 
     constructor(pixels, options) {
-        super(pixels, options);
+        super(options);
 
+        this.pixels = pixels;
         this.name   = 'Matrix';
         this.worms  = [];
 

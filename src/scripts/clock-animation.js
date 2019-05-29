@@ -1,6 +1,6 @@
 
 var sprintf = require('yow/sprintf');
-var Animation = require('rpi-neopixels').Animation;
+var Animation = require('rpi-animations').Animation;
 
 var Layout    = require('./layout.js');
 var Color     = require('color');
@@ -9,8 +9,9 @@ module.exports = class extends Animation {
 
 
     constructor(pixels, options) {
-        super(pixels, Object.assign({}, options));
+        super(options);
 
+        this.pixels = pixels;
         this.renderFrequency = 15 * 1000;
         this.name = 'Clock';
 
