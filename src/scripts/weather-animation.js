@@ -212,6 +212,8 @@ module.exports = class extends Animation {
 
         words = layout.getTextLayout(words);
 
+        pixels.fill(0);
+
         words.forEach(function(word) {
             for (var i = 0; i < word.text.length; i++) {
                 pixels.setPixel(word.col + i, word.row, Color(word.color).rgbNumber());
@@ -219,7 +221,6 @@ module.exports = class extends Animation {
 
         });
 
-        pixels.fill(0);
         pixels.render({transition:'fade', duration:100});
 
     }
