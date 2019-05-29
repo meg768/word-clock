@@ -11,12 +11,14 @@ module.exports = class extends Animation {
 
 
 	constructor(pixels, options) {
-		super(Object.assign({color:'blue'}, options));
+		var {color = 'blue', ...other} = options;
+
+		super(other);
 
 		this.pixels = pixels;
 		this.name  = 'Color animation';
 		this.renderFrequency = 60000;
-		this.color = 'blue';
+		this.color = color;
 
 		try {
 			this.color = Color(this.color).rgbNumber();
