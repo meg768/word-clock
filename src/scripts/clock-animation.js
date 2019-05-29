@@ -22,10 +22,9 @@ module.exports = class extends Animation {
     render() {
         var display = new Layout();
         var pixels  = this.pixels;
-        var text    = this.getTime();
         var hue     = this.getHue();
 
-        var words   = display.lookupText(text);
+        var words = display.lookupText(this.getTime());
 
         pixels.clear();
 
@@ -36,6 +35,9 @@ module.exports = class extends Animation {
             }
         });
 
+        words = display.lookupText('KKEI ' + this.getDay());
+
+        console.log(words);
         pixels.render({transition:'fade', duration:200});
     }
 
@@ -87,6 +89,25 @@ module.exports = class extends Animation {
             12 : 'TOLV'
         };
 
+        var now = new Date();
+
+        var minute = now.getMinutes();
+        var hour   = now.getHours() % 12;
+        
+        if (minutes[minute] == undefined) {
+            minute = 5 * Math.floor((minute + 2.5) / 5);
+        }
+
+        if (minute >= 25)
+            hour += 1;
+
+        return sprintf('%s %s', minutes[minute], hours[hour]);
+    }
+
+
+
+    getDay() {
+
         var days = {
             0 : 'SÖ',
             1 : 'MÅ',
@@ -99,18 +120,8 @@ module.exports = class extends Animation {
 
 
         var now = new Date();
+        var day = now.getDay();
 
-        var minute = now.getMinutes();
-        var hour   = now.getHours() % 12;
-        var day    = now.getDay();
-        
-        if (minutes[minute] == undefined) {
-            minute = 5 * Math.floor((minute + 2.5) / 5);
-        }
-
-        if (minute >= 25)
-            hour += 1;
-
-        return sprintf('%s %s %s', minutes[minute], hours[hour], days[day]);
-    }
+        return days[day];
+    }    
 }
