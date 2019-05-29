@@ -92,7 +92,7 @@ var Module = module.exports = function() {
                 var index = lookupWord(word.text, cursor);
 
                 if (index == undefined)
-                    throw new Error('Invalid word:', '*', word.text, '*');
+                    throw new Error('Invalid word:' + '*' + word.text + '*');
 
                 var row = Math.floor(index / _columns);
                 var col = index % _columns;
