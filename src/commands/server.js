@@ -129,58 +129,6 @@ var Module = new function() {
 				runNextAnimation();
 			});
 
-			/*
-			if (monitor) {
-				monitor.on('upload', (fileName, content) => {
-
-					// The file has already been deleted.
-					// File contents is in the contents parameter.
-					debug('File uploaded', Path.join(monitor.path, fileName));
-	
-					try {
-						var json = JSON.parse(content);
-	
-						if (json.ssid != undefined) {
-							debug('Connecting to network', json.ssid, '...');
-							runAnimation(new TextAnimation(strip, {priority:'!', color:'blue', text:'PLEASE WAIT', duration:-1}));
-	
-							wifi.connect({ssid:json.ssid, psk:json.password}).then(() => {
-								debug('Connected to network.');
-								runNextAnimation();
-							})
-							.catch((error) => {
-								runAnimation(new PulseAnimation(strip, {priority:'!', color:'blue', duration:-1}));
-								console.log(error);
-							});
-	
-						}
-					}
-					catch(error) {
-						debug('Invalid file contents');
-					}
-				});
-	
-				monitor.enableBluetooth();
-	
-				// Start monitoring. Stop by calling stop()
-				monitor.start();
-	
-			}
-
-            wifi.getState().then((connected) => {
-                if (connected) {
-                    runNextAnimation();
-                }
-                else {
-                    runAnimation(new TextAnimation(strip, {priority:'!', color:'blue', text:'BLUETOOTH ON', duration:-1}));
-                }
-
-            })
-            .catch(() => {
-                runAnimation(new TextAnimation(strip, {priority:'!', color:'blue', text:'BLUETOOTH ON', duration:-1}));
-
-            })
-			*/
 
 			runNextAnimation();
 
