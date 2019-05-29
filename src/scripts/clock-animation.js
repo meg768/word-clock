@@ -38,7 +38,7 @@ module.exports = class extends Animation {
         this.pixels.clear();
 
         this.drawWords(timeWords, this.getHue(), 100, 50);
-        this.drawWords(dayWords, 0, 100, 100);
+        //this.drawWords(dayWords, 0, 100, 100);
         
         this.pixels.render({transition:'fade', duration:200});
     }
