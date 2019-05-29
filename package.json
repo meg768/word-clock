@@ -26,6 +26,7 @@
     "dotenv": "^4.0.0",
     "pigpio": "^0.6.2",
     "rpi-neopixels": "^1.0.66",
+    "rpi-animations": "^1.0.7",
     "rpi-obex-monitor": "^1.0.11",
     "rpi-wifi-connection": "^1.0.6",
     "sleep": "^5.1.1",
