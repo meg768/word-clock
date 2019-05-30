@@ -17,6 +17,8 @@ var fetchIndices = function(yahoo) {
 
 	];
 
+	var yahoo = new Yahoo();
+
 	return yahoo.fetchQuotes(symbols);
 }
 
@@ -48,7 +50,6 @@ module.exports = class Module extends Animation {
 		return yahoo.fetchQuotes(symbols);
 	}
 
-	static foo = Module.fetchQuotes;
 
 	getQuotes() {
 		return getIndices(this.yahoo);
