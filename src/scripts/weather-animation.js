@@ -41,7 +41,7 @@ function fetchWeather(useCache = true) {
                             .catch((error) => {
                                 console.log(error);
                             });
-                        }, 30000);
+                        }, 1000 * 60 * 60);
             
                         resolve(cache = result);
                     }
