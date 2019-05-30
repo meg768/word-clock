@@ -19,7 +19,7 @@ module.exports = function(fn, timeout) {
                     
                     setTimeout(() => {
                         force = true;
-                        loop(myargs).then((data) => {
+                        loop.apply(this, arguments).then((data) => {
                             debug('Done!');
                         })
                         .catch((error) => {
