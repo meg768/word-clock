@@ -16,7 +16,7 @@ module.exports = class Module extends Animation {
 		this.name = 'Yahoo Index Animation';
 	}
 
-	fetchQuotes() {
+	getQuotes() {
 		var symbols = [
 			{name:'OMX', symbol:'^OMX'},
 			{name:'NASDAQ', symbol:'^IXIC'},

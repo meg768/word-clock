@@ -5,7 +5,7 @@ module.exports = function(fn, timeout) {
 
     var result = undefined;
 
-    return function() { 
+    var foo = function() { 
 
 		return new Promise((resolve, reject) => {
 			var now = new Date();
@@ -17,8 +17,7 @@ module.exports = function(fn, timeout) {
                     
                     setTimeout(() => {
                         debug('Updating contents now...');
-                        fn.apply(null, arguments).then((data) => {
-                            result = data;
+                        foo.then((data) => {
                             debug('Done!');
                         })
                         .catch((error) => {

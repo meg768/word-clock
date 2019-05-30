@@ -16,13 +16,13 @@ module.exports = class extends Animation {
 	}
 
 
-	fetchQuotes() {
+	getQuotes() {
 		return Promise.resolve([]);
 	}
 
 	render() {
 
-		this.fetchQuotes().then((symbols) => {
+		this.getQuotes().then((symbols) => {
 
 	        var pixels  = this.pixels;
 	        var display = new Layout();
