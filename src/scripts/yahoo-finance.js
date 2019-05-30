@@ -8,9 +8,9 @@ module.exports = class YahoooFinance {
 	constructor() {
 	}
 
-	getSymbols(name, symbols) {
+	getSymbols(name, symbols, useCache = true) {
 
-		if (cache[name] != undefined) {
+		if (useCache && cache[name] != undefined) {
 			console.log('Returning cached values for', name);
 			return Promise.resolve(cache[name]);
 
@@ -40,7 +40,7 @@ module.exports = class YahoooFinance {
 				});
 
 				setTimeout(() => {
-					this.getSymbols(name, symbols).then(() => {
+					this.getSymbols(name, symbols, false).then(() => {
 
 					})
 					.catch((error) => {
