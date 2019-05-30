@@ -9,7 +9,7 @@ module.exports = class extends Animation {
 		super(options);
 
 		this.pixels = pixels;
-		this.renderFrequency = 60 * 1000; // * 15;
+		this.renderFrequency = 60 * 1000 * 5;
 		this.name    = 'Yahoo Animation';
 		this.yahoo  = new YahooFinance();
 
