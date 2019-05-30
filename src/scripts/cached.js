@@ -4,25 +4,28 @@ var debug = require('./debug.js');
 module.exports = function(fn, timeout) { 
 
     var result = undefined;
+    var force  = false;
 
     var loop = function() { 
 
 		return new Promise((resolve, reject) => {
-			var now = new Date();
 
-			if (result == undefined) {
-                debug('Calling first time...')
+			if (result == undefined || force) {
+                debug(force ? 'Calling first time...' : 'Updating contents...')
 				fn.apply(this, arguments).then((data) => {
                     result = data;
                     
                     setTimeout(() => {
-                        debug('Updating contents now...');
+                        force = true;
                         loop().then((data) => {
                             debug('Done!');
                         })
                         .catch((error) => {
                             console.log(error);
-                        });
+                        })
+                        .then(() => {
+                            force = false;
+                        })
 
                     }, timeout);
 
