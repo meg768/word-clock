@@ -24,7 +24,7 @@ module.exports = class extends Animation {
 
 	render() {
 
-		this.getQuotes.then((symbols) => {
+		this.getQuotes().then((symbols) => {
 
 	        var pixels  = this.pixels;
 	        var display = new Layout();
