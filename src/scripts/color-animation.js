@@ -7,8 +7,9 @@ var debug = require('./debug.js');
 module.exports = class extends Animation {
 
 
-	constructor(pixels, options) {
-		var {color = 'blue', ...other} = options;
+	constructor(options) {
+
+		var {pixels, color = 'blue', ...other} = options;
 
 		super({...other, name:'Color Animation', renderFrequency: 60000});
 

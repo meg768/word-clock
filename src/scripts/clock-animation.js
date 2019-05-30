@@ -6,8 +6,11 @@ var Layout = require('./layout.js');
 module.exports = class extends Animation {
 
 
-    constructor(pixels, options) {
-		super({...options, name:'Clock Animation', renderFrequency: 15 * 1000});
+    constructor(options) {
+        var {pixels, ...other} = options;
+
+        super({...other, name:'Clock Animation', renderFrequency: 15 * 1000});
+        
         this.pixels = pixels;
     }
 

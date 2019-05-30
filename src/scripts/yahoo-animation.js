@@ -6,11 +6,13 @@ var debug = require('./debug');
 module.exports = class extends Animation {
 
 
-	constructor(pixels, options) {
-		super({...options, name:'Yahoo Animation', renderFrequency: 60 * 1000});
+	constructor(options) {
+
+		var {pixels, ...other} = options;
+
+		super({...other, name:'Yahoo Animation', renderFrequency: 60 * 1000});
 
 		this.pixels = pixels;
-
 	}
 
 

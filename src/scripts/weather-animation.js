@@ -50,8 +50,10 @@ var fetchWeather = cached(60000, (location) => {
 module.exports = class extends Animation {
 
 
-    constructor(pixels, options) {
-        super({...options, name:'Weather Animation', renderFrequency:60 * 1000});
+    constructor(options) {
+        var {pixels, ...other} = options;
+
+        super({...other, name:'Weather Animation', renderFrequency:60 * 1000});
 
         this.pixels = pixels;
         this.location = 'Lund, Skåne, Sweden';

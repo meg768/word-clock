@@ -51,7 +51,7 @@ var Module = new function() {
 			animations       = [IndexAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
-			var strip            = new Neopixels.Pixels();
+			var pixels           = new Neopixels.Pixels();
 
 			var defaultDuration  = 10000;
 			var animationIndex   = -1;
@@ -65,11 +65,11 @@ var Module = new function() {
 				animationIndex = 0;
 
 				if (state == 'on') {
-					runAnimation(new ColorAnimation(strip, {color:'black', duration:-1, priority:'!'}));
+					runAnimation(new ColorAnimation({pixels:pixels, color:'black', duration:-1, priority:'!'}));
 				}
 				else {
 					var Animation = animations[animationIndex % animations.length];
-					runAnimation(new Animation(strip, {duration:duration, priority:'!'}));
+					runAnimation(new Animation({pixels:pixels, duration:duration, priority:'!'}));
 				}
 
 				state = (state == 'on') ? 'off' : 'on';
@@ -88,11 +88,11 @@ var Module = new function() {
 						animationIndex = 0;
 
 						var Animation = animations[animationIndex % animations.length];
-						runAnimation(new Animation(strip, {duration:duration, priority:'!'}));
+						runAnimation(new Animation({pixels:pixels, duration:duration, priority:'!'}));
 						break;
 					}
 					case 3: {
-						runAnimation(new MatrixAnimation(strip, {duration:-1, priority:'!'}));
+						runAnimation(new MatrixAnimation({pixels:pixels, duration:-1, priority:'!'}));
 						break;
 					}
 				}
@@ -106,7 +106,7 @@ var Module = new function() {
 
 				// Get next animation
 				var Animation = animations[animationIndex % animations.length];
-				var animation = new Animation(strip, {duration:duration, priority:'!'});
+				var animation = new Animation({pixels:pixels, duration:duration, priority:'!'});
 
 				runAnimation(animation);
             }

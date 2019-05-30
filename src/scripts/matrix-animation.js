@@ -69,8 +69,10 @@ class Worm {
 module.exports = class extends Animation {
 
 
-    constructor(pixels, options) {
-        super({...options, name:'Matrix Animation'});
+    constructor(options) {
+        var {pixels, ...other} = options;
+
+        super({...other, name:'Matrix Animation'});
 
         this.pixels = pixels;
         this.worms  = [];

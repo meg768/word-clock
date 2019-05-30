@@ -11,8 +11,8 @@ var Layout    = require('./layout.js');
 module.exports = class extends Animation {
 
 
-    constructor(pixels, options) {
-        var {text = 'ABCDEFG', color = 'blue', ...other} = options;
+    constructor(options) {
+        var {pixels, text = 'ABCDEFG', color = 'blue', ...other} = options;
 
         super(other);
 
