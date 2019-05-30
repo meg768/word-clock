@@ -3,7 +3,7 @@
 
 var Neopixels = require('../scripts/neopixels.js');
 var MatrixAnimation = require('../scripts/matrix-animation.js');
-var debug = require('./debug.js');
+var debug = require('../scripts/debug.js');
 
 
 
