@@ -22,7 +22,7 @@ module.exports = class extends Animation {
 
 	render() {
 
-		var promise = this.yahoo.getSymbols(this.getSymbols());
+		var promise = this.yahoo.getSymbols(this.name, this.getSymbols());
 
 		promise.then((symbols) => {
 
