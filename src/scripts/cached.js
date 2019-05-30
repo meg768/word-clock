@@ -41,6 +41,6 @@ module.exports = function(fn, timeout) {
 		});
     };
 
-    return foo;
+    return loop;
 }
 
