@@ -69,9 +69,6 @@ module.exports = function() {
                             console.log(error);
                         })
                         .then(() => {
-                            // Reset timer, if any
-                            clearTimer();
-
                             forceRequest = false;
                         })
 
