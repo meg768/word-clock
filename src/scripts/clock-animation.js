@@ -7,9 +7,9 @@ module.exports = class extends Animation {
 
 
     constructor(options) {
-        var {pixels, ...other} = options;
+        var {pixels, ...options} = options;
 
-        super({...other, name:'Clock Animation', renderFrequency: 15 * 1000});
+        super({...options, name:'Clock Animation', renderFrequency: 15 * 1000});
         
         this.pixels = pixels;
     }
