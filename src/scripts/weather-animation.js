@@ -40,8 +40,11 @@ function cached(fn, timeout) {
 					reject(error);
 				})
 			}
-			else
+			else {
+                debug('Returning cached result.');
 				resolve(result);
+
+            }
 		
 		});
     };
