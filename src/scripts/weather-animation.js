@@ -17,7 +17,7 @@ function fetchWeather(useCache = true) {
         return Promise.resolve(cache);
     }
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
         try {
             var weather = require('weather-js');
 
@@ -27,7 +27,7 @@ function fetchWeather(useCache = true) {
 
             debug('Fetching weather...');
 
-            weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, function(error, result) {
+            weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, (error, result) => {
                 try {
                     if (error)
                         reject(error);
@@ -52,14 +52,13 @@ function fetchWeather(useCache = true) {
                 }
             });
 
-
-
         }
         catch(error) {
             reject(error);
         }
     });
 }
+
 
 module.exports = class extends Animation {
 
@@ -69,8 +68,6 @@ module.exports = class extends Animation {
 
         this.pixels = pixels;
         this.name  = 'Weather Animation';
-        this.cache = undefined;
-        this.time  = undefined;
     }
 
 
@@ -124,56 +121,24 @@ module.exports = class extends Animation {
 
         }
 
-
         console.log(sprintf('Weather condition \'%s\' not defined.', text));
 
         return {'REGN':1.0, 'MOLN':1.0, 'SNÖ':1.0, 'VIND':1.0, 'SOL':1.0};
 
     }
 
-    getWeather() {
-        return new Promise(function(resolve, reject) {
-            try {
-                var weather = require('weather-js');
-
-                // Options:
-                // search:     location name or zipcode
-                // degreeType: F or C
-
-                debug('Fetching weather...');
-
-                weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, function(error, result) {
-                    try {
-                        if (error)
-                            reject(error);
-                        else
-                            resolve(result);
-
-                    }
-                    catch(error) {
-                        console.log(error);
-                        reject(error);
-                    }
-                });
-
-
-            }
-            catch(error) {
-                reject(error);
-            }
-        });
-    }
-
     getForecast() {
 
 
-        return new Promise(function(resolve, reject) {
+        return new Promise((resolve, reject) => {
 
-            fetchWeather().then(function(weather) {
+            fetchWeather().then((weather) => {
 
                 if (isArray(weather))
                     weather = weather[0];
 
+                debug(wather);
+                
                 var current  = weather.current;
                 var forecastToday = undefined;
                 var forecastTomorrow = undefined;
@@ -206,7 +171,7 @@ module.exports = class extends Animation {
                 resolve(forecast);
 
             })
-            .catch(function(error) {
+            .catch((error) => {
                 reject(error);
             })
 
@@ -215,12 +180,12 @@ module.exports = class extends Animation {
 
     getText() {
 
-        return new Promise(function(resolve, reject) {
+        return new Promise((resolve, reject) => {
 
             this.getForecast().then((forecast) => {
-                var state = this.getWeatherState(forecast.tomorrow);
+                var state = this.getWeatherState(forecast.current);
                 var words = "SOL VIND SNÖ MOLN REGN".split(' ');
-                var text  = words.map(function(word) {
+                var text  = words.map((word) => {
 
                     var index     = state[word];
                     var hue       = 240;
@@ -235,7 +200,7 @@ module.exports = class extends Animation {
                 resolve(text);
 
             })
-            .catch(function(error) {
+            .catch((error) => {
                 reject(error);
             })
 
@@ -251,7 +216,7 @@ module.exports = class extends Animation {
 
         pixels.fill(0);
 
-        words.forEach(function(word) {
+        words.forEach((word) => {
             for (var i = 0; i < word.text.length; i++) {
                 pixels.setPixel(word.col + i, word.row, Color(word.color).rgbNumber());
             }
