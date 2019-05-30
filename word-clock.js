@@ -2,8 +2,6 @@
 
 require('dotenv').config();
 
-var sprintf    = require('yow/sprintf');
-var prefixLogs = require('yow/logs').prefix;
 
 var App = function() {
 
@@ -42,7 +40,6 @@ var App = function() {
 	  // application specific logging, throwing an error, or other logic here
 	});
 
-	prefixLogs();
 	run();
 };
 

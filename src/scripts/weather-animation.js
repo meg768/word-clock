@@ -5,10 +5,8 @@ var sprintf = require('yow/sprintf');
 
 var Layout     = require('./layout.js');
 var Color      = require('color');
+var debug      = require('./debug.js');
 
-function debug() {
-	console.log.apply(this, arguments);
-}
 
 module.exports = class extends Animation {
 
@@ -100,7 +98,7 @@ module.exports = class extends Animation {
 
                     }
                     catch(error) {
-                        console.log('Whoops!');
+                        console.log(error);
                         reject(error);
                     }
                 });
@@ -121,7 +119,7 @@ module.exports = class extends Animation {
         // May we use cached weather?
         if (self.time != undefined && self.cache != undefined) {
             if (now.getTime() - self.time.getTime() < 30 * 60 * 1000) {
-                console.log('Using cached weather.');
+                debug('Using cached weather.');
                 return Promise.resolve(self.cache);
             }
         }

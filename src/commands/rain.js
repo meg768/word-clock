@@ -3,9 +3,8 @@
 
 var Neopixels = require('../scripts/neopixels.js');
 var MatrixAnimation = require('../scripts/matrix-animation.js');
+var debug = require('./debug.js');
 
-function debug() {
-}
 
 
 var Module = new function() {
@@ -23,13 +22,6 @@ var Module = new function() {
 
 
 	function run(argv) {
-
-		if (argv.debug) {
-            debug = function() {
-                console.log.apply(this, arguments);
-            }
-        }
-
 
 		var strip     = new Neopixels.Pixels();
 		var animation = new MatrixAnimation(strip, {duration:-1, priority:'!', debug:true});

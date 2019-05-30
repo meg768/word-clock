@@ -2,6 +2,8 @@ var Animation   = require('rpi-animations').Animation;
 var Layout      = require('./layout.js');
 var YahooFinance = require('./yahoo-finance.js');
 
+var debug = require('./debug');
+
 module.exports = class extends Animation {
 
 
@@ -9,7 +11,7 @@ module.exports = class extends Animation {
 		super(options);
 
 		this.pixels = pixels;
-		this.renderFrequency = 60 * 1000 * 5;
+		this.renderFrequency = 60 * 1000;
 		this.name    = 'Yahoo Animation';
 		this.yahoo  = new YahooFinance();
 
@@ -22,7 +24,8 @@ module.exports = class extends Animation {
 
 	render() {
 
-		console.log('Rendering animation', this.name, '...');
+		debug('Rendering animation', this.name, '...');
+
 		var promise = this.yahoo.getSymbols(this.name, this.getSymbols());
 
 		promise.then((symbols) => {

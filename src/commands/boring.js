@@ -2,9 +2,7 @@
 
 
 var Neopixels = require('../scripts/neopixels.js');
-
-function debug() {
-}
+var debug = require('./debug.js');
 
 
 var Module = new function() {
@@ -48,7 +46,7 @@ var Module = new function() {
         setInterval(() => {
             var x = offset % pixels.width;
             var y = Math.floor(offset / pixels.width);
-            console.log('Loop', offset, x, y);
+            debug('Loop', offset, x, y);
             pixels.clear();
             pixels.setPixelRGB(x, y, 255, 255, 255);
             pixels.render();

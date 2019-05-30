@@ -5,6 +5,7 @@ var Button = require('pigpio-button');
 
 var Neopixels = require('../scripts/neopixels.js');
 var AnimationQueue = require('rpi-animations').Queue;
+var debug = require('./debug.js');
 
 var ClockAnimation     = require('../scripts/clock-animation.js');
 var WeatherAnimation   = require('../scripts/weather-animation.js');
@@ -41,13 +42,6 @@ var Module = new function() {
 	function run(argv) {
 
 
-		var timer = new Timer();
-
-        if (argv.debug) {
-            debug = function() {
-                console.log.apply(this, arguments);
-            }
-        }
 
 		registerService().then(function() {
 

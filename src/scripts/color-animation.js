@@ -1,10 +1,7 @@
 var Animation = require('rpi-animations').Animation;
 var Color = require('color');
+var debug = require('./debug.js');
 
-
-function debug() {
-    console.log.apply(this, arguments);
-}
 
 
 module.exports = class extends Animation {
@@ -29,16 +26,11 @@ module.exports = class extends Animation {
 		}
 	}
 
-
-
 	render() {
 		debug('Setting color', this.color);
 		this.pixels.fill(this.color);
         this.pixels.render({transition:'fade', duration:200});
 
     }
-
-
-
 
 };

@@ -4,12 +4,9 @@ var isArray   = require('yow/is').isArray;
 var sprintf   = require('yow/sprintf');
 var Color     = require('color');
 var random    = require('yow/random');
-
+var debug     = require('./debug.js');
 var Layout    = require('./layout.js');
 
-function debug() {
-    console.log.apply(this, arguments);
-}
 
 module.exports = class extends Animation {
 

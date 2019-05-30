@@ -3,10 +3,8 @@ var sprintf   = require('yow/sprintf');
 var isString  = require('yow/is').isString;
 var Animation = require('rpi-animations').Animation;
 var Color     = require('color');
+var debug = require('./debug.js');
 
-function debug() {
-    console.log.apply(this, arguments);
-}
 
 module.exports = class extends Animation {
 
