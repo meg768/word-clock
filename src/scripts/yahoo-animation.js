@@ -10,7 +10,7 @@ module.exports = class extends Animation {
 
 		var {pixels, ...options} = options;
 
-		super({...options, name:'Yahoo Animation', renderFrequency: 60 * 1000});
+		super({name:'Yahoo Animation', renderFrequency: 60 * 1000, ...options});
 
 		this.pixels = pixels;
 	}

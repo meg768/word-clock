@@ -10,7 +10,7 @@ var fetchQuotes = cached(1000 * 60 * 15, (symbols) => {
 module.exports = class Module extends Animation {
 
 	constructor(options) {
-		super({...options, name:'Yahoo Index Animation'});
+		super({name:'Yahoo Index Animation', ...options});
 	}
 
 	fetchQuotes() {

@@ -53,7 +53,7 @@ module.exports = class extends Animation {
     constructor(options) {
         var {pixels, ...options} = options;
 
-        super({...options, name:'Weather Animation', renderFrequency:60 * 1000});
+        super({name:'Weather Animation', renderFrequency:60 * 1000, ...options});
 
         this.pixels = pixels;
         this.location = 'Lund, Skåne, Sweden';
