@@ -16,7 +16,7 @@ var fetchIndices = function(yahoo) {
 
 	];
 
-	return yahoo.getSymbols(symbols);
+	return yahoo.fetchQuotes(symbols);
 }
 
 var getIndices = cached(fetchIndices, 60000);

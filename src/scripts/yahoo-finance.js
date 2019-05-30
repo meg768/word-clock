@@ -7,7 +7,7 @@ module.exports = class YahoooFinance {
 	constructor() {
 	}
 
-	fetchSymbols(symbols) {
+	fetchQuotes(symbols) {
 
 		return new Promise((resolve, reject) => {
 			var params = {};
