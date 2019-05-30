@@ -9,7 +9,7 @@ module.exports = class extends Animation {
 		super(options);
 
 		this.pixels = pixels;
-		this.renderFrequency = 60 * 1000 * 15;
+		this.renderFrequency = 60 * 1000; // * 15;
 		this.name    = 'Yahoo Animation';
 		this.yahoo  = new YahooFinance();
 
@@ -22,6 +22,7 @@ module.exports = class extends Animation {
 
 	render() {
 
+		console.log('Rendering animation', this.name, '...');
 		var promise = this.yahoo.getSymbols(this.name, this.getSymbols());
 
 		promise.then((symbols) => {

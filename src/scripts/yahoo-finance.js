@@ -47,7 +47,7 @@ module.exports = class YahoooFinance {
 						console.log(error);
 					});
 
-				}, 30000);
+				}, 15 * 1000 * 60);
 
 				/*
 				var timer = new Timer();
