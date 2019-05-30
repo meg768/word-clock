@@ -3,11 +3,13 @@ var debug = require('./debug.js');
 
 module.exports = function() { 
 
-    var result = undefined;
-    var force  = false;
-    var fn = undefined;
-    var timeout = undefined;
+    var cache        = undefined;
+    var forceRequest = false;
+    var fn           = undefined;
+    var timeout      = undefined;
+    var timer        = undefined;
 
+    // Check arguments
     if (typeof arguments[0] == 'function' && typeof arguments[1] == 'number') {
         fn = arguments[0];
         timeout = arguments[1];
@@ -15,24 +17,29 @@ module.exports = function() {
     else if (typeof arguments[0] == 'number' && typeof arguments[1] == 'function') {
         timeout = arguments[0];
         fn = arguments[1];
-
     }
     else
         throw new Error('Invalid arguments for cached()');
 
     var loop = function() { 
 
-        var myargs = arguments;
-
 		return new Promise((resolve, reject) => {
 
-			if (result == undefined || force) {
-                debug(!force ? 'Calling first time...' : 'Updating contents...')
+			if (cache == undefined || forceRequest) {
+                debug(forceRequest ? 'Updating contents...' : 'Calling first time...');
+
 				fn.apply(this, arguments).then((data) => {
-                    result = data;
+                    debug('Storing data to cache.');
+                    cache = data;
                     
-                    setTimeout(() => {
-                        force = true;
+                    if (timer)
+                        clearTimeout(timer);
+
+                    timer = setTimeout(() => {
+                        
+                        // Make sure we make a real request
+                        forceRequest = true;
+
                         loop.apply(this, arguments).then((data) => {
                             debug('Done!');
                         })
@@ -40,12 +47,12 @@ module.exports = function() {
                             console.log(error);
                         })
                         .then(() => {
-                            force = false;
+                            forceRequest = false;
                         })
 
                     }, timeout);
 
-					resolve(result);	
+					resolve(cache);	
 				})
 				.catch((error) => {
 					reject(error);
@@ -53,7 +60,7 @@ module.exports = function() {
 			}
 			else {
                 debug('Returning cached result.');
-				resolve(result);
+				resolve(cache);
 
             }
 		
