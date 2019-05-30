@@ -20,12 +20,14 @@ function cached(fn, timeout) {
 			var now = new Date();
 
 			if (result == undefined) {
+                debug('Calling first time...')
 				fn.apply(this, arguments).then((data) => {
                     result = data;
                     
                     setTimeout(() => {
+                        debug('Updating contents now...');
                         fn.apply(null, arguments).then((data) => {
-
+                            debug('Done!');
                         })
                         .catch((error) => {
                             console.log(error);
@@ -84,7 +86,7 @@ var fetchWeather = function() {
     });
 }
 
-var getWeather = cached(fetchWeather, 30000);
+var getWeather = cached(fetchWeather, 60000);
 
 function fetchWeatherOLD(useCache = true) {
 
