@@ -70,10 +70,9 @@ module.exports = class extends Animation {
 
 
     constructor(pixels, options) {
-        super(options);
+        super({...options, name:'Matrix Animation'});
 
         this.pixels = pixels;
-        this.name   = 'Matrix';
         this.worms  = [];
 
     }

@@ -10,11 +10,9 @@ module.exports = class extends Animation {
 	constructor(pixels, options) {
 		var {color = 'blue', ...other} = options;
 
-		super(other);
+		super({...other, name:'Color Animation', renderFrequency: 60000});
 
 		this.pixels = pixels;
-		this.name  = 'Color animation';
-		this.renderFrequency = 60000;
 		this.color = color;
 
 		try {

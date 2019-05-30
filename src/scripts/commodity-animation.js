@@ -9,9 +9,7 @@ var fetchQuotes = cached(60000, (symbols) => {
 module.exports = class Module extends Animation {
 
 	constructor(pixels, options) {
-		super(pixels, options);
-
-		this.name = 'Yahoo Commodity Animation';
+		super(pixels, {...options, name:'Yahoo Commodity Animation'});
 	}
 
 

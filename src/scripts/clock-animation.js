@@ -7,12 +7,8 @@ module.exports = class extends Animation {
 
 
     constructor(pixels, options) {
-        super(options);
-
+		super({...options, name:'Clock Animation', renderFrequency: 15 * 1000});
         this.pixels = pixels;
-        this.renderFrequency = 15 * 1000;
-        this.name = 'Clock';
-
     }
 
     drawWords(words, h = 0, s = 100, l = 50) {
