@@ -47,8 +47,8 @@ var Module = new function() {
 
 
 			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, WeatherAnimation];
-			animations       = [WeatherAnimation];
-			animations       = [IndexAnimation];
+//			animations       = [WeatherAnimation];
+//			animations       = [IndexAnimation];
 			var upperButton      = new Button(6);
 			var lowerButton      = new Button(13);
 			var pixels           = new Neopixels.Pixels();
