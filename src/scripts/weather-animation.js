@@ -51,6 +51,8 @@ function cached(fn, timeout) {
 
 
 
+/*
+
 function fetchWeatherOLD(useCache = true) {
 
     if (useCache && cache != undefined) {
@@ -101,7 +103,7 @@ function fetchWeatherOLD(useCache = true) {
         }
     });
 }
-
+*/
 
 module.exports = class extends Animation {
 
@@ -118,7 +120,7 @@ module.exports = class extends Animation {
     }
 
 
-    fetchWeather() {
+    static fetchWeather() {
 
         return new Promise((resolve, reject) => {
             try {
