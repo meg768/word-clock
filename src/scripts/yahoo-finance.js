@@ -12,7 +12,7 @@ module.exports = class YahoooFinance {
 
 		if (cache[name] != undefined) {
 			console.log('Returning cached values for', name);
-			return Promise.resolve(cache[name].cache);
+			return Promise.resolve(cache[name]);
 
 		}
 
@@ -39,10 +39,27 @@ module.exports = class YahoooFinance {
 					results.push({name:symbol.name, symbol:symbol.symbol, change:change, price:price});
 				});
 
-				var timer = new Timer();
+				setTimeout(() => {
+					this.getSymbols(name, symbols).then(() => {
 
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+
+				}, 30000);
+
+				/*
+				var timer = new Timer();
 				// Remove from cache after a while
 				timer.setTimer(30000, () => {
+					this.getSymbols(name, symbols).then(() => {
+
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+
 					console.log('Removing cached results for', name);
 					delete cache[name];
 
@@ -50,8 +67,10 @@ module.exports = class YahoooFinance {
 						console.log('What?!');
 					}
 				});				
-
 				cache[name] = {timer:timer, cache:results};
+				*/
+
+				cache[name] = results;
 
 				console.log('Caching results for', name);
 				resolve(results);
