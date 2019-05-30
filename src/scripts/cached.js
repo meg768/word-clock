@@ -13,7 +13,7 @@ module.exports = function(fn, timeout) {
 		return new Promise((resolve, reject) => {
 
 			if (result == undefined || force) {
-                debug(force ? 'Calling first time...' : 'Updating contents...')
+                debug(!force ? 'Calling first time...' : 'Updating contents...')
 				fn.apply(this, arguments).then((data) => {
                     result = data;
                     
