@@ -7,8 +7,6 @@ var Layout     = require('./layout.js');
 var Color      = require('color');
 var debug      = require('./debug.js');
 
-//var cache = undefined;
-
 
 function cached(fn, timeout) { 
 
@@ -50,6 +48,44 @@ function cached(fn, timeout) {
 }
 
 
+var fetchWeather = function() {
+
+    return new Promise((resolve, reject) => {
+        try {
+            var weather = require('weather-js');
+
+            // Options:
+            // search:     location name or zipcode
+            // degreeType: F or C
+
+            debug('Fetching weather...');
+
+            weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, (error, result) => {
+                try {
+                    if (error)
+                        reject(error);
+                    else {
+
+                        debug(result);
+            
+                        resolve(result);
+                    }
+
+                }
+                catch(error) {
+                    console.log(error);
+                    reject(error);
+                }
+            });
+
+        }
+        catch(error) {
+            reject(error);
+        }
+    });
+}
+
+var getWeather = cached(fetchWeather, 60000);
 
 /*
 
@@ -115,47 +151,9 @@ module.exports = class extends Animation {
 		this.renderFrequency = 60 * 1000;
         this.name  = 'Weather Animation';
 
-        this.getWeather = cached(this.fetchWeather.bind(this), 60000);
-
     }
 
 
-    static fetchWeather() {
-
-        return new Promise((resolve, reject) => {
-            try {
-                var weather = require('weather-js');
-
-                // Options:
-                // search:     location name or zipcode
-                // degreeType: F or C
-
-                debug('Fetching weather...');
-
-                weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, (error, result) => {
-                    try {
-                        if (error)
-                            reject(error);
-                        else {
-
-                            debug(result);
-                
-                            resolve(result);
-                        }
-
-                    }
-                    catch(error) {
-                        console.log(error);
-                        reject(error);
-                    }
-                });
-
-            }
-            catch(error) {
-                reject(error);
-            }
-        });
-    }
 
     getWeatherState(text) {
 
@@ -218,7 +216,7 @@ module.exports = class extends Animation {
 
         return new Promise((resolve, reject) => {
 
-            this.getWeather().then((weather) => {
+            getWeather().then((weather) => {
 
                 if (isArray(weather))
                     weather = weather[0];
