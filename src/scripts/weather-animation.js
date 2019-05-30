@@ -9,7 +9,6 @@ var debug      = require('./debug.js');
 
 var cache = undefined;
 
-
 function fetchWeather(useCache = true) {
 
     if (useCache && cache != undefined) {
@@ -32,6 +31,8 @@ function fetchWeather(useCache = true) {
                     if (error)
                         reject(error);
                     else {
+
+                        debug(result);
 
                         setTimeout(() => {
                             fetchWeather(false).then(() => {
@@ -67,9 +68,9 @@ module.exports = class extends Animation {
         super(options);
 
         this.pixels = pixels;
+		this.renderFrequency = 60 * 1000;
         this.name  = 'Weather Animation';
     }
-
 
     getWeatherState(text) {
 
@@ -136,8 +137,6 @@ module.exports = class extends Animation {
 
                 if (isArray(weather))
                     weather = weather[0];
-
-                debug(weather);
 
                 var current  = weather.current;
                 var forecastToday = undefined;
