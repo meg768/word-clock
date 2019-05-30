@@ -69,10 +69,9 @@ module.exports = function() {
                             console.log(error);
                         })
                         .then(() => {
-                            if (timer)
-                                clearTimeout(timer);
-    
-                            timer = undefined;
+                            // Reset timer, if any
+                            clearTimer();
+
                             forceRequest = false;
                         })
 
