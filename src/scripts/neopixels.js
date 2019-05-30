@@ -3,6 +3,7 @@ var Neopixels = require('rpi-neopixels');
 function configure() {
 
     function cleanup() {
+        console.log('Cleaning up...');
         var pixels = new Neopixels.Pixels();
 
         pixels.fill('black');
