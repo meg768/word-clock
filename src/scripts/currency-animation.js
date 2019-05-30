@@ -1,23 +1,22 @@
-var AvanzaAnimation = require('./avanza-animation.js');
+var Animation = require('./yahoo-animation.js');
 
-module.exports = class extends AvanzaAnimation {
-
+module.exports = class extends Animation {
 
 	constructor(pixels, options) {
 		super(pixels, options);
 
-		this.name = 'Avanza Currency';
+		this.name = 'Yahoo Currency';
 	}
 
 	getSymbols() {
 		return ([
-			{symbol: 'NOK', id:53293},
-			{symbol: 'JPY', id:108702},
-			{symbol: 'USD', id:19000},
-			{symbol: 'GBP', id:108703},
-			{symbol: 'EUR', id:18998},
-			{symbol: 'DKK', id:53292},
-			{symbol: 'CAD', id:108701}
+			{name:'NOK', symbol:'NOKSEK=X'},
+			{name:'JPY', symbol:'JPYSEK=X'},
+			{name:'USD', symbol:'USDSEK=X'},
+			{name:'GBP', symbol:'GBPSEK=X'},
+			{name:'EUR', symbol:'EURSEK=X'},
+			{name:'DKK', symbol:'DKKSEK=X'},
+			{name:'CAD', symbol:'CADSEK=X'}
 		]);
 
 	}

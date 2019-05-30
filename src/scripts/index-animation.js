@@ -1,26 +1,24 @@
-var AvanzaAnimation = require('./avanza-animation.js');
+var Animation = require('./yahoo-animation.js');
 
-
-module.exports = class extends AvanzaAnimation {
-
+module.exports = class extends Animation {
 
 	constructor(pixels, options) {
 		super(pixels, options);
 
-		this.name = 'Avanza Index Animation';
+		this.name = 'Yahoo Index Animation';
 	}
 
 	getSymbols() {
 		return ([
-			{symbol: 'OMX',      id:19002},
-			{symbol: 'NASDAQ',   id:19006},
-			{symbol: 'DAX',      id:18981},
-			{symbol: 'DOWJONES', id:18985},
-			{symbol: 'HANGSENG', id:18984},
-			{symbol: 'USA',      id:155458},
-			{symbol: 'UK',       id:155698},
-			{symbol: 'BRIC',     id:134948},
-			{symbol: 'NIKKEI',   id:18997}
+			{name:'OMX', symbol:'^OMX'},
+			{name:'NASDAQ', symbol:'^IXIC'},
+			{name:'DAX', symbol:'^GDAXI'},
+			{name:'DOWJONES', symbol:'^DJI'},
+			{name:'HANGSENG', symbol:'^HSI'},
+			{name:'USA', symbol:'^GSPC'},
+			{name:'UK', symbol:'^FTSE'},
+			{name:'BRIC', symbol:'^BSESN'},
+			{name:'NIKKEI', symbol:'^N225'}
 		]);
 
 	}

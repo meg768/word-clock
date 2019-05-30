@@ -4,8 +4,8 @@
   "description": "Word Clock",
   "main": "word-clock.js",
   "scripts": {
-		"goto-github": "make goto-github",
-		"goto-npm": "make goto-npm",
+    "goto-github": "make goto-github",
+    "goto-npm": "make goto-npm",
     "git-pull": "make git-pull",
     "git-commit": "make git-commit",
     "git-revert": "make git-revert"
@@ -25,13 +25,14 @@
     "color": "^2.0.0",
     "dotenv": "^4.0.0",
     "pigpio": "^0.6.2",
-    "rpi-neopixels": "^1.0.70",
+    "pigpio-button": "^1.0.6",
     "rpi-animations": "^1.0.7",
+    "rpi-neopixels": "^1.0.70",
     "rpi-obex-monitor": "^1.0.11",
     "rpi-wifi-connection": "^1.0.6",
     "sleep": "^5.1.1",
-    "pigpio-button": "^1.0.6",
     "weather-js": "^2.0.0",
+    "yahoo-finance": "^0.3.6",
     "yargs": "^8.0.2",
     "yow": "^1.0.84"
   }

@@ -1,24 +1,23 @@
-var AvanzaAnimation = require('./avanza-animation.js');
+var Animation = require('./yahoo-animation.js');
 
-module.exports = class extends AvanzaAnimation {
-
+module.exports = class extends Animation {
 
 	constructor(pixels, options) {
 		super(pixels, options);
 
-		this.name = 'Avanza Commodity';
+		this.name = 'Yahoo Commodity';
 	}
 
 	getSymbols() {
 		return ([
-			{symbol: 'ZN',    id:18992},
-			{symbol: 'AU',    id:18986},
-			{symbol: 'AL',    id:18990},
-			{symbol: 'NI',    id:18996},
-			{symbol: 'CU',    id:18989},
-			{symbol: 'BRENT', id:155722},
-			{symbol: 'AG',    id:18991},
-			{symbol: 'PB',    id:18983}
+			{name:'ZN', symbol:'^SPGSIZ'}, // Zink 
+			{name:'AU', symbol:'^SPGSGC'}, // Guld 
+			{name:'AL', symbol:'^SPGSIA'}, // Aluminium 
+			{name:'NI', symbol:'^SPGSIK'}, // Nickel 
+			{name:'CU', symbol:'^SPGSIC'}, // Koppar 
+			{name:'BRENT', symbol:'^SPGSBR'}, // Olja  
+			{name:'AG', symbol:'^SPGSSI'}, // Silver 
+			{name:'PB', symbol:'^SPGSIL'} // Bly 
 		]);
 
 	}

@@ -12,8 +12,8 @@ var CurrencyAnimation  = require('../scripts/currency-animation.js');
 var CommodityAnimation = require('../scripts/commodity-animation.js');
 var IndexAnimation     = require('../scripts/index-animation.js');
 var ColorAnimation     = require('../scripts/color-animation.js');
-var PulseAnimation     = require('../scripts/pulse-animation.js')
 var MatrixAnimation    = require('../scripts/matrix-animation.js');
+var PulseAnimation     = require('../scripts/pulse-animation.js')
 var TextAnimation      = require('../scripts/text-animation.js');
 
 function debug() {
