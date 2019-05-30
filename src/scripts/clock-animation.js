@@ -2,6 +2,7 @@
 var sprintf = require('yow/sprintf');
 var Animation = require('rpi-animations').Animation;
 var Layout = require('./layout.js');
+var debug = require('./debug.js');
 
 module.exports = class extends Animation {
 
