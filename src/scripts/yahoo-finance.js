@@ -37,7 +37,6 @@ function getSymbols(name, symbols, useCache) {
 
 			setTimeout(() => {
 				getSymbols(name, symbols, false).then(() => {
-					debug('Fetched symbols again', name);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -48,7 +47,6 @@ function getSymbols(name, symbols, useCache) {
 
 			cache[name] = results;
 
-			debug('Caching results for', name);
 			resolve(results);
 		})
 		.catch((error) => {
@@ -58,6 +56,8 @@ function getSymbols(name, symbols, useCache) {
 	});
 
 }
+
+
 module.exports = class YahoooFinance {
 
 	constructor() {

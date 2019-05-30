@@ -7,6 +7,59 @@ var Layout     = require('./layout.js');
 var Color      = require('color');
 var debug      = require('./debug.js');
 
+var cache = undefined;
+
+
+function fetchWeather(useCache = true) {
+
+    if (useCache && cache != undefined) {
+        debug('Using cached weather.');
+        return Promise.resolve(cache);
+    }
+
+    return new Promise(function(resolve, reject) {
+        try {
+            var weather = require('weather-js');
+
+            // Options:
+            // search:     location name or zipcode
+            // degreeType: F or C
+
+            debug('Fetching weather...');
+
+            weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, function(error, result) {
+                try {
+                    if (error)
+                        reject(error);
+                    else {
+
+                        setTimeout(() => {
+                            fetchWeather(false).then(() => {
+            
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                        }, 30000);
+            
+                        resolve(cache = result);
+                    }
+
+                }
+                catch(error) {
+                    console.log(error);
+                    reject(error);
+                }
+            });
+
+
+
+        }
+        catch(error) {
+            reject(error);
+        }
+    });
+}
 
 module.exports = class extends Animation {
 
@@ -113,20 +166,10 @@ module.exports = class extends Animation {
 
     getForecast() {
 
-        var self = this;
-        var now  = new Date();
-
-        // May we use cached weather?
-        if (self.time != undefined && self.cache != undefined) {
-            if (now.getTime() - self.time.getTime() < 30 * 60 * 1000) {
-                debug('Using cached weather.');
-                return Promise.resolve(self.cache);
-            }
-        }
 
         return new Promise(function(resolve, reject) {
 
-            self.getWeather().then(function(weather) {
+            fetchWeather().then(function(weather) {
 
                 if (isArray(weather))
                     weather = weather[0];
@@ -140,11 +183,11 @@ module.exports = class extends Animation {
 
                 tomorrow.setDate(today.getDate() + 1);
 
-                weather.forecast.forEach(function(day) {
+                weather.forecast.forEach((day) => {
                     var date = new Date(day.date);
 
                     // Just for debugging
-                    self.getWeatherState(day.skytextday);
+                    this.getWeatherState(day.skytextday);
 
                     if (date.valueOf() == today.valueOf())
                         forecastToday = day;
@@ -154,14 +197,13 @@ module.exports = class extends Animation {
                     }
                 });
 
-                self.time  = new Date();
-                self.cache = {
+                var forecast = {
                     current:current.skytext,
                     today:forecastToday.skytextday,
                     tomorrow:forecastTomorrow.skytextday
                 };
 
-                resolve(self.cache);
+                resolve(forecast);
 
             })
             .catch(function(error) {
@@ -173,12 +215,10 @@ module.exports = class extends Animation {
 
     getText() {
 
-        var self = this;
-
         return new Promise(function(resolve, reject) {
 
-            self.getForecast().then(function(forecast) {
-                var state = self.getWeatherState(forecast.tomorrow);
+            this.getForecast().then((forecast) => {
+                var state = this.getWeatherState(forecast.tomorrow);
                 var words = "SOL VIND SNÖ MOLN REGN".split(' ');
                 var text  = words.map(function(word) {
 
@@ -203,7 +243,6 @@ module.exports = class extends Animation {
     }
 
     displayText(words) {
-        var self = this;
 
         var pixels = this.pixels;
         var layout = new Layout();
