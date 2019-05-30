@@ -5,7 +5,7 @@ var Button = require('pigpio-button');
 
 var Neopixels = require('../scripts/neopixels.js');
 var AnimationQueue = require('rpi-animations').Queue;
-var debug = require('./debug.js');
+var debug = require('../scripts/debug.js');
 
 var ClockAnimation     = require('../scripts/clock-animation.js');
 var WeatherAnimation   = require('../scripts/weather-animation.js');
