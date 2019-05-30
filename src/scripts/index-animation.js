@@ -3,11 +3,7 @@ var cached = require('./cached.js');
 var yahoo = require('./yahoo-finance.js')
 
 
-var fetchQuotes = function(symbols) {
-	return yahoo.fetchQuotes(symbols);
-}
-
-var getQuotes = cached(fetchQuotes, 15000);
+var fetchQuotes = cached((symbols) => { return yahoo.fetchQuotes(symbols) }, 60000);
 
 module.exports = class Module extends Animation {
 
@@ -16,7 +12,7 @@ module.exports = class Module extends Animation {
 		this.name = 'Yahoo Index Animation';
 	}
 
-	getQuotes() {
+	fetchQuotes() {
 		var symbols = [
 			{name:'OMX', symbol:'^OMX'},
 			{name:'NASDAQ', symbol:'^IXIC'},
@@ -30,7 +26,7 @@ module.exports = class Module extends Animation {
 	
 		];
 
-		return getQuotes(symbols);
+		return fetchQuotes(symbols);
 	}
 
 
