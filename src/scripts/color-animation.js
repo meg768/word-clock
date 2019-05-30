@@ -14,7 +14,7 @@ module.exports = class extends Animation {
 		super({...options, name:'Color Animation', renderFrequency: 60000});
 
 		this.pixels = pixels;
-		this.color = color;
+		this.color  = color;
 
 		try {
 			this.color = Color(this.color).rgbNumber();

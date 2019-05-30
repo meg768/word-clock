@@ -8,9 +8,7 @@ module.exports = class extends Animation {
 
 
     constructor(options) {
-        debug('Options before', options);
         var {pixels, ...options} = options;
-		debug('Options after', options);
 
         super({...options, name:'Clock Animation', renderFrequency: 15 * 1000});
         
