@@ -50,6 +50,7 @@ module.exports = class Module extends Animation {
 		return yahoo.fetchQuotes(symbols);
 	}
 
+	static foo = 4;
 
 	getQuotes() {
 		return getIndices(this.yahoo);
