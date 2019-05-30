@@ -2,14 +2,14 @@ var Animation = require('./yahoo-animation.js');
 var cached = require('./cached.js');
 var yahoo = require('./yahoo-finance.js')
 
-
-var fetchQuotes = cached((symbols) => { return yahoo.fetchQuotes(symbols) }, 60000);
+var fetchQuotes = cached((symbols) => { 
+	return yahoo.fetchQuotes(symbols);
+}, 60000);
 
 module.exports = class Module extends Animation {
 
 	constructor(pixels, options) {
-		super(pixels, options);
-		this.name = 'Yahoo Index Animation';
+		super(pixels, {...options, name:'Yahoo Index Animation'});
 	}
 
 	fetchQuotes() {
