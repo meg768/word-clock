@@ -56,7 +56,7 @@ var Module = new function() {
 			var defaultDuration  = 10000;
 			var animationIndex   = -1;
 			var state            = 'on';
-			var duration         = defaultDuration;
+			var duration         = -1;
 			var animationQueue   = new AnimationQueue();
 
 			upperButton.on('click', (clicks) => {
