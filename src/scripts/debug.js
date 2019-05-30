@@ -9,3 +9,9 @@ module.exports = function() {
 
 	console.log.apply(this, args);
 }
+
+/*
+module.exports = function() {
+
+}
+*/
