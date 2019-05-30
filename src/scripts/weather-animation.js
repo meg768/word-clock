@@ -27,6 +27,7 @@ function cached(fn, timeout) {
                     setTimeout(() => {
                         debug('Updating contents now...');
                         fn.apply(null, arguments).then((data) => {
+                            result = data;
                             debug('Done!');
                         })
                         .catch((error) => {
