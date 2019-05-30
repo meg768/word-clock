@@ -2,8 +2,6 @@ var yahoo = require('yahoo-finance');
 var Timer = require('yow/timer');
 
 var cache = [];
-var timer = new Timer();
-
 
 module.exports = class YahoooFinance {
 
@@ -14,7 +12,7 @@ module.exports = class YahoooFinance {
 
 		if (cache[name] != undefined) {
 			console.log('Returning cached values for', name);
-			return Promise.resolve(cache[name]);
+			return Promise.resolve(cache[name].cache);
 
 		}
 
@@ -41,6 +39,8 @@ module.exports = class YahoooFinance {
 					results.push({name:symbol.name, symbol:symbol.symbol, change:change, price:price});
 				});
 
+				var timer = new Timer();
+
 				// Remove from cache after a while
 				timer.setTimer(30000, () => {
 					console.log('Removing cached results for', name);
@@ -51,8 +51,10 @@ module.exports = class YahoooFinance {
 					}
 				});				
 
+				cache[name] = {timer:timer, cache:results};
+
 				console.log('Caching results for', name);
-				resolve(cache[name] = results);
+				resolve(results);
 			})
 			.catch((error) => {
 				reject(error);
