@@ -7,7 +7,7 @@ var fetchQuotes = function(symbols) {
 	return yahoo.fetchQuotes(symbols);
 }
 
-var getQuotes = cached(fetchQuotes, 60000);
+var getQuotes = cached(fetchQuotes, 15000);
 
 module.exports = class Module extends Animation {
 
