@@ -13,13 +13,13 @@ module.exports = function() {
         timeout = arguments[1];
     }
     else if (typeof arguments[0] == 'number' && typeof arguments[1] == 'function') {
+        timeout = arguments[0];
         fn = arguments[1];
-        timeout = arguments[1];
 
     }
     else
         throw new Error('Invalid arguments for cached()');
-        
+
     var loop = function() { 
 
         var myargs = arguments;
