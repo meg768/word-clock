@@ -9,7 +9,7 @@ var debug      = require('./debug.js');
 var cached     = require('./cached.js');
 
 
-var fetchWeather = function() {
+var fetchWeather = cached(60000, () => {
 
     return new Promise((resolve, reject) => {
         try {
@@ -44,9 +44,8 @@ var fetchWeather = function() {
             reject(error);
         }
     });
-}
+});
 
-var getWeather = cached(fetchWeather, 60000);
 
 module.exports = class extends Animation {
 
@@ -121,7 +120,7 @@ module.exports = class extends Animation {
 
         return new Promise((resolve, reject) => {
 
-            getWeather().then((weather) => {
+            fetchWeather().then((weather) => {
 
                 if (isArray(weather))
                     weather = weather[0];

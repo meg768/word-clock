@@ -1,11 +1,25 @@
 var debug = require('./debug.js');
 
 
-module.exports = function(fn, timeout) { 
+module.exports = function() { 
 
     var result = undefined;
     var force  = false;
+    var fn = undefined;
+    var timeout = undefined;
 
+    if (typeof arguments[0] == 'function' && typeof arguments[1] == 'number') {
+        fn = arguments[0];
+        timeout = arguments[1];
+    }
+    else if (typeof arguments[0] == 'number' && typeof arguments[1] == 'function') {
+        fn = arguments[1];
+        timeout = arguments[1];
+
+    }
+    else
+        throw new Error('Invalid arguments for cached()');
+        
     var loop = function() { 
 
         var myargs = arguments;
