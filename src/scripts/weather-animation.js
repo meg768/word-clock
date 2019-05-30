@@ -9,7 +9,7 @@ var debug      = require('./debug.js');
 var cached     = require('./cached.js');
 
 
-var fetchWeather = cached(60000, () => {
+var fetchWeather = cached(60000, (location) => {
 
     return new Promise((resolve, reject) => {
         try {
@@ -21,7 +21,7 @@ var fetchWeather = cached(60000, () => {
 
             debug('Fetching weather...');
 
-            weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, (error, result) => {
+            weather.find({search: location, degreeType: 'C'}, (error, result) => {
                 try {
                     if (error)
                         reject(error);
@@ -56,6 +56,7 @@ module.exports = class extends Animation {
         this.pixels = pixels;
 		this.renderFrequency = 60 * 1000;
         this.name  = 'Weather Animation';
+        this.location = 'Lund, Skåne, Sweden';
 
     }
 
@@ -120,7 +121,7 @@ module.exports = class extends Animation {
 
         return new Promise((resolve, reject) => {
 
-            fetchWeather().then((weather) => {
+            fetchWeather(this.location).then((weather) => {
 
                 if (isArray(weather))
                     weather = weather[0];
