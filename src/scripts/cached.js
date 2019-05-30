@@ -20,6 +20,19 @@ module.exports = function() {
     else
         throw new Error('Invalid arguments for cached()');
 
+    var clearTimer = function() {
+        if (timer)
+            clearTimeout(timer);
+        
+        timer = undefined;
+    }
+
+    var setTimer = function(fn) {
+        clearTimer();
+
+        timer = setTimeout(fn, timeout);
+    }
+
     var loop = function() { 
 
 		return new Promise((resolve, reject) => {
@@ -30,10 +43,7 @@ module.exports = function() {
 
                 // Make sure to forget previous calls
                 // This must be done before we apply the function, since it may take some time to resolve
-                if (timer) {
-                    clearTimeout(timer);
-                    timer = undefined;
-                }
+                clearTimer();
 
                 // Make the call
                 var promise = fn.apply(this, arguments);
@@ -47,7 +57,7 @@ module.exports = function() {
                     debug('Storing data to cache.');
                     cache = data;
                     
-                    timer = setTimeout(() => {
+                    setTimer(() => {
                         
                         // Make sure we make a real request
                         forceRequest = true;
@@ -59,10 +69,14 @@ module.exports = function() {
                             console.log(error);
                         })
                         .then(() => {
+                            if (timer)
+                                clearTimeout(timer);
+    
+                            timer = undefined;
                             forceRequest = false;
                         })
 
-                    }, timeout);
+                    });
 
 					resolve(cache);	
 				})
