@@ -1,7 +1,7 @@
 var yahoo = require('yahoo-finance');
 var debug = require('./debug.js');
 
-module.exports = function(symbols) {
+function fetchQuotes(symbols) {
 
 	return new Promise((resolve, reject) => {
 		var params = {};
@@ -35,3 +35,5 @@ module.exports = function(symbols) {
 	});
 
 }
+
+module.exports.fetchQuotes = fetchQuotes;
