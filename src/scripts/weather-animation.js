@@ -9,7 +9,7 @@ var debug      = require('./debug.js');
 var cached     = require('./cached.js');
 
 
-var fetchWeather = cached(60000, (location) => {
+var fetchWeather = cached(1000 * 60 * 60, (location) => {
 
     return new Promise((resolve, reject) => {
         try {

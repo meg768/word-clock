@@ -22,8 +22,6 @@ module.exports = class extends Animation {
 
 	render() {
 
-		debug('*************Rendering animation', this.name);
-
 		this.fetchQuotes().then((symbols) => {
 
 	        var pixels  = this.pixels;

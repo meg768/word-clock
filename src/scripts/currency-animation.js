@@ -2,9 +2,10 @@ var Animation = require('./yahoo-animation.js');
 var cached = require('./cached.js');
 var yahoo = require('./yahoo-finance.js')
 
-var fetchQuotes = cached(60000, (symbols) => { 
+var fetchQuotes = cached(1000 * 60 * 15, (symbols) => { 
 	return yahoo.fetchQuotes(symbols);
 });
+
 
 module.exports = class Module extends Animation {
 
