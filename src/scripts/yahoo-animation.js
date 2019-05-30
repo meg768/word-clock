@@ -18,15 +18,13 @@ module.exports = class extends Animation {
 	}
 
 
-	getSymbols() {
-		return [];
+	getQuotes() {
+		return Promise.resolve([]);
 	}
 
 	render() {
 
-		var promise = this.yahoo.getSymbols(this.name, this.getSymbols());
-
-		promise.then((symbols) => {
+		this.getQuotes.then((symbols) => {
 
 	        var pixels  = this.pixels;
 	        var display = new Layout();

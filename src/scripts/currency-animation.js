@@ -1,4 +1,5 @@
 var Animation = require('./yahoo-animation.js');
+var cached = require('./cached.js');
 
 module.exports = class extends Animation {
 

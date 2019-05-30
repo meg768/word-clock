@@ -6,49 +6,7 @@ var sprintf = require('yow/sprintf');
 var Layout     = require('./layout.js');
 var Color      = require('color');
 var debug      = require('./debug.js');
-
-
-function cached(fn, timeout) { 
-
-    var result = undefined;
-
-    return function() { 
-
-		return new Promise((resolve, reject) => {
-			var now = new Date();
-
-			if (result == undefined) {
-                debug('Calling first time...')
-				fn.apply(this, arguments).then((data) => {
-                    result = data;
-                    
-                    setTimeout(() => {
-                        debug('Updating contents now...');
-                        fn.apply(null, arguments).then((data) => {
-                            result = data;
-                            debug('Done!');
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
-
-                    }, timeout);
-
-					resolve(result);	
-				})
-				.catch((error) => {
-					reject(error);
-				})
-			}
-			else {
-                debug('Returning cached result.');
-				resolve(result);
-
-            }
-		
-		});
-    };
-}
+var cached     = require('./cached.js');
 
 
 var fetchWeather = function() {
@@ -90,60 +48,6 @@ var fetchWeather = function() {
 
 var getWeather = cached(fetchWeather, 60000);
 
-/*
-
-function fetchWeatherOLD(useCache = true) {
-
-    if (useCache && cache != undefined) {
-        debug('Using cached weather.');
-        return Promise.resolve(cache);
-    }
-
-    return new Promise((resolve, reject) => {
-        try {
-            var weather = require('weather-js');
-
-            // Options:
-            // search:     location name or zipcode
-            // degreeType: F or C
-
-            debug('Fetching weather...');
-
-            weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, (error, result) => {
-                try {
-                    if (error)
-                        reject(error);
-                    else {
-
-                        debug(result);
-
-                        setTimeout(() => {
-                            fetchWeather(false).then(() => {
-            
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            });
-                        }, 1000 * 60 * 60);
-            
-                        resolve(cache = result);
-                    }
-
-                }
-                catch(error) {
-                    console.log(error);
-                    reject(error);
-                }
-            });
-
-        }
-        catch(error) {
-            reject(error);
-        }
-    });
-}
-*/
-
 module.exports = class extends Animation {
 
 
@@ -155,8 +59,6 @@ module.exports = class extends Animation {
         this.name  = 'Weather Animation';
 
     }
-
-
 
     getWeatherState(text) {
 
