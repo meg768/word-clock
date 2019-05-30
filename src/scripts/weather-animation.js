@@ -137,8 +137,8 @@ module.exports = class extends Animation {
                 if (isArray(weather))
                     weather = weather[0];
 
-                debug(wather);
-                
+                debug(weather);
+
                 var current  = weather.current;
                 var forecastToday = undefined;
                 var forecastTomorrow = undefined;
