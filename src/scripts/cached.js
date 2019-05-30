@@ -1,6 +1,5 @@
 var debug = require('./debug.js');
 
-
 module.exports = function() { 
 
     var cache        = undefined;
@@ -26,15 +25,28 @@ module.exports = function() {
 		return new Promise((resolve, reject) => {
 
 			if (cache == undefined || forceRequest) {
+                // Never been called before or new request is required...
                 debug(forceRequest ? 'Updating contents...' : 'Calling first time...');
 
-				fn.apply(this, arguments).then((data) => {
+                // Make sure to forget previous calls
+                // This must be done before we apply the function, since it may take some time to resolve
+                if (timer) {
+                    clearTimeout(timer);
+                    timer = undefined;
+                }
+
+                // Make the call
+                var promise = fn.apply(this, arguments);
+                
+                // Make sure the function returns a promise
+                if (!(promise instanceof Promise)) {
+                    throw new Error('Function must return a promise.');
+                }
+
+				promise.then((data) => {
                     debug('Storing data to cache.');
                     cache = data;
                     
-                    if (timer)
-                        clearTimeout(timer);
-
                     timer = setTimeout(() => {
                         
                         // Make sure we make a real request
