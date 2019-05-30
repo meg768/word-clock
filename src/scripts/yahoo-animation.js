@@ -8,9 +8,9 @@ module.exports = class extends Animation {
 
 	constructor(options) {
 
-		var {pixels, ...other} = options;
+		var {pixels, ...options} = options;
 
-		super({...other, name:'Yahoo Animation', renderFrequency: 60 * 1000});
+		super({...options, name:'Yahoo Animation', renderFrequency: 60 * 1000});
 
 		this.pixels = pixels;
 	}
