@@ -7,9 +7,86 @@ var Layout     = require('./layout.js');
 var Color      = require('color');
 var debug      = require('./debug.js');
 
-var cache = undefined;
+//var cache = undefined;
 
-function fetchWeather(useCache = true) {
+
+function cached(fn, timeout) { 
+
+    var result = undefined;
+
+    return function() { 
+
+		return new Promise((resolve, reject) => {
+			var now = new Date();
+
+			if (result == undefined) {
+				fn.apply(this, arguments).then((data) => {
+                    result = data;
+                    
+                    setTimeout(() => {
+                        fn.apply(null, arguments).then((data) => {
+
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+
+                    }, timeout);
+
+					resolve(result);	
+				})
+				.catch((error) => {
+					reject(error);
+				})
+			}
+			else
+				resolve(result);
+		
+		});
+    };
+}
+
+
+var fetchWeather = function() {
+
+    return new Promise((resolve, reject) => {
+        try {
+            var weather = require('weather-js');
+
+            // Options:
+            // search:     location name or zipcode
+            // degreeType: F or C
+
+            debug('Fetching weather...');
+
+            weather.find({search: 'Lund, Skåne, Sweden', degreeType: 'C'}, (error, result) => {
+                try {
+                    if (error)
+                        reject(error);
+                    else {
+
+                        debug(result);
+            
+                        resolve(result);
+                    }
+
+                }
+                catch(error) {
+                    console.log(error);
+                    reject(error);
+                }
+            });
+
+        }
+        catch(error) {
+            reject(error);
+        }
+    });
+}
+
+var getWeather = cached(fetchWeather, 30000);
+
+function fetchWeatherOLD(useCache = true) {
 
     if (useCache && cache != undefined) {
         debug('Using cached weather.');
@@ -133,7 +210,7 @@ module.exports = class extends Animation {
 
         return new Promise((resolve, reject) => {
 
-            fetchWeather().then((weather) => {
+            getWeather().then((weather) => {
 
                 if (isArray(weather))
                     weather = weather[0];

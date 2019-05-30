@@ -24,8 +24,6 @@ module.exports = class extends Animation {
 
 	render() {
 
-		debug('Rendering animation', this.name, '...');
-
 		var promise = this.yahoo.getSymbols(this.name, this.getSymbols());
 
 		promise.then((symbols) => {
@@ -34,7 +32,7 @@ module.exports = class extends Animation {
 	        var display = new Layout();
 			var words   = [];
 
-			symbols.forEach(function(symbol) {
+			symbols.forEach((symbol) => {
 				words.push(symbol.name);
 			});
 
