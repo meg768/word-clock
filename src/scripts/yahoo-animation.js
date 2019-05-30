@@ -1,6 +1,5 @@
 var Animation   = require('rpi-animations').Animation;
 var Layout      = require('./layout.js');
-var YahooFinance = require('./yahoo-finance.js');
 
 var debug = require('./debug');
 
@@ -12,8 +11,7 @@ module.exports = class extends Animation {
 
 		this.pixels = pixels;
 		this.renderFrequency = 60 * 1000;
-		this.name    = 'Yahoo Animation';
-		this.yahoo  = new YahooFinance();
+		this.name = 'Yahoo Animation';
 
 	}
 

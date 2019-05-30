@@ -1,15 +1,20 @@
 var Animation = require('./yahoo-animation.js');
+var cached = require('./cached.js');
+var yahoo = require('./yahoo-finance.js')
 
-module.exports = class extends Animation {
+var fetchQuotes = cached((symbols) => { return yahoo.fetchQuotes(symbols); }, 60000);
+
+module.exports = class Module extends Animation {
 
 	constructor(pixels, options) {
 		super(pixels, options);
 
-		this.name = 'Yahoo Commodity';
+		this.name = 'Yahoo Commodity Animation';
 	}
 
-	getSymbols() {
-		return ([
+
+	fetchQuotes() {
+		var symbols = [
 			{name:'ZN', symbol:'^SPGSIZ'}, // Zink 
 			{name:'AU', symbol:'^SPGSGC'}, // Guld 
 			{name:'AL', symbol:'^SPGSIA'}, // Aluminium 
@@ -18,8 +23,10 @@ module.exports = class extends Animation {
 			{name:'BRENT', symbol:'^SPGSBR'}, // Olja  
 			{name:'AG', symbol:'^SPGSSI'}, // Silver 
 			{name:'PB', symbol:'^SPGSIL'} // Bly 
-		]);
+		
+		];
 
+		return fetchQuotes(symbols);
 	}
 
 
