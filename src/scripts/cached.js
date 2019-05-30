@@ -8,6 +8,8 @@ module.exports = function(fn, timeout) {
 
     var loop = function() { 
 
+        var myargs = arguments;
+
 		return new Promise((resolve, reject) => {
 
 			if (result == undefined || force) {
@@ -17,7 +19,7 @@ module.exports = function(fn, timeout) {
                     
                     setTimeout(() => {
                         force = true;
-                        loop(arguments).then((data) => {
+                        loop(myargs).then((data) => {
                             debug('Done!');
                         })
                         .catch((error) => {
