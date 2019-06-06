@@ -2,6 +2,7 @@ var sprintf = require('yow/sprintf');
 
 module.exports = function() {
 
+	
 	var date  = new Date();
 	var args = Array.prototype.slice.call(arguments);
 

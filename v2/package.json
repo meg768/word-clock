@@ -1,0 +1,22 @@
+{
+  "name": "word-clock-v2",
+  "version": "1.0.0",
+  "description": "Word Clock Version 2",
+  "main": "index.js",
+  "scripts": {
+    "goto-github": "make goto-github",
+    "git-pull": "make git-pull",
+    "git-commit": "make git-commit",
+    "git-revert": "make git-revert"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meg768/word-clock-v2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meg768/word-clock-v2/issues"
+  },
+  "homepage": "https://github.com/meg768/word-clock-v2#readme"
+}
