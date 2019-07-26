@@ -2,7 +2,7 @@
 
 
 var Neopixels = require('../scripts/neopixels.js');
-var ClockAnimation = require('../scripts/clock-animation.js');
+var Animation = require('../scripts/clock-animation.js');
 
 var Module = new function() {
 
@@ -19,7 +19,7 @@ var Module = new function() {
 
 
 	function run(argv) {
-		var animation = new ClockAnimation({pixels: new Neopixels.Pixels(), duration:-1, priority:'!', debug:true});
+		var animation = new Animation({pixels: new Neopixels.Pixels(), duration:-1, priority:'!', debug:true});
 		return animation.run();
 	}
 
