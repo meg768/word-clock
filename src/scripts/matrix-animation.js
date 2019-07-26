@@ -75,6 +75,7 @@ module.exports = class extends Animation {
         super({name:'Matrix Animation', ...options});
 
         this.pixels = pixels;
+        console.log(this.pixels);
         this.worms  = [];
 
     }
