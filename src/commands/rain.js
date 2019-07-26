@@ -23,8 +23,8 @@ var Module = new function() {
 		return animation.run();
 	}
 
-	module.exports.command  = 'clock [options]';
-	module.exports.describe = 'Display current time';
+	module.exports.command  = 'rain [options]';
+	module.exports.describe = 'Display rain';
 	module.exports.builder  = defineArgs;
 	module.exports.handler  = run;
 
