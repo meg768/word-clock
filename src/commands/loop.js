@@ -82,9 +82,15 @@ var Module = new function() {
 					}
 					case 2: {
 						// Switch duration mode, loop or static
-						duration = (duration < 0) ? defaultDuration : -1;
-						animationIndex = (duration < 0) ? 1 : 0;
-
+						if (animationIndex == 0) {
+							duration = defaultDuration;
+							animationIndex = 1;
+						}
+						else {
+							animationIndex = 0;
+							duration = -1;
+						}
+						
 						var Animation = animations[animationIndex % animations.length];
 						runAnimation(new Animation({pixels:pixels, duration:duration, priority:'!'}));
 						break;
