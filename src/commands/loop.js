@@ -83,11 +83,10 @@ var Module = new function() {
 					case 2: {
 						// Switch duration mode, loop or static
 						duration = (duration < 0) ? defaultDuration : -1;
-						animationIndex = 0;
+						animationIndex = (duration < 0) ? 1 : 0;
 
 						var Animation = animations[animationIndex % animations.length];
-						runAnimation(new ColorAnimation({pixels:pixels, color:duration < 0 ? 'red' : 'green', duration:500, priority:'!'}));
-						runAnimation(new Animation({pixels:pixels, duration:duration, priority:'normal'}));
+						runAnimation(new Animation({pixels:pixels, duration:duration, priority:'!'}));
 						break;
 					}
 					case 3: {
