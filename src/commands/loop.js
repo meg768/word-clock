@@ -77,11 +77,6 @@ var Module = new function() {
 			lowerButton.on('click', (clicks) => {
 				switch (clicks) {
 					case 1: {
-						debug('Running next animation...');
-						runNextAnimation();
-						break;
-					}
-					case 2: {
 						// Switch duration mode, loop or static
 						if (animationIndex == 0) {
 							animationIndex = 1;
@@ -94,6 +89,11 @@ var Module = new function() {
 						
 						var Animation = animations[animationIndex % animations.length];
 						runAnimation(new Animation({pixels:pixels, duration:duration, priority:'!'}));
+						break;
+					}
+					case 2: {
+						debug('Running next animation...');
+						runNextAnimation();
 						break;
 					}
 					case 3: {
