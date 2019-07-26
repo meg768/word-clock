@@ -59,8 +59,9 @@ var Module = new function() {
 
 			upperButton.on('click', (clicks) => {
 
-				// Reset animation index
+				// Reset
 				animationIndex = 0;
+				duration = defaultDuration;
 
 				if (state == 'on') {
 					runAnimation(new ColorAnimation({pixels:pixels, color:'black', duration:-1, priority:'!'}));
@@ -83,8 +84,8 @@ var Module = new function() {
 					case 2: {
 						// Switch duration mode, loop or static
 						if (animationIndex == 0) {
-							duration = defaultDuration;
 							animationIndex = 1;
+							duration = defaultDuration;
 						}
 						else {
 							animationIndex = 0;
