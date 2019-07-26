@@ -24,7 +24,7 @@ var Module = new function() {
 	function run(argv) {
 
 		var strip     = new Neopixels.Pixels();
-		var animation = new MatrixAnimation({pixels:strip, duration:-1, priority:'!', debug:true});
+		var animation = new MatrixAnimation(strip, {duration:-1, priority:'!', debug:true});
 
 		return animation.run();
 
