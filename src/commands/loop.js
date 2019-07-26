@@ -47,8 +47,8 @@ var Module = new function() {
 
 
 			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, WeatherAnimation];
-			var upperButton      = new Button(6);
-			var lowerButton      = new Button(13);
+			var upperButton      = new Button(13);
+			var lowerButton      = new Button(6);
 			var pixels           = new Neopixels.Pixels();
 
 			var defaultDuration  = 10000;

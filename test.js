@@ -3,7 +3,6 @@
 
 var YahoooFinance = require('./src/scripts/yahoo-finance.js');
 
-
 var App = function() {
 
 
