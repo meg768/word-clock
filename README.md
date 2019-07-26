@@ -55,7 +55,7 @@ git clone https://github.com/meg768/word-clock.git
 ````bash
 cd word-clock
 npm install
-sudo node ./word-clock.js server
+sudo node ./word-clock.js loop
 ````
 
 
