@@ -86,7 +86,7 @@ var Module = new function() {
 						animationIndex = 0;
 
 						var Animation = animations[animationIndex % animations.length];
-						runAnimation(new ColorAnimation({pixels:pixels, color:duration < 0 ? 'blue' : 'red', duration:500, priority:'!'}));
+						runAnimation(new ColorAnimation({pixels:pixels, color:duration < 0 ? 'red' : 'green', duration:500, priority:'!'}));
 						runAnimation(new Animation({pixels:pixels, duration:duration, priority:'normal'}));
 						break;
 					}
