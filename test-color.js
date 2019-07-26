@@ -8,8 +8,10 @@ var App = function() {
 
 	function run() {
 
-		var color = Color({h:0, s:100, l:50});
-		console.log(color);
+		var colorHSL = Color({h:0, s:100, l:50});
+		var colorRGB = Color({r:255, g:0, b:0});
+		console.log(colorHSL);
+		console.log(colorRGB);
 	};
 
 	run();
