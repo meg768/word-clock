@@ -22,13 +22,8 @@ var Module = new function() {
 
 
 	function run(argv) {
-
-		var pixels    = new Neopixels.Pixels();
-		var animation = new MatrixAnimation({pixels:pixels, duration:-1, priority:'!', debug:true});
-
+		var animation = new MatrixAnimation({pixels:new Neopixels.Pixels(), duration:-1, priority:'!', debug:true});
 		return animation.run();
-
-
 	}
 
 
