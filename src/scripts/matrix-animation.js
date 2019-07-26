@@ -90,6 +90,7 @@ module.exports = class extends Animation {
                     worms.push(new Worm(this.pixels.width, this.pixels.height, i));
                 }
 
+                console.log(this.pixels);
                 this.pixels.clear();
                 this.worms = worms;
 
