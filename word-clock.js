@@ -24,6 +24,7 @@ var App = function() {
 			args.command(require('./src/commands/boring.js'));
 			args.command(require('./src/commands/word.js'));
 			args.command(require('./src/commands/weather.js'));
+			args.command(require('./src/commands/index.js'));
 
 			args.wrap(null);
 			args.demand(1);
