@@ -10,7 +10,7 @@ module.exports = class extends Animation {
     constructor(options) {
         var {pixels, ...options} = options;
 
-        super({name:'Word Animation', ...options});
+        super({...options, name:'Word Animation', renderFrequency: 2 * 1000});
         
         this.pixels = pixels;
     }
@@ -37,7 +37,8 @@ module.exports = class extends Animation {
         text = layout.lookupText(text);
 
         this.pixels.clear();
-
+        this.pixels.fillRGB(128, 0, 0);
+/*
         text.forEach((item, index) => {
             var color = Color(words[index].color).rgbNumber();
 
@@ -45,7 +46,7 @@ module.exports = class extends Animation {
                 this.pixels.setPixel(item.x + i, item.y, color);
             }
         });
-
+*/
         this.pixels.render({transition:'fade', duration:200});
     }
 
