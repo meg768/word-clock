@@ -14,7 +14,7 @@ module.exports = class extends WordAnimation {
 
     getWords() {
         var words = [];
-        var color = Color.hls(this.getHue(), 100, 50).rgbNumber();
+        var color = Color.hsl([this.getHue(), 100, 50]).rgbNumber();
         var time = this.getTime();
 
         debug('Time is now', time, '...');
