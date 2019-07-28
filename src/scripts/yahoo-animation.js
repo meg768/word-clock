@@ -31,8 +31,6 @@ module.exports = class Module extends WordAnimation {
 					this.quotes.push(item);
 				});
 
-				this.render();
-
 				setTimeout(loop, 5000);
 			});
 
