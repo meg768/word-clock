@@ -1,11 +1,8 @@
 #!/usr/bin/env node
 
-
 var Neopixels = require('../scripts/neopixels.js');
-var MatrixAnimation = require('../scripts/matrix-animation.js');
+var Animation = require('../scripts/word-animation.js');
 var debug = require('../scripts/debug.js');
-
-
 
 var Module = new function() {
 
@@ -23,8 +20,8 @@ var Module = new function() {
 
 	function run(argv) {
 
-		var strip     = new Neopixels.Pixels();
-		var animation = new MatrixAnimation(strip, {duration:-1, priority:'!', debug:true});
+		var strip     = ;
+		var animation = new Animation({pixels: new Neopixels.Pixels(), duration:-1, priority:'!', debug:true});
 
 		return animation.run();
 
@@ -32,8 +29,8 @@ var Module = new function() {
 	}
 
 
-	module.exports.command  = 'rain [options]';
-	module.exports.describe = 'Make it rain';
+	module.exports.command  = 'text [options]';
+	module.exports.describe = 'Test';
 	module.exports.builder  = defineArgs;
 	module.exports.handler  = run;
 

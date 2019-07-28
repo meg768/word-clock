@@ -23,16 +23,6 @@ module.exports = class extends Animation {
         ];
     }
 
-    renderWords(words) {
-        words.forEach((word) => {
-            var color = Color(word.color).rgbNumber();
-
-            for (var i = 0; i < word.text.length; i++) {
-                this.pixels.setPixel(word.x + i, word.y, color);
-            }
-        });
-    }
-
     render() {
         var layout = new Layout();
 
