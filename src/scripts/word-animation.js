@@ -5,13 +5,14 @@ var Color = require('color');
 
 var debug = require('./debug.js');
 
+
 module.exports = class extends Animation {
 
 
     constructor(options) {
         var {pixels, ...options} = options;
 
-        super({...options, name:'Word Animation', renderFrequency: 2 * 1000});
+        super({renderFrequency: 10 * 1000, name:'Word Animation', ...options, });
         
         this.pixels = pixels;
     }
@@ -30,13 +31,11 @@ module.exports = class extends Animation {
         var layout = new Layout();
         var words = this.getWords();
 
-
         var text = [];
 
         words.forEach((item) => {
             text.push(item.word);
         });
-
 
         text = layout.lookup(text);
 
@@ -46,7 +45,7 @@ module.exports = class extends Animation {
         text.forEach((item, index) => {
             var color = Color(words[index].color).rgbNumber();
 
-            for (var i = 0; i < item.text.length; i++) {
+            for (var i = 0; i < item.word.length; i++) {
                 this.pixels.setPixel(item.x + i, item.y, color);
             }
         });

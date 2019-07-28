@@ -102,7 +102,7 @@ var Module = module.exports = function() {
                 var row = Math.floor(index / _columns);
                 var col = index % _columns;
 
-                layout.push({text:word, x:col, y:row});
+                layout.push({word:word, x:col, y:row});
 
                 cursor = Math.min(index + word.length + 1, Math.floor(index / _columns) * _columns + _columns);
             });
