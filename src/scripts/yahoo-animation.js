@@ -1,168 +1,77 @@
-var Animation   = require('rpi-animations').Animation;
-var WordAnimation = require('./word-animation');
-var Layout      = require('./layout.js');
-
-var debug = require('./debug');
-
-module.exports = class extends WordAnimation {
+var WordAnimation = require('./word-animation.js');
+var Color = require('color');
+var yahoo = require('./yahoo-finance.js')
+var debug = require('./debug.js');
 
 
-	constructor(options) {
+var quotes = [];
 
-		var {pixels, ...options} = options;
-
-		super({name:'Yahoo Animation', renderFrequency: 60 * 1000, ...options});
-
-		this.pixels = pixels;
-	}
-
-
-	fetchQuotes() {
-		return Promise.resolve([]);
-	}
-
-	render() {
-
-		this.fetchQuotes().then((symbols) => {
-
-	        var pixels  = this.pixels;
-	        var display = new Layout();
-			var words   = [];
-
-			symbols.forEach((symbol) => {
-				words.push(symbol.name);
-			});
-
-	        var lookup = display.lookupText(words.join(' '));
-
-			if (lookup.length == symbols.length) {
-				pixels.clear();
-
-				for (var index = 0; index < symbols.length; index++) {
-					var symbol = symbols[index];
-					var layout = lookup[index];
-
-					var change     = Math.max(-2, Math.min(2, symbol.change));
-					var hue        = change >= 0 ? 240 : 0;
-					var saturation = 100;
-					var luminance  = 10 + (Math.abs(change) / 2) * 40;
-
-					if (Math.abs(symbol.change) > 2)
-						luminance = 60;
-
-					if (Math.abs(symbol.change) > 2.5)
-						luminance = 65;
-
-					if (Math.abs(symbol.change) > 3)
-						luminance = 70;
-
-					for (var i = 0; i < layout.text.length; i++) {
-		                pixels.setPixelHSL(layout.x + i, layout.y, hue, saturation, luminance);
-		            }
-
-				}
-				pixels.render({transition:'fade', duration:200});
-			}
-			else {
-				pixels.fillRGB(255, 0, 0);
-				pixels.render({transition:'fade', duration:200});
-
-			}
-
-
-		})
-		.catch((error) => {
-			console.log(error);
-		})
-
-
-
-    }
-
-
-
-
-};
-
-
-
-
-class Old extends Animation {
-
+module.exports = class Module extends WordAnimation {
 
 	constructor(options) {
+		super({name:'Yahoo Animation', ...options});
 
-		var {pixels, ...options} = options;
-
-		super({name:'Yahoo Animation', renderFrequency: 60 * 1000, ...options});
-
-		this.pixels = pixels;
+		this.quotes = this.getQuotes();
 	}
 
-
-	fetchQuotes() {
-		return Promise.resolve([]);
+	getQuotes() {
+		return quotes;
 	}
 
-	render() {
+	start() {
 
-		this.fetchQuotes().then((symbols) => {
+		var loop = () => {
+			
+			debug('Fetching quotes...');
 
-	        var pixels  = this.pixels;
-	        var display = new Layout();
-			var words   = [];
+			yahoo.fetchQuotes(this.getQuotes()).then((response) => {
+				this.quotes.length = 0;
+				
+				response.forEach((item) => {
+					this.quotes.push(item);
+				});
 
-			symbols.forEach((symbol) => {
-				words.push(symbol.name);
+				this.render();
+
+				setTimeout(loop, 5000);
 			});
 
-	        var lookup = display.lookupText(words.join(' '));
+		};
 
-			if (lookup.length == symbols.length) {
-				pixels.clear();
+		loop();
 
-				for (var index = 0; index < symbols.length; index++) {
-					var symbol = symbols[index];
-					var layout = lookup[index];
+		return super.start();
+	}
 
-					var change     = Math.max(-2, Math.min(2, symbol.change));
-					var hue        = change >= 0 ? 240 : 0;
-					var saturation = 100;
-					var luminance  = 10 + (Math.abs(change) / 2) * 40;
+	getWords() {
+		var words = [];
 
-					if (Math.abs(symbol.change) > 2)
-						luminance = 60;
+		this.quotes.forEach((item) => {
+			var color = Color.rgb(32, 32, 32);
 
-					if (Math.abs(symbol.change) > 2.5)
-						luminance = 65;
-
-					if (Math.abs(symbol.change) > 3)
-						luminance = 70;
-
-					for (var i = 0; i < layout.text.length; i++) {
-		                pixels.setPixelHSL(layout.x + i, layout.y, hue, saturation, luminance);
-		            }
-
-				}
-				pixels.render({transition:'fade', duration:200});
-			}
-			else {
-				pixels.fillRGB(255, 0, 0);
-				pixels.render({transition:'fade', duration:200});
-
+			if (item.change != undefined) {
+				var change     = Math.max(-2, Math.min(2, item.change));
+				var hue        = change >= 0 ? 240 : 0;
+				var saturation = 100;
+				var luminance  = 10 + (Math.abs(change) / 2) * 40;
+	
+				if (Math.abs(item.change) > 2)
+					luminance = 60;
+	
+				if (Math.abs(item.change) > 2.5)
+					luminance = 65;
+	
+				if (Math.abs(item.change) > 3)
+					luminance = 70;
+	
+				color = Color.hsl(hue, saturation, luminance);
 			}
 
+			words.push({word:item.name, color:color});
+		});
 
-		})
-		.catch((error) => {
-			console.log(error);
-		})
-
-
-
-    }
-
-
-
+		return words;
+		
+	}
 
 };
