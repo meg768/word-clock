@@ -50,6 +50,72 @@ var Module = module.exports = function() {
     }
 
 
+    _this.lookup = function(words) {
+
+        if (isString(words)) {
+            words = words.split(' ');
+
+            // Ignore multiple spaces between words
+            words = words.filter(function(word){
+                return word.length > 0;
+            });
+
+        }
+
+        debug('Looking up words', words, '...');
+
+        try {
+            var layout = [];
+
+            function lookupWord(word, cursor) {
+                debug('Looking up word', word, 'cursor at', cursor, '...');
+
+                var regexp = new RegExp(word, "g");
+                var match, matches = [];
+
+                for (var i = 0; i < _layout.length; i++) {
+                    var text = _layout[i];
+
+                    debug('Searching in', text, 'after', word, '...');
+
+                    while ((match = regexp.exec(text)) != null) {
+                        matches.push(i * _columns + match.index);
+                    }
+
+                }
+
+                return matches.find(function(index) {
+                    return index >= cursor;
+                });
+            }
+
+
+            var cursor = 0;
+
+            words.forEach(function(word) {
+
+                var index = lookupWord(word, cursor);
+
+                if (index == undefined)
+                    throw new Error('Invalid word:' + '*' + word + '*');
+
+                var row = Math.floor(index / _columns);
+                var col = index % _columns;
+
+                layout.push({text:word, x:col, y:row});
+
+                cursor = Math.min(index + word.length + 1, Math.floor(index / _columns) * _columns + _columns);
+            });
+
+            return layout;
+
+        }
+        catch(error) {
+            console.log(error);
+            return [];
+        }
+    }
+
     _this.lookupText = function(words) {
 
         if (isString(words)) {
