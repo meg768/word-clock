@@ -4,7 +4,7 @@ var yahoo = require('./yahoo-finance.js')
 var debug = require('./debug.js');
 
 var quotes = [
-	{name:'OMX', symbol:'^OMX'},
+	{name:'OMX', symbol:'^OMX', change:0.5},
 	{name:'NASDAQ', symbol:'^IXIC'},
 	{name:'DAX', symbol:'^GDAXI'},
 	{name:'DOWJONES', symbol:'^DJI'},
@@ -33,8 +33,8 @@ module.exports = class Module extends Animation {
 			
 			debug('Fetching quotes...');
 
-			yahoo.fetchQuotes(this.getQuotes()).then((quotes) => {
-				this.quotes = quotes;
+			yahoo.fetchQuotes(this.getQuotes()).then((response) => {
+				this.quotes = quotes = response;
 				this.render();
 
 				setTimeout(loop, 5000);
