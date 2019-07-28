@@ -2,6 +2,7 @@
 var sprintf = require('yow/sprintf');
 var Animation = require('rpi-animations').Animation;
 var Layout = require('./layout.js');
+var Color = require('color');
 var debug = require('./debug.js');
 var WordAnimation = require('./word-animation');
 
