@@ -71,11 +71,15 @@ var Module = module.exports = function() {
             var layout = [];
 
             function lookupWord(word, cursor) {
+                debug('Looking up word', word, 'cursor at', cursor, '...');
+
                 var regexp = new RegExp(word, "g");
                 var match, matches = [];
 
                 for (var i = 0; i < _layout.length; i++) {
                     var text = _layout[i];
+
+                    debug('Searching in', text, 'after', word, '...');
 
                     while ((match = regexp.exec(text)) != null) {
                         matches.push(i * _columns + match.index);
@@ -92,7 +96,6 @@ var Module = module.exports = function() {
             var cursor = 0;
 
             words.forEach(function(word) {
-                debug('Looking up word', word, '...');
 
                 var index = lookupWord(word.text, cursor);
 
