@@ -1,27 +1,28 @@
-var Animation = require('./word-animation.js');
+var WordAnimation = require('./word-animation.js');
 var Color = require('color');
 var yahoo = require('./yahoo-finance.js')
 var debug = require('./debug.js');
 
-var quotes = [
-	{name:'OMX', symbol:'^OMX', change:0.5},
-	{name:'NASDAQ', symbol:'^IXIC'},
-	{name:'DAX', symbol:'^GDAXI'},
-	{name:'DOWJONES', symbol:'^DJI'},
-	{name:'HANGSENG', symbol:'^HSI'},
-	{name:'USA', symbol:'^GSPC'},
-	{name:'UK', symbol:'^FTSE'},
-	{name:'BRIC', symbol:'^BSESN'},
-	{name:'NIKKEI', symbol:'^N225'}
-];
 
-module.exports = class Module extends Animation {
+module.exports = class Module extends WordAnimation {
 
 	constructor(options) {
 		super({name:'Yahoo Index Animation', ...options});
 
 		this.quotes = this.getQuotes();
 	}
+
+	static quotes = [
+		{name:'OMX', symbol:'^OMX', change:0.5},
+		{name:'NASDAQ', symbol:'^IXIC'},
+		{name:'DAX', symbol:'^GDAXI'},
+		{name:'DOWJONES', symbol:'^DJI'},
+		{name:'HANGSENG', symbol:'^HSI'},
+		{name:'USA', symbol:'^GSPC'},
+		{name:'UK', symbol:'^FTSE'},
+		{name:'BRIC', symbol:'^BSESN'},
+		{name:'NIKKEI', symbol:'^N225'}
+	];
 
 	getQuotes() {
 		return quotes;
