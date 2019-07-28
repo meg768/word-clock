@@ -25,18 +25,24 @@ module.exports = class extends Animation {
 
     render() {
         console.log('rendering');
-/*
-        var layout = new Layout();
 
+        var layout = new Layout();
         var words = this.getWords();
+
+        console.log('words', words);
+
         var text = [];
 
         words.forEach((word) => {
             text.push(word.text);
         });
+        console.log('text', text);
+
 
         text = layout.lookupText(text);
-*/
+        console.log('text position', text);
+
+
         this.pixels.clear();
         this.pixels.fillRGB(128, 0, 0);
 /*
