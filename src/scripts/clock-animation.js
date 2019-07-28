@@ -4,7 +4,7 @@ var Animation = require('rpi-animations').Animation;
 var Layout = require('./layout.js');
 var Color = require('color');
 var debug = require('./debug.js');
-var WordAnimation = require('./word-animation');
+var WordAnimation = require('./word-animation.js');
 
 module.exports = class extends WordAnimation {
 

@@ -28,8 +28,8 @@ var Module = new function() {
 	}
 
 
-	module.exports.command  = 'test [options]';
-	module.exports.describe = 'Test';
+	module.exports.command  = 'word [options]';
+	module.exports.describe = 'Test Word Animation';
 	module.exports.builder  = defineArgs;
 	module.exports.handler  = run;
 

@@ -13,7 +13,7 @@ module.exports = class Module extends Animation {
 	}
 
 
-	fetchQuotes() {
+	getSymbols() {
 		var symbols = [
 			{name:'ZN', symbol:'^SPGSIZ'}, // Zink 
 			{name:'AU', symbol:'^SPGSGC'}, // Guld 
@@ -26,7 +26,11 @@ module.exports = class Module extends Animation {
 		
 		];
 
-		return fetchQuotes(symbols);
+		return symbols;
+	}
+
+	fetchQuotes() {
+		return fetchQuotes(this.getSymbols());
 	}
 
 

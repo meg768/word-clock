@@ -22,7 +22,7 @@ var App = function() {
 			args.command(require('./src/commands/rain.js'));
 			args.command(require('./src/commands/clock.js'));
 			args.command(require('./src/commands/boring.js'));
-			args.command(require('./src/commands/test.js'));
+			args.command(require('./src/commands/word.js'));
 
 			args.wrap(null);
 			args.demand(1);

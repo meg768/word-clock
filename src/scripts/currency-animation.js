@@ -13,8 +13,7 @@ module.exports = class Module extends Animation {
 		super({name:'Yahoo Currency Animation', ...options});
 	}
 
-
-	fetchQuotes() {
+	getSymbols() {
 		var symbols = [
 			{name:'NOK', symbol:'NOKSEK=X'},
 			{name:'JPY', symbol:'JPYSEK=X'},
@@ -26,7 +25,12 @@ module.exports = class Module extends Animation {
 		
 		];
 
-		return fetchQuotes(symbols);
+		return symbols;
+
+	}
+
+	fetchQuotes() {
+		return fetchQuotes(this.getSymbols());
 	}
 
 

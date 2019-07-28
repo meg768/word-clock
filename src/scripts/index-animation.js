@@ -13,7 +13,7 @@ module.exports = class Module extends Animation {
 		super({name:'Yahoo Index Animation', ...options});
 	}
 
-	fetchQuotes() {
+	getSymbols() {
 		var symbols = [
 			{name:'OMX', symbol:'^OMX'},
 			{name:'NASDAQ', symbol:'^IXIC'},
@@ -27,7 +27,11 @@ module.exports = class Module extends Animation {
 	
 		];
 
-		return fetchQuotes(symbols);
+		return symbols;
+	}
+
+	fetchQuotes() {
+		return fetchQuotes(this.getSymbols());
 	}
 
 
