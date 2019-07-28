@@ -1,6 +1,8 @@
 
 var Animation = require('rpi-animations').Animation;
 var Layout = require('./layout.js');
+var Color = require('color');
+
 var debug = require('./debug.js');
 
 module.exports = class extends Animation {
@@ -23,7 +25,7 @@ module.exports = class extends Animation {
     }
 
     render() {
-        console.log('rendering');
+        debug('Rendering words...');
 
         var layout = new Layout();
         var words = this.getWords();
