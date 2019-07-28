@@ -25,6 +25,7 @@ module.exports = class extends Animation {
 
     render() {
         console.log('rendering');
+/*
         var layout = new Layout();
 
         var words = this.getWords();
@@ -35,7 +36,7 @@ module.exports = class extends Animation {
         });
 
         text = layout.lookupText(text);
-
+*/
         this.pixels.clear();
         this.pixels.fillRGB(128, 0, 0);
 /*
