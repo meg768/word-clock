@@ -18,9 +18,9 @@ module.exports = class extends Animation {
 
     getWords() {
         return [
-            {text:'FEM', color:'red'},
-            {text:'I', color:'red'},
-            {text:'SEX', color:'blue'}
+            {word:'FEM', color:'red'},
+            {word:'I', color:'red'},
+            {word:'SEX', color:'blue'}
         ];
     }
 
@@ -33,8 +33,8 @@ module.exports = class extends Animation {
 
         var text = [];
 
-        words.forEach((word) => {
-            text.push(word.text);
+        words.forEach((item) => {
+            text.push(item.word);
         });
 
 
