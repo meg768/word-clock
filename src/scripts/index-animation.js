@@ -3,10 +3,9 @@ var Color = require('color');
 var yahoo = require('./yahoo-finance.js')
 var debug = require('./debug.js');
 
-
 var quotes = [
-	{name:'OMX', symbol:'^OMX', change:0.5},
-	{name:'NASDAQ', symbol:'^IXIC', change:-0.5},
+	{name:'OMX', symbol:'^OMX'},
+	{name:'NASDAQ', symbol:'^IXIC'},
 	{name:'DAX', symbol:'^GDAXI'},
 	{name:'DOWJONES', symbol:'^DJI'},
 	{name:'HANGSENG', symbol:'^HSI'},
@@ -20,17 +19,24 @@ module.exports = class Module extends Animation {
 
 	constructor(options) {
 		super({name:'Yahoo Index Animation', ...options});
+
+		this.quotes = this.getQuotes();
 	}
 
+	getQuotes() {
+		return quotes;
+	}
 
 	start() {
 
 		var loop = () => {
+			
 			debug('Fetching quotes...');
 
-			yahoo.fetchQuotes(quotes).then((reply) => {
-				quotes = reply;
+			yahoo.fetchQuotes(this.getQuotes()).then((quotes) => {
+				this.quotes = quotes;
 				this.render();
+
 				setTimeout(loop, 5000);
 			});
 
