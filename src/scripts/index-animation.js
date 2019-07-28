@@ -28,7 +28,7 @@ module.exports = class Module extends Animation {
 		var loop = () => {
 			debug('Fetching quotes...');
 
-			yahoo.fetchQuotes().then((reply) => {
+			yahoo.fetchQuotes(quotes).then((reply) => {
 				quotes = reply;
 				this.render();
 				setTimeout(loop, 5000);
