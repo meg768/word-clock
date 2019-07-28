@@ -28,23 +28,19 @@ module.exports = class extends Animation {
         var layout = new Layout();
         var words = this.getWords();
 
-        debug('words', words);
 
         var text = [];
 
         words.forEach((word) => {
             text.push(word.text);
         });
-        debug('text', text);
 
 
         text = layout.lookup(text);
-        debug('text position', text);
 
 
         this.pixels.clear();
-        this.pixels.fillRGB(128, 0, 0);
-/*
+
         text.forEach((item, index) => {
             var color = Color(words[index].color).rgbNumber();
 
@@ -52,7 +48,7 @@ module.exports = class extends Animation {
                 this.pixels.setPixel(item.x + i, item.y, color);
             }
         });
-*/
+
         this.pixels.render({transition:'fade', duration:200});
     }
 
