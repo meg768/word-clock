@@ -23,7 +23,7 @@ function configure() {
     process.once('SIGUSR2', cleanup);
     process.once('SIGINT',  cleanup);
     process.once('SIGTERM', cleanup);
-    process.once('SIGKILL', cleanup);
+//    process.once('SIGKILL', cleanup);
     process.once('SIGALRM', cleanup);
 }
 
