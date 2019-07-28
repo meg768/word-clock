@@ -20,12 +20,22 @@ module.exports = class Module extends Animation {
 		super({name:'Yahoo Index Animation', ...options});
 	}
 
-	fetchQuotes() {
 
-	}
-
-	
 	start() {
+
+		var loop = () => {
+			debug('Fetching quotes...');
+
+			yahoo.fetchQuotes().then((reply) => {
+				quotes = reply;
+				this.render();
+				setTimeout(loop, 5000);
+			});
+
+		};
+
+		loop();
+
 		return super.start();
 	}
 
