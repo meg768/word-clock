@@ -1,10 +1,15 @@
 var Animation = require('./yahoo-animation.js');
-var cached = require('./cached.js');
-var yahoo = require('./yahoo-finance.js')
 
-var fetchQuotes = cached(1000 * 60 * 15, (symbols) => { 
-	return yahoo.fetchQuotes(symbols);
-});
+var quotes = [
+	{name:'ZN', symbol:'^SPGSIZ'}, // Zink 
+	{name:'AU', symbol:'^SPGSGC'}, // Guld 
+	{name:'AL', symbol:'^SPGSIA'}, // Aluminium 
+	{name:'NI', symbol:'^SPGSIK'}, // Nickel 
+	{name:'CU', symbol:'^SPGSIC'}, // Koppar 
+	{name:'BRENT', symbol:'^SPGSBR'}, // Olja  
+	{name:'AG', symbol:'^SPGSSI'}, // Silver 
+	{name:'PB', symbol:'^SPGSIL'} // Bly 
+];
 
 module.exports = class Module extends Animation {
 
@@ -12,27 +17,8 @@ module.exports = class Module extends Animation {
 		super({name:'Yahoo Commodity Animation', ...options});
 	}
 
-
-	getSymbols() {
-		var symbols = [
-			{name:'ZN', symbol:'^SPGSIZ'}, // Zink 
-			{name:'AU', symbol:'^SPGSGC'}, // Guld 
-			{name:'AL', symbol:'^SPGSIA'}, // Aluminium 
-			{name:'NI', symbol:'^SPGSIK'}, // Nickel 
-			{name:'CU', symbol:'^SPGSIC'}, // Koppar 
-			{name:'BRENT', symbol:'^SPGSBR'}, // Olja  
-			{name:'AG', symbol:'^SPGSSI'}, // Silver 
-			{name:'PB', symbol:'^SPGSIL'} // Bly 
-		
-		];
-
-		return symbols;
+	getQuotes() {
+		return quotes;
 	}
-
-	fetchQuotes() {
-		return fetchQuotes(this.getSymbols());
-	}
-
-
 
 };
