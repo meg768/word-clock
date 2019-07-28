@@ -1,5 +1,4 @@
 
-var sprintf = require('yow/sprintf');
 var Animation = require('rpi-animations').Animation;
 var Layout = require('./layout.js');
 var debug = require('./debug.js');
@@ -29,18 +28,18 @@ module.exports = class extends Animation {
         var layout = new Layout();
         var words = this.getWords();
 
-        console.log('words', words);
+        debug('words', words);
 
         var text = [];
 
         words.forEach((word) => {
             text.push(word.text);
         });
-        console.log('text', text);
+        debug('text', text);
 
 
         text = layout.lookupText(text);
-        console.log('text position', text);
+        debug('text position', text);
 
 
         this.pixels.clear();

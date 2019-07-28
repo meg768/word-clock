@@ -1,6 +1,7 @@
 
 var isArray  = require('yow/is').isArray;
 var isString = require('yow/is').isString;
+var debug = require('./debug.js');
 
 var Module = module.exports = function() {
 
@@ -64,6 +65,8 @@ var Module = module.exports = function() {
             });
         }
 
+        debug('Looking up words', words, '...');
+
         try {
             var layout = [];
 
@@ -89,6 +92,8 @@ var Module = module.exports = function() {
             var cursor = 0;
 
             words.forEach(function(word) {
+                debug('Looking up word', word, '...');
+
                 var index = lookupWord(word.text, cursor);
 
                 if (index == undefined)
