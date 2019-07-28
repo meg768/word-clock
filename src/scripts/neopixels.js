@@ -25,6 +25,7 @@ function configure() {
     process.once('SIGTERM', cleanup);
 //    process.once('SIGKILL', cleanup);
     process.once('SIGALRM', cleanup);
+    process.once(2, cleanup);
 }
 
 
