@@ -34,7 +34,12 @@ module.exports = class Module extends WordAnimation {
 			debug('Fetching quotes...');
 
 			yahoo.fetchQuotes(this.getQuotes()).then((response) => {
-				this.quotes = quotes = response;
+				this.quotes.length = 0;
+				
+				response.forEach((item) => {
+					this.quotes.push(item);
+				});
+
 				this.render();
 
 				setTimeout(loop, 5000);
@@ -50,7 +55,7 @@ module.exports = class Module extends WordAnimation {
 	getWords() {
 		var words = [];
 
-		quotes.forEach((item) => {
+		this.quotes.forEach((item) => {
 			var color = Color.rgb(32, 32, 32);
 
 			if (item.change != undefined) {
