@@ -19,13 +19,13 @@ function configure() {
 
     Neopixels.configure({debug:false, map:map, width:width, height:height, stripType:stripType});
 
-    process.once('SIGUSR1', cleanup);
-    process.once('SIGUSR2', cleanup);
-    process.once('SIGINT',  cleanup);
-    process.once('SIGTERM', cleanup);
-//    process.once('SIGKILL', cleanup);
-    process.once('SIGALRM', cleanup);
-    process.once(2, cleanup);
+    process.on('SIGUSR1', cleanup);
+    process.on('SIGUSR2', cleanup);
+    process.on('SIGINT',  cleanup);
+    process.on('SIGTERM', cleanup);
+    process.on('SIGALRM', cleanup);
+    process.on('SIGHUP', cleanup);
+    process.on('SIGQUIT', cleanup);
 }
 
 
