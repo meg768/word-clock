@@ -10,7 +10,7 @@ module.exports = class extends Animation {
     constructor(options) {
         var {pixels, ...options} = options;
 
-        super(options);
+        super({name:'Word Animation', ...options});
         
         this.pixels = pixels;
     }
@@ -24,6 +24,7 @@ module.exports = class extends Animation {
     }
 
     render() {
+        console.log('rendering');
         var layout = new Layout();
 
         var words = this.getWords();
