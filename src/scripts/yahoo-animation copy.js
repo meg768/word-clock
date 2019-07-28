@@ -1,3 +1,5 @@
+/*
+
 var Animation   = require('rpi-animations').Animation;
 var WordAnimation = require('./word-animation');
 var Layout      = require('./layout.js');
@@ -166,3 +168,5 @@ class Old extends Animation {
 
 
 };
+
+*/
