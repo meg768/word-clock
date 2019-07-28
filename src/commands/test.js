@@ -28,7 +28,7 @@ var Module = new function() {
 	}
 
 
-	module.exports.command  = 'text [options]';
+	module.exports.command  = 'test [options]';
 	module.exports.describe = 'Test';
 	module.exports.builder  = defineArgs;
 	module.exports.handler  = run;
