@@ -1,6 +1,8 @@
 var Animation = require('./word-animation.js');
 var Color = require('color');
 var yahoo = require('./yahoo-finance.js')
+var debug = require('./debug.js');
+
 
 var quotes = [
 	{name:'OMX', symbol:'^OMX', change:0.5},
