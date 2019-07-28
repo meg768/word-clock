@@ -1,12 +1,17 @@
-var Animation = require('./yahoo-animation.js');
-var cached = require('./cached.js');
+var Animation = require('./word-animation.js');
 var yahoo = require('./yahoo-finance.js')
 
-var fetchQuotes = cached(1000 * 60 * 15, (symbols) => { 
-	return yahoo.fetchQuotes(symbols);
-});
-
-
+var quotes = [
+	{name:'OMX', symbol:'^OMX'},
+	{name:'NASDAQ', symbol:'^IXIC'},
+	{name:'DAX', symbol:'^GDAXI'},
+	{name:'DOWJONES', symbol:'^DJI'},
+	{name:'HANGSENG', symbol:'^HSI'},
+	{name:'USA', symbol:'^GSPC'},
+	{name:'UK', symbol:'^FTSE'},
+	{name:'BRIC', symbol:'^BSESN'},
+	{name:'NIKKEI', symbol:'^N225'}
+];
 
 module.exports = class Module extends Animation {
 
@@ -14,27 +19,19 @@ module.exports = class Module extends Animation {
 		super({name:'Yahoo Index Animation', ...options});
 	}
 
-	getSymbols() {
-		var symbols = [
-			{name:'OMX', symbol:'^OMX'},
-			{name:'NASDAQ', symbol:'^IXIC'},
-			{name:'DAX', symbol:'^GDAXI'},
-			{name:'DOWJONES', symbol:'^DJI'},
-			{name:'HANGSENG', symbol:'^HSI'},
-			{name:'USA', symbol:'^GSPC'},
-			{name:'UK', symbol:'^FTSE'},
-			{name:'BRIC', symbol:'^BSESN'},
-			{name:'NIKKEI', symbol:'^N225'}
-	
-		];
-
-		return symbols;
+	start() {
+		return super.start();
 	}
 
-	fetchQuotes() {
-		return fetchQuotes(this.getSymbols());
+	getWords() {
+		var words = [];
+
+		quotes.forEach((item) => {
+			words.push({word:item.name, color:'white'});
+		});
+
+		return words;
+		
 	}
-
-
 
 };
