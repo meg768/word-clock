@@ -13,7 +13,7 @@ function fetchQuotes(symbols) {
 			params.symbols.push(symbol.symbol);
 		})
 
-		debug('Fetching quotes', symbols);
+		debug('Fetching quotes for symbols', symbols);
 
 		yahoo.quote(params).then((data) => {
 
@@ -23,7 +23,7 @@ function fetchQuotes(symbols) {
 				var change = data[symbol.symbol].price.regularMarketChangePercent;
 				var price = data[symbol.symbol].price.regularMarketPrice;
 
-				results.push({name:symbol.name, symbol:symbol.symbol, change:change, price:price});
+				results.push({...symbol, change:change, price:price});
 			});
 
 			resolve(results);

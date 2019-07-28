@@ -20,6 +20,11 @@ module.exports = class Module extends Animation {
 		super({name:'Yahoo Index Animation', ...options});
 	}
 
+	fetchQuotes() {
+
+	}
+
+	
 	start() {
 		return super.start();
 	}
@@ -28,7 +33,7 @@ module.exports = class Module extends Animation {
 		var words = [];
 
 		quotes.forEach((item) => {
-			var color = Color.rgb(64, 64, 64);
+			var color = Color.rgb(32, 32, 32);
 
 			if (item.change != undefined) {
 				var change     = Math.max(-2, Math.min(2, item.change));
