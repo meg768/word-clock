@@ -27,7 +27,7 @@ module.exports = class Module extends Animation {
 		var words = [];
 
 		quotes.forEach((item) => {
-			words.push({word:item.name, color:'white'});
+			words.push({word:item.name, color:'red'});
 		});
 
 		return words;
