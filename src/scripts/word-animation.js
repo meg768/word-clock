@@ -38,7 +38,7 @@ module.exports = class extends Animation {
         debug('text', text);
 
 
-        text = layout.lookup(text);,
+        text = layout.lookup(text);
         debug('text position', text);
 
 
