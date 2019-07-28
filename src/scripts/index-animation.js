@@ -1,4 +1,5 @@
 var Animation = require('./word-animation.js');
+var Color = require('color');
 var yahoo = require('./yahoo-finance.js')
 
 var quotes = [
