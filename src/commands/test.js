@@ -20,7 +20,6 @@ var Module = new function() {
 
 	function run(argv) {
 
-		var strip     = ;
 		var animation = new Animation({pixels: new Neopixels.Pixels(), duration:-1, priority:'!', debug:true});
 
 		return animation.run();
