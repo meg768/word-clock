@@ -62,21 +62,16 @@ var Module = module.exports = function() {
 
         }
 
-        debug('Looking up words', words, '...');
-
         try {
             var layout = [];
 
             function lookupWord(word, cursor) {
-                debug('Looking up word', word, 'cursor at', cursor, '...');
 
                 var regexp = new RegExp(word, "g");
                 var match, matches = [];
 
                 for (var i = 0; i < _layout.length; i++) {
                     var text = _layout[i];
-
-                    debug('Searching in', text, 'after', word, '...');
 
                     while ((match = regexp.exec(text)) != null) {
                         matches.push(i * _columns + match.index);
