@@ -62,7 +62,8 @@ module.exports = class Module extends WordAnimation {
 				if (Math.abs(item.change) > 3)
 					luminance = 70;
 	
-				color = Color.hsl(hue, 100, 25);
+				color = Color.hsl(hue, saturation, 25);
+				color = Color.hsl(hue, saturation, luminance);
 			}
 
 			words.push({word:item.name, color:color});
