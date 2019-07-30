@@ -1,8 +1,7 @@
 var Animation = require('./yahoo-animation.js');
 var debug = require('./debug.js');
 
-var cache = {};
-var symbols = [
+var quotes = {}, symbols = [
 	{name:'ZN', symbol:'^SPGSIZ'}, // Zink 
 	{name:'AU', symbol:'^SPGSGC'}, // Guld 
 	{name:'AL', symbol:'^SPGSIA'}, // Aluminium 
@@ -16,11 +15,7 @@ var symbols = [
 module.exports = class Module extends Animation {
 
 	constructor(options) {
-		super({name:'Yahoo Commodity Animation', ...options});
-
-		this.quotes = cache;
-		this.symbols = symbols;
-
+		super({name:'Yahoo Commodity Animation', quotes:quotes, symbols:symbols, ...options});
 	}
 
 

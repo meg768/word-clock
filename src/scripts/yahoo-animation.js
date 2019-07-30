@@ -7,10 +7,12 @@ var debug = require('./debug.js');
 module.exports = class Module extends WordAnimation {
 
 	constructor(options) {
+		var {symbols, quotes, ...options} = options;
+
 		super({name:'Yahoo Animation', ...options});
 
-		this.quotes = {};
-		this.symbols = [];
+		this.quotes = quotes;
+		this.symbols = symbols;
 		this.timeout = null;
 	}
 

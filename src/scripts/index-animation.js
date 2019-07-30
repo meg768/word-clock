@@ -1,8 +1,7 @@
 var Animation = require('./yahoo-animation.js');
 var debug = require('./debug.js');
 
-var cache = {};
-var symbols = [
+var quotes = {}, symbols = [
 	{name:'OMX', symbol:'^OMX'},
 	{name:'NASDAQ', symbol:'^IXIC'},
 	{name:'DAX', symbol:'^GDAXI'},
@@ -17,11 +16,7 @@ var symbols = [
 module.exports = class Module extends Animation {
 
 	constructor(options) {
-		super({name:'Yahoo Index Animation', ...options});
-
-		this.quotes = cache;
-		this.symbols = symbols;	
-
+		super({name:'Yahoo Index Animation', quotes:quotes, symbols:symbols, ...options});
 	}
 
 
