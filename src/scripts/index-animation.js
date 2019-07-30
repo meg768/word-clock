@@ -24,9 +24,5 @@ module.exports = class Module extends Animation {
 
 	}
 
-	start() {
-		this.fetchQuotes();
-		return super.start();
-	}
 
 };

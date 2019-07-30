@@ -14,6 +14,11 @@ module.exports = class Module extends WordAnimation {
 
 	}
 
+	start() {
+		this.fetchQuotes();
+		return super.start();
+	}
+
 
 	fetchQuotes() {
 
