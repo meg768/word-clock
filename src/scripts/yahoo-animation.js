@@ -73,7 +73,7 @@ module.exports = class Module extends WordAnimation {
 					luminance = 70;
 	
 				color = Color.hsl(hue, saturation, 25);
-				color = Color.hsl(hue, saturation, luminance);
+				color = Color.hsl(hue, saturation, 50);
 			}
 
 			words.push({word:symbol.name, color:color});
