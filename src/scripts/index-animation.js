@@ -20,7 +20,7 @@ module.exports = class Module extends Animation {
 		super({name:'Yahoo Index Animation', ...options});
 
 		this.quotes = cache;
-		this.symbols = this.symbols;
+		this.symbols = symbols;
 	
 		this.on('quotes', (quotes) => {
 			debug('Got index quotes...');
