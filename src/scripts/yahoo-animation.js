@@ -11,6 +11,7 @@ module.exports = class Module extends WordAnimation {
 
 		this.quotes = {};
 		this.symbols = [];
+
 	}
 
 	fetchQuotes() {
@@ -39,6 +40,8 @@ module.exports = class Module extends WordAnimation {
 				});
 	
 				this.emit('quotes', this.quotes);
+
+				setTimeout(this.fetchQuotes, 10 * 1000);
 				resolve(quotes);
 			})
 			.catch((error) => {
