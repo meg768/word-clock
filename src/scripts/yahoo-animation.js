@@ -11,7 +11,7 @@ module.exports = class Module extends WordAnimation {
 
 		this.quotes = {};
 		this.symbols = [];
-
+		this.timeout = null;
 	}
 
 	start() {
@@ -19,6 +19,22 @@ module.exports = class Module extends WordAnimation {
 		return super.start();
 	}
 
+	stop() {
+		this.clearTimeout();
+		return super.stop();
+	}
+	
+	clearTimeout() {
+		if (this.timeout != null) {
+			this.clearTimeout(this.timeout);
+			this.timeout = null;
+		}
+	}
+
+	setTimeout(fn, delay) {
+		this.clearTimeout();
+		this.timeout = setTimeout(fn, delay);
+	}	
 
 	fetchQuotes() {
 
@@ -43,9 +59,8 @@ module.exports = class Module extends WordAnimation {
 					this.quotes[symbol.symbol] = {change:change, price:price};
 				});
 	
-				this.emit('quotes', this.quotes);
+				this.setTimeout(this.fetchQuotes.bind(this), 10 * 1000);
 
-				setTimeout(this.fetchQuotes.bind(this), 10 * 1000);
 				resolve(this.quotes);
 			})
 			.catch((error) => {
