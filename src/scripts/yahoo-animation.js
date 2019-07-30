@@ -1,72 +1,82 @@
 var WordAnimation = require('./word-animation.js');
 var Color = require('color');
-var yahoo = require('./yahoo-finance.js')
+var yahoo = require('yahoo-finance');
 var debug = require('./debug.js');
 
-
-var quotes = [];
 
 module.exports = class Module extends WordAnimation {
 
 	constructor(options) {
 		super({name:'Yahoo Animation', ...options});
 
-		this.quotes = this.getQuotes();
+		this.quotes = {};
+		this.symbols = [];
 	}
 
-	getQuotes() {
-		return quotes;
-	}
+	fetchQuotes() {
 
-	start() {
-
-		var loop = () => {
-			
-			debug('Fetching quotes...');
-
-			yahoo.fetchQuotes(this.getQuotes()).then((response) => {
-				this.quotes.length = 0;
-				
-				response.forEach((item) => {
-					this.quotes.push(item);
+		return new Promise((resolve, reject) => {
+			var params = {};
+	
+			params.symbols = [];
+			params.modules = ['price'];
+	
+			this.symbols.forEach((symbol) => {
+				params.symbols.push(symbol.symbol);
+			})
+	
+			debug('Fetching quotes for symbols', symbols);
+	
+			yahoo.quote(params).then((data) => {
+	
+				var quotes = {};
+	
+				symbols.forEach((symbol) => {
+					var change = data[symbol.symbol].price.regularMarketChangePercent;
+					var price = data[symbol.symbol].price.regularMarketPrice;
+	
+					this.quotes[symbols.symbol] = {change:change, price:price};
 				});
-
-				setTimeout(loop, 1000 * 60 * 15);
+	
+				this.emit('quotes', this.quotes);
+				resolve(quotes);
+			})
+			.catch((error) => {
+				reject(error);
 			});
-
-		};
-
-		loop();
-
-		return super.start();
+	
+		});
+	
 	}
+	
 
 	getWords() {
 		var words = [];
 
-		this.quotes.forEach((item) => {
+		this.symbols.forEach((symbol) => {
 			var color = Color.rgb(32, 32, 32);
+			var quote = this.quotes[symbol.symbol];
 
-			if (item.change != undefined) {
-				var change     = Math.max(-2, Math.min(2, item.change));
+			if (quote != undefined && quote.change != undefined) {
+				var change     = Math.max(-2, Math.min(2, quote.change));
 				var hue        = change >= 0 ? 240 : 0;
 				var saturation = 100;
 				var luminance  = 10 + (Math.abs(change) / 2) * 40;
 	
-				if (Math.abs(item.change) > 2)
+				if (Math.abs(quote.change) > 2)
 					luminance = 60;
 	
-				if (Math.abs(item.change) > 2.5)
+				if (Math.abs(quote.change) > 2.5)
 					luminance = 65;
 	
-				if (Math.abs(item.change) > 3)
+				if (Math.abs(quote.change) > 3)
 					luminance = 70;
 	
 				color = Color.hsl(hue, saturation, 25);
 				color = Color.hsl(hue, saturation, luminance);
 			}
 
-			words.push({word:item.name, color:color});
+			words.push({word:symbol.name, color:color});
 		});
 
 		return words;
