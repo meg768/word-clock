@@ -19,10 +19,20 @@ module.exports = class Module extends WordAnimation {
 		this.cache = cache[this.name];
 		this.symbols = symbols;
 		this.timeout = null;
+		this.fetchInterval = 30000;
 	}
 
 	start() {
-		this.fetchQuotes();
+		var now = new Date();
+		var delay = 0;
+
+		if (this.cache.timestamp != undefined) {
+			delay = Math.max(0, this.fetchInterval - (now - this.cache.timestamp));
+		}
+
+		debug('Calling fetchQuotes in', delay / 1000, 'seconds...');
+		this.setTimeout(this.fetchQuotes.bind(this), delay);
+
 		return super.start();
 	}
 
@@ -45,55 +55,23 @@ module.exports = class Module extends WordAnimation {
 
 	fetchQuotes() {
 
-		var now = new Date();
-
 		return new Promise((resolve, reject) => {
 
-			Promise.resolve().then(() => {
-				if (this.cache.quotes == undefined || this.cache.timestamp == undefined || now - this.cache.timestamp > 30000) {
-					debug('Fetching quotes for symbols', this.symbols);
+			debug('Fetching quotes for symbols', this.symbols);
 
-					var params = {};
+			var params = {};
 
-					params.symbols = [];
-					params.modules = ['price'];
-			
-					this.symbols.forEach((symbol) => {
-						params.symbols.push(symbol.symbol);
-					})
-		
-					return yahoo.quote(params).then((data) => {
-				
-						var quotes = {};
-
-						this.symbols.forEach((symbol) => {
-							var change = data[symbol.symbol].price.regularMarketChangePercent;
-							var price = data[symbol.symbol].price.regularMarketPrice;
-			
-							quotes[symbol.symbol] = {change:change, price:price};
-						});
-			
-						this.cache.timestamp = new Date();
-						this.cache.quotes = quotes;
-						
-						this.render();
-					});
-				}
-				else {
-					debug('Using cached quotes...');
-					return Promise.resolve();	
-
-				}
-			})
-			.then(() => {
-				debug('Setting next timeout...');
-				this.setTimeout(this.fetchQuotes.bind(this), 10 * 1000);
-				resolve();
+			params.symbols = [];
+			params.modules = ['price'];
+	
+			this.symbols.forEach((symbol) => {
+				params.symbols.push(symbol.symbol);
 			})
 
-			/*
 			yahoo.quote(params).then((data) => {
-				
+		
+				var quotes = {};
+
 				this.symbols.forEach((symbol) => {
 					var change = data[symbol.symbol].price.regularMarketChangePercent;
 					var price = data[symbol.symbol].price.regularMarketPrice;
@@ -102,15 +80,13 @@ module.exports = class Module extends WordAnimation {
 				});
 	
 				this.cache.timestamp = new Date();
+				this.cache.quotes = quotes;
 
-				return Promise.resolve();
-			})
-			.then(() => {
 				this.render();
-				this.setTimeout(this.fetchQuotes.bind(this), 10 * 1000);
+				this.setTimeout(this.fetchQuotes.bind(this), this.fetchInterval);
 				resolve();
+
 			})
-			*/
 			.catch((error) => {
 				reject(error);
 			});
