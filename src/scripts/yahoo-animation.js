@@ -29,6 +29,7 @@ module.exports = class Module extends WordAnimation {
 
 		if (this.cache.timestamp != undefined) {
 			debug('fetchQuotes previously called', this.cache.timestamp);
+			debug('Cache', now - this.cache.timestamp, 'ms old.');
 			delay = Math.max(0, this.fetchInterval - (now - this.cache.timestamp));
 		}
 
@@ -81,6 +82,7 @@ module.exports = class Module extends WordAnimation {
 					quotes[symbol.symbol] = {change:change, price:price};
 				});
 	
+				debug('Storing quotes to cache...');
 				this.cache.timestamp = new Date();
 				this.cache.quotes = quotes;
 
