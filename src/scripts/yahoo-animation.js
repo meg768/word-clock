@@ -1,12 +1,10 @@
-var WordAnimation = require('./word-animation.js');
+var CachedWordAnimation = require('./cached-word-animation.js');
 var Color = require('color');
 var yahoo = require('yahoo-finance');
 var debug = require('./debug.js');
 
-var cache = {};
-var wordCache = {};
 
-
+/*
 class CachedWordAnimation extends WordAnimation {
 
 	constructor(options) {
@@ -88,6 +86,7 @@ class CachedWordAnimation extends WordAnimation {
 
 };
 
+*/
 
 module.exports = class Module extends CachedWordAnimation {
 
