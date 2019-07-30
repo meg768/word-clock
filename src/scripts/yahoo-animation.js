@@ -20,7 +20,7 @@ module.exports = class Module extends WordAnimation {
 		this.cache = cache[this.name];
 		this.symbols = symbols;
 		this.timeout = null;
-		this.fetchInterval = 30000;
+		this.fetchInterval = 60000;
 	}
 
 	start() {
