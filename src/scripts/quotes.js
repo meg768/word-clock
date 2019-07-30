@@ -8,6 +8,7 @@ var quotes = {};
 module.exports = class extends Events {
 
 	constructor() {
+		super();
 		this.quotes = quotes;
 		this.jobs = [];
 	}
