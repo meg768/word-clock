@@ -18,7 +18,7 @@ module.exports = class Module extends WordAnimation {
 		this.fetchQuotes();
 		super.start();
 	}
-	
+
 	fetchQuotes() {
 
 		return new Promise((resolve, reject) => {
@@ -45,7 +45,7 @@ module.exports = class Module extends WordAnimation {
 				this.emit('quotes', this.quotes);
 
 				setTimeout(this.fetchQuotes.bind(this), 10 * 1000);
-				resolve(quotes);
+				resolve(this.quotes);
 			})
 			.catch((error) => {
 				reject(error);
