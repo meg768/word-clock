@@ -31,7 +31,7 @@ module.exports = class Module extends WordAnimation {
 	
 				var quotes = {};
 	
-				symbols.forEach((symbol) => {
+				this.symbols.forEach((symbol) => {
 					var change = data[symbol.symbol].price.regularMarketChangePercent;
 					var price = data[symbol.symbol].price.regularMarketPrice;
 	
