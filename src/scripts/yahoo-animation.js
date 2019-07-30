@@ -13,7 +13,7 @@ module.exports = class Module extends WordAnimation {
 		super({name:'Yahoo Animation', ...options});
 
 		if (cache[this.name] == undefined) {
-			cache[this.name] = {timestamp:undefined, quotes:{}};
+			cache[this.name] = {};
 		}
 
 		this.cache = cache[this.name];
@@ -45,21 +45,55 @@ module.exports = class Module extends WordAnimation {
 
 	fetchQuotes() {
 
-		return new Promise((resolve, reject) => {
-			var params = {};
-			var quotes = this.cache.quotes;
+		var now = new Date();
 
-			params.symbols = [];
-			params.modules = ['price'];
-	
-			this.symbols.forEach((symbol) => {
-				params.symbols.push(symbol.symbol);
+		return new Promise((resolve, reject) => {
+
+			Promise.resolve().then(() => {
+				if (this.cache.quotes == undefined || this.cache.timestamp == undefined || now - this.cache.timestamp > 30000) {
+					debug('Fetching quotes for symbols', this.symbols);
+
+					var params = {};
+
+					params.symbols = [];
+					params.modules = ['price'];
+			
+					this.symbols.forEach((symbol) => {
+						params.symbols.push(symbol.symbol);
+					})
+		
+					return yahoo.quote(params).then((data) => {
+				
+						var quotes = {};
+
+						this.symbols.forEach((symbol) => {
+							var change = data[symbol.symbol].price.regularMarketChangePercent;
+							var price = data[symbol.symbol].price.regularMarketPrice;
+			
+							quotes[symbol.symbol] = {change:change, price:price};
+						});
+			
+						this.cache.timestamp = new Date();
+						this.cache.quotes = quotes;
+						
+						this.render();
+					});
+				}
+				else {
+					debug('Using cached quotes...');
+					return Promise.resolve();	
+
+				}
 			})
-	
-			debug('Fetching quotes for symbols', this.symbols);
-	
+			.then(() => {
+				debug('Setting next timeout...');
+				this.setTimeout(this.fetchQuotes.bind(this), 10 * 1000);
+				resolve();
+			})
+
+			/*
 			yahoo.quote(params).then((data) => {
-	
+				
 				this.symbols.forEach((symbol) => {
 					var change = data[symbol.symbol].price.regularMarketChangePercent;
 					var price = data[symbol.symbol].price.regularMarketPrice;
@@ -69,11 +103,14 @@ module.exports = class Module extends WordAnimation {
 	
 				this.cache.timestamp = new Date();
 
+				return Promise.resolve();
+			})
+			.then(() => {
 				this.render();
 				this.setTimeout(this.fetchQuotes.bind(this), 10 * 1000);
-
-				resolve(quotes);
+				resolve();
 			})
+			*/
 			.catch((error) => {
 				reject(error);
 			});
@@ -85,7 +122,7 @@ module.exports = class Module extends WordAnimation {
 
 	getWords() {
 		var words = [];
-		var quotes = this.cache.quotes;
+		var quotes = this.cache.quotes || {};
 
 		this.symbols.forEach((symbol) => {
 			var color = Color.rgb(32, 32, 32);
