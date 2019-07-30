@@ -14,6 +14,11 @@ module.exports = class Module extends WordAnimation {
 
 	}
 
+	start() {
+		this.fetchQuotes();
+		super.start();
+	}
+	
 	fetchQuotes() {
 
 		return new Promise((resolve, reject) => {
@@ -29,8 +34,6 @@ module.exports = class Module extends WordAnimation {
 			debug('Fetching quotes for symbols', this.symbols);
 	
 			yahoo.quote(params).then((data) => {
-	
-				var quotes = {};
 	
 				this.symbols.forEach((symbol) => {
 					var change = data[symbol.symbol].price.regularMarketChangePercent;
