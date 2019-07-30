@@ -3,6 +3,7 @@ var Color = require('color');
 var yahoo = require('yahoo-finance');
 var debug = require('./debug.js');
 
+var cache = {};
 
 module.exports = class Module extends WordAnimation {
 
@@ -11,7 +12,12 @@ module.exports = class Module extends WordAnimation {
 
 		super({name:'Yahoo Animation', ...options});
 
-		this.quotes = quotes;
+		if (cache[this.name] == undefined) {
+			cache[this.name] = {timestamp:undefined, quotes:{}};
+		}
+
+		this.cache = cache[this.name];
+		this.quotes = this.cache.quotes;
 		this.symbols = symbols;
 		this.timeout = null;
 	}
