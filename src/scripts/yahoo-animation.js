@@ -17,7 +17,6 @@ module.exports = class Module extends WordAnimation {
 		}
 
 		this.cache = cache[this.name];
-		this.quotes = this.cache.quotes;
 		this.symbols = symbols;
 		this.timeout = null;
 	}
@@ -48,7 +47,8 @@ module.exports = class Module extends WordAnimation {
 
 		return new Promise((resolve, reject) => {
 			var params = {};
-	
+			var quotes = this.cache.quotes;
+
 			params.symbols = [];
 			params.modules = ['price'];
 	
@@ -64,13 +64,15 @@ module.exports = class Module extends WordAnimation {
 					var change = data[symbol.symbol].price.regularMarketChangePercent;
 					var price = data[symbol.symbol].price.regularMarketPrice;
 	
-					this.quotes[symbol.symbol] = {change:change, price:price};
+					quotes[symbol.symbol] = {change:change, price:price};
 				});
 	
+				this.cache.timestamp = new Date();
+
 				this.render();
 				this.setTimeout(this.fetchQuotes.bind(this), 10 * 1000);
 
-				resolve(this.quotes);
+				resolve(quotes);
 			})
 			.catch((error) => {
 				reject(error);
@@ -83,10 +85,11 @@ module.exports = class Module extends WordAnimation {
 
 	getWords() {
 		var words = [];
+		var quotes = this.cache.quotes;
 
 		this.symbols.forEach((symbol) => {
 			var color = Color.rgb(32, 32, 32);
-			var quote = this.quotes[symbol.symbol];
+			var quote = quotes[symbol.symbol];
 
 			if (quote != undefined && quote.change != undefined) {
 				var change     = Math.max(-2, Math.min(2, quote.change));
