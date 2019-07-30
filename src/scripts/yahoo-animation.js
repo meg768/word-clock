@@ -23,10 +23,10 @@ module.exports = class Module extends WordAnimation {
 		this.clearTimeout();
 		return super.stop();
 	}
-	
+
 	clearTimeout() {
 		if (this.timeout != null) {
-			this.clearTimeout(this.timeout);
+			clearTimeout(this.timeout);
 			this.timeout = null;
 		}
 	}
