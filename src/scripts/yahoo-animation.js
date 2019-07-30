@@ -25,7 +25,7 @@ module.exports = class Module extends WordAnimation {
 				params.symbols.push(symbol.symbol);
 			})
 	
-			debug('Fetching quotes for symbols', symbols);
+			debug('Fetching quotes for symbols', this.symbols);
 	
 			yahoo.quote(params).then((data) => {
 	
