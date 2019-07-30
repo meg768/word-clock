@@ -13,6 +13,7 @@ module.exports = class Module extends WordAnimation {
 		super({name:'Yahoo Animation', ...options});
 
 		if (cache[this.name] == undefined) {
+			debug('Creating cache for animation', this.name);
 			cache[this.name] = {};
 		}
 
@@ -27,6 +28,7 @@ module.exports = class Module extends WordAnimation {
 		var delay = 0;
 
 		if (this.cache.timestamp != undefined) {
+			debug('fetchQuotes previously called', this.cache.timestamp);
 			delay = Math.max(0, this.fetchInterval - (now - this.cache.timestamp));
 		}
 
