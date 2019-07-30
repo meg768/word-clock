@@ -5,7 +5,7 @@ var schedule = require('node-schedule');
 
 var quotes = {};
 
-export default class Quotes extends Events {
+module.exports = class Quotes extends Events {
 
 	constructor() {
 		this.quotes = quotes;
