@@ -18,6 +18,7 @@ module.exports = class CachedWordAnimation extends WordAnimation {
 		this.cache = cache[this.name];
 		this.timeout = null;
 		this.fetchInterval = 60000;
+		this.fetching = false;
 	}
 
 	start() {
@@ -25,9 +26,15 @@ module.exports = class CachedWordAnimation extends WordAnimation {
 		var delay = 0;
 
 		var fetch = () => {
+			if (this.fetching) {
+				debug('Animation', this.name, 'is already fetching!!');
+				return Promise.resolve();
+			}
+
 			return new Promise((resolve, reject) => {
 	
 				debug('Animation', this.name, 'is fetching data...');
+				this.fetching = true;
 	
 				this.fetch().then((data) => {
 			
@@ -44,7 +51,10 @@ module.exports = class CachedWordAnimation extends WordAnimation {
 				})
 				.catch((error) => {
 					reject(error);
-				});
+				})
+				.then(() => {
+					this.fetching = false;
+				})
 		
 			});
 		
