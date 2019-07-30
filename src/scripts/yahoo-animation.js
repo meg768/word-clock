@@ -7,7 +7,7 @@ var debug = require('./debug.js');
 module.exports = class Module extends WordAnimation {
 
 	constructor(options) {
-		super({name:'Yahoo Animation', renderFrequency: 1000, ...options});
+		super({name:'Yahoo Animation', ...options});
 
 		this.quotes = {};
 		this.symbols = [];
@@ -59,6 +59,7 @@ module.exports = class Module extends WordAnimation {
 					this.quotes[symbol.symbol] = {change:change, price:price};
 				});
 	
+				this.render();
 				this.setTimeout(this.fetchQuotes.bind(this), 10 * 1000);
 
 				resolve(this.quotes);
