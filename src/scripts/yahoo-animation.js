@@ -41,7 +41,7 @@ module.exports = class Module extends WordAnimation {
 	
 				this.emit('quotes', this.quotes);
 
-				setTimeout(this.fetchQuotes, 10 * 1000);
+				setTimeout(this.fetchQuotes.bind(this), 10 * 1000);
 				resolve(quotes);
 			})
 			.catch((error) => {
