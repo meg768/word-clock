@@ -15,9 +15,6 @@ var IndexAnimation     = require('../scripts/index-animation.js');
 var ColorAnimation     = require('../scripts/color-animation.js');
 var MatrixAnimation    = require('../scripts/matrix-animation.js');
 
-function debug() {
-}
-
 
 var Module = new function() {
 
@@ -32,106 +29,99 @@ var Module = new function() {
 		});
 	}
 
-	function registerService() {
-		return Promise.resolve();
-	}
 
 
 	function run(argv) {
 
+		var leftButton       = new Button(13);
+		var rightButton      = new Button(6);
+		var pixels           = new Neopixels.Pixels();
 
+		var mode             = 'loop';
+		var animationQueue   = new AnimationQueue();
 
-		registerService().then(function() {
+		var loopAnimations   = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, WeatherAnimation];
+		var loopDuration     = 10000;
+		var loopIndex        = 0;
 
+		leftButton.on('click', (clicks) => {
 
-			var animations       = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, WeatherAnimation];
-			var upperButton      = new Button(13);
-			var lowerButton      = new Button(6);
-			var pixels           = new Neopixels.Pixels();
+			loopIndex = 0;
+			mode = (mode != 'off') ? 'off' : 'loop';
+			
+			runNextAnimation();
+		});
 
-			var defaultDuration  = 10000;
-			var animationIndex   = -1;
-			var state            = 'on';
-			var duration         = defaultDuration;
-			var animationQueue   = new AnimationQueue();
+		rightButton.on('click', (clicks, time) => {
 
-			upperButton.on('click', (clicks) => {
+			loopIndex = 0;
 
-				// Reset
-				animationIndex = 0;
-				duration = defaultDuration;
-
-				if (state == 'on') {
-					runAnimation(new ColorAnimation({pixels:pixels, color:'black', duration:-1, priority:'!'}));
-				}
-				else {
-					var Animation = animations[animationIndex % animations.length];
-					runAnimation(new Animation({pixels:pixels, duration:duration, priority:'!'}));
-				}
-
-				state = (state == 'on') ? 'off' : 'on';
-			});
-
-			lowerButton.on('click', (clicks, time) => {
-				switch (clicks) {
-					case 1: {
-						if (time >= 1000) {
-							runAnimation(new MatrixAnimation({pixels:pixels, duration:-1, priority:'!'}));
+			switch (clicks) {
+				case 1: {
+					switch(mode) {
+						case 'clock': {
+							mode = 'loop';
+							break;
 						}
-						else {
-							// Switch duration mode, loop or static
-							if (animationIndex == 0) {
-								animationIndex = 1;
-								duration = defaultDuration;
-							}
-							else {
-								animationIndex = 0;
-								duration = -1;
-							}
-							
-							var Animation = animations[animationIndex % animations.length];
-							runAnimation(new Animation({pixels:pixels, duration:duration, priority:'!'}));
-
+						case 'loop': {
+							mode = 'rain';
+							break;
 						}
-						break;
+						case 'rain': {
+							mode = 'clock';
+							break;
+						}
 					}
-					case 2: {
-						debug('Running next animation...');
-						runNextAnimation();
-						break;
-					}
+
+					runNextAnimation();
+					break;
 				}
-			});
-
-
-
-			function runNextAnimation() {
-
-				animationIndex = (animationIndex + 1) % animations.length;
-
-				// Get next animation
-				var Animation = animations[animationIndex % animations.length];
-				var animation = new Animation({pixels:pixels, duration:duration, priority:'!'});
-
-				runAnimation(animation);
-            }
-
-			function runAnimation(animation) {
-				debug('Starting animation', animation.name); 
-				animationQueue.enqueue(animation);
-
 			}
 
-			animationQueue.on('idle', () => {
-				debug('Idle. Running next animation');
-				runNextAnimation();
-			});
-
-
-			runNextAnimation();
-
-
 		});
+
+		function runNextAnimation() {
+
+			switch(mode) {
+				case 'loop': {
+					loopIndex = (loopIndex + 1) % loopAnimations.length;
+
+					// Get next animation
+					var Animation = loopAnimations[loopIndex % loopAnimations.length];
+					var animation = new Animation({pixels:pixels, duration:loopDuration, priority:'!'});
+	
+					runAnimation(animation);
+					break;
+				}
+				case 'rain': {
+					runAnimation(new MatrixAnimation({pixels:pixels, duration:-1, priority:'!'}));
+					break;
+				}
+				case 'clock': {
+					runAnimation(new ClockAnimation({pixels:pixels, duration:-1, priority:'!'}));
+					break;
+				}
+				case 'off': {
+					runAnimation(new ColorAnimation({pixels:pixels, color:'black', duration:-1, priority:'!'}));
+					break;
+				}
+			}
+		}
+
+		function runAnimation(animation) {
+			debug('Starting animation', animation.name); 
+			animationQueue.enqueue(animation);
+
+		}
+
+		animationQueue.on('idle', () => {
+			debug('Idle. Running next animation');
+			runNextAnimation();
+		});
+
+
+		runNextAnimation();
+
 
 
 	}
