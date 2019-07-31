@@ -1,6 +1,5 @@
 var WordAnimation = require('./word-animation.js');
 var Color = require('color');
-var yahoo = require('yahoo-finance');
 var debug = require('./debug.js');
 
 

@@ -1,5 +1,5 @@
 var Animation = require('./quote-animation.js');
-var Quotes = require('./yahoo-quotes.js');
+var Quotes = require('./quotes.js');
 
 var quotes = new Quotes([
 	{name:'ZN', symbol:'^SPGSIZ'}, // Zink 

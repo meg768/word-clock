@@ -19,7 +19,7 @@ module.exports = class  {
 			});
 		};
 
-		schedule.scheduleJob({second:0}, fetch);
+		schedule.scheduleJob({minute:[5, 35]}, fetch);
 		fetch();
     }
 
