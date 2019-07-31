@@ -3,39 +3,13 @@ var Events  = require('events');
 var debug = require('./debug.js');
 var schedule = require('node-schedule');
 
-var quotes = {};
-var data = {};
 
 module.exports = class extends Events {
 
 	constructor() {
 		super();
-		this.quotes = quotes;
-		this.jobs = [];
+		this.quotes = {};
 	}
-/*
-	subscribeX(id, fn) {
-
-		var job = schedule.scheduleJob({second:0}, () => {
-			var params = {};
-	
-			params.symbols = symbols;
-			params.modules = ['price'];
-	
-			debug('Fetching quotes for symbols', symbols);
-	
-			fn.apply(this, arguments).then((reply) => {
-				data[id] = reply;
-				this.emit('data', this.reply);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-		});
-
-		this.jobs.push(job);
-	}
-*/
 
 	fetchQuotes(symbols) {
 
@@ -55,7 +29,7 @@ module.exports = class extends Events {
 					var change = data[symbol].price.regularMarketChangePercent;
 					var price = data[symbol].price.regularMarketPrice;
 	
-					quotes[symbol] = {change:change, price:price};
+					this.quotes[symbol] = quotes[symbol] = {change:change, price:price};
 				});
 	
 				resolve(quotes);
@@ -67,29 +41,21 @@ module.exports = class extends Events {
 		});
 
 	}
+
 	subscribe(symbols) {
 
-		var job = schedule.scheduleJob({second:0}, () => {
-
+		var fetch = () => {
 			this.fetchQuotes(symbols).then((quotes) => {
-				this.quotes = {...this.quotes, quotes};				
-				this.emit('quotes', this.quotes);
 			})
 			.catch((error) => {
 				console.error(error);
 			});
-		});
+		};
 
-		this.jobs.push(job);
+		schedule.scheduleJob({second:0}, fetch);
+		fetch();
 	}
 
-	quote(symbol) {
-		return this.quotes[symbol];
-	}
-
-	quotes() {
-		return this.quotes;
-	}
 
 };
 

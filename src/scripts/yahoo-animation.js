@@ -1,62 +1,26 @@
-var CachedWordAnimation = require('./cached-word-animation.js');
+var WordAnimation = require('./word-animation.js');
 var Color = require('color');
 var yahoo = require('yahoo-finance');
 var debug = require('./debug.js');
 
 
 
-module.exports = class Module extends CachedWordAnimation {
+module.exports = class Module extends WordAnimation {
 
 	constructor(options) {
-		var {symbols, ...options} = options;
+		var {quotes, symbols, ...options} = options;
 
 		super({name:'Yahoo Animation', ...options});
 
 		this.symbols = symbols;
+		this.quotes = quotes;
 	}
 
 
-	fetch() {
-
-		return new Promise((resolve, reject) => {
-
-			debug('Fetching quotes for symbols', this.symbols);
-
-			var params = {};
-
-			params.symbols = [];
-			params.modules = ['price'];
-	
-			this.symbols.forEach((symbol) => {
-				params.symbols.push(symbol.symbol);
-			})
-
-			yahoo.quote(params).then((data) => {
-		
-				var quotes = {};
-
-				this.symbols.forEach((symbol) => {
-					var change = data[symbol.symbol].price.regularMarketChangePercent;
-					var price = data[symbol.symbol].price.regularMarketPrice;
-	
-					quotes[symbol.symbol] = {change:change, price:price};
-				});
-	
-				resolve(quotes);
-
-			})
-			.catch((error) => {
-				reject(error);
-			});
-	
-		});
-	
-	}
-	
 
 	getWords() {
 		var words = [];
-		var quotes = this.cache.data || {};
+		var quotes = this.quotes;
 
 		this.symbols.forEach((symbol) => {
 			var color = Color.rgb(32, 32, 32);
