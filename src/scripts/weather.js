@@ -1,12 +1,13 @@
+var schedule = require('node-schedule');
 var isArray = require('yow/is').isArray;
 var sprintf = require('yow/sprintf');
-var debug   = require('./debug.js');
+var debug = require('./debug.js');
 
 
 module.exports = class  {
 
     constructor(location) {
-        this.location = 'Lund, Skåne, Sweden';
+        this.location = location;
         this.weather = {'REGN':1.0, 'MOLN':1.0, 'SNÖ':1.0, 'VIND':1.0, 'SOL':1.0};
 
 		var fetch = () => {

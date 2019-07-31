@@ -4,7 +4,7 @@ var sprintf = require('yow/sprintf');
 var debug = require('./debug.js');
 var Weather = require('./weather.js');
 
-var weather = new Weather();
+var weather = new Weather('Lund, Skåne, Sweden');
 
 module.exports = class extends WordAnimation {
 
