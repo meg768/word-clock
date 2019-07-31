@@ -87,7 +87,7 @@ var Module = new function() {
 					loopIndex = (loopIndex + 1) % loopAnimations.length;
 
 					// Get next animation
-					var Animation = loopAnimations[loopIndex % loopAnimations.length];
+					var Animation = loopAnimations[loopIndex];
 					var animation = new Animation({pixels:pixels, duration:loopDuration, priority:'!'});
 	
 					runAnimation(animation);
