@@ -52,7 +52,7 @@ var Module = new function() {
 		rightButton.on('click', (clicks, time) => {
 
 			switch(mode) {
-				case 'clock': {
+				case 'clock' && clicks == 1: {
 					// Special case, when in clock mode you will never
 					// se the change when entering loop mode since 
 					// the clock animation is the first...
