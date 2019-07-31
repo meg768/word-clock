@@ -8,11 +8,10 @@ var debug = require('./debug.js');
 module.exports = class Module extends WordAnimation {
 
 	constructor(options) {
-		var {quotes, symbols, ...options} = options;
+		var {quotes, ...options} = options;
 
 		super({name:'Yahoo Animation', ...options});
 
-		this.symbols = symbols;
 		this.quotes = quotes;
 	}
 
@@ -20,9 +19,10 @@ module.exports = class Module extends WordAnimation {
 
 	getWords() {
 		var words = [];
-		var quotes = this.quotes;
+		var quotes = this.quotes.quotes;
+		var symbols = this.quotes.symbols;
 
-		this.symbols.forEach((symbol) => {
+		symbols.forEach((symbol) => {
 			var color = Color.rgb(32, 32, 32);
 			var quote = quotes[symbol.symbol];
 

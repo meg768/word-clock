@@ -50,7 +50,7 @@ module.exports = class extends Animation {
             }
         });
 
-        this.pixels.render({transition:'fade', duration:200});
+        this.pixels.render();
     }
 
 }

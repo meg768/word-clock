@@ -6,16 +6,19 @@ var schedule = require('node-schedule');
 
 module.exports = class extends Events {
 
-	constructor() {
+	constructor(symbols) {
 		super();
+
+
 		this.quotes = {};
+		this.symbols = symbols;
+
+		this.subscribe(symbols);
 	}
 
 	fetchQuotes(symbols) {
 
 		return new Promise((resolve, reject) => {
-			var params = {};
-
 			var params = {};
 
 			params.symbols = [];
@@ -29,16 +32,14 @@ module.exports = class extends Events {
 	
 			yahoo.quote(params).then((data) => {
 	
-				var quotes = {};
-
 				symbols.forEach((symbol) => {
 					var change = data[symbol.symbol].price.regularMarketChangePercent;
 					var price = data[symbol.symbol].price.regularMarketPrice;
 	
-					this.quotes[symbol.symbol] = quotes[symbol.symbol] = {change:change, price:price};
+					this.quotes[symbol.symbol] = {change:change, price:price};
 				});
 	
-				resolve(quotes);
+				resolve();
 			})
 			.catch((error) => {
 				reject(error);
