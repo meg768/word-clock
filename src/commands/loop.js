@@ -51,30 +51,36 @@ var Module = new function() {
 
 		rightButton.on('click', (clicks, time) => {
 
-			switch(mode) {
-				case 'clock' && clicks == 1: {
-					// Special case, when in clock mode you will never
-					// se the change when entering loop mode since 
-					// the clock animation is the first...
-					loopIndex = 1;
-					mode = 'loop';
-
-					runNextAnimation();
-					break;
-				}
-				case 'loop': {
-					if (clicks == 1)
+			if (clicks == 1) {
+				switch(mode) {
+					case 'clock': {
+						// Special case, when in clock mode you will never
+						// se the change when entering loop mode since 
+						// the clock animation is the first...
+						loopIndex = 1;
+						mode = 'loop';
+	
+						runNextAnimation();
+						break;
+					}
+					case 'loop': {
 						mode = 'rain';
 
-					runNextAnimation();
-					break;
+						runNextAnimation();
+						break;
+					}
+					case 'rain': {
+						mode = 'clock';
+	
+						runNextAnimation();
+						break;
+					}
 				}
-				case 'rain': {
-					mode = 'clock';
+	
+			}
 
-					runNextAnimation();
-					break;
-				}
+			if (clicks == 2 && mode == 'loop') {
+				runNextAnimation();
 			}
 
 		});
