@@ -75,6 +75,12 @@ var Module = new function() {
 					runNextAnimation();
 					break;
 				}
+				case 2: {
+					if (mode == 'loop')
+						runNextAnimation();
+					break;
+
+				}
 			}
 
 		});
