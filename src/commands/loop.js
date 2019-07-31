@@ -14,8 +14,6 @@ var CommodityAnimation = require('../scripts/commodity-animation.js');
 var IndexAnimation     = require('../scripts/index-animation.js');
 var ColorAnimation     = require('../scripts/color-animation.js');
 var MatrixAnimation    = require('../scripts/matrix-animation.js');
-var PulseAnimation     = require('../scripts/pulse-animation.js')
-var TextAnimation      = require('../scripts/text-animation.js');
 
 function debug() {
 }
@@ -74,30 +72,32 @@ var Module = new function() {
 				state = (state == 'on') ? 'off' : 'on';
 			});
 
-			lowerButton.on('click', (clicks) => {
+			lowerButton.on('click', (clicks, time) => {
 				switch (clicks) {
 					case 1: {
-						// Switch duration mode, loop or static
-						if (animationIndex == 0) {
-							animationIndex = 1;
-							duration = defaultDuration;
+						if (time >= 1000) {
+							runAnimation(new MatrixAnimation({pixels:pixels, duration:-1, priority:'!'}));
 						}
 						else {
-							animationIndex = 0;
-							duration = -1;
+							// Switch duration mode, loop or static
+							if (animationIndex == 0) {
+								animationIndex = 1;
+								duration = defaultDuration;
+							}
+							else {
+								animationIndex = 0;
+								duration = -1;
+							}
+							
+							var Animation = animations[animationIndex % animations.length];
+							runAnimation(new Animation({pixels:pixels, duration:duration, priority:'!'}));
+
 						}
-						
-						var Animation = animations[animationIndex % animations.length];
-						runAnimation(new Animation({pixels:pixels, duration:duration, priority:'!'}));
 						break;
 					}
 					case 2: {
 						debug('Running next animation...');
 						runNextAnimation();
-						break;
-					}
-					case 3: {
-						runAnimation(new MatrixAnimation({pixels:pixels, duration:-1, priority:'!'}));
 						break;
 					}
 				}
