@@ -75,7 +75,7 @@ var Module = new function() {
 
 			runNextAnimation();
 			break;
-		}
+		});
 
 
 		function runNextAnimation() {
