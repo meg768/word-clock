@@ -16,8 +16,14 @@ module.exports = class extends Events {
 		return new Promise((resolve, reject) => {
 			var params = {};
 
-			params.symbols = symbols;
+			var params = {};
+
+			params.symbols = [];
 			params.modules = ['price'];
+	
+			this.symbols.forEach((symbol) => {
+				params.symbols.push(symbol.symbol);
+			})
 	
 			debug('Fetching quotes for symbols', symbols);
 	
