@@ -1,4 +1,4 @@
-var Animation = require('./yahoo-animation.js');
+var Animation = require('./quote-animation.js');
 var Quotes = require('./yahoo-quotes.js');
 
 var quotes = new Quotes([

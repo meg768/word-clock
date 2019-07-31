@@ -4,7 +4,6 @@ var yahoo = require('yahoo-finance');
 var debug = require('./debug.js');
 
 
-
 module.exports = class Module extends WordAnimation {
 
 	constructor(options) {
