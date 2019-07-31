@@ -46,9 +46,9 @@ var Module = new function() {
 
 		leftButton.on('click', (clicks) => {
 
-			loopIndex = 0;
+			loopIndex = 1;
 			mode = (mode != 'off') ? 'off' : 'loop';
-			
+
 			runNextAnimation();
 		});
 
