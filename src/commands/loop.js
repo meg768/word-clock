@@ -18,7 +18,6 @@ var MatrixAnimation    = require('../scripts/matrix-animation.js');
 
 var Module = new function() {
 
-
 	function defineArgs(args) {
 
 		args.help('help').alias('help', 'h');
@@ -28,8 +27,6 @@ var Module = new function() {
 			return true;
 		});
 	}
-
-
 
 	function run(argv) {
 
@@ -46,7 +43,7 @@ var Module = new function() {
 
 		leftButton.on('click', (clicks) => {
 
-			loopIndex = 1;
+			loopIndex = 0;
 			mode = (mode != 'off') ? 'off' : 'loop';
 
 			runNextAnimation();
