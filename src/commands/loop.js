@@ -51,7 +51,7 @@ var Module = new function() {
 
 		rightButton.on('click', (clicks, time) => {
 
-			loopIndex = 2;
+			loopIndex = 0;
 
 			switch (clicks) {
 				case 1: {
