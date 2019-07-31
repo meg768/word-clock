@@ -32,10 +32,10 @@ module.exports = class extends Events {
 				var quotes = {};
 
 				symbols.forEach((symbol) => {
-					var change = data[symbol].price.regularMarketChangePercent;
-					var price = data[symbol].price.regularMarketPrice;
+					var change = data[symbol.symbol].price.regularMarketChangePercent;
+					var price = data[symbol.symbol].price.regularMarketPrice;
 	
-					this.quotes[symbol] = quotes[symbol] = {change:change, price:price};
+					this.quotes[symbol.symbol] = quotes[symbol.symbol] = {change:change, price:price};
 				});
 	
 				resolve(quotes);
