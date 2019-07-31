@@ -9,11 +9,24 @@ module.exports = class extends Events {
 	constructor(symbols) {
 		super();
 
-
 		this.quotes = {};
 		this.symbols = symbols;
 
 		this.subscribe(symbols);
+	}
+
+	subscribe(symbols) {
+
+		var fetch = () => {
+			this.fetchQuotes(symbols).then((quotes) => {
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+		};
+
+		schedule.scheduleJob({minute:[5, 20, 35, 50]}, fetch);
+		fetch();
 	}
 
 	fetchQuotes(symbols) {
@@ -32,8 +45,6 @@ module.exports = class extends Events {
 	
 			yahoo.quote(params).then((data) => {
 	
-				debug('Got quotes for symbols', symbols);
-
 				symbols.forEach((symbol) => {
 					var change = data[symbol.symbol].price.regularMarketChangePercent;
 					var price = data[symbol.symbol].price.regularMarketPrice;
@@ -51,19 +62,6 @@ module.exports = class extends Events {
 
 	}
 
-	subscribe(symbols) {
-
-		var fetch = () => {
-			this.fetchQuotes(symbols).then((quotes) => {
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-		};
-
-		schedule.scheduleJob({minute:[5, 20, 35, 50]}, fetch);
-		fetch();
-	}
 
 
 };
