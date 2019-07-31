@@ -58,22 +58,25 @@ var Module = new function() {
 					// the clock animation is the first...
 					loopIndex = 1;
 					mode = 'loop';
+
+					runNextAnimation();
 					break;
 				}
 				case 'loop': {
-					if (clicks > 1)
-						runNextAnimation();
-					else 
+					if (clicks == 1)
 						mode = 'rain';
+
+					runNextAnimation();
 					break;
 				}
 				case 'rain': {
 					mode = 'clock';
+
+					runNextAnimation();
 					break;
 				}
 			}
 
-			runNextAnimation();
 		});
 
 
