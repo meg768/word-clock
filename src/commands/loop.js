@@ -51,12 +51,14 @@ var Module = new function() {
 
 		rightButton.on('click', (clicks, time) => {
 
-			loopIndex = 0;
-
 			switch (clicks) {
 				case 1: {
 					switch(mode) {
 						case 'clock': {
+							// Special case, when in clock mode you will never
+							// se the change when entering loop mode since 
+							// the clock animation is the first...
+							loopIndex = 1;
 							mode = 'loop';
 							break;
 						}
