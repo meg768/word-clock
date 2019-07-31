@@ -39,11 +39,11 @@ var Module = new function() {
 
 		var loopAnimations   = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, WeatherAnimation];
 		var loopDuration     = 10000;
-		var loopIndex        = 0;
+		var loopIndex        = -1;
 
 		leftButton.on('click', (clicks) => {
 
-			loopIndex = 0;
+			loopIndex = -1;
 			mode = (mode != 'off') ? 'off' : 'loop';
 
 			runNextAnimation();
@@ -51,7 +51,7 @@ var Module = new function() {
 
 		rightButton.on('click', (clicks, time) => {
 
-			loopIndex = 0;
+			loopIndex = -1;
 
 			switch (clicks) {
 				case 1: {
