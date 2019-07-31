@@ -61,7 +61,7 @@ module.exports = class extends Events {
 			});
 		};
 
-		schedule.scheduleJob({minute:[5, 15, 30, 45]}, fetch);
+		schedule.scheduleJob({minute:[5, 20, 35, 50]}, fetch);
 		fetch();
 	}
 
