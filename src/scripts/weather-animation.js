@@ -8,6 +8,7 @@ var Color      = require('color');
 var debug      = require('./debug.js');
 var cached     = require('./cached.js');
 
+var weather = undefined;
 
 var fetchWeather = cached(1000 * 60 * 60, (location) => {
 

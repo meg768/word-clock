@@ -1,7 +1,6 @@
 var Animation = require('./yahoo-animation.js');
 var Quotes = require('./yahoo-quotes.js');
 
-
 var quotes = new Quotes([
 	{name:'OMX', symbol:'^OMX'},
 	{name:'NASDAQ', symbol:'^IXIC'},
@@ -13,7 +12,6 @@ var quotes = new Quotes([
 	{name:'BRIC', symbol:'^BSESN'},
 	{name:'NIKKEI', symbol:'^N225'}
 ]);
-
 
 module.exports = class Module extends Animation {
 
