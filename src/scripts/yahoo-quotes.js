@@ -21,7 +21,7 @@ module.exports = class extends Events {
 			params.symbols = [];
 			params.modules = ['price'];
 	
-			this.symbols.forEach((symbol) => {
+			symbols.forEach((symbol) => {
 				params.symbols.push(symbol.symbol);
 			})
 	
