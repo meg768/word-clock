@@ -2,8 +2,6 @@
 
 require('dotenv').config();
 
-
-
 var App = function() {
 
 
