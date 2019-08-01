@@ -8,7 +8,6 @@ var AnimationQueue = require('rpi-animations').Queue;
 var debug = require('../scripts/debug.js');
 
 var ClockAnimation     = require('../scripts/clock-animation.js');
-var WeatherAnimation   = require('../scripts/weather-animation.js');
 var CurrencyAnimation  = require('../scripts/currency-animation.js');
 var CommodityAnimation = require('../scripts/commodity-animation.js');
 var IndexAnimation     = require('../scripts/index-animation.js');
@@ -37,7 +36,7 @@ var Module = new function() {
 		var mode             = 'loop';
 		var animationQueue   = new AnimationQueue();
 
-		var loopAnimations   = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, WeatherAnimation];
+		var loopAnimations   = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
 		var loopDuration     = 10000;
 		var loopIndex        = 0;
 
