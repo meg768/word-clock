@@ -38,7 +38,8 @@ This could be done by typing the following
 nano /Volumes/boot/wpa_supplicant.conf
 ````
 
-Then paste the contents above.
+Then paste the contents above and save.
+
 
 ### Update apt-get
 
