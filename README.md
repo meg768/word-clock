@@ -32,6 +32,13 @@ network={
 }
 ````
 
+This could be done by typing the following
+
+````bash
+nano /Volumes/boot/wpa_supplicant.conf
+````
+
+Then paste the contents above.
 
 ### Update apt-get
 
