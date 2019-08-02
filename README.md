@@ -16,6 +16,23 @@ enter this.
 echo > /Volumes/boot/ssh
 ````
 
+### Create a Wifi Connection
+
+Create a file named **wpa_supplicant.conf** in the **/Volumes/boot** folder.
+It should contain something like this.
+
+````bash
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=GB
+
+network={
+        ssid="my-wifi-name"
+        psk="my-password"
+}
+````
+
+
 ### Update apt-get
 
 When all set up. Update apt-get.
