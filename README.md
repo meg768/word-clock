@@ -39,8 +39,8 @@ nano /Volumes/boot/wpa_supplicant.conf
 ````
 
 Then paste the contents above and save. Now eject
-your drive named **boot** and put the SD card in the Pi.
-
+your drive named **boot** and put the SD card in the Pi. Hopefully you will
+figure out the IP address of your Pi. Connect to it via SSH.
 
 ### Update apt-get
 
