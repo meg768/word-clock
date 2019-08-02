@@ -27,8 +27,8 @@ update_config=1
 country=GB
 
 network={
-        ssid="my-wifi-name"
-        psk="my-password"
+    ssid="my-wifi-name"
+    psk="my-password"
 }
 ````
 
