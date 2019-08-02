@@ -38,7 +38,8 @@ This could be done by typing the following
 nano /Volumes/boot/wpa_supplicant.conf
 ````
 
-Then paste the contents above and save.
+Then paste the contents above and save. Now eject
+your drive named **boot** and put the SD card in the Pi.
 
 
 ### Update apt-get
