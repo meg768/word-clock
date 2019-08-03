@@ -1,6 +1,6 @@
 # Word Clock
 
-Word Clock as of 2017-10-03.
+Word Clock as of 2019-08-03.
 
 ## Setting up the Pi Zero
 
@@ -50,7 +50,9 @@ When all set up. Update apt-get.
 sudo apt-get update && sudo apt-get dist-upgrade
 ````
 
-### Use raspi-config to set time zone, enable SSH.
+### Raspberry Pi Configuration
+
+Use **raspi-config** to set time zone, enable SSH and name your Pi.
 
 ````bash
 sudo raspi-config
