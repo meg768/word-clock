@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-var Timer = require('yow/timer');
 var Button = require('pigpio-button');
 
 var Neopixels = require('../scripts/neopixels.js');
