@@ -28,6 +28,8 @@ var Module = new function() {
 
 	function run(argv) {
 
+		debug('Starting animation loop...');
+
 		var leftButton       = new Button(13);
 		var rightButton      = new Button(6);
 		var pixels           = new Neopixels();
