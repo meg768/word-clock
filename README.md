@@ -3,68 +3,7 @@
 Word Clock as of 2019-08-03.
 
 ## Setting up the Pi Zero
-
-Visit https://www.raspberrypi.org/downloads to download latest version of Raspberry OS.
-Use Pi-Filler or other tool to create an SD-card with the latest image.
-
-### Enable SSH
-
-Create an empty file named ssh and copy it to boot. From the Mac terminal
-enter this.
-
-````bash
-echo > /Volumes/boot/ssh
-````
-
-### Create a Wifi Connection
-
-Create a file named **wpa_supplicant.conf** in the **/Volumes/boot** folder.
-It should contain something like this.
-
-````bash
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=GB
-
-network={
-    ssid="my-wifi-name"
-    psk="my-password"
-}
-````
-
-This could be done by typing the following
-
-````bash
-nano /Volumes/boot/wpa_supplicant.conf
-````
-
-Then paste the contents above and save. Now eject
-your drive named **boot** and put the SD card in the Pi. Hopefully you will
-figure out the IP address of your Pi. Connect to it via SSH.
-
-### Update Stuff
-
-When all set up. Update apt-get.
-
-````bash
-sudo apt-get update && sudo apt-get dist-upgrade
-````
-
-### Raspberry Pi Configuration
-
-Use **raspi-config** to set time zone, enable SSH and name your Pi.
-
-````bash
-sudo raspi-config
-````
-
-### Install Node and npm
-
-````bash
-wget -O - https://raw.githubusercontent.com/sdesalas/node-pi-zero/master/install-node-v11.5.0.sh | bash
-````
-
-See https://github.com/sdesalas/node-pi-zero for later versions.
+See https://github.com/meg768/installing-new-rpi-from-scratch.
 
 ### Install git and pigpio
 
