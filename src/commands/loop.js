@@ -30,7 +30,7 @@ var Module = new function() {
 
 		var leftButton       = new Button(13);
 		var rightButton      = new Button(6);
-		var pixels           = new Neopixels.Pixels();
+		var pixels           = new Neopixels();
 
 		var mode             = 'loop';
 		var animationQueue   = new AnimationQueue();

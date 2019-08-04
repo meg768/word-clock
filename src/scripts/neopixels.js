@@ -4,7 +4,7 @@ function configure() {
 
     function cleanup() {
         console.log('Cleaning up...');
-        var pixels = new Neopixels.Pixels();
+        var pixels = new Neopixels();
 
         pixels.fill('black');
         pixels.render();

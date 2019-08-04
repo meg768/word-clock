@@ -40,7 +40,7 @@ var Module = new function() {
 	function run(argv) {
 
 
-		var pixels = new Neopixels.Pixels();
+		var pixels = new Neopixels();
 		var offset = 0;
 
         setInterval(() => {
