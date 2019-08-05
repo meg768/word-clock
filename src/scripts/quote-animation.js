@@ -32,7 +32,7 @@ module.exports = class Module extends WordAnimation {
 			var quote = quotes[symbol.symbol];
 
 			if (quote != undefined && quote.change != undefined) {
-				var change     = Math.max(-2, Math.min(2, quote.change));
+				var change     = Math.max(-2, Math.min(2, quote.change * 100));
 				var hue        = change >= 0 ? 240 : 0;
 				var saturation = 100;
 				var luminance  = 10 + (Math.abs(change) / 2) * 40;
