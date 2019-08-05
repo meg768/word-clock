@@ -38,7 +38,7 @@ var Module = new function() {
 		var animationQueue   = new AnimationQueue();
 
 		var loopAnimations   = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
-		var loopDuration     = 10000;
+		var loopDuration     = 500;
 		var loopIndex        = 0;
 
 		leftButton.on('click', (clicks) => {
