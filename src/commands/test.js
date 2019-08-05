@@ -22,11 +22,6 @@ class Animation extends WordAnimation {
 
 		var clock = new Clock(now);
 
-		return [
-            {word:'FEM', color:'red'},
-            {word:'I', color:'red'},
-            {word:'SEX', color:'blue'}
-        ];
 		console.log(now);
 
         var clock = new Clock(now);
@@ -37,6 +32,12 @@ class Animation extends WordAnimation {
         time.split(' ').forEach((word) => {
             words.push({word:word, color:color});
         });
+
+		return [
+            {word:'FEM', color:'red'},
+            {word:'I', color:'red'},
+            {word:'SEX', color:'blue'}
+        ];
 
         return words;
     }
