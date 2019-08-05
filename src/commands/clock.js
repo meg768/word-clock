@@ -3,8 +3,11 @@ var Neopixels = require('../scripts/neopixels.js');
 var Animation = require('../scripts/clock-animation.js');
 var debug = require('../scripts/debug.js');
 
+/*
 1234567890123456789012345678901234567890123
 OMXNASDAQDAXDOWJONESHANGSENGUSAUKBRICNIKKEI
+*/
+
 var Module = new function() {
 
 
