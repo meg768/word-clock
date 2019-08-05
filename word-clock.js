@@ -15,12 +15,12 @@ var App = function() {
 
 			args.command(require('./src/commands/loop.js'));
 			args.command(require('./src/commands/clock.js'));
-//			args.command(require('./src/commands/rain.js'));
-//			args.command(require('./src/commands/boring.js'));
-//			args.command(require('./src/commands/word.js'));
-//			args.command(require('./src/commands/weather.js'));
-//			args.command(require('./src/commands/index.js'));
-//			args.command(require('./src/commands/quotes.js'));
+			args.command(require('./src/commands/rain.js'));
+			args.command(require('./src/commands/boring.js'));
+			args.command(require('./src/commands/word.js'));
+			args.command(require('./src/commands/weather.js'));
+			args.command(require('./src/commands/index.js'));
+			args.command(require('./src/commands/quotes.js'));
 
 			args.wrap(null);
 			args.demand(1);

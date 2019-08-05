@@ -46,7 +46,7 @@ module.exports = class extends Animation {
             var color = Color(words[index].color).rgbNumber();
 
             Color(color).rgb().array().forEach((value) => {
-                mA += 20 * (rgb/255);
+                mA += (20 * value) / 255;
             });
 
             for (var i = 0; i < item.word.length; i++) {
