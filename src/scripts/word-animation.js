@@ -38,13 +38,20 @@ module.exports = class extends Animation {
 
         this.pixels.clear();
 
+        var power = 0;
+
         text.forEach((item, index) => {
             var color = Color(words[index].color).rgbNumber();
+            var rgb =  Color(color).rgb().array();
+
+            power += 20*(rgb[0]/255) + 20*(rgb[1]/255) + 20*(rgb[2]/255);
 
             for (var i = 0; i < item.word.length; i++) {
                 this.pixels.setPixel(item.x + i, item.y, color);
             }
         });
+
+        console.log('Power consumption', power, 'mA');
 
         this.pixels.render();
     }
