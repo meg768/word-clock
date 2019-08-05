@@ -14,7 +14,7 @@ class Animation extends WordAnimation {
 		this.index = 0;
 	}
 
-    getWords() {
+    xgetWords() {
 		this.index++;
 
 		var now = new Date();
