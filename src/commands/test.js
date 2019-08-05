@@ -20,9 +20,6 @@ class Animation extends WordAnimation {
 		var now = new Date();
 		now.setTime(this.date.getTime() + (this.index * 60 * 1000));
 
-		var clock = new Clock(now);
-
-
         var clock = new Clock(now);
         var words = [];
         var color = clock.getColor();

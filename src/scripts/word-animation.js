@@ -33,10 +33,10 @@ module.exports = class extends Animation {
         var items = [];
         var text = [];
         var mA = 0;
-
+        
         words.forEach((item) => {
             items.push(item.word);
-            text.push(item.word);
+            text.push(item.word);    
         });
 
         items = layout.lookup(items);

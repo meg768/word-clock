@@ -71,7 +71,7 @@ module.exports = class  {
         if (minute >= 25)
             hour += 1;
 
-        return sprintf('%s %s', minutes[minute], hours[hour]);
+        return sprintf('%s %s', minutes[minute], hours[hour]).trim();
     }
 
 
