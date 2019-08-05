@@ -1,12 +1,40 @@
 #!/usr/bin/env node
 var Neopixels = require('../scripts/neopixels.js');
-var Animation = require('../scripts/clock-animation.js');
+var ClockAnimation = require('../scripts/clock-animation.js');
+var WordAnimation = require('../scripts/word-animation.js');
 var debug = require('../scripts/debug.js');
+var Clock = require('../scripts/clock.js');
 
-/*
-1234567890123456789012345678901234567890123
-OMXNASDAQDAXDOWJONESHANGSENGUSAUKBRICNIKKEI
-*/
+
+class SpeedAnimation extends WordAnimation {
+
+    constructor(options) {
+
+        super({name:'Clock Test Animation', renderFrequency: 100, ...options});
+		this.date = new Date();
+		this.index = 0;
+	}
+
+    getWords() {
+		this.index++;
+
+		var now = new Date();
+		now.setTime(this.date.getTime() + (this.index * 60 * 1000));
+
+        var clock = new Clock(now);
+        var words = [];
+        var color = clock.getColor();
+        var time  = clock.getTime();
+
+        time.split(' ').forEach((word) => {
+            words.push({word:word, color:color});
+        });
+
+        return words;
+    }
+
+}
+
 
 var Module = new function() {
 
@@ -14,6 +42,7 @@ var Module = new function() {
 	function defineArgs(args) {
 
 		args.help('help').alias('help', 'h');
+		args.help('test').alias('test', 't');
 		args.wrap(null);
 
 		args.check(function(argv) {
@@ -23,7 +52,14 @@ var Module = new function() {
 
 
 	function run(argv) {
-		var animation = new Animation({pixels: new Neopixels(), duration:-1, priority:'!', debug:debug});
+
+		var animation = null;
+		
+		if (argv.test)
+			animation = new SpeedAnimation({pixels: new Neopixels(), duration:-1, priority:'!', debug:debug});
+		else
+			animation = new ClockAnimation({pixels: new Neopixels(), duration:-1, priority:'!', debug:debug});
+
 		return animation.run();
 	}
 
