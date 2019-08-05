@@ -60,7 +60,7 @@ module.exports = class extends Animation {
 
         maxMilliAmpere = Math.max(maxMilliAmpere, milliAmpere);
 
-        debug(sprintf('"%s" (%d mA/%d mA', text.join(' '), milliAmpere, maxMilliAmpere));
+        debug(sprintf('"%s" (%d mA/%d mA)', text.join(' '), milliAmpere, maxMilliAmpere));
 
         this.pixels.render();
     }
