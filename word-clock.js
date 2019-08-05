@@ -13,9 +13,6 @@ var App = function() {
 
 			args.help();
 
-			args.option('size',      {alias:'S', describe:'Size of the Neopixel strip', default:process.env.NEOPIXEL_STRIP_LENGTH});
-			args.option('debug',     {alias:'D', describe:'Debug mode', default:false});
-
 			args.command(require('./src/commands/loop.js'));
 			args.command(require('./src/commands/clock.js'));
 //			args.command(require('./src/commands/rain.js'));
