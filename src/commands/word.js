@@ -19,7 +19,6 @@ var Module = new function() {
 
 
 	function run(argv) {
-		console.log('Starting Word Animation...');
 		var animation = new Animation({pixels: new Neopixels(), duration:-1, priority:'!', debug:true});
 
 		return animation.run();
