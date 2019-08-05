@@ -13,7 +13,11 @@ module.exports = class Module extends WordAnimation {
 		super({name:'Yahoo Animation', ...options});
 
 		if (cache[this.name] == undefined) {
-			cache[this.name] = new Quotes(symbols);
+			var quotes = cache[this.name] = new Quotes(symbols);
+
+			quotes.on('quotes', () => {
+				this.render();
+			});
 		}
 
 		this.quotes = cache[this.name];

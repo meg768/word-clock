@@ -11,7 +11,7 @@ module.exports = class extends Animation {
     constructor(options) {
         var {pixels, ...options} = options;
 
-        super({renderFrequency: 10 * 1000, name:'Word Animation', ...options});
+        super({renderFrequency: 30 * 1000, name:'Word Animation', ...options});
         
         this.pixels = pixels;
     }
