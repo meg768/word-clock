@@ -138,7 +138,7 @@ var Module = new function() {
 
 
 	module.exports.command  = 'loop [options]';
-	module.exports.describe = 'Run Neopixel word clock';
+	module.exports.describe = 'Run Neopixel Word Clock';
 	module.exports.builder  = defineArgs;
 	module.exports.handler  = run;
 
