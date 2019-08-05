@@ -9,13 +9,13 @@ class Animation extends WordAnimation {
 
     constructor(options) {
 
-        super({name:'Clock Test Animation', renderFrequency: 100, ...options});
+        super({name:'Clock Test Animation', renderFrequency: 50, ...options});
 		this.date = new Date();
 
 	}
 
     getWords() {
-		this.date.setMinutes(this.date.getMinutes() + 30);
+		this.date.setMinutes(this.date.getMinutes() + 1);
 
         var clock = new Clock(this.date);
         var words = [];
