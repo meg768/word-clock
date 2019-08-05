@@ -28,7 +28,7 @@ class Animation extends WordAnimation {
         var color = clock.getColor();
         var time  = clock.getTime();
 
-		debug(now, '*'+time'*');
+		debug(now, '*'+time+'*');
 
         time.split(' ').forEach((word) => {
             words.push({word:word, color:color});
