@@ -60,6 +60,7 @@ var Module = module.exports = function() {
                 return word.length > 0;
             });
 
+            debug('WORDS:', words);
         }
 
         try {

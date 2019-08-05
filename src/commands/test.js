@@ -9,8 +9,8 @@ class Animation extends WordAnimation {
 
     constructor(options) {
 
-        super({name:'Clock Test Animation', renderFrequency: 1000, ...options});
-		this.date = new Date();
+        super({name:'Clock Test Animation', renderFrequency: 100, ...options});
+		this.date = new Date("2010-01-01 19:30");
 		this.index = 0;
 	}
 
