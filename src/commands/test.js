@@ -33,6 +33,7 @@ class Animation extends WordAnimation {
             words.push({word:word, color:color});
         });
 
+        return words;
 
 		return [
             {word:'LITE', color:color},
