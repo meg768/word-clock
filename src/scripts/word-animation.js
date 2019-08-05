@@ -36,7 +36,6 @@ module.exports = class extends Animation {
 
         text = layout.lookup(text);
 
-        debug('Rendering', text);
         this.pixels.clear();
 
         text.forEach((item, index) => {
