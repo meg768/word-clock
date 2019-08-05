@@ -1,7 +1,6 @@
 var Animation = require('./quote-animation.js');
-var Quotes = require('./quotes.js');
 
-var quotes = new Quotes([
+var symbols = [
 	{name:'ZN', symbol:'^SPGSIZ'}, // Zink 
 	{name:'AU', symbol:'^SPGSGC'}, // Guld 
 	{name:'AL', symbol:'^SPGSIA'}, // Aluminium 
@@ -10,12 +9,12 @@ var quotes = new Quotes([
 	{name:'BRENT', symbol:'^SPGSBR'}, // Olja  
 	{name:'AG', symbol:'^SPGSSI'}, // Silver 
 	{name:'PB', symbol:'^SPGSIL'} // Bly 
-]);
+];
 
 module.exports = class Module extends Animation {
 
 	constructor(options) {		
-		super({name:'Yahoo Commodity Animation', quotes:quotes, ...options});
+		super({name:'Yahoo Commodity Animation', symbols:symbols, ...options});
 	}
 
 };

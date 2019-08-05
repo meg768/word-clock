@@ -10,7 +10,6 @@ module.exports = class extends Events {
 		super();
 
 		this.quotes = {};
-		this.symbols = symbols;
 
 		this.subscribe(symbols);
 	}

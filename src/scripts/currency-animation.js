@@ -1,7 +1,6 @@
 var Animation = require('./quote-animation.js');
-var Quotes = require('./quotes.js');
 
-var quotes = new Quotes([
+var symbols = [
 	{name:'NOK', symbol:'NOKSEK=X'},
 	{name:'JPY', symbol:'JPYSEK=X'},
 	{name:'USD', symbol:'USDSEK=X'},
@@ -9,12 +8,12 @@ var quotes = new Quotes([
 	{name:'EUR', symbol:'EURSEK=X'},
 	{name:'DKK', symbol:'DKKSEK=X'},
 	{name:'CAD', symbol:'CADSEK=X'}
-]);
+];
 
 module.exports = class Module extends Animation {
 
 	constructor(options) {		
-		super({name:'Yahoo Currency Animation', quotes:quotes, ...options});
+		super({name:'Yahoo Currency Animation', symbols:symbols, ...options});
 	}
 
 };
