@@ -40,7 +40,7 @@ module.exports = class extends Events {
 				params.symbols.push(symbol.symbol);
 			})
 	
-			debug('Fetching quotes for symbols', symbols);
+			debug('Fetching quotes for symbols', params.symbols.join(' '));
 	
 			yahoo.quote(params).then((data) => {
 	
@@ -50,9 +50,10 @@ module.exports = class extends Events {
 	
 					this.quotes[symbol.symbol] = {change:change, price:price};
 				});
-	
+
+				debug('Finished fetching quotes.');
 				this.emit('quotes');
-				
+
 				resolve();
 			})
 			.catch((error) => {
