@@ -44,14 +44,17 @@ module.exports = class extends Animation {
 
         items.forEach((item, index) => {
             var color = Color(words[index].color).rgbNumber();
+            var power = 0;
 
             Color(color).rgb().array().forEach((value) => {
-                mA += (20 * value) / 255;
+                power += (20 * value) / 255;
             });
 
             for (var i = 0; i < item.word.length; i++) {
                 this.pixels.setPixel(item.x + i, item.y, color);
             }
+
+            mA += item.word.length * power;
         });
 
         debug(sprintf('"%s" (%d mA)', text.join(' '), mA));
