@@ -11,14 +11,18 @@ class Animation extends WordAnimation {
 
         super({name:'Clock Test Animation', renderFrequency: 1000, ...options});
 		this.date = new Date();
-
+		this.index = 0;
 	}
 
     getWords() {
-//		this.date.setMinutes(this.date.getMinutes() + 3);
-		console.log(this.date);
+		this.index++;
 
-        var clock = new Clock(this.date);
+		var now = new Date();
+		now.setTime(this.date.getTime() + (this.index * 60 * 1000));
+
+		console.log(now);
+
+        var clock = new Clock(now);
         var words = [];
         var color = clock.getColor();
         var time  = clock.getTime();
