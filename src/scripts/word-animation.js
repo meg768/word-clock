@@ -28,19 +28,20 @@ module.exports = class extends Animation {
         var layout = new Layout();
         var words = this.getWords();
 
+        var items = [];
         var text = [];
+        var power = 0;
 
         words.forEach((item) => {
+            items.push(item.word);
             text.push(item.word);
         });
 
-        text = layout.lookup(text);
+        items = layout.lookup(items);
 
         this.pixels.clear();
 
-        var power = 0;
-
-        text.forEach((item, index) => {
+        items.forEach((item, index) => {
             var color = Color(words[index].color).rgbNumber();
             var rgb =  Color(color).rgb().array();
 
@@ -51,7 +52,7 @@ module.exports = class extends Animation {
             }
         });
 
-        console.log('Power consumption', power, 'mA');
+        console.log('Rendering ', text.join(' '), '(', Math.floor(power), 'mA)');
 
         this.pixels.render();
     }
