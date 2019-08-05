@@ -60,7 +60,6 @@ var Module = module.exports = function() {
                 return word.length > 0;
             });
 
-            debug('WORDS:', words);
         }
 
         try {
@@ -89,6 +88,9 @@ var Module = module.exports = function() {
             var cursor = 0;
 
             words.forEach(function(word) {
+
+                if (word.length == 0)
+                    throw new Error('Word may not be empty.');
 
                 var index = lookupWord(word, cursor);
 
