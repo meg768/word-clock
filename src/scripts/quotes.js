@@ -51,6 +51,8 @@ module.exports = class extends Events {
 					this.quotes[symbol.symbol] = {change:change, price:price};
 				});
 	
+				this.emit('quotes');
+				
 				resolve();
 			})
 			.catch((error) => {
