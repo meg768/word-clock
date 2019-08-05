@@ -2,6 +2,7 @@
 var Animation = require('rpi-animations').Animation;
 var Layout = require('./layout.js');
 var Color = require('color');
+var sprintf = require('yow/sprintf');
 var debug = require('./debug.js');
 
 
@@ -30,7 +31,7 @@ module.exports = class extends Animation {
 
         var items = [];
         var text = [];
-        var power = 0;
+        var mA = 0;
 
         words.forEach((item) => {
             items.push(item.word);
@@ -43,16 +44,17 @@ module.exports = class extends Animation {
 
         items.forEach((item, index) => {
             var color = Color(words[index].color).rgbNumber();
-            var rgb =  Color(color).rgb().array();
 
-            power += 20*(rgb[0]/255) + 20*(rgb[1]/255) + 20*(rgb[2]/255);
+            Color(color).rgb().array().forEach((value) => {
+                mA += 20 * (rgb/255);
+            });
 
             for (var i = 0; i < item.word.length; i++) {
                 this.pixels.setPixel(item.x + i, item.y, color);
             }
         });
 
-        console.log('Rendering ', text.join(' '), '(', Math.floor(power), 'mA)');
+        debug(sprintf('"%s" (%d mA)', text.join(' '), mA));
 
         this.pixels.render();
     }
