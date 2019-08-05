@@ -15,8 +15,9 @@ class Animation extends WordAnimation {
 	}
 
     getWords() {
-		this.date.setMinutes(this.date.getMinutes() + 1);
-
+		this.date.setMinutes(this.date.getMinutes() + 3);
+		console.log(this.date);
+		
         var clock = new Clock(this.date);
         var words = [];
         var color = clock.getColor();
