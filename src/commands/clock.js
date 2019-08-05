@@ -41,8 +41,9 @@ var Module = new function() {
 
 	function defineArgs(args) {
 
-		args.help('help').alias('help', 'h');
-		args.help('test').alias('test', 't');
+		args.option('help', {alias:'h', describe:'Displays this information'});
+		args.option('test', {alias:'t', describe:'Test clock'});
+
 		args.wrap(null);
 
 		args.check(function(argv) {
