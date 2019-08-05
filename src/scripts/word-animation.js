@@ -5,6 +5,7 @@ var Color = require('color');
 var sprintf = require('yow/sprintf');
 var debug = require('./debug.js');
 
+var max = 0;
 
 module.exports = class extends Animation {
 
@@ -57,7 +58,10 @@ module.exports = class extends Animation {
             mA += item.word.length * power;
         });
 
-        debug(sprintf('"%s" (%d mA)', text.join(' '), mA));
+        if (mA > max)
+            max = mA;
+
+        debug(sprintf('"%s" (%d/%d mA)', text.join(' '), mA, max));
 
         this.pixels.render();
     }
