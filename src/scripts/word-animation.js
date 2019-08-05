@@ -5,7 +5,7 @@ var Color = require('color');
 var sprintf = require('yow/sprintf');
 var debug = require('./debug.js');
 
-var max = 0;
+var maxMilliAmpere = 0;
 
 module.exports = class extends Animation {
 
@@ -32,7 +32,7 @@ module.exports = class extends Animation {
 
         var items = [];
         var text = [];
-        var mA = 0;
+        var milliAmpere = 0;
         
         words.forEach((item) => {
             items.push(item.word);
@@ -55,13 +55,12 @@ module.exports = class extends Animation {
                 this.pixels.setPixel(item.x + i, item.y, color);
             }
 
-            mA += item.word.length * power;
+            milliAmpere += item.word.length * power;
         });
 
-        if (mA > max)
-            max = mA;
+        maxMilliAmpere = Math.max(maxMilliAmpere, milliAmpere);
 
-        debug(sprintf('"%s" (%d/%d mA)', text.join(' '), mA, max));
+        debug(sprintf('"%s" (%d mA/%d mA', text.join(' '), milliAmpereA, maxMilliAmpere));
 
         this.pixels.render();
     }
