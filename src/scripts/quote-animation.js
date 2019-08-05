@@ -10,7 +10,7 @@ module.exports = class Module extends WordAnimation {
 	constructor(options) {
 		var {symbols, ...options} = options;
 
-		super({name:'Yahoo Animation', ...options});
+		super({name:'Yahoo Animation', renderFrequency: 60 * 1000, ...options});
 
 		if (cache[this.name] == undefined) {
 			var quotes = cache[this.name] = new Quotes(symbols);
