@@ -30,14 +30,14 @@ class Animation extends WordAnimation {
         var time  = clock.getTime();
 
         time.split(' ').forEach((word) => {
-            words.push({word:word, color:'color'});
+            words.push({word:word, color:color});
         });
 
 
 		return [
-            {word:'LITE', color:'red'},
-            {word:'I', color:'red'},
-            {word:'ÅTTA', color:'blue'}
+            {word:'LITE', color:color},
+            {word:'I', color:color},
+            {word:'ÅTTA', color:color}
         ];
 
         return words;
