@@ -19,7 +19,7 @@ var Module = new function() {
 	function defineArgs(args) {
 
 		args.option('help', {alias:'h', describe:'Displays this information'});
-		args.option('speed', {alias:'s', describe:'Specifies loop speed (ms)', default:10000});
+		args.option('speed', {alias:'s', describe:'Specifies loop speed in seconds', default:10});
 
 		args.wrap(null);
 
@@ -40,7 +40,7 @@ var Module = new function() {
 		var animationQueue   = new AnimationQueue();
 
 		var loopAnimations   = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
-		var loopDuration     = argv.speed;
+		var loopDuration     = argv.speed * 1000;
 		var loopIndex        = 0;
 
 		leftButton.on('click', (clicks) => {
