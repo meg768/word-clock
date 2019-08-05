@@ -33,14 +33,6 @@ class Animation extends WordAnimation {
 
 		debug(words);
         return words;
-
-		return [
-            {word:'LITE', color:color},
-            {word:'I', color:color},
-            {word:'ÅTTA', color:color}
-        ];
-
-        return words;
     }
 
 }
