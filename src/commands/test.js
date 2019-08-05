@@ -5,7 +5,7 @@ var WordAnimation = require('../scripts/word-animation.js');
 var debug = require('../scripts/debug.js');
 var Clock = require('../scripts/clock.js');
 
-module.exports = class extends WordAnimation {
+class Animation extends WordAnimation {
 
     constructor(options) {
 
@@ -46,7 +46,7 @@ var Module = new function() {
 	}
 
 	function run(argv) {
-		var animation = new Animation({pixels: new Neopixels(), duration:-1, priority:'!', debug:true});
+		var animation = new Animation({pixels: new Neopixels(), duration:-1, priority:'!', debug:debug});
 		return animation.run();
 
 
