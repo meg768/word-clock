@@ -55,7 +55,7 @@ var Module = new function() {
 	function run(argv) {
 
 		var animation = null;
-		debug(argv);
+
 		if (argv.test)
 			animation = new SpeedAnimation({pixels: new Neopixels(), duration:-1, priority:'!', debug:debug});
 		else
