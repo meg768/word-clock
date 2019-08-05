@@ -9,7 +9,7 @@ class Animation extends WordAnimation {
 
     constructor(options) {
 
-        super({name:'Clock Test Animation', renderFrequency: 50, ...options});
+        super({name:'Clock Test Animation', renderFrequency: 100, ...options});
 		this.date = new Date();
 
 	}
