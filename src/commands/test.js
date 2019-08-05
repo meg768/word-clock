@@ -22,12 +22,13 @@ class Animation extends WordAnimation {
 
 		var clock = new Clock(now);
 
-		console.log(now);
 
         var clock = new Clock(now);
         var words = [];
         var color = clock.getColor();
         var time  = clock.getTime();
+
+		debug(now, '*'+time'*');
 
         time.split(' ').forEach((word) => {
             words.push({word:word, color:color});
