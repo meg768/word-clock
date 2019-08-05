@@ -1,9 +1,11 @@
 var Color = require('color');
 var sprintf = require('yow/sprintf');
+var debug = require('./debug.js');
 
 module.exports = class  {
 
     constructor(date) {
+        debug('New clock!');
         this.date = date || new Date();
     }
 
