@@ -14,12 +14,17 @@ class Animation extends WordAnimation {
 		this.index = 0;
 	}
 
-    xgetWords() {
+    getWords() {
 		this.index++;
 
 		var now = new Date();
 		now.setTime(this.date.getTime() + (this.index * 60 * 1000));
 
+		return [
+            {word:'FEM', color:'red'},
+            {word:'I', color:'red'},
+            {word:'SEX', color:'blue'}
+        ];
 		console.log(now);
 
         var clock = new Clock(now);
