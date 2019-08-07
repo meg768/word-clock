@@ -45,6 +45,7 @@ module.exports = class Module extends WordAnimation {
 				// Limit the current to the leds to about 500 mA 
 				luminance = luminance * 0.65;
 
+				luminance = 50;
 				color = Color.hsl(hue, saturation, luminance);
 			}
 
