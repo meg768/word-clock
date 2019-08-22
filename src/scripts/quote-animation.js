@@ -40,11 +40,8 @@ module.exports = class Module extends WordAnimation {
 				var change     = Math.max(-2, Math.min(2, quote.change * 100));
 				var hue        = change >= 0 ? 240 : 0;
 				var saturation = 100;
-				var luminance  = 10 + (Math.abs(change) / 2) * 40;
+				var luminance  = 20 + (Math.abs(change) / 2) * 30;
 		
-				// Limit the current to the leds to about 500 mA 
-				//luminance = luminance * 0.65;
-
 				color = Color.hsl(hue, saturation, luminance);
 			}
 
