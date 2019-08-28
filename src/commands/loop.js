@@ -12,6 +12,7 @@ var CommodityAnimation = require('../scripts/commodity-animation.js');
 var IndexAnimation     = require('../scripts/index-animation.js');
 var ColorAnimation     = require('../scripts/color-animation.js');
 var MatrixAnimation    = require('../scripts/matrix-animation.js');
+var WeatherAnimation   = require('../scripts/weather-animation.js');
 
 
 var Module = new function() {
@@ -39,7 +40,8 @@ var Module = new function() {
 		var mode             = 'loop';
 		var animationQueue   = new AnimationQueue();
 
-		var loopAnimations   = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
+		//var loopAnimations   = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
+		var loopAnimations   = [ClockAnimation, WeatherAnimation];
 		var loopDuration     = parseFloat(argv.speed) * 1000;
 		var loopIndex        = 0;
 
