@@ -40,8 +40,7 @@ var Module = new function() {
 		var mode             = 'loop';
 		var animationQueue   = new AnimationQueue();
 
-		//var loopAnimations   = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation];
-		var loopAnimations   = [ClockAnimation, WeatherAnimation];
+		var loopAnimations   = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, WeatherAnimation];
 		var loopDuration     = parseFloat(argv.speed) * 1000;
 		var loopIndex        = 0;
 
