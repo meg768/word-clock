@@ -15,7 +15,7 @@
     "url": "git+https://github.com/meg768/word-clock.git"
   },
   "author": "",
-  "license": "ISC", 
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/meg768/word-clock/issues"
   },
@@ -28,6 +28,7 @@
     "pigpio-button": "^1.0.6",
     "rpi-animations": "^1.0.8",
     "rpi-neopixels": "^1.0.73",
+    "schedule": "^0.5.0",
     "weather-js": "^2.0.0",
     "yahoo-finance": "^0.3.6",
     "yargs": "^8.0.2",
