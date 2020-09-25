@@ -1,5 +1,6 @@
 word-clock.json
 .vscode
+.env
 
 # Logs
 logs
