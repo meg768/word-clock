@@ -1,7 +1,7 @@
 word-clock.json
-#.vscode
-#.env
-#.DS_store
+.vscode
+.env
+.DS_store
 
 # Logs
 logs
