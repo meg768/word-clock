@@ -16,7 +16,7 @@ module.exports = class extends Events {
 
 	subscribe(symbols) {
 
-		debug('Sybscribing quotes for symbols', symbols.join(' '));
+		debug('Subscribing quotes for symbols', symbols.join(' '));
 
 		var fetch = () => {
 			this.fetchQuotes(symbols).then((quotes) => {
