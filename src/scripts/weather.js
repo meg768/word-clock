@@ -95,7 +95,7 @@ class Weather {
 				resolve(this.weather);
 			})
 			.catch((error) => {
-				this.debug('Failed to fetch weather.');
+				debug('Failed to fetch weather.');
 				reject(error);
 			})	
 		});
