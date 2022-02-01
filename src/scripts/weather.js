@@ -13,7 +13,6 @@ class Weather {
 
 
 		this.weather = {'REGN':1.0, 'MOLN':1.0, 'SNÖ':1.0, 'VIND':1.0, 'SOL':1.0};
-
 		this.subscribe();
 	};
 

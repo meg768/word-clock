@@ -4,7 +4,7 @@ var debug = require('./debug.js');
 function configure() {
 
     function cleanup() {
-        console.log('Cleaning up...');
+        debug('Cleaning up...');
         var pixels = new Neopixels();
 
         pixels.fill('black');
