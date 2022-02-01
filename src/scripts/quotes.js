@@ -52,7 +52,7 @@ module.exports = class extends Events {
 				});
 
 				debug('Finished fetching quotes.');
-				this.emit('quotes');
+				this.emit('quotes', this.quotes);
 
 				resolve();
 			})
