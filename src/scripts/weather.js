@@ -13,7 +13,6 @@ class Weather {
 
 
 		this.weather = {'REGN':1.0, 'MOLN':1.0, 'SNÖ':1.0, 'VIND':1.0, 'SOL':1.0};
-		this.debug = debug;
 
 		this.subscribe();
 	};
@@ -82,7 +81,7 @@ class Weather {
 		var Request = require('yow/request');
 
 		return new Promise((resolve, reject) => {
-			this.debug('Fetching weather...');
+			debug('Fetching weather...');
 			var api = new Request('https://api.openweathermap.org');
 
 			var query = {};
@@ -92,7 +91,7 @@ class Weather {
 	
 			api.get('/data/2.5/weather', {query:query}).then((response) => {
 				this.weather = this.translateWeather(response.body);
-				this.debug('Current weather is', this.weather);
+				debug('Current weather is', this.weather);
 				resolve(this.weather);
 			})
 			.catch((error) => {
@@ -108,7 +107,7 @@ class Weather {
 			this.fetchWeather().then(() => {
 			})
 			.catch((error) => {
-				this.debug('Failed to fetch weather.');
+				debug('Failed to fetch weather.');
 				console.error(error);
 			});
 		};
