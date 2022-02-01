@@ -82,6 +82,7 @@ class Weather {
 		var Request = require('yow/request');
 
 		return new Promise((resolve, reject) => {
+			debug('Fetching weather...');
 			var api = new Request('https://api.openweathermap.org');
 
 			var query = {};
