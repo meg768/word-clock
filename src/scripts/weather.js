@@ -112,7 +112,7 @@ class Weather {
 			});
 		};
 
-		schedule.scheduleJob({second:0}, fetch);
+		schedule.scheduleJob({minute:[0, 30]}, fetch);
 		fetch();
 	}
 
