@@ -8,8 +8,8 @@ class Weather {
 
 	constructor(options = {}) {
 
-		if (process.env.OPENWEATHERMAP_LOCATION == undefined || process.env.OPENWEATHERMAP_API_KEY == undefined)
-			throw new Error('You need to specify both weather location and API key.');
+		if (process.env.OPENWEATHERMAP_LAT == undefined || process.env.OPENWEATHERMAP_LAT == undefined || process.env.OPENWEATHERMAP_API_KEY == undefined)
+			throw new Error('You need to specify both weather location (lat/lon) and API key.');
 
 
 		this.weather = {'REGN':1.0, 'MOLN':1.0, 'SNÖ':1.0, 'VIND':1.0, 'SOL':1.0};
@@ -86,10 +86,11 @@ class Weather {
 			var api = new Request('https://api.openweathermap.org');
 
 			var query = {};
-			query.q = process.env.OPENWEATHERMAP_LOCATION;
+			query.lat = process.env.OPENWEATHERMAP_LAT;
+			query.lon = process.env.OPENWEATHERMAP_LON;
 			query.appid = process.env.OPENWEATHERMAP_API_KEY;
 	
-			api.get('/data/2.5/weather', {query:query, debug:this.debug}).then((response) => {
+			api.get('/data/2.5/weather', {query:query}).then((response) => {
 				this.weather = this.translateWeather(response.body);
 				this.debug('Current weather is', this.weather);
 				resolve(this.weather);
