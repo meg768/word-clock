@@ -16,8 +16,6 @@ module.exports = class extends Events {
 
 	subscribe(symbols) {
 
-		debug('Subscribing quotes for symbols', symbols.join(' '));
-
 		var fetch = () => {
 			this.fetchQuotes(symbols).then((quotes) => {
 			})
@@ -59,6 +57,7 @@ module.exports = class extends Events {
 				resolve();
 			})
 			.catch((error) => {
+				debug('Failed to fetch quotes.');
 				reject(error);
 			});
 	
