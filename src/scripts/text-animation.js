@@ -67,7 +67,7 @@ module.exports = class extends Animation {
             pixels.fill(0);
             pixels.render({transition:'fade', duration:100});
             pixels.render({transition:'fade', duration:100});
-    }
+		}
 
 
     }

@@ -17,9 +17,8 @@ var Module = new function() {
 
 	function run(argv) {
 		var Quotes = require('../scripts/quotes.js');
-		var quotes = new Quotes();
 		var symbols = ['^OMX', '^IXIC', '^GDAXI'];
-		quotes.subscribe(symbols);
+		var quotes = new Quotes(symbols);
 
 		quotes.on('quotes', (quotes) => {
 			console.log(quotes);
