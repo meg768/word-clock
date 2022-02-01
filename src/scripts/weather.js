@@ -82,7 +82,7 @@ class Weather {
 		var Request = require('yow/request');
 
 		return new Promise((resolve, reject) => {
-			debug('Fetching weather...');
+			this.debug('Fetching weather...');
 			var api = new Request('https://api.openweathermap.org');
 
 			var query = {};
@@ -95,6 +95,7 @@ class Weather {
 				resolve(this.weather);
 			})
 			.catch((error) => {
+				this.debug('Failed to fetch weather.');
 				reject(error);
 			})	
 		});
