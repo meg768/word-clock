@@ -104,9 +104,16 @@ class Weather {
 	subscribe() {
 		var schedule = require('node-schedule');
 
-		//schedule.scheduleJob({minute:[5, 20, 35, 50]}, this.fetchWeather);
-		schedule.scheduleJob({second:0}, this.fetchWeather.bind(this));
-		this.fetchWeather();
+		var fetch = () => {
+			this.fetchWeather().then(() => {
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+		};
+
+		schedule.scheduleJob({second:0}, fetch);
+		fetch();
 	}
 
 
