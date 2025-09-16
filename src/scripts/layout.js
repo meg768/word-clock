@@ -1,6 +1,6 @@
 
-var isArray  = require('yow/is').isArray;
-var isString = require('yow/is').isString;
+var isArray  = require('yow/isArray');
+var isString = require('yow/isString');
 var debug = require('./debug.js');
 
 var Module = module.exports = function() {
