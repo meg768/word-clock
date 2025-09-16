@@ -1,5 +1,5 @@
 
-var isArray   = require('yow/is').isArray;
+var isArray   = require('yow/isArray');
 var sprintf   = require('yow/sprintf');
 var Color     = require('color');
 var random    = require('yow/random');
