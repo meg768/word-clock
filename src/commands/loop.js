@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var Button = require('pigpio-button');
+var Button = require('../scripts/button.js');
 
 var Neopixels = require('../scripts/neopixels.js');
 var AnimationQueue = require('rpi-animations').Queue;
