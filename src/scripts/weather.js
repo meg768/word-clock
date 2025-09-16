@@ -1,5 +1,5 @@
 var schedule = require('node-schedule');
-var isArray = require('yow/is').isArray;
+var isArray = require('yow/isArray');
 var sprintf = require('yow/sprintf');
 var debug = require('./debug.js');
 
