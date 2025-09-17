@@ -3,7 +3,7 @@
 Word Clock as of 2025-09-17.
 
 ## Setting up the Pi Zero
-See https://github.com/meg768/installing-new-rpi-from-scratch. Use node version 14.21.3
+See https://github.com/meg768/installing-new-rpi-from-scratch. Use node version 16.20.2
 to make pigpio build correctly.
 
 ### Install essentials and pigpio
@@ -16,6 +16,7 @@ sudo apt-get install -y git build-essential python3 pigpio
 
 ````bash
 sudo N_NODE_MIRROR=https://unofficial-builds.nodejs.org/download/release n 16.20.2
+hash -r
 ````
 
 ### Install a modern npm
@@ -37,12 +38,6 @@ npm install
 sudo node ./word-clock.js clock
 ````
 
-## Notes
-````bash
-sudo N_NODE_MIRROR=https://unofficial-builds.nodejs.org/download/release n 16.20.2
-sudo npm i -g npm@9
-hash -r
-````
 
 ## Links
 - Send files to RPI over Bluetooth - https://www.raspberrypi.org/forums/viewtopic.php?p=963751#p963751
