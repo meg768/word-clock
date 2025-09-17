@@ -6,7 +6,7 @@ Word Clock as of 2025-09-17.
 See https://github.com/meg768/installing-new-rpi-from-scratch. Use node version 14.21.3
 to make pigpio build correctly.
 
-### Install git and pigpio
+### Install essentials and pigpio
 
 ````bash
 sudo apt-get install -y git build-essential python3 pigpio
