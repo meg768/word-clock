@@ -12,6 +12,17 @@ to make pigpio build correctly.
 sudo apt-get install -y git build-essential python3 pigpio
 ````
 
+### Install node version compatible with pigpio
+
+````bash
+sudo N_NODE_MIRROR=https://unofficial-builds.nodejs.org/download/release n 16.20.2
+````
+
+### Install a modern npm
+````bash
+sudo npm i -g npm@9
+````
+
 ### Clone repository
 
 ````bash
