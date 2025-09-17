@@ -9,7 +9,7 @@ to make pigpio build correctly.
 ### Install git and pigpio
 
 ````bash
-sudo apt-get install git-core pigpio
+sudo apt-get install -y git build-essential python3 pigpio
 ````
 
 ### Clone repository
