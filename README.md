@@ -26,7 +26,12 @@ npm install
 sudo node ./word-clock.js clock
 ````
 
-
+## Notes
+````bash
+sudo N_NODE_MIRROR=https://unofficial-builds.nodejs.org/download/release n 16.20.2
+sudo npm i -g npm@9
+hash -r
+````
 
 ## Links
 - Send files to RPI over Bluetooth - https://www.raspberrypi.org/forums/viewtopic.php?p=963751#p963751
