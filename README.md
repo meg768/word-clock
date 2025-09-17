@@ -1,9 +1,10 @@
 # Word Clock
 
-Word Clock as of 2019-08-03.
+Word Clock as of 2025-09-17.
 
 ## Setting up the Pi Zero
-See https://github.com/meg768/installing-new-rpi-from-scratch.
+See https://github.com/meg768/installing-new-rpi-from-scratch. Use node version 14.21.3
+to make pigpio build correctly.
 
 ### Install git and pigpio
 
@@ -22,7 +23,7 @@ git clone https://github.com/meg768/word-clock.git
 ````bash
 cd word-clock
 npm install
-sudo node ./word-clock.js loop
+sudo node ./word-clock.js clock
 ````
 
 
