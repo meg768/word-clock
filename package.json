@@ -27,7 +27,6 @@
     "pigpio": "3.3.1",
     "rpi-animations": "^1.0.8",
     "rpi-neopixels": "^1.0.73",
-    "schedule": "^0.5.0",
     "weather-js": "^2.0.0",
     "yahoo-finance": "^0.3.6",
     "yargs": "^8.0.2",
