@@ -16,7 +16,7 @@ module.exports = class extends WordAnimation {
         var day   = clock.getDay();
 
         time.split(' ').forEach((word) => {
-            //words.push({word:word, color:color});
+            words.push({word:word, color:color});
         });
 
         // Add the day of the week
