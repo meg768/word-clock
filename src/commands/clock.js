@@ -31,7 +31,7 @@ class SpeedAnimation extends WordAnimation {
             words.push({word:word, color:color});
         });
 
-		words.push({ word: day, color: color });
+		words.push({ word: "LÖ", color: color });
 
         return words;
     }
