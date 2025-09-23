@@ -30,6 +30,8 @@ class SpeedAnimation extends WordAnimation {
             words.push({word:word, color:color});
         });
 
+		words.push({ word: clock.getDay(), color: color });
+
         return words;
     }
 
