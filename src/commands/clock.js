@@ -28,7 +28,7 @@ class SpeedAnimation extends WordAnimation {
 		var day   = clock.getDay();
 
         time.split(' ').forEach((word) => {
-            words.push({word:word, color:color});
+            words.push({word:word, color:'red'});
         });
 
 		words.push({ word: "LÖ", color: color });
