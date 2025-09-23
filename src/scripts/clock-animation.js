@@ -13,10 +13,14 @@ module.exports = class extends WordAnimation {
         var words = [];
         var color = clock.getColor();
         var time  = clock.getTime();
+        var day   = clock.getDay();
 
         time.split(' ').forEach((word) => {
             words.push({word:word, color:color});
         });
+
+        // Add the day of the week
+        words.push({ word: day, color: color });
 
         return words;
     }
