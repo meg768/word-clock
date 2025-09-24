@@ -25,7 +25,7 @@ var Module = new function() {
 	}
 
 	module.exports.command  = 'weather [options]';
-	module.exports.describe = 'Test Weather Animation';
+	module.exports.describe = 'Weather Animation';
 	module.exports.builder  = defineArgs;
 	module.exports.handler  = run;
 
