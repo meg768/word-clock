@@ -8,7 +8,7 @@ class Weather {
 
 	constructor(options = {}) {
 
-		if (process.env.OPENWEATHERMAP_LAT == undefined || process.env.OPENWEATHERMAP_LAT == undefined || process.env.OPENWEATHERMAP_API_KEY == undefined)
+		if (process.env.OPENWEATHERMAP_LAT == undefined || process.env.OPENWEATHERMAP_LON == undefined || process.env.OPENWEATHERMAP_API_KEY == undefined)
 			throw new Error('You need to specify both weather location (lat/lon) and API key.');
 
 
@@ -75,8 +75,17 @@ class Weather {
 
 		return state;
 	};
+/*
+	async getLocation() {
+		var Request = require('yow/request');
+		var api = new Request('http://ip-api.com');
+		
+		var json = await api.get('/json');
+		console.log(json);
+	}
+*/
 
-	fetchWeather() {
+fetchWeather() {
 		var Request = require('yow/request');
 
 		return new Promise((resolve, reject) => {
