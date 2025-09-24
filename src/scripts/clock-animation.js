@@ -24,7 +24,7 @@ module.exports = class extends WordAnimation {
 
         // Add the day of the week
 
-        words.push({ word: day, color: color });
+        words.push({ word: day, color: 'silver' });
 
         return words;
     }
