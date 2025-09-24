@@ -20,7 +20,7 @@ module.exports = class extends WordAnimation {
         });
 
         // Hack - make the day of week light the last row
-        words.push({ word: 'NIKK', color: 'black' });
+        words.push({ word: 'NIKK', color: 'red' });
 
         // Add the day of the week
 
