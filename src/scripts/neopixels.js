@@ -77,6 +77,7 @@ class Neopixels extends Pixels {
 function configure() {
 	function cleanup() {
 		debug('Cleaning up...');
+		ws281x.reset();
 		ws281x.finalize();
 		process.exit();
 	}
