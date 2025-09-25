@@ -50,7 +50,7 @@ class Neopixels extends Pixels {
 					}
 
 					channel.array.set(tmp);
-					ws281x.render(tmp);
+					ws281x.render();
 				}
 
 				var now = new Date();
