@@ -1,5 +1,4 @@
 var Neopixels = require('rpi-neopixels');
-var ws281x = require('rpi-ws281x-native');
 
 
 let config = {
@@ -12,7 +11,7 @@ let config = {
 	gpio: 18,
 	invert: false,
 	brightness: 255,
-	stripType: 'ws2811-grb' // ws281x.stripType.WS2812
+	stripType: 'ws2811-grb'
 };
 
 module.exports = new Neopixels(config);
