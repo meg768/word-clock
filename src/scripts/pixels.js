@@ -104,7 +104,7 @@ module.exports = class Pixels {
 		this.pixels[this.getIndex(x, y)] = this.HSL(h, s, l);
 	}
 
-	static gammaCorrect(pixels, gamma = 2.2) {
+	static gammaCorrect(pixels, gamma = 4) {
 		if (!(pixels instanceof Uint32Array)) {
 			throw new Error('pixels must be a Uint32Array of 0xRRGGBB values');
 		}
