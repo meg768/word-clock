@@ -2,7 +2,6 @@ var sprintf = require('yow/sprintf');
 var Pixels = require('./pixels.js');
 var ws281x = require('rpi-ws281x-native');
 
-var debug = function () {};
 
 class Neopixels extends Pixels {
 	constructor(options) {
