@@ -17,7 +17,7 @@ var Module = new function() {
 
 
 	function run(argv) {
-		var animation = new Animation({pixels: new Neopixels(), duration:-1, priority:'!', debug:false});
+		var animation = new Animation({pixels: Neopixels, duration:-1, priority:'!', debug:false});
 		return animation.run();
 	}
 
