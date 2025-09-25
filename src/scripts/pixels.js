@@ -114,16 +114,17 @@ module.exports = class Pixels {
 		}
 
 		const out = new Uint32Array(pixels.length);
-		const g = gamma;
+
 		for (let i = 0; i < pixels.length; i++) {
 			const rgb = pixels[i] >>> 0; // 0xRRGGBB
-			const r = (rgb >>> 16) & 0xff;
-			const gr = (rgb >>> 8) & 0xff;
-			const b = (rgb >>> 0) & 0xff;
+			
+			const r1 = (rgb >>> 16) & 0xff;
+			const g1 = (rgb >>> 8) & 0xff;
+			const b1 = (rgb >>> 0) & 0xff;
 
-			const r2 = Math.min(255, Math.round(Math.pow(r / 255, g) * 255));
-			const g2 = Math.min(255, Math.round(Math.pow(gr / 255, g) * 255));
-			const b2 = Math.min(255, Math.round(Math.pow(b / 255, g) * 255));
+			const r2 = Math.min(255, Math.round(Math.pow(r1 / 255, gamma) * 255));
+			const g2 = Math.min(255, Math.round(Math.pow(g1 / 255, gamma) * 255));
+			const b2 = Math.min(255, Math.round(Math.pow(b1 / 255, gamma) * 255));
 
 			out[i] = ((r2 << 16) | (g2 << 8) | b2) >>> 0;
 		}

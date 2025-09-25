@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 
-var Neopixels = require('../scripts/neopixels.js');
 var debug = require('../scripts/debug.js');
 
 
@@ -40,7 +39,7 @@ var Module = new function() {
 	function run(argv) {
 
 
-		var pixels = new Neopixels();
+		var pixels = require('../scripts/neopixels.js');
 		var offset = 0;
 
         setInterval(() => {
