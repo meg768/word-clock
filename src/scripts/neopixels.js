@@ -23,8 +23,6 @@ const gammaCorrection = new Uint8Array([
 	142, 145, 148, 151, 154, 157, 160, 164, 167, 170, 173, 177, 180, 184, 187, 191, 194, 198, 202, 205, 209, 213, 216, 220, 224, 228, 232, 236, 240, 244, 248, 252, 255
 ]);
 
-
-
 var debug = function () {};
 
 class Neopixels extends Pixels {
@@ -40,6 +38,7 @@ class Neopixels extends Pixels {
 
 	render(options) {
 		var tmp = this.tmp;
+		var pixels = this.pixels;
 
 		if (options && options.transition == 'fade') {
 			var duration = options.duration != undefined ? options.duration : 100;
@@ -69,7 +68,7 @@ class Neopixels extends Pixels {
 						tmp[i] = (red << 16) | (green << 8) | blue;
 					}
 
-					channel.array.set(tmp);
+					channel.array.set(Neopixels.gammaCorrect(tmp));
 					ws281x.render();
 				}
 
@@ -91,7 +90,7 @@ class Neopixels extends Pixels {
 		this.content.set(this.pixels);
 
 		// Display the current buffer
-		channel.array.set(this.pixels);
+		channel.array.set(Neopixels.gammaCorrect(this.pixels));
 		ws281x.render();
 	}
 }
