@@ -6,7 +6,6 @@ var ws281x = require('rpi-ws281x-native');
 var channel = null;
 
 var debug = function () {};
-var config = {};
 
 class Neopixels extends Pixels {
 	constructor() {
@@ -14,6 +13,7 @@ class Neopixels extends Pixels {
 
 		this.length = this.width * this.height;
 		this.content = new Uint32Array(this.length);
+		this.pixels = channel.array;
 		this.speed = 0.5;
 	}
 
@@ -21,7 +21,6 @@ class Neopixels extends Pixels {
 
 		console.log('Neopixels.render', options);
 		if (options && options.transition == 'fade') {
-			var tmp = channel.array;
 			var duration = options.duration != undefined ? options.duration : 100;
 
 			if (duration > 0) {
@@ -46,7 +45,7 @@ class Neopixels extends Pixels {
 						var green = g1 + (step * (g2 - g1)) / numSteps;
 						var blue = b1 + (step * (b2 - b1)) / numSteps;
 
-						tmp[i] = (red << 16) | (green << 8) | blue;
+						this.pixels[i] = (red << 16) | (green << 8) | blue;
 					}
 
 					ws281x.render();
@@ -67,7 +66,7 @@ class Neopixels extends Pixels {
 		}
 
 		// Save rgb buffer
-		this.content.set(channel.array);
+		this.content.set(this.pixels);
 
 		// Display the current buffer
 		ws281x.render();
