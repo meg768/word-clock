@@ -5,7 +5,8 @@ var Pixels = require('./pixels.js');
 var ws281x = require('rpi-ws281x-native');
 var channel = null;
 
-
+const DISPLAY_WIDTH = 13;
+const DISPLAY_HEIGHT = 13;
 
 var debug = function () {};
 
@@ -96,7 +97,7 @@ function configure() {
 		stripType: ws281x.stripType.WS2812
 	};
 
-	channel = ws281x(169, options);
+	channel = ws281x(DISPLAY_HEIGHT * DISPLAY_WIDTH, options);
 
 	process.on('SIGUSR1', cleanup);
 	process.on('SIGUSR2', cleanup);
@@ -106,7 +107,7 @@ function configure() {
 
 configure();
 
-module.exports = new Neopixels({width:13, height:13, map:'serpentine'});
+module.exports = new Neopixels({ width: DISPLAY_WIDTH, height: DISPLAY_HEIGHT, map: 'serpentine' });
 
 /*
 
