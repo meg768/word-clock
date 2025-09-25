@@ -17,7 +17,7 @@ module.exports = class Pixels {
 			this.map = options.map;
 		}
 
-		if (options.map === 'serpentine' || true) {
+		if (options.map === 'serpentine') {
 			let map = new Uint32Array(this.width * this.height);
 
 			for (var i = 0; i < map.length; i++) {

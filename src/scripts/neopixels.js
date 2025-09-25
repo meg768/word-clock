@@ -10,8 +10,8 @@ var channel = null;
 var debug = function () {};
 
 class Neopixels extends Pixels {
-	constructor() {
-		super({ width: 13, height: 13 });
+	constructor(options) {
+		super(options);
 
 		this.length = this.width * this.height;
 		this.content = new Uint32Array(this.length);
@@ -106,7 +106,7 @@ function configure() {
 
 configure();
 
-module.exports = Neopixels;
+module.exports = new Neopixels({width:13, height:13, map:'serpentine'});
 
 /*
 
