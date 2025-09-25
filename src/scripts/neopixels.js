@@ -73,23 +73,6 @@ class Neopixels extends Pixels {
 	}
 }
 
-Neopixels.configure = function (options) {
-	var { width, height } = options;
-
-	if (options.debug) {
-		debug = function () {
-			console.log.apply(this, arguments);
-		};
-
-		if (isFunction(options.debug)) {
-			debug = options.debug;
-		}
-	}
-
-	if (width == undefined || height == undefined) throw new Error('Both width and height must be specified.');
-
-	ws281x.configure((config = options));
-};
 
 function configure() {
 	function cleanup() {
