@@ -12,7 +12,7 @@ let config = {
 	gpio: 18,
 	invert: false,
 	brightness: 255,
-	stripType: ws281x.stripType.WS2812
+	stripType: 'ws2811-rgb' // ws281x.stripType.WS2812
 };
 
 module.exports = new Neopixels(config);
