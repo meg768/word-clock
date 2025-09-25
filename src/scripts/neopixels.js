@@ -19,6 +19,7 @@ class Neopixels extends Pixels {
 
 	render(options) {
 
+		console.log('.');
 		if (options && options.transition == 'fade') {
 			var duration = options.duration != undefined ? options.duration : 100;
 
