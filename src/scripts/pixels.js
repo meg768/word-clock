@@ -109,15 +109,14 @@ module.exports = class Pixels {
 			throw new Error('pixels must be a Uint32Array of 0xRRGGBB values');
 		}
 		if (typeof gamma !== 'number' || gamma <= 0) {
-			// ingen korrigering: returnera kopia
 			return pixels;
 		}
 
-		const out = new Uint32Array(pixels.length);
+		const output = new Uint32Array(pixels.length);
 
 		for (let i = 0; i < pixels.length; i++) {
 			const rgb = pixels[i] >>> 0; // 0xRRGGBB
-			
+
 			const r1 = (rgb >>> 16) & 0xff;
 			const g1 = (rgb >>> 8) & 0xff;
 			const b1 = (rgb >>> 0) & 0xff;
@@ -126,11 +125,11 @@ module.exports = class Pixels {
 			const g2 = Math.min(255, Math.round(Math.pow(g1 / 255, gamma) * 255));
 			const b2 = Math.min(255, Math.round(Math.pow(b1 / 255, gamma) * 255));
 
-			out[i] = ((r2 << 16) | (g2 << 8) | b2) >>> 0;
+			output[i] = ((r2 << 16) | (g2 << 8) | b2) >>> 0;
 		}
-		return out;
-	}
 
+		return output;
+	}
 
 	render(options) {}
 };
