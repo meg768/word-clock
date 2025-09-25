@@ -2,10 +2,6 @@ var sprintf = require('yow/sprintf');
 var Pixels = require('./pixels.js');
 var ws281x = require('rpi-ws281x-native');
 
-var channel = null;
-
-const DISPLAY_WIDTH = 13;
-const DISPLAY_HEIGHT = 13;
 
 var debug = function () {};
 
@@ -13,10 +9,25 @@ class Neopixels extends Pixels {
 	constructor(options) {
 		super(options);
 
+		function cleanup() {
+			ws281x.reset();
+			ws281x.finalize();
+			process.exit();
+		}
+
+		this.channel = ws281x(this.width * this.height, options);
+
+		process.on('SIGUSR1', cleanup);
+		process.on('SIGUSR2', cleanup);
+		process.on('SIGINT', cleanup);
+		process.on('SIGTERM', cleanup);
+
 		this.content = new Uint32Array(this.width * this.height);
 		this.tmp = new Uint32Array(this.width * this.height);
 		this.speed = 0.5;
+		this.debug = console.log;
 	}
+
 
 	render(options) {
 		var tmp = this.tmp;
@@ -77,34 +88,20 @@ class Neopixels extends Pixels {
 	}
 }
 
-function configure() {
-	function cleanup() {
-		debug('Cleaning up...');
-		ws281x.reset();
-		ws281x.finalize();
-		process.exit();
-	}
 
-	const options = {
-		dma: 10,
-		freq: 800000,
-		gpio: 18,
-		invert: false,
-		brightness: 255,
-		stripType: ws281x.stripType.WS2812
-	};
+let config = {
+	width:13,
+	height:13,
+	map:'serpentine',
+	dma: 10,
+	freq: 800000,
+	gpio: 18,
+	invert: false,
+	brightness: 255,
+	stripType: ws281x.stripType.WS2812
+};
 
-	channel = ws281x(DISPLAY_HEIGHT * DISPLAY_WIDTH, options);
-
-	process.on('SIGUSR1', cleanup);
-	process.on('SIGUSR2', cleanup);
-	process.on('SIGINT', cleanup);
-	process.on('SIGTERM', cleanup);
-}
-
-configure();
-
-module.exports = new Neopixels({ width: DISPLAY_WIDTH, height: DISPLAY_HEIGHT, map: 'serpentine' });
+module.exports = new Neopixels(config);
 
 /*
 
