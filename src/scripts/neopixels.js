@@ -67,13 +67,13 @@ class Neopixels extends Pixels {
 				var now = new Date();
 				var time = now - then;
 
-				debug(sprintf('Transition "%s %d" took %d milliseconds to run.', options.transition, duration, time));
+				this.debug(sprintf('Transition "%s %d" took %d milliseconds to run.', options.transition, duration, time));
 
 				// Adjust speed factor
 				if (options.speed == undefined) {
 					var speed = (this.speed * duration) / time;
 					this.speed = (this.speed + speed) / 2;
-					debug(sprintf('Adjusting speed factor to %02f', this.speed));
+					this.debug(sprintf('Adjusting speed factor to %02f', this.speed));
 				}
 			}
 		}
