@@ -30,7 +30,7 @@ class Neopixels extends Pixels {
 
 
 	render(options) {
-		this.debug('.');
+		this.debug('.'	);
 		var tmp = this.tmp;
 		var pixels = this.pixels;
 
@@ -62,7 +62,7 @@ class Neopixels extends Pixels {
 						tmp[i] = (red << 16) | (green << 8) | blue;
 					}
 
-					channel.array.set(Neopixels.gammaCorrect(tmp));
+					this.channel.array.set(Neopixels.gammaCorrect(tmp));
 					ws281x.render();
 				}
 
@@ -84,7 +84,7 @@ class Neopixels extends Pixels {
 		this.content.set(this.pixels);
 
 		// Display the current buffer
-		channel.array.set(Neopixels.gammaCorrect(this.pixels));
+		this.channel.array.set(Neopixels.gammaCorrect(this.pixels));
 		ws281x.render();
 	}
 }
