@@ -93,8 +93,7 @@ function configure() {
 		gpio: 18,
 		invert: false,
 		brightness: 255,
-		stripType: ws281x.stripType.WS2812,
-		gamma: gammaCorrection
+		stripType: ws281x.stripType.WS2812
 	};
 
 	channel = ws281x(169, options);
