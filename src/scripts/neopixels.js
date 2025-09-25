@@ -1,4 +1,5 @@
 var Neopixels = require('rpi-neopixels');
+var ws281x = require('rpi-ws281x-native');
 
 
 let config = {
