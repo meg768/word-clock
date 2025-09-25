@@ -30,6 +30,7 @@ class Neopixels extends Pixels {
 
 
 	render(options) {
+		this.debug('.');
 		var tmp = this.tmp;
 		var pixels = this.pixels;
 
