@@ -1,5 +1,6 @@
 var sprintf = require('yow/sprintf');
 var Pixels = require('./pixels.js');
+var Pixels = require('rpi-pixels');
 var ws281x = require('rpi-ws281x-native');
 
 
