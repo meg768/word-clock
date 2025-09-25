@@ -2,7 +2,6 @@ var sprintf = require('yow/sprintf');
 var Pixels = require('./pixels.js');
 var ws281x = require('rpi-ws281x-native');
 
-
 var debug = function () {};
 
 class Neopixels extends Pixels {
@@ -16,23 +15,22 @@ class Neopixels extends Pixels {
 		}
 
 		this.channel = ws281x(this.width * this.height, options);
+		this.content = new Uint32Array(this.width * this.height);
+		this.tmp = new Uint32Array(this.width * this.height);
+		this.speed = 0.5;
+		this.debug = (typeof options.debug == 'function') ? options.debug : (options.debug ? console.log : function () {});
 
 		process.on('SIGUSR1', cleanup);
 		process.on('SIGUSR2', cleanup);
 		process.on('SIGINT', cleanup);
 		process.on('SIGTERM', cleanup);
-
-		this.content = new Uint32Array(this.width * this.height);
-		this.tmp = new Uint32Array(this.width * this.height);
-		this.speed = 0.5;
-		this.debug = console.log;
 	}
 
-
 	render(options) {
-		this.debug('.'	);
 		var tmp = this.tmp;
 		var pixels = this.pixels;
+
+		this.debug('XXX Render', options);
 
 		if (options && options.transition == 'fade') {
 			var duration = options.duration != undefined ? options.duration : 100;
@@ -89,11 +87,11 @@ class Neopixels extends Pixels {
 	}
 }
 
-
 let config = {
-	width:13,
-	height:13,
-	map:'serpentine',
+	debug: true,
+	width: 13,
+	height: 13,
+	map: 'serpentine',
 	dma: 10,
 	freq: 800000,
 	gpio: 18,
