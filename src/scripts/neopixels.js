@@ -1,8 +1,7 @@
 var sprintf = require('yow/sprintf');
-var isFunction = require('yow/isFunction');
 var Pixels = require('./pixels.js');
-
 var ws281x = require('rpi-ws281x-native');
+
 var channel = null;
 
 const DISPLAY_WIDTH = 13;
@@ -14,10 +13,8 @@ class Neopixels extends Pixels {
 	constructor(options) {
 		super(options);
 
-		this.length = this.width * this.height;
-		this.content = new Uint32Array(this.length);
-		this.tmp = new Uint32Array(this.length);
-
+		this.content = new Uint32Array(this.width * this.height);
+		this.tmp = new Uint32Array(this.width * this.height);
 		this.speed = 0.5;
 	}
 
@@ -31,7 +28,7 @@ class Neopixels extends Pixels {
 			if (duration > 0) {
 				var content = this.content;
 				var pixels = this.pixels;
-				var length = this.length;
+				var length = this.content.length;
 
 				var numSteps = duration * this.speed;
 				var then = new Date();
