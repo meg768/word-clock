@@ -14,7 +14,7 @@ class Neopixels extends Pixels {
 
 		this.length = this.width * this.height;
 		this.content = new Uint32Array(this.length);
-		this.speed = options.speed ? options.speed : 0.5;
+		this.speed = 0.5;
 	}
 
 	render(options) {
