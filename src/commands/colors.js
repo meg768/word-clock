@@ -45,6 +45,7 @@ var Module = new function() {
 
         setInterval(() => {
 
+			console.log('Cycle colors');
 			pixels.clear();
             pixels.fill('red');
             pixels.render({transition: 'fade', duration: 100});
