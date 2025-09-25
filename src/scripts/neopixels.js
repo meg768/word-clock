@@ -1,6 +1,6 @@
-var Pixels = require('rpi-pixels');
 var sprintf = require('yow/sprintf');
 var isFunction = require('yow/isFunction');
+var Pixels = require('./pixels.js');
 
 var ws281x = require('rpi-ws281x-native');
 var channel = null;
