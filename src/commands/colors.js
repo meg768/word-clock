@@ -48,9 +48,9 @@ var Module = new function() {
 			console.log('Cycle colors');
 			pixels.clear();
             pixels.fill('red');
-            pixels.render();
+            pixels.render({transition: 'fade', duration: 100});
             pixels.fill('blue');
-			pixels.render();
+			pixels.render({ transition: 'fade', duration: 100 });
     
     
         }, 1000);

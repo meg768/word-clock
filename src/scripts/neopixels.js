@@ -13,13 +13,14 @@ class Neopixels extends Pixels {
 
 		this.length = this.width * this.height;
 		this.content = new Uint32Array(this.length);
-		this.pixels = channel.array;
+		this.tmp = new Uint32Array(this.length);
+
 		this.speed = 0.5;
 	}
 
 	render(options) {
+		var tmp = this.tmp;
 
-		console.log('.');
 		if (options && options.transition == 'fade') {
 			var duration = options.duration != undefined ? options.duration : 100;
 
@@ -45,10 +46,11 @@ class Neopixels extends Pixels {
 						var green = g1 + (step * (g2 - g1)) / numSteps;
 						var blue = b1 + (step * (b2 - b1)) / numSteps;
 
-						this.pixels[i] = (red << 16) | (green << 8) | blue;
+						tmp[i] = (red << 16) | (green << 8) | blue;
 					}
 
-					ws281x.render();
+					channel.array.set(tmp);
+					ws281x.render(tmp);
 				}
 
 				var now = new Date();
@@ -69,10 +71,10 @@ class Neopixels extends Pixels {
 		this.content.set(this.pixels);
 
 		// Display the current buffer
+		channel.array.set(this.pixels);
 		ws281x.render();
 	}
 }
-
 
 function configure() {
 	function cleanup() {
