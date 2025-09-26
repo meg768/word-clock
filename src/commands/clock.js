@@ -18,7 +18,7 @@ var Module = new (function () {
 	function run(argv) {
 		var animation = null;
 
-		animation = new ClockAnimation({ pixels: Neopixels, duration: -1, priority: '!', debug: debug });
+		animation = new ClockAnimation({ pixels: new Neopixels(), duration: -1, priority: '!', debug: debug });
 
 		return animation.run();
 	}
