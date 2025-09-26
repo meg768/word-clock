@@ -2,15 +2,6 @@ var Neopixels = require('rpi-neopixels');
 var debug = require('./debug.js');
 
 function configure() {
-	function cleanup() {
-		debug('Cleaning up...');
-		var pixels = new Neopixels();
-
-		pixels.fill('black');
-		pixels.render();
-
-		process.exit();
-	}
 
 	var stripType = 'grb';
 	var width = 13;
@@ -20,10 +11,6 @@ function configure() {
 	console.log('Configuring Neopixels', {map: map, width: width, height: height, stripType: stripType});
 	Neopixels.configure({ debug: debug, map: map, width: width, height: height, stripType: stripType });
 
-	process.on('SIGUSR1', cleanup);
-	process.on('SIGUSR2', cleanup);
-	process.on('SIGINT', cleanup);
-	process.on('SIGTERM', cleanup);
 }
 
 configure();
