@@ -38,8 +38,8 @@ var Module = new function() {
 
 	function run(argv) {
 
-
-		var pixels = require('../scripts/neopixels.js');
+		var Neopixels = require('../scripts/neopixels.js');
+		var pixels = new Neopixels();
 		var offset = 0;
 
         setInterval(() => {
