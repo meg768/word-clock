@@ -1,4 +1,5 @@
-var debug = require('./debug.js');
+// weather.js
+const debug = require('./debug.js');
 
 class Weather {
 	constructor(options = {}) {
@@ -8,31 +9,26 @@ class Weather {
 	}
 
 	subscribe() {
-		var schedule = require('node-schedule');
+		const schedule = require('node-schedule');
 
-		schedule.scheduleJob({ seconds: [0, 30] }, this.fetchWeather.bind(this));
-		this.fetchWeather();
+		// Rek. intervall: var 5:e minut (snällt mot MET)
+		schedule.scheduleJob('*/5 * * * *', this.fetchWeather.bind(this));
+
+		// Försök direkt vid start
+		this.fetchWeather().catch(err => debug('Initial fetchWeather failed:', err));
 	}
 
 	async getLocation() {
 		try {
-			if (this.location) {
-				return this.location;
-			}
+			if (this.location) return this.location;
 
-			const res = await fetch('http://ip-api.com/json');
-
-			if (!res.ok) {
-				throw new Error(`ip-api HTTP ${res.status} ${res.statusText}`);
-			}
+			const res = await fetch('http://ip-api.com/json?fields=status,message,lat,lon,city,country');
+			if (!res.ok) throw new Error(`ip-api HTTP ${res.status} ${res.statusText}`);
 
 			const json = await res.json();
-
 			debug('Weather location is', json.city);
 
-			if (json.status !== 'success') {
-				throw new Error(`ip-api error: ${json.message || 'unknown error'}`);
-			}
+			if (json.status !== 'success') throw new Error(`ip-api error: ${json.message || 'unknown error'}`);
 
 			return (this.location = json);
 		} catch (err) {
@@ -41,63 +37,86 @@ class Weather {
 		}
 	}
 
+	// Beräkna faktorer (0–1) från MET "now"-objekt
+	_computeFactors(now) {
+		const details = now?.data?.instant?.details || {};
+		const precip1h = now?.data?.next_1_hours?.details?.precipitation_amount;
+		const precip6h = now?.data?.next_6_hours?.details?.precipitation_amount;
+		const symbol = now?.data?.next_1_hours?.summary?.symbol_code || now?.data?.next_6_hours?.summary?.symbol_code || '';
+
+		// mm/h: använd 1h om finns, annars dela 6h med 6
+		const rainMm = Number.isFinite(precip1h) ? precip1h : Number.isFinite(precip6h) ? precip6h / 6 : 0;
+
+		const cloudsPct = details.cloud_area_fraction ?? 0; // 0–100
+		const windMs = details.wind_speed ?? 0; // m/s
+
+		const clouds = Math.min(Math.max(cloudsPct / 100, 0), 1);
+		const wind = Math.min(Math.max(windMs / 20, 0), 1); // 20 m/s ~ 1.0
+
+		let rain = 0;
+		let snow = 0;
+
+		const s = String(symbol);
+		const has = x => s.includes(x);
+
+		// Regnindikatorer
+		if (has('rain') || has('drizzle')) {
+			rain = Math.min(1, (rainMm || 0) / 2); // ~2 mm/h ⇒ 1.0
+		}
+
+		// Snö/sleet
+		if (has('snow') || has('snowshowers')) {
+			snow = 1;
+		} else if (has('sleet') || has('sleetshowers') || has('snowrain')) {
+			// blandning – ge minst 0.5, skala upp med intensitet
+			snow = Math.min(1, 0.5 + (rainMm || 0) / 4);
+		}
+
+		const clear = Math.max(0, 1 - Math.max(rain, snow, clouds));
+
+		return { rain, snow, clouds, wind, clear };
+	}
+
 	async fetchWeather() {
-		let location = await this.getLocation();
-
-		if (!location || typeof location.lat !== 'number' || typeof location.lon !== 'number') {
-			throw new Error('Invalid location object: behöver lat och lon');
-		}
-
-		const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${location.lat}&lon=${location.lon}`;
-
-		const res = await fetch(url, {
-			headers: {
-				'User-Agent': 'WordClock/1.0 (magnus@example.com)'
+		try {
+			const location = await this.getLocation();
+			if (!location || typeof location.lat !== 'number' || typeof location.lon !== 'number') {
+				throw new Error('Invalid location object: behöver lat och lon');
 			}
-		});
 
-		if (!res.ok) {
-			throw new Error(`MET Norway HTTP ${res.status} ${res.statusText}`);
+			const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${location.lat}&lon=${location.lon}`;
+
+			const opts = {
+				headers: { 'User-Agent': 'WordClock/1.0 (magnus@example.com)' }
+			};
+
+			// Timeout om tillgänglig (Node 18+)
+			if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
+				opts.signal = AbortSignal.timeout(7000);
+			}
+
+			const res = await fetch(url, opts);
+			if (!res.ok) throw new Error(`MET Norway HTTP ${res.status} ${res.statusText}`);
+
+			const data = await res.json();
+			const now = data?.properties?.timeseries?.[0];
+			if (!now) throw new Error('MET: saknar timeseries[0]');
+
+			const factors = this._computeFactors(now);
+
+			// Uppdatera svenska nycklar
+			this.weather.REGN = factors.rain;
+			this.weather.MOLN = factors.clouds;
+			this.weather.SNÖ = factors.snow;
+			this.weather.VIND = factors.wind;
+			this.weather.SOL = factors.clear;
+
+			debug('Updated weather:', JSON.stringify(this.weather));
+			return factors;
+		} catch (err) {
+			debug('fetchWeather failed:', err);
+			return null; // behåll senaste this.weather vid fel
 		}
-
-		const data = await res.json();
-		const now = data.properties.timeseries[0];
-		const details = now.data.instant.details;
-
-		const rainMm = details.precipitation_amount ?? 0;
-		const cloudFrac = details.cloud_area_fraction ?? 0;
-		const wind = details.wind_speed ?? 0;
-
-		const symbol = now.data.next_1_hours?.summary?.symbol_code || now.data.next_6_hours?.summary?.symbol_code || '';
-
-		let factors = {
-			rain: 0,
-			snow: 0,
-			clouds: Math.min(cloudFrac / 100, 1),
-			wind: Math.min(wind / 20, 1),
-			clear: 0
-		};
-
-		if (symbol.includes('rain')) {
-			factors.rain = Math.min(1, rainMm / 2); // 2 mm/h ≈ 100 %
-		}
-		if (symbol.includes('snow')) {
-			factors.snow = 1;
-		}
-
-		// gör clear till "resten"
-		const maxVal = Math.max(factors.rain, factors.snow, factors.clouds);
-		factors.clear = Math.max(0, 1 - maxVal);
-
-		this.weather['MOLN'] = factors.clouds;
-		this.weather['VIND'] = factors.wind;
-		this.weather['REGN'] = factors.rain;
-		this.weather['SNÖ'] = factors.snow;
-		this.weather['SOL'] = factors.clear;
-
-		debug('Updated weather:', JSON.stringify(this.weather));
-
-		return factors;
 	}
 }
 
