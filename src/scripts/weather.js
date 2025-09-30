@@ -10,6 +10,8 @@ class Weather {
 
 		this.weather = { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
 		this.subscribe();
+		this.location = null;
+
 	}
 
 	getSunFactor(response) {
@@ -66,18 +68,11 @@ class Weather {
 
 		return state;
 	}
-	/*
-	async getLocation() {
-		var Request = require('yow/request');
-		var api = new Request('http://ip-api.com');
-		
-		var json = await api.get('/json');
-		console.log(json);
-	}
-*/
 
 	async getLocation() {
 		try {
+			if (this.location) return this.location;
+
 			const res = await fetch('http://ip-api.com/json');
 
 			if (!res.ok) {
@@ -92,7 +87,7 @@ class Weather {
 				throw new Error(`ip-api error: ${json.message || 'unknown error'}`);
 			}
 
-			return { lat: json.lat, lon: json.lon };
+			return this.location = json;
 		} catch (err) {
 			debug('Failed to fetch location:', err);
 			throw err;
