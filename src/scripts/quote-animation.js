@@ -36,7 +36,7 @@ module.exports = class Module extends WordAnimation {
 				var change = Math.max(-2, Math.min(2, quote.change));
 				var hue = quote.change >= 0 ? 240 : 0;
 				var saturation = 100;
-				var luminance = 10; //Math.abs(change) / 2) * 30;
+				var luminance = Math.abs(change) / 2) * 30;
 
 				color = Color.hsl(hue, saturation, luminance);
 			}
