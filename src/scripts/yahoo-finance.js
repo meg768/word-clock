@@ -5,6 +5,6 @@ const YahooFinance = require('yahoo-finance2').default;
 const silent = { debug() {}, info() {}, warn() {}, error() {}, log() {} };
 
 // skapa en instans med egen logger
-const yf = new YahooFinance({ logger: silent });
+const yf = YahooFinance({ logger: silent });
 
 module.exports = yf;
