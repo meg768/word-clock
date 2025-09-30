@@ -44,6 +44,7 @@ module.exports = class extends Events {
 	
 			yahoo.quote(symbols, {modules : ['price']}).then((data) => {
 	
+				console.log('XX________________');
 				console.log(JSON.stringify(data));
 				symbols.forEach((symbol) => {
 					var change = data[symbol.symbol].price.regularMarketChangePercent;
