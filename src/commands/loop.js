@@ -33,7 +33,7 @@ var Module = new (function () {
 		var mode = 'loop';
 		var animationQueue = new AnimationQueue();
 
-		var loopAnimations = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, WeatherAnimation];
+		var loopAnimations = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, WeatherAnimation, MatrixAnimation];
 		var loopDuration = parseFloat(argv.speed) * 1000;
 		var loopIndex = 0;
 
