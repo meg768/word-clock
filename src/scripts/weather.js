@@ -1,77 +1,19 @@
 var schedule = require('node-schedule');
-var isArray = require('yow/isArray');
 var sprintf = require('yow/sprintf');
 var debug = require('./debug.js');
 
 class Weather {
 	constructor(options = {}) {
-		if (process.env.OPENWEATHERMAP_LAT == undefined || process.env.OPENWEATHERMAP_LON == undefined || process.env.OPENWEATHERMAP_API_KEY == undefined)
-			throw new Error('You need to specify both weather location (lat/lon) and API key.');
-
 		this.weather = { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
-		this.subscribe();
 		this.location = null;
-
-	}
-
-	getSunFactor(response) {
-		return 1.0 - this.getCloudFactor(response);
-	}
-
-	getCloudFactor(response) {
-		if (response.clouds && response.clouds.all) {
-			return parseInt(response.clouds.all) / 100;
-		} else {
-			return 0;
-		}
-	}
-
-	getWindFactor(response) {
-		if (response.wind && response.wind.speed) {
-			var maxWindSpeed = 20;
-			var winSpeed = parseFloat(response.wind.speed);
-
-			return Math.min(1.0, winSpeed / maxWindSpeed);
-		} else {
-			return 0;
-		}
-	}
-
-	getRainFactor(response) {
-		var rain = 0;
-
-		if (response.rain) {
-			var rain1h = 0;
-			var rain3h = 0;
-
-			if (response.rain['1h']) {
-				rain1h = parseFloat(response.rain['1h']);
-			}
-
-			if (response.rain['3h']) {
-				rain3h += parseFloat(response.rain['3h']) / 3;
-			}
-
-			rain = (rain3h + rain1h) / 2;
-		}
-
-		return rain;
-	}
-
-	translateWeather(response) {
-		var state = {};
-
-		state['MOLN'] = this.getCloudFactor(response);
-		state['VIND'] = this.getWindFactor(response);
-		state['REGN'] = this.getRainFactor(response);
-		state['SOL'] = this.getSunFactor(response);
-
-		return state;
+		this.subscribe();
 	}
 
 	async getLocation() {
 		try {
-			if (this.location) return this.location;
+			if (this.location) {
+				return this.location;
+			}
 
 			const res = await fetch('http://ip-api.com/json');
 
@@ -87,186 +29,70 @@ class Weather {
 				throw new Error(`ip-api error: ${json.message || 'unknown error'}`);
 			}
 
-			return this.location = json;
+			return (this.location = json);
 		} catch (err) {
 			debug('Failed to fetch location:', err);
 			throw err;
 		}
 	}
 
-	// Node 18+ (fetch finns globalt)
 	async fetchWeather() {
-		try {
-			debug('Fetching weather...');
+		let location = await this.getLocation();
 
-			let location = await this.getLocation();
-
-			const params = new URLSearchParams({
-				lat: location.lat,
-				lon: location.lon,
-				appid: process.env.OPENWEATHERMAP_API_KEY
-			});
-
-			const url = `https://api.openweathermap.org/data/2.5/weather?${params.toString()}`;
-
-			// Timeout (ms) – AbortSignal.timeout finns i Node 18+
-			const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-
-			if (!res.ok) {
-				// Försök få med feltext från API:t om möjligt
-				let details = '';
-				try {
-					details = JSON.stringify(await res.json());
-				} catch {}
-				throw new Error(`OpenWeatherMap HTTP ${res.status}: ${res.statusText} ${details}`);
-			}
-
-			const json = await res.json();
-			this.weather = this.translateWeather(json);
-			debug('Current weather is', this.weather);
-			return this.weather;
-		} catch (err) {
-			debug('Failed to fetch weather:', err);
-			throw err;
+		if (!location || typeof location.lat !== 'number' || typeof location.lon !== 'number') {
+			throw new Error('Invalid location object: behöver lat och lon');
 		}
-	}
 
-	async fetchWeatherX() {
-		var Request = require('yow/request');
+		const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${location.lat}&lon=${location.lon}`;
 
-		debug('Fetching weather...');
-		var api = new Request('https://api.openweathermap.org');
+		const res = await fetch(url, {
+			headers: {
+				'User-Agent': 'WordClock/1.0 (magnus@example.com)'
+			}
+		});
 
-		var query = {};
-		query.lat = process.env.OPENWEATHERMAP_LAT;
-		query.lon = process.env.OPENWEATHERMAP_LON;
-		query.appid = process.env.OPENWEATHERMAP_API_KEY;
+		if (!res.ok) {
+			throw new Error(`MET Norway HTTP ${res.status} ${res.statusText}`);
+		}
 
-		let response = await api.get('/data/2.5/weather', { query: query });
-		this.weather = this.translateWeather(response.body);
-		debug('Current weather is', this.weather);
-	}
+		const data = await res.json();
+		const now = data.properties.timeseries[0];
+		const details = now.data.instant.details;
 
-	subscribe() {
-		var schedule = require('node-schedule');
+		const rainMm = details.precipitation_amount ?? 0;
+		const cloudFrac = details.cloud_area_fraction ?? 0;
+		const wind = details.wind_speed ?? 0;
 
-		schedule.scheduleJob({ minute: [0, 30] }, this.fetchWeather.bind(this));
-		this.fetchWeather();
-	}
-}
+		const symbol = now.data.next_1_hours?.summary?.symbol_code || now.data.next_6_hours?.summary?.symbol_code || '';
 
-class OldWeather {
-	constructor(location) {
-		this.location = location;
-		this.weather = { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
-
-		var fetch = () => {
-			this.getWeather()
-				.then(weather => {
-					this.weather = weather;
-				})
-				.catch(error => {
-					console.error(error);
-				});
+		let factors = {
+			rain: 0,
+			snow: 0,
+			clouds: Math.min(cloudFrac / 100, 1),
+			wind: Math.min(wind / 20, 1),
+			clear: 0
 		};
 
-		schedule.scheduleJob({ minute: [0, 20, 40] }, fetch);
-		fetch();
-	}
-
-	fetchWeather(location) {
-		return new Promise((resolve, reject) => {
-			try {
-				var weather = require('weather-js');
-
-				// Options:
-				// search:     location name or zipcode
-				// degreeType: F or C
-
-				debug('Fetching weather...');
-
-				weather.find({ search: location, degreeType: 'C' }, (error, result) => {
-					try {
-						if (error) reject(error);
-						else {
-							debug(result);
-
-							resolve(result);
-						}
-					} catch (error) {
-						console.log(error);
-						reject(error);
-					}
-				});
-			} catch (error) {
-				reject(error);
-			}
-		});
-	}
-
-	getWeatherState(text) {
-		switch (text) {
-			case 'Cloudy':
-				return { MOLN: 1.0 };
-
-			case 'Mostly Cloudy':
-				return { SOL: 0.25, MOLN: 0.75 };
-
-			case 'Partly Cloudy':
-				return { SOL: 0.75, MOLN: 0.25 };
-
-			case 'Partly Sunny':
-				return { SOL: 0.5, MOLN: 0.5 };
-
-			case 'Mostly Sunny':
-				return { SOL: 0.75, MOLN: 0.25 };
-
-			case 'Clear':
-			case 'Sunny':
-				return { SOL: 1.0 };
-
-			case 'Mostly Clear':
-				return { SOL: 0.75, MOLN: 0.25 };
-
-			case 'Rain':
-				return { REGN: 1.0, MOLN: 1.0 };
-
-			case 'Light Rain':
-				return { REGN: 0.5, MOLN: 0.5 };
-
-			case 'Rain Showers':
-				return { REGN: 0.5, MOLN: 0.5 };
-
-			case 'Fog':
-				return { SOL: 0.25, MOLN: 0.25 };
-
-			case 'T-Storms':
-				return { MOLN: 1.0, REGN: 0.5, VIND: 1.0 };
-
-			case 'Snow':
-				return { MOLN: 1.0, SNÖ: 1.0 };
-
-			case 'Light Snow':
-				return { MOLN: 0.5, SNÖ: 0.5 };
+		if (symbol.includes('rain')) {
+			factors.rain = Math.min(1, rainMm / 2); // 2 mm/h ≈ 100 %
+		}
+		if (symbol.includes('snow')) {
+			factors.snow = 1;
 		}
 
-		console.log(sprintf("Weather condition '%s' not defined.", text));
+		// gör clear till "resten"
+		const maxVal = Math.max(factors.rain, factors.snow, factors.clouds);
+		factors.clear = Math.max(0, 1 - maxVal);
 
-		return { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
-	}
+		this.weather['MOLN'] = factors.clouds;
+		this.weather['VIND'] = factors.wind;
+		this.weather['REGN'] = factors.rain;
+		this.weather['SNÖ']  = factors.snow;
+		this.weather['SOL']  = factors.clear;
 
-	getWeather() {
-		return new Promise((resolve, reject) => {
-			this.fetchWeather(this.location)
-				.then(weather => {
-					if (isArray(weather)) weather = weather[0];
+		debug('Updated weather:', this.weather);
 
-					resolve(this.getWeatherState(weather.current.skytext));
-				})
-				.catch(error => {
-					reject(error);
-				});
-		});
+		return factors;
 	}
 }
 
