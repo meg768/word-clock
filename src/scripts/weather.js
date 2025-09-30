@@ -3,18 +3,14 @@ var isArray = require('yow/isArray');
 var sprintf = require('yow/sprintf');
 var debug = require('./debug.js');
 
-
 class Weather {
-
 	constructor(options = {}) {
-
 		if (process.env.OPENWEATHERMAP_LAT == undefined || process.env.OPENWEATHERMAP_LON == undefined || process.env.OPENWEATHERMAP_API_KEY == undefined)
 			throw new Error('You need to specify both weather location (lat/lon) and API key.');
 
-
-		this.weather = {'REGN':1.0, 'MOLN':1.0, 'SNÖ':1.0, 'VIND':1.0, 'SOL':1.0};
+		this.weather = { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
 		this.subscribe();
-	};
+	}
 
 	getSunFactor(response) {
 		return 1.0 - this.getCloudFactor(response);
@@ -23,28 +19,24 @@ class Weather {
 	getCloudFactor(response) {
 		if (response.clouds && response.clouds.all) {
 			return parseInt(response.clouds.all) / 100;
-		}
-		else {
+		} else {
 			return 0;
 		}
-
 	}
 
-	getWindFactor(response) {		
+	getWindFactor(response) {
 		if (response.wind && response.wind.speed) {
 			var maxWindSpeed = 20;
 			var winSpeed = parseFloat(response.wind.speed);
 
 			return Math.min(1.0, winSpeed / maxWindSpeed);
-		}
-		else {
+		} else {
 			return 0;
 		}
-
 	}
 
 	getRainFactor(response) {
-		var rain = 0;		
+		var rain = 0;
 
 		if (response.rain) {
 			var rain1h = 0;
@@ -65,17 +57,16 @@ class Weather {
 	}
 
 	translateWeather(response) {
-
 		var state = {};
 
 		state['MOLN'] = this.getCloudFactor(response);
 		state['VIND'] = this.getWindFactor(response);
 		state['REGN'] = this.getRainFactor(response);
-		state['SOL']  = this.getSunFactor(response);
+		state['SOL'] = this.getSunFactor(response);
 
 		return state;
-	};
-/*
+	}
+	/*
 	async getLocation() {
 		var Request = require('yow/request');
 		var api = new Request('http://ip-api.com');
@@ -85,185 +76,143 @@ class Weather {
 	}
 */
 
-fetchWeather() {
+	async fetchWeather() {
 		var Request = require('yow/request');
 
-		return new Promise((resolve, reject) => {
-			debug('Fetching weather...');
-			var api = new Request('https://api.openweathermap.org');
+		debug('Fetching weather...');
+		var api = new Request('https://api.openweathermap.org');
 
-			var query = {};
-			query.lat = process.env.OPENWEATHERMAP_LAT;
-			query.lon = process.env.OPENWEATHERMAP_LON;
-			query.appid = process.env.OPENWEATHERMAP_API_KEY;
-	
-			api.get('/data/2.5/weather', {query:query}).then((response) => {
-				this.weather = this.translateWeather(response.body);
-				debug('Current weather is', this.weather);
-				resolve(this.weather);
-			})
-			.catch((error) => {
-				reject(error);
-			})	
-		});
+		var query = {};
+		query.lat = process.env.OPENWEATHERMAP_LAT;
+		query.lon = process.env.OPENWEATHERMAP_LON;
+		query.appid = process.env.OPENWEATHERMAP_API_KEY;
+
+		let response = await api.get('/data/2.5/weather', { query: query });
+		this.weather = this.translateWeather(response.body);
+		debug('Current weather is', this.weather);
 	}
 
 	subscribe() {
 		var schedule = require('node-schedule');
 
+		schedule.scheduleJob({ minute: [0, 30] }, this.fetchWeather.bind(this));
+		this.fetchWeather
+	}
+}
+
+class OldWeather {
+	constructor(location) {
+		this.location = location;
+		this.weather = { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
+
 		var fetch = () => {
-			this.fetchWeather().then(() => {
-			})
-			.catch((error) => {
-				debug('Failed to fetch weather.');
-				console.error(error);
-			});
+			this.getWeather()
+				.then(weather => {
+					this.weather = weather;
+				})
+				.catch(error => {
+					console.error(error);
+				});
 		};
 
-		schedule.scheduleJob({minute:[0, 30]}, fetch);
+		schedule.scheduleJob({ minute: [0, 20, 40] }, fetch);
 		fetch();
 	}
 
+	fetchWeather(location) {
+		return new Promise((resolve, reject) => {
+			try {
+				var weather = require('weather-js');
 
-};
+				// Options:
+				// search:     location name or zipcode
+				// degreeType: F or C
 
+				debug('Fetching weather...');
 
+				weather.find({ search: location, degreeType: 'C' }, (error, result) => {
+					try {
+						if (error) reject(error);
+						else {
+							debug(result);
 
-class OldWeather  {
+							resolve(result);
+						}
+					} catch (error) {
+						console.log(error);
+						reject(error);
+					}
+				});
+			} catch (error) {
+				reject(error);
+			}
+		});
+	}
 
-    constructor(location) {
-        this.location = location;
-        this.weather = {'REGN':1.0, 'MOLN':1.0, 'SNÖ':1.0, 'VIND':1.0, 'SOL':1.0};
+	getWeatherState(text) {
+		switch (text) {
+			case 'Cloudy':
+				return { MOLN: 1.0 };
 
-		var fetch = () => {
-			this.getWeather().then((weather) => {
-                this.weather = weather;
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-		};
+			case 'Mostly Cloudy':
+				return { SOL: 0.25, MOLN: 0.75 };
 
-		schedule.scheduleJob({minute:[0, 20, 40]}, fetch);
-		fetch();
-    }
+			case 'Partly Cloudy':
+				return { SOL: 0.75, MOLN: 0.25 };
 
-    
-    fetchWeather(location) {
+			case 'Partly Sunny':
+				return { SOL: 0.5, MOLN: 0.5 };
 
-        return new Promise((resolve, reject) => {
-            try {
-                var weather = require('weather-js');
-    
-                // Options:
-                // search:     location name or zipcode
-                // degreeType: F or C
-    
-                debug('Fetching weather...');
-    
-                weather.find({search: location, degreeType: 'C'}, (error, result) => {
-                    try {
-                        if (error)
-                            reject(error);
-                        else {
-    
-                            debug(result);
-                
-                            resolve(result);
-                        }
-    
-                    }
-                    catch(error) {
-                        console.log(error);
-                        reject(error);
-                    }
-                });
-    
-            }
-            catch(error) {
-                reject(error);
-            }
-        });
-    };
-    
-    getWeatherState(text) {
+			case 'Mostly Sunny':
+				return { SOL: 0.75, MOLN: 0.25 };
 
+			case 'Clear':
+			case 'Sunny':
+				return { SOL: 1.0 };
 
-        switch(text) {
-            case 'Cloudy':
-                return {'MOLN': 1.0};
+			case 'Mostly Clear':
+				return { SOL: 0.75, MOLN: 0.25 };
 
-            case 'Mostly Cloudy':
-                return {'SOL': 0.25, 'MOLN':0.75};
+			case 'Rain':
+				return { REGN: 1.0, MOLN: 1.0 };
 
-            case 'Partly Cloudy':
-                return {'SOL': 0.75, 'MOLN':0.25};
+			case 'Light Rain':
+				return { REGN: 0.5, MOLN: 0.5 };
 
+			case 'Rain Showers':
+				return { REGN: 0.5, MOLN: 0.5 };
 
-            case 'Partly Sunny':
-                return {'SOL': 0.50, 'MOLN': 0.50};
+			case 'Fog':
+				return { SOL: 0.25, MOLN: 0.25 };
 
-            case 'Mostly Sunny':
-                return {'SOL': 0.75, 'MOLN': 0.25};
+			case 'T-Storms':
+				return { MOLN: 1.0, REGN: 0.5, VIND: 1.0 };
 
-            case 'Clear':
-            case 'Sunny':
-                return {'SOL':1.0};
+			case 'Snow':
+				return { MOLN: 1.0, SNÖ: 1.0 };
 
-            case 'Mostly Clear':
-                return {'SOL':0.75, 'MOLN':0.25};
+			case 'Light Snow':
+				return { MOLN: 0.5, SNÖ: 0.5 };
+		}
 
-            case 'Rain':
-                return {'REGN':1.0, 'MOLN':1.0};
+		console.log(sprintf("Weather condition '%s' not defined.", text));
 
-            case 'Light Rain':
-                return {'REGN':0.5, 'MOLN':0.5};
+		return { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
+	}
 
-            case 'Rain Showers':
-                return {'REGN':0.5, 'MOLN':0.5};
+	getWeather() {
+		return new Promise((resolve, reject) => {
+			this.fetchWeather(this.location)
+				.then(weather => {
+					if (isArray(weather)) weather = weather[0];
 
-            case 'Fog':
-                return {'SOL': 0.25, 'MOLN': 0.25};
-
-            case 'T-Storms':
-                return {'MOLN': 1.0, 'REGN':0.5, 'VIND':1.0};
-
-            case 'Snow':
-                return {'MOLN': 1.0, 'SNÖ':1.0};
-
-            case 'Light Snow':
-                return {'MOLN': 0.5, 'SNÖ':0.5};
-
-        }
-
-        console.log(sprintf('Weather condition \'%s\' not defined.', text));
-
-        return {'REGN':1.0, 'MOLN':1.0, 'SNÖ':1.0, 'VIND':1.0, 'SOL':1.0};
-
-    }
-
-    getWeather() {
-
-        return new Promise((resolve, reject) => {
-
-            this.fetchWeather(this.location).then((weather) => {
-
-                if (isArray(weather))
-                    weather = weather[0];
-
-                resolve(this.getWeatherState(weather.current.skytext));
-
-            })
-            .catch((error) => {
-                reject(error);
-            })
-
-        });
-    }
-
-
-
-};
-
+					resolve(this.getWeatherState(weather.current.skytext));
+				})
+				.catch(error => {
+					reject(error);
+				});
+		});
+	}
+}
 
 module.exports = Weather;
