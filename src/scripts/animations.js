@@ -15,7 +15,7 @@ module.exports = class extends Events {
 		this.renderTime = undefined;
         console.log('Debug value', debug);
         console.log('Debug is function', typeof debug === 'function');
-		this.debug = typeof debug === 'function' ? debug : debug ? console.log : () => {};
+		this.debug = debug; //typeof debug === 'function' ? debug : debug ? console.log : () => {};
 	}
 
 	render() {
