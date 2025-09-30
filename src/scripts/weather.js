@@ -8,6 +8,13 @@ class Weather {
 		this.location = null;
 		this.subscribe();
 	}
+	
+	subscribe() {
+		var schedule = require('node-schedule');
+
+		schedule.scheduleJob({ minute: [0, 30] }, this.fetchWeather.bind(this));
+		this.fetchWeather();
+	}
 
 	async getLocation() {
 		try {
@@ -87,8 +94,8 @@ class Weather {
 		this.weather['MOLN'] = factors.clouds;
 		this.weather['VIND'] = factors.wind;
 		this.weather['REGN'] = factors.rain;
-		this.weather['SNÖ']  = factors.snow;
-		this.weather['SOL']  = factors.clear;
+		this.weather['SNÖ'] = factors.snow;
+		this.weather['SOL'] = factors.clear;
 
 		debug('Updated weather:', this.weather);
 
