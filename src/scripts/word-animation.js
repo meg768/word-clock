@@ -11,10 +11,9 @@ module.exports = class extends Animation {
 
     constructor(options) {
         var {pixels, ...options} = options;
-
-        this.debug = require('./debug.js');
-
-        super({renderFrequency: 10 * 1000, debug:this.debug, name:'Word Animation', ...options});
+        var debug = require('./debug.js');
+      
+        super({renderFrequency: 10 * 1000, debug:debug, name:'Word Animation', ...options});
         
         this.pixels = pixels;
     }
