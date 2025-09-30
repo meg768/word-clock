@@ -16,6 +16,7 @@ function debugNoop() {
 
 
 module.exports = function () {
+		return debugPrint;
 	if (debugMode) {
 		return debugPrint;
 	}
