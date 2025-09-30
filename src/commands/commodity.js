@@ -20,7 +20,7 @@ var Module = new (function () {
 		return animation.run();
 	}
 
-	module.exports.command = 'index [options]';
+	module.exports.command = 'commodity [options]';
 	module.exports.describe = 'Commodity Animation';
 	module.exports.builder = defineArgs;
 	module.exports.handler = run;
