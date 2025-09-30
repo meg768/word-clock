@@ -95,7 +95,7 @@ class Weather {
 		this.weather['SNÖ'] = factors.snow;
 		this.weather['SOL'] = factors.clear;
 
-		debug('Updated weather:', this.weather);
+		debug('Updated weather:', JSON.stringify(this.weather));
 
 		return factors;
 	}
