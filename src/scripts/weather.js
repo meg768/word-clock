@@ -96,7 +96,7 @@ class Weather {
 		var schedule = require('node-schedule');
 
 		schedule.scheduleJob({ minute: [0, 30] }, this.fetchWeather.bind(this));
-		this.fetchWeather
+		this.fetchWeather()
 	}
 }
 
