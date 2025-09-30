@@ -3,7 +3,6 @@ var Animation = require('./animations');
 var Layout = require('./layout.js');
 var Color = require('color');
 var sprintf = require('yow/sprintf');
-var debugX = require('./debug.js');
 
 var maxMilliAmpere = 0;
 
@@ -13,7 +12,9 @@ module.exports = class extends Animation {
     constructor(options) {
         var {pixels, ...options} = options;
 
-        super({renderFrequency: 10 * 1000, debug:debugX, name:'Word Animation', ...options});
+        this.debug = require('./debug.js');
+
+        super({renderFrequency: 10 * 1000, debug:this.debug, name:'Word Animation', ...options});
         
         this.pixels = pixels;
     }
@@ -60,7 +61,7 @@ module.exports = class extends Animation {
 
         maxMilliAmpere = Math.max(maxMilliAmpere, milliAmpere);
 
-        debug(sprintf('"%s" (%d mA/%d mA)', text.join(' '), milliAmpere, maxMilliAmpere));
+        this.debug(sprintf('"%s" (%d mA/%d mA)', text.join(' '), milliAmpere, maxMilliAmpere));
 
         this.pixels.render();
     }
