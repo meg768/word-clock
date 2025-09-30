@@ -1,4 +1,4 @@
-var yahoo = require('yahoo-finance2').default;
+var yahoo = require('./yahoo-finance.js');
 var Events = require('events');
 var debug = require('./debug.js');
 var schedule = require('node-schedule');
@@ -28,7 +28,6 @@ module.exports = class extends Events {
 			tickers.push(symbol.symbol);
 		});
 
-		debug('----------------------------');
 		debug('Fetching quotes for symbols', tickers.join(' '));
 
 		let data = await yahoo.quote(tickers);
