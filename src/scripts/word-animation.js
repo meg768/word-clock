@@ -13,7 +13,7 @@ module.exports = class extends Animation {
         var {pixels, ...options} = options;
         var debug = require('./debug.js');
       
-        super({renderFrequency: 10 * 1000, debug:debug, name:'Word Animation', ...options});
+        super({renderFrequency: 10 * 1000, debug:false, name:'Word Animation', ...options});
         
         this.pixels = pixels;
     }
