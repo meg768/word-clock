@@ -1,5 +1,5 @@
 
-var Animation = require('rpi-animations').Animation;
+var Animation = require('./animations');
 var Layout = require('./layout.js');
 var Color = require('color');
 var sprintf = require('yow/sprintf');
