@@ -3,7 +3,7 @@ var Animation = require('./animations');
 var Layout = require('./layout.js');
 var Color = require('color');
 var sprintf = require('yow/sprintf');
-var debug = require('./debug.js');
+var debugX = require('./debug.js');
 
 var maxMilliAmpere = 0;
 
@@ -13,7 +13,7 @@ module.exports = class extends Animation {
     constructor(options) {
         var {pixels, ...options} = options;
 
-        super({renderFrequency: 10 * 1000, debug:debug, name:'Word Animation', ...options});
+        super({renderFrequency: 10 * 1000, debug:debugX, name:'Word Animation', ...options});
         
         this.pixels = pixels;
     }
