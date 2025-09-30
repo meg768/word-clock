@@ -26,7 +26,7 @@ module.exports = class extends Events {
 	}
 
 	start() {
-		this.debug('Starting animation', this.name);
+		this.debug('Starting animationX', this.name);
 
 		return new Promise((resolve, reject) => {
 			this.cancelled = false;
