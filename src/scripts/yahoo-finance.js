@@ -1,9 +1,9 @@
-// yahoo-finance.js (CommonJS / Node 16-vänligt)
 const yahooFinance = require('yahoo-finance2').default;
 
+// Quiet logger 
 const silent = { debug() {}, info() {}, warn() {}, error() {}, log() {} };
 
-// Tysta all loggning i v2:
+// Set global config for all requests
 yahooFinance.setGlobalConfig({ logger: silent });
 
 module.exports = yahooFinance;
