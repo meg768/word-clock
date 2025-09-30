@@ -31,19 +31,16 @@ module.exports = class extends Events {
 	fetchQuotes(symbols) {
 
 		return new Promise((resolve, reject) => {
-			var params = {};
+			var tickers = [];
 
-			params.symbols = [];
-			params.modules = ['price'];
-	
 			symbols.forEach((symbol) => {
-				params.symbols.push(symbol.symbol);
+				tickers.push(symbol.symbol);
 			})
 	
 			console.log('----------------------------');
-			console.log('Fetching quotes for symbols', symbols.join(' '));
+			console.log('Fetching quotes for symbols', tickers.join(' '));
 	
-			yahoo.quote(symbols).then((data) => {
+			yahoo.quote(tickers).then((data) => {
 	
 				console.log('XX________________');
 				console.log(JSON.stringify(data));
