@@ -42,8 +42,8 @@ module.exports = class extends Events {
 	
 			yahoo.quote(tickers).then((data) => {
 	
-				console.log('XX________________');
-				console.log(JSON.stringify(data, null, 2));
+				debug('XX________________');
+				debug(JSON.stringify(data, null, 2));
 				symbols.forEach((symbol) => {
 					var change = data[symbol.symbol].price.regularMarketChangePercent;
 					var price = data[symbol.symbol].price.regularMarketPrice;
