@@ -1,5 +1,3 @@
-var schedule = require('node-schedule');
-var sprintf = require('yow/sprintf');
 var debug = require('./debug.js');
 
 class Weather {
