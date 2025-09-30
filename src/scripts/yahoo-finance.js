@@ -1,14 +1,14 @@
-var yahooFinance = require('yahoo-finance2');
+var YahooFinance = require('yahoo-finance2');
+
+const silentLogger = {
+	debug: () => {},
+	info: () => {},
+	warn: () => {},
+	error: () => {},
+	log: () => {}
+};
+
+const yf = new YahooFinance({ logger: silentLogger });
 
 
-yahooFinance.setGlobalConfig({
-	logger: {
-		debug: () => {},
-		info: () => {},
-		warn: () => {},
-		error: () => {},
-		log: () => {}
-	}
-});
-
-module.exports = yahooFinance.default;
+module.exports = yf;
