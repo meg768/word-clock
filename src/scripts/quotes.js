@@ -41,10 +41,12 @@ module.exports = class extends Events {
 			debug('Fetching quotes for symbols', tickers.join(' '));
 	
 			yahoo.quote(tickers).then((data) => {
+
+				data.forEach((item) => {
+					debug(item.symbol, item.regularMarketChangePercent, item.regularMarketPrice);
+				}
 	
-				debug('XX________________');
-				debug(JSON.stringify(data, null, 2));
-				symbols.forEach((symbol) => {
+/*				symbols.forEach((symbol) => {
 					var change = data[symbol.symbol].price.regularMarketChangePercent;
 					var price = data[symbol.symbol].price.regularMarketPrice;
 	
@@ -53,7 +55,7 @@ module.exports = class extends Events {
 
 				debug('Finished fetching quotes.');
 				this.emit('quotes', this.quotes);
-
+*/
 				resolve();
 			})
 			.catch((error) => {
