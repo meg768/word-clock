@@ -12,7 +12,7 @@ class Weather {
 	subscribe() {
 		var schedule = require('node-schedule');
 
-		schedule.scheduleJob({ minute: [0, 10] }, this.fetchWeather.bind(this));
+		schedule.scheduleJob({ seconds: [0, 30] }, this.fetchWeather.bind(this));
 		this.fetchWeather();
 	}
 
