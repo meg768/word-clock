@@ -13,8 +13,8 @@ module.exports = class extends Events {
 		this.iterations = iterations;
 		this.renderFrequency = renderFrequency;
 		this.renderTime = undefined;
-        console.log('Debug is', debug);
-        console.log('Debug is', typeof debug === 'function');
+        console.log('Debug value', debug);
+        console.log('Debug is function', typeof debug === 'function');
 		this.debug = typeof debug === 'function' ? debug : debug ? console.log : () => {};
 	}
 
