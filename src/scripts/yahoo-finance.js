@@ -1,4 +1,4 @@
-var YahooFinance = require('yahoo-finance2');
+var YahooFinance = require('yahoo-finance2').default;
 
 const silentLogger = {
 	debug: () => {},
