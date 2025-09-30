@@ -1,18 +1,6 @@
 #!/usr/bin/env node
 
-var Button = require('../scripts/button.js');
-
-var Neopixels = require('../scripts/neopixels.js');
-var AnimationQueue = require('rpi-animations').Queue;
 var debug = require('../scripts/debug.js');
-
-var ClockAnimation = require('../scripts/clock-animation.js');
-var CurrencyAnimation = require('../scripts/currency-animation.js');
-var CommodityAnimation = require('../scripts/commodity-animation.js');
-var IndexAnimation = require('../scripts/index-animation.js');
-var ColorAnimation = require('../scripts/color-animation.js');
-var MatrixAnimation = require('../scripts/matrix-animation.js');
-var WeatherAnimation = require('../scripts/weather-animation.js');
 
 var Module = new (function () {
 	function defineArgs(args) {
@@ -28,6 +16,19 @@ var Module = new (function () {
 
 	function run(argv) {
 		debug('Starting animation loop...');
+
+		var Button = require('../scripts/button.js');
+
+		var Neopixels = require('../scripts/neopixels.js');
+		var AnimationQueue = require('rpi-animations').Queue;
+
+		var ClockAnimation = require('../scripts/clock-animation.js');
+		var CurrencyAnimation = require('../scripts/currency-animation.js');
+		var CommodityAnimation = require('../scripts/commodity-animation.js');
+		var IndexAnimation = require('../scripts/index-animation.js');
+		var ColorAnimation = require('../scripts/color-animation.js');
+		var MatrixAnimation = require('../scripts/matrix-animation.js');
+		var WeatherAnimation = require('../scripts/weather-animation.js');
 
 		var leftButton = new Button(13);
 		var rightButton = new Button(6);
