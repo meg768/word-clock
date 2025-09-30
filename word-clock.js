@@ -21,7 +21,7 @@ var App = function() {
 			args.command(require('./src/commands/loop.js'));
 			args.command(require('./src/commands/word.js'));
 			args.command(require('./src/commands/index.js'));
-			args.command(require('./src/commands/quotes.js'));
+			args.command(require('./src/commands/commodity.js'));
 
 			args.wrap(null);
 			args.demand(1);
