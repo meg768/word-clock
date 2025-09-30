@@ -76,44 +76,7 @@ class Weather {
 	}
 */
 
-	// Node 18+ (fetch finns globalt)
 	async fetchWeather() {
-		try {
-			debug('Fetching weather...');
-
-			const params = new URLSearchParams({
-				lat: process.env.OPENWEATHERMAP_LAT,
-				lon: process.env.OPENWEATHERMAP_LON,
-				appid: process.env.OPENWEATHERMAP_API_KEY
-				// units: 'metric', // valfritt
-				// lang: 'sv',      // valfritt
-			});
-
-			const url = `https://api.openweathermap.org/data/2.5/weather?${params.toString()}`;
-
-			// Timeout (ms) – AbortSignal.timeout finns i Node 18+
-			const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-
-			if (!res.ok) {
-				// Försök få med feltext från API:t om möjligt
-				let details = '';
-				try {
-					details = JSON.stringify(await res.json());
-				} catch {}
-				throw new Error(`OpenWeatherMap HTTP ${res.status}: ${res.statusText} ${details}`);
-			}
-
-			const json = await res.json();
-			this.weather = this.translateWeather(json);
-			debug('Current weather is', this.weather);
-			return this.weather;
-		} catch (err) {
-			debug('Failed to fetch weather:', err);
-			throw err;
-		}
-	}
-
-	async fetchWeatherX() {
 		var Request = require('yow/request');
 
 		debug('Fetching weather...');
@@ -133,7 +96,7 @@ class Weather {
 		var schedule = require('node-schedule');
 
 		schedule.scheduleJob({ minute: [0, 30] }, this.fetchWeather.bind(this));
-		this.fetchWeather();
+		this.fetchWeather()
 	}
 }
 
