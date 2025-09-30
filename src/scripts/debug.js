@@ -13,13 +13,17 @@ function debugPrint() {
 function debugNoop() {
 
 }
+	module.exports = debugPrint;		
 
+/*
 if (debugMode) {
 	module.exports = debugPrint;		
 }
 else {
 	module.exports = debugNoop;
 }
+
+*/
 /*
 module.exports = function () {
 		return debugPrint;
