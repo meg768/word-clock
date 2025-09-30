@@ -37,8 +37,8 @@ module.exports = class extends Events {
 				tickers.push(symbol.symbol);
 			})
 	
-			console.log('----------------------------');
-			console.log('Fetching quotes for symbols', tickers.join(' '));
+			debug('----------------------------');
+			debug('Fetching quotes for symbols', tickers.join(' '));
 	
 			yahoo.quote(tickers).then((data) => {
 	
