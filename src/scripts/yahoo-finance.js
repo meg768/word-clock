@@ -1,14 +1,10 @@
-var YahooFinance = require('yahoo-finance2').default;
+// Notera .default när du använder require
+const YahooFinance = require('yahoo-finance2').default;
 
-const silentLogger = {
-	debug: () => {},
-	info: () => {},
-	warn: () => {},
-	error: () => {},
-	log: () => {}
-};
+// tyst logger
+const silent = { debug() {}, info() {}, warn() {}, error() {}, log() {} };
 
-const yf = new YahooFinance({ logger: silentLogger });
-
+// skapa en instans med egen logger
+const yf = new YahooFinance({ logger: silent });
 
 module.exports = yf;
