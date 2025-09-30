@@ -30,7 +30,7 @@ class Weather {
 
 			const json = await res.json();
 
-			debug('Weather location is', json);
+			debug('Weather location is', json.city);
 
 			if (json.status !== 'success') {
 				throw new Error(`ip-api error: ${json.message || 'unknown error'}`);
