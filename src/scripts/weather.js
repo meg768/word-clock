@@ -78,7 +78,7 @@ class Weather {
 
 	async getLocation() {
 		try {
-			const res = await fetch('http://ip-api.com/json/?fields=status,message,lat,lon,query');
+			const res = await fetch('http://ip-api.com/json');
 
 			if (!res.ok) {
 				throw new Error(`ip-api HTTP ${res.status} ${res.statusText}`);
