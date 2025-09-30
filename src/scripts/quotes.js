@@ -16,49 +16,36 @@ module.exports = class extends Events {
 
 	subscribe(symbols) {
 
-		var fetch = () => {
-			this.fetchQuotes(symbols).then((quotes) => {
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+		let fetch = async  () => {
+			await this.fetchQuotes(symbols)
 		};
 
 		schedule.scheduleJob({minute:[5, 20, 35, 50]}, fetch);
 		fetch();
 	}
 
-	fetchQuotes(symbols) {
+	async fetchQuotes(symbols) {
 
-		return new Promise((resolve, reject) => {
-			var tickers = [];
+		var tickers = [];
 
-			symbols.forEach((symbol) => {
-				tickers.push(symbol.symbol);
-			})
-	
-			debug('----------------------------');
-			debug('Fetching quotes for symbols', tickers.join(' '));
-	
-			yahoo.quote(tickers).then((data) => {
+		symbols.forEach((symbol) => {
+			tickers.push(symbol.symbol);
+		})
 
-				data.forEach((item) => {
+		debug('----------------------------');
+		debug('Fetching quotes for symbols', tickers.join(' '));
 
-					debug(item.symbol, item.regularMarketChangePercent, item.regularMarketPrice);
-					this.quotes[item.symbol] = { change: item.regularMarketChangePercent, price: item.regularMarketPrice };
-				});
-	
-				debug('Finished fetching quotes.');
-				this.emit('quotes', this.quotes);
+		let data = await yahoo.quote(tickers);
 
-				resolve();
-			})
-			.catch((error) => {
-				debug('Failed to fetch quotes.');
-				reject(error);
-			});
-	
+		data.forEach((item) => {
+
+			debug(item.symbol, item.regularMarketChangePercent, item.regularMarketPrice);
+			this.quotes[item.symbol] = { change: item.regularMarketChangePercent, price: item.regularMarketPrice };
 		});
+
+		debug('Finished fetching quotes.');
+		this.emit('quotes', this.quotes);
+
 
 	}
 
