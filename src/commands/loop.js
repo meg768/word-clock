@@ -17,8 +17,6 @@ var Module = new (function () {
 	function run(argv) {
 		debug('Starting animation loop...');
 
-		var Button = require('../scripts/button.js');
-
 		var Neopixels = require('../scripts/neopixels.js');
 		var AnimationQueue = require('rpi-animations').Queue;
 
@@ -30,8 +28,6 @@ var Module = new (function () {
 		var MatrixAnimation = require('../scripts/matrix-animation.js');
 		var WeatherAnimation = require('../scripts/weather-animation.js');
 
-		var leftButton = new Button(13);
-		var rightButton = new Button(6);
 		var pixels = new Neopixels();
 
 		var mode = 'loop';
@@ -41,46 +37,6 @@ var Module = new (function () {
 		var loopDuration = parseFloat(argv.speed) * 1000;
 		var loopIndex = 0;
 
-		leftButton.on('click', clicks => {
-			loopIndex = 0;
-
-			mode = mode != 'off' ? 'off' : 'loop';
-
-			runNextAnimation();
-		});
-
-		rightButton.on('click', (clicks, time) => {
-			if (clicks == 1) {
-				switch (mode) {
-					case 'clock': {
-						// Special case, when in clock mode you will never
-						// se the change when entering loop mode since
-						// the clock animation is the first...
-						loopIndex = 1;
-						mode = 'loop';
-
-						runNextAnimation();
-						break;
-					}
-					case 'loop': {
-						mode = 'rain';
-
-						runNextAnimation();
-						break;
-					}
-					case 'rain': {
-						mode = 'clock';
-
-						runNextAnimation();
-						break;
-					}
-				}
-			}
-
-			if (clicks == 2 && mode == 'loop') {
-				runNextAnimation();
-			}
-		});
 
 		function runNextAnimation() {
 			switch (mode) {
