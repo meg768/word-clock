@@ -1,5 +1,5 @@
 
-var Animation = require('./animations');
+var Animation = require('./animations.js');
 var Layout = require('./layout.js');
 var Color = require('color');
 var sprintf = require('yow/sprintf');
