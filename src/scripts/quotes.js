@@ -42,7 +42,7 @@ module.exports = class extends Events {
 	
 			debug('Fetching quotes for symbols', symbols.join(' '));
 	
-			yahoo.quote(symbols, {modules : ['price']}).then((data) => {
+			yahoo.quote(symbols).then((data) => {
 	
 				console.log('XX________________');
 				console.log(JSON.stringify(data));
