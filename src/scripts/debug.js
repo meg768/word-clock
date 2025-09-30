@@ -14,7 +14,13 @@ function debugNoop() {
 
 }
 
-
+if (debugMode) {
+	module.exports = debugPrint;		
+}
+else {
+	module.exports = debugNoop;
+}
+/*
 module.exports = function () {
 		return debugPrint;
 	if (debugMode) {
@@ -24,3 +30,4 @@ module.exports = function () {
 		return debugNoop;
 	}
 };
+*/
