@@ -40,8 +40,8 @@ module.exports = class extends Events {
 				params.symbols.push(symbol.symbol);
 			})
 	
-			debug('----------------------------');
-			debug('Fetching quotes for symbols', symbols.join(' '));
+			console.log('----------------------------');
+			console.log('Fetching quotes for symbols', symbols.join(' '));
 	
 			yahoo.quote(symbols).then((data) => {
 	
