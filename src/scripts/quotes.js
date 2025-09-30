@@ -44,7 +44,7 @@ module.exports = class extends Events {
 
 				data.forEach((item) => {
 					debug(item.symbol, item.regularMarketChangePercent, item.regularMarketPrice);
-				}
+				});
 	
 /*				symbols.forEach((symbol) => {
 					var change = data[symbol.symbol].price.regularMarketChangePercent;
