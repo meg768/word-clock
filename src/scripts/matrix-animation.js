@@ -110,6 +110,7 @@ module.exports = class extends Animation {
         }
 
         this.pixels.render();
+        this.pixels.sleep(50);
     }
 
 
