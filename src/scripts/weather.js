@@ -76,17 +76,38 @@ class Weather {
 	}
 */
 
+	async getLocation() {
+		try {
+			const res = await fetch('http://ip-api.com/json/?fields=status,message,lat,lon,query');
+
+			if (!res.ok) {
+				throw new Error(`ip-api HTTP ${res.status} ${res.statusText}`);
+			}
+
+			const json = await res.json();
+
+			if (json.status !== 'success') {
+				throw new Error(`ip-api error: ${json.message || 'unknown error'}`);
+			}
+
+			return { lat: json.lat, lon: json.lon };
+		} catch (err) {
+			debug('Failed to fetch location:', err);
+			throw err;
+		}
+	}
+
 	// Node 18+ (fetch finns globalt)
 	async fetchWeather() {
 		try {
 			debug('Fetching weather...');
 
+			let location = this.getLocation();
+
 			const params = new URLSearchParams({
-				lat: process.env.OPENWEATHERMAP_LAT,
-				lon: process.env.OPENWEATHERMAP_LON,
+				lat: location.lat,
+				lon: location.lon,
 				appid: process.env.OPENWEATHERMAP_API_KEY
-				// units: 'metric', // valfritt
-				// lang: 'sv',      // valfritt
 			});
 
 			const url = `https://api.openweathermap.org/data/2.5/weather?${params.toString()}`;
