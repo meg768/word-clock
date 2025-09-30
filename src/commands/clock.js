@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-var ClockAnimation = require('../scripts/clock-animation.js');
-var Neopixels = require('../scripts/neopixels.js');
 var debug = require('../scripts/debug.js');
 
 var Module = new (function () {
@@ -16,6 +14,9 @@ var Module = new (function () {
 	}
 
 	function run(argv) {
+		var ClockAnimation = require('../scripts/clock-animation.js');
+		var Neopixels = require('../scripts/neopixels.js');
+		
 		var animation = null;
 
 		animation = new ClockAnimation({ pixels: new Neopixels(), duration: -1, priority: '!', debug: debug });

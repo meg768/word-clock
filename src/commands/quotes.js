@@ -33,7 +33,7 @@ var Module = new function() {
 
 
 	module.exports.command  = 'quotes [options]';
-	module.exports.describe = 'Test Quotes';
+	module.exports.describe = 'Display quotes';
 	module.exports.builder  = defineArgs;
 	module.exports.handler  = run;
 
