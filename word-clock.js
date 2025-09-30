@@ -18,6 +18,7 @@ var App = function() {
 			args.command(require('./src/commands/rain.js'));
 			args.command(require('./src/commands/weather.js'));
 			args.command(require('./src/commands/colors.js'));
+			args.command(require('./src/commands/currency.js'));
 			args.command(require('./src/commands/loop.js'));
 			args.command(require('./src/commands/word.js'));
 			args.command(require('./src/commands/index.js'));
