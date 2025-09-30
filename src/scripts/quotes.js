@@ -1,4 +1,4 @@
-var yahoo = require('yahoo-finance2');
+var yahoo = require('yahoo-finance2').default;
 var Events  = require('events');
 var debug = require('./debug.js');
 var schedule = require('node-schedule');
