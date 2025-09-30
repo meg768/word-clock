@@ -12,7 +12,7 @@ class Weather {
 		const schedule = require('node-schedule');
 
 		// Rek. intervall: var 5:e minut (snällt mot MET)
-		schedule.scheduleJob('*/5 * * * *', this.fetchWeather.bind(this));
+		schedule.scheduleJob('*/1 * * * *', this.fetchWeather.bind(this));
 
 		// Försök direkt vid start
 		this.fetchWeather().catch(err => debug('Initial fetchWeather failed:', err));
