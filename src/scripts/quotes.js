@@ -43,19 +43,14 @@ module.exports = class extends Events {
 			yahoo.quote(tickers).then((data) => {
 
 				data.forEach((item) => {
-					debug(item.symbol, item.regularMarketChangePercent, item.regularMarketPrice);
-				});
-	
-/*				symbols.forEach((symbol) => {
-					var change = data[symbol.symbol].price.regularMarketChangePercent;
-					var price = data[symbol.symbol].price.regularMarketPrice;
-	
-					this.quotes[symbol.symbol] = {change:change, price:price};
-				});
 
+					debug(item.symbol, item.regularMarketChangePercent, item.regularMarketPrice);
+					this.quotes[item.symbol] = { change: item.regularMarketChangePercent, price: item.regularMarketPrice };
+				});
+	
 				debug('Finished fetching quotes.');
 				this.emit('quotes', this.quotes);
-*/
+
 				resolve();
 			})
 			.catch((error) => {
