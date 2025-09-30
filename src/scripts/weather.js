@@ -102,7 +102,7 @@ class Weather {
 		try {
 			debug('Fetching weather...');
 
-			let location = this.getLocation();
+			let location = await this.getLocation();
 
 			const params = new URLSearchParams({
 				lat: location.lat,
