@@ -15,10 +15,9 @@ var Module = new function() {
 
 
 	function run(argv) {
-		console.log('---------------------------------------------------------');
 		var Neopixels = require('../scripts/neopixels.js');
 		var Animation = require('../scripts/weather-animation.js');
-		var animation = new Animation({pixels: new Neopixels(), duration:-1, priority:'!', debug:true});
+		var animation = new Animation({pixels: new Neopixels(), duration:-1, priority:'!'});
 
 		return animation.run();
 
