@@ -89,13 +89,14 @@ class Weather extends Events {
 	async fetchWeather() {
 		try {
 			const location = await this.getLocation();
-			
+
 			if (!location || typeof location.lat !== 'number' || typeof location.lon !== 'number') {
 				throw new Error('Invalid location object: behöver lat och lon');
 			}
 
 			const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${location.lat}&lon=${location.lon}`;
 
+			throw new Error('MET API requires User-Agent header');
 			const options = {
 				headers: { 'User-Agent': 'WordClock/1.0 (magnus@example.com)' }
 			};
