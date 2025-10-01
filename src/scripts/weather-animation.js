@@ -11,6 +11,7 @@ module.exports = class extends WordAnimation {
 		this.weather = new Weather();
 
 		this.weather.on('weather', () => {
+            debug('Weather updated, re-rendering');
 			this.render();
 		});
 	}
