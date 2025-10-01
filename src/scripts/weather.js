@@ -6,7 +6,7 @@ const debug = require('./debug.js');
 class Weather extends Events {
 	constructor(options = {}) {
 		super(options);
-		this.weather = { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
+		this.state = { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
 		this.location = null;
 		this.subscribe();
 	}
@@ -16,7 +16,7 @@ class Weather extends Events {
 			await this.fetchWeather();
 		};
 
-		schedule.scheduleJob({ minute: [0, 10, 20, 30, 40, 50] }, fetch);
+		schedule.scheduleJob({ minute: [0, 15, 30, 45] }, fetch);
 		fetch();
 	}
 
@@ -117,18 +117,17 @@ class Weather extends Events {
 			const factors = this.computeFactors(now);
 
 			// Uppdatera svenska nycklar
-			this.weather.REGN = factors.rain;
-			this.weather.MOLN = factors.clouds;
-			this.weather.SNÖ = factors.snow;
-			this.weather.VIND = factors.wind;
-			this.weather.SOL = factors.clear;
+			this.state.REGN = factors.rain;
+			this.state.MOLN = factors.clouds;
+			this.state.SNÖ = factors.snow;
+			this.state.VIND = factors.wind;
+			this.state.SOL = factors.clear;
 
-			debug('Fetched weather:', JSON.stringify(this.weather));
-			this.emit('weather', this.weather);
+			debug('Fetched weather:', JSON.stringify(this.state));
+			this.emit('weather', this.state);
 
 		} catch (err) {
 			debug('fetchWeather failed:', err);
-			return null; // behåll senaste this.weather vid fel
 		}
 	}
 }
