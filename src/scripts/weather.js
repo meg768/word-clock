@@ -1,7 +1,9 @@
-// weather.js
+var Events = require('events');
+var schedule = require('node-schedule');
+
 const debug = require('./debug.js');
 
-class Weather {
+class Weather extends Events {
 	constructor(options = {}) {
 		this.weather = { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
 		this.location = null;
@@ -9,14 +11,14 @@ class Weather {
 	}
 
 	subscribe() {
-		const schedule = require('node-schedule');
+		let fetch = async () => {
+			await this.fetchWeather();
+		};
 
-		// Rek. intervall: var 5:e minut (snällt mot MET)
-		schedule.scheduleJob('*/10 * * * *', this.fetchWeather.bind(this));
-
-		// Försök direkt vid start
-		this.fetchWeather().catch(err => debug('Initial fetchWeather failed:', err));
+		schedule.scheduleJob({ minute: [0, 10, 20, 30, 40, 50] }, fetch);
+		fetch();
 	}
+
 
 	async getLocation() {
 		try {
@@ -115,6 +117,7 @@ class Weather {
 			this.weather.SOL = factors.clear;
 
 			debug('Fetched weather:', JSON.stringify(this.weather));
+			this.emit('weather', this.weather);
 			return factors;
 		} catch (err) {
 			debug('fetchWeather failed:', err);
