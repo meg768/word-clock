@@ -2,6 +2,7 @@ var Events = require('events');
 var schedule = require('node-schedule');
 
 const debug = require('./debug.js');
+const { threadId } = require('worker_threads');
 
 class Weather extends Events {
 	constructor(options = {}) {
@@ -25,6 +26,8 @@ class Weather extends Events {
 			if (this.location) {
 				return this.location;
 			}
+
+			throw new Error('Fetching location from ip-api.com');
 
 			const res = await fetch('http://ip-api.com/json?fields=status,message,lat,lon,city,country');
 
