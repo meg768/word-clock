@@ -7,7 +7,7 @@ function configure() {
 	var width = 13;
 	var height = 13;
 	var map = 'alternating-matrix';
-	var gamma = 2.2;
+	var gamma = 4;
 
 	Neopixels.configure({ debug: debug, map: map, width: width, height: height, stripType: stripType, gamma: gamma });
 
