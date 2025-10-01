@@ -89,30 +89,33 @@ class Weather extends Events {
 	async fetchWeather() {
 		try {
 			const location = await this.getLocation();
+			
 			if (!location || typeof location.lat !== 'number' || typeof location.lon !== 'number') {
 				throw new Error('Invalid location object: behöver lat och lon');
 			}
 
 			const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${location.lat}&lon=${location.lon}`;
 
-			const opts = {
+			const options = {
 				headers: { 'User-Agent': 'WordClock/1.0 (magnus@example.com)' }
 			};
 
 			// Timeout om tillgänglig (Node 18+)
 			if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
-				opts.signal = AbortSignal.timeout(7000);
+				options.signal = AbortSignal.timeout(7000);
 			}
 
 			debug(`Fetching weather from ${url}`);
-			const res = await fetch(url, opts);
-			if (!res.ok) {
-				throw new Error(`MET Norway HTTP ${res.status} ${res.statusText}`);
+			const result = await fetch(url, options);
+			if (!result.ok) {
+				throw new Error(`MET Norway HTTP ${result.status} ${result.statusText}`);
 			}
 
-			const data = await res.json();
+			const data = await result.json();
 			const now = data?.properties?.timeseries?.[0];
-			if (!now) throw new Error('MET: saknar timeseries[0]');
+			if (!now) {
+				throw new Error('MET: saknar timeseries[0]');
+			}
 
 			const factors = this.computeFactors(now);
 
@@ -125,7 +128,6 @@ class Weather extends Events {
 
 			debug('Fetched weather:', JSON.stringify(this.state));
 			this.emit('weather', this.state);
-
 		} catch (err) {
 			debug('fetchWeather failed:', err);
 		}
