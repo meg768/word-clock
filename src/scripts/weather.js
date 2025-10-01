@@ -41,9 +41,9 @@ class Weather extends Events {
 			}
 
 			return (this.location = json);
-		} catch (err) {
-			debug('Failed to fetch location:', err);
-			throw err;
+		} catch (error) {
+			debug('Failed to fetch location:', error);
+			throw error;
 		}
 	}
 
