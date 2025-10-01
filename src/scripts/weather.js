@@ -12,7 +12,7 @@ class Weather {
 		const schedule = require('node-schedule');
 
 		// Rek. intervall: var 5:e minut (snällt mot MET)
-		schedule.scheduleJob('*/1 * * * *', this.fetchWeather.bind(this));
+		schedule.scheduleJob('*/10 * * * *', this.fetchWeather.bind(this));
 
 		// Försök direkt vid start
 		this.fetchWeather().catch(err => debug('Initial fetchWeather failed:', err));
@@ -38,7 +38,7 @@ class Weather {
 	}
 
 	// Beräkna faktorer (0–1) från MET "now"-objekt
-	_computeFactors(now) {
+	computeFactors(now) {
 		const details = now?.data?.instant?.details || {};
 		const precip1h = now?.data?.next_1_hours?.details?.precipitation_amount;
 		const precip6h = now?.data?.next_6_hours?.details?.precipitation_amount;
@@ -95,14 +95,17 @@ class Weather {
 				opts.signal = AbortSignal.timeout(7000);
 			}
 
+			debug(`Fetching weather from ${url}`);
 			const res = await fetch(url, opts);
-			if (!res.ok) throw new Error(`MET Norway HTTP ${res.status} ${res.statusText}`);
+			if (!res.ok) {
+				throw new Error(`MET Norway HTTP ${res.status} ${res.statusText}`);
+			}
 
 			const data = await res.json();
 			const now = data?.properties?.timeseries?.[0];
 			if (!now) throw new Error('MET: saknar timeseries[0]');
 
-			const factors = this._computeFactors(now);
+			const factors = this.computeFactors(now);
 
 			// Uppdatera svenska nycklar
 			this.weather.REGN = factors.rain;
@@ -111,7 +114,7 @@ class Weather {
 			this.weather.VIND = factors.wind;
 			this.weather.SOL = factors.clear;
 
-			debug('Updated weather:', JSON.stringify(this.weather));
+			debug('Fetched weather:', JSON.stringify(this.weather));
 			return factors;
 		} catch (err) {
 			debug('fetchWeather failed:', err);
