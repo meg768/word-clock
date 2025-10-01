@@ -4,19 +4,24 @@ var Weather = require('./weather.js');
 var sprintf = require('yow/sprintf');
 var debug = require('./debug.js');
 
+// Cache instance of Weather
+var weather = null;
+
 module.exports = class extends WordAnimation {
 	constructor(options) {
 		super({ name: 'Weather Animation', renderFrequency: 60 * 1000, ...options });
 
-		this.weather = new Weather();
+		if (!weather) {
+			weather = new Weather();
+		}
 
-		this.weather.on('weather', () => {
+		weather.on('weather', () => {
 			this.render();
 		});
 	}
 
 	getWords() {
-		var state = this.weather.state;
+		var state = weather.state;
 
 		var words = 'SOL VIND SNÖ MOLN REGN'.split(' ').map(word => {
 			var index = state[word];
