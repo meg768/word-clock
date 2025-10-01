@@ -33,7 +33,7 @@ var Module = new (function () {
 
 		function runNextAnimation() {
 			function createAnimation(name) {
-				let duration = 10000;
+				let duration = 60000;
 
 				switch (name) {
 					case 'index':
@@ -48,7 +48,7 @@ var Module = new (function () {
 						return new MatrixAnimation({ pixels: pixels, duration: duration, priority: '!' });
 				}
 
-				return new ClockAnimation({ pixels: pixels, duration: duration * 1, priority: '!' });
+				return new ClockAnimation({ pixels: pixels, duration: duration * 10, priority: '!' });
 			}
 
 			// Get next animation
