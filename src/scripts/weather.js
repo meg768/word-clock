@@ -5,6 +5,7 @@ const debug = require('./debug.js');
 
 class Weather extends Events {
 	constructor(options = {}) {
+		super(options);
 		this.weather = { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
 		this.location = null;
 		this.subscribe();
@@ -19,18 +20,24 @@ class Weather extends Events {
 		fetch();
 	}
 
-
 	async getLocation() {
 		try {
-			if (this.location) return this.location;
+			if (this.location) {
+				return this.location;
+			}
 
 			const res = await fetch('http://ip-api.com/json?fields=status,message,lat,lon,city,country');
-			if (!res.ok) throw new Error(`ip-api HTTP ${res.status} ${res.statusText}`);
+			
+			if (!res.ok) {
+				throw new Error(`ip-api HTTP ${res.status} ${res.statusText}`);
+			}
 
 			const json = await res.json();
 			debug('Weather location is', json.city);
 
-			if (json.status !== 'success') throw new Error(`ip-api error: ${json.message || 'unknown error'}`);
+			if (json.status !== 'success') {
+				throw new Error(`ip-api error: ${json.message || 'unknown error'}`);
+			}
 
 			return (this.location = json);
 		} catch (err) {
