@@ -5,6 +5,7 @@ var debug = require('../scripts/debug.js');
 var Module = new (function () {
 	function defineArgs(args) {
 		args.option('help', { alias: 'h', describe: 'Displays this information' });
+		args.option('speed', { alias: 's', describe: 'Specifies loop speed in seconds', default: 10 });
 
 		args.wrap(null);
 
@@ -23,41 +24,45 @@ var Module = new (function () {
 		var CurrencyAnimation = require('../scripts/currency-animation.js');
 		var CommodityAnimation = require('../scripts/commodity-animation.js');
 		var IndexAnimation = require('../scripts/index-animation.js');
+		var ColorAnimation = require('../scripts/color-animation.js');
 		var MatrixAnimation = require('../scripts/matrix-animation.js');
 		var WeatherAnimation = require('../scripts/weather-animation.js');
 
 		var pixels = new Neopixels();
+
+		var mode = 'loop';
 		var animationQueue = new AnimationQueue();
-		var loopAnimations = ['clock', 'index', 'clock', 'currency', 'clock', 'weather', 'clock', 'matrix', 'clock', 'commodity'];
+
+		var loopAnimations = [ClockAnimation, IndexAnimation, CommodityAnimation, CurrencyAnimation, WeatherAnimation, MatrixAnimation];
+		var loopDuration = parseFloat(argv.speed) * 1000;
 		var loopIndex = 0;
 
+
 		function runNextAnimation() {
-			function createAnimation(name) {
-				let duration = 10000;
+			switch (mode) {
+				case 'loop': {
+					// Get next animation
+					var Animation = loopAnimations[loopIndex];
+					var animation = new Animation({ pixels: pixels, duration: loopDuration, priority: '!' });
 
-				switch (name) {
-					case 'index':
-						return new IndexAnimation({ pixels: pixels, duration: duration, priority: '!' });
-					case 'commodity':
-						return new CommodityAnimation({ pixels: pixels, duration: duration, priority: '!' });
-					case 'currency':
-						return new CurrencyAnimation({ pixels: pixels, duration: duration, priority: '!' });
-					case 'weather':
-						return new WeatherAnimation({ pixels: pixels, duration: duration, priority: '!' });
-					case 'matrix':
-						return new MatrixAnimation({ pixels: pixels, duration: duration, priority: '!' });
+					loopIndex = (loopIndex + 1) % loopAnimations.length;
+
+					runAnimation(animation);
+					break;
 				}
-
-				return new ClockAnimation({ pixels: pixels, duration: duration * 1, priority: '!' });
+				case 'rain': {
+					runAnimation(new MatrixAnimation({ pixels: pixels, duration: -1, priority: '!' }));
+					break;
+				}
+				case 'clock': {
+					runAnimation(new ClockAnimation({ pixels: pixels, duration: -1, priority: '!' }));
+					break;
+				}
+				case 'off': {
+					runAnimation(new ColorAnimation({ pixels: pixels, color: 'black', duration: -1, priority: '!' }));
+					break;
+				}
 			}
-
-			// Get next animation
-			var animationName = loopAnimations[loopIndex];
-			var animation = createAnimation(animationName);
-
-			loopIndex = (loopIndex + 1) % loopAnimations.length;
-
-			runAnimation(animation);
 		}
 
 		function runAnimation(animation) {
