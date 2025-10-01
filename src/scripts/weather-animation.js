@@ -17,7 +17,7 @@ module.exports = class extends WordAnimation {
 	}
 
 	getWords() {
-		var state = this.weather;
+		var state = this.weather.weather;
 		var words = 'SOL VIND SNÖ MOLN REGN'.split(' ').map(word => {
 			var index = state[word];
 			var hue = 240;
