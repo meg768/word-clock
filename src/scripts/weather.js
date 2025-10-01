@@ -96,7 +96,6 @@ class Weather extends Events {
 
 			const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${location.lat}&lon=${location.lon}`;
 
-			throw new Error('MET API requires User-Agent header');
 			const options = {
 				headers: { 'User-Agent': 'WordClock/1.0 (magnus@example.com)' }
 			};
