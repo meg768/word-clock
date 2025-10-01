@@ -27,7 +27,7 @@ class Weather extends Events {
 			}
 
 			const res = await fetch('http://ip-api.com/json?fields=status,message,lat,lon,city,country');
-			
+
 			if (!res.ok) {
 				throw new Error(`ip-api HTTP ${res.status} ${res.statusText}`);
 			}
@@ -125,7 +125,7 @@ class Weather extends Events {
 
 			debug('Fetched weather:', JSON.stringify(this.weather));
 			this.emit('weather', this.weather);
-			return factors;
+
 		} catch (err) {
 			debug('fetchWeather failed:', err);
 			return null; // behåll senaste this.weather vid fel
