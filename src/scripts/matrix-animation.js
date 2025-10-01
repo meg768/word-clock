@@ -70,11 +70,12 @@ module.exports = class extends Animation {
 
 
     constructor(options) {
-        var {pixels, ...options} = options;
+        var {pixels, delay, ...options} = options;
 
         super({name:'Matrix Animation', ...options});
 
         this.pixels = pixels;
+        this.delay  = delay || 30;
         this.worms  = [];
 
     }
@@ -110,7 +111,7 @@ module.exports = class extends Animation {
         }
 
         this.pixels.render();
-        this.sleep(25);
+        this.sleep(this.delay);
     }
 
 
