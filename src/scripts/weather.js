@@ -27,8 +27,6 @@ class Weather extends Events {
 				return this.location;
 			}
 
-			throw new Error('Fetching location from ip-api.com');
-
 			const res = await fetch('http://ip-api.com/json?fields=status,message,lat,lon,city,country');
 
 			if (!res.ok) {
