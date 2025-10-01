@@ -27,13 +27,13 @@ class Weather extends Events {
 				return this.location;
 			}
 
-			const res = await fetch('http://ip-api.com/json?fields=status,message,lat,lon,city,country');
+			const result = await fetch('http://ip-api.com/json?fields=status,message,lat,lon,city,country');
 
-			if (!res.ok) {
-				throw new Error(`ip-api HTTP ${res.status} ${res.statusText}`);
+			if (!result.ok) {
+				throw new Error(`ip-api HTTP ${result.status} ${result.statusText}`);
 			}
 
-			const json = await res.json();
+			const json = await result.json();
 			debug('Weather location is', json.city);
 
 			if (json.status !== 'success') {
