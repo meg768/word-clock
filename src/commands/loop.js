@@ -33,7 +33,7 @@ var Module = new (function () {
 
 		function runNextAnimation() {
 			function createAnimation(name) {
-				let duration = 60000;
+				let duration = 15000;
 
 				switch (name) {
 					case 'index':
