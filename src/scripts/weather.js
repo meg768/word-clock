@@ -1,13 +1,11 @@
 var Events = require('events');
 var schedule = require('node-schedule');
-
-const debug = require('./debug.js');
-const { threadId } = require('worker_threads');
+var debug = require('./debug.js');
 
 class Weather extends Events {
 	constructor(options = {}) {
 		super(options);
-		this.state = { REGN: 1.0, MOLN: 1.0, SNÖ: 1.0, VIND: 1.0, SOL: 1.0 };
+		this.state = { REGN: 0.1, MOLN: 0.1, SNÖ: 0.1, VIND: 0.1, SOL: 0.1 };
 		this.location = null;
 		this.subscribe();
 	}
