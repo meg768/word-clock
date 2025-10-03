@@ -1,31 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="911px" height="89px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:square;stroke-miterlimit:1;">
+<svg width="911px" height="112px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;">
     <g transform="matrix(0.24,0,0,0.24,-109.933,-95.7601)">
-        <g transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
+        <g id="D" transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
+            <g transform="matrix(0.24,0,0,0.24,-85.0394,-921.26)">
+                <path d="M2244.09,4181.1L2244.09,4039.37" style="fill:none;stroke:rgb(127,127,127);stroke-width:94.49px;"/>
+            </g>
             <g id="Guide" transform="matrix(0.698182,0,0,0.048,-329.85,-36.8504)">
-                <rect x="472.441" y="767.717" width="1299.21" height="1299.21" style="fill:none;stroke:rgb(0,23,255);stroke-width:0.48px;"/>
+                <rect x="472.441" y="767.717" width="1299.21" height="1299.21" style="fill:none;stroke:rgb(0,23,255);stroke-width:0.48px;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:1;"/>
             </g>
-        </g>
-        <g transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
-            <g transform="matrix(0.24,0,0,0.048,56.6929,-31.1811)">
-                <path d="M1653.54,2125.98L1653.54,1771.65" style="fill:none;"/>
-            </g>
-        </g>
-        <g transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
             <g transform="matrix(0.944882,0,0,0.787402,-8.97638,-15.8409)">
                 <g id="Origo">
                     <g>
-                        <path d="M18.5,20.118L9.5,20.118L9.5,2.118L18.5,20.118Z" style="fill:rgb(255,0,0);fill-rule:nonzero;stroke:rgb(255,0,0);stroke-width:0.79px;stroke-linecap:butt;stroke-miterlimit:10;"/>
-                    </g>
-                </g>
-            </g>
-        </g>
-        <g transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
-            <g transform="matrix(0.944882,0,0,0.787402,-8.97638,-15.8409)">
-                <g id="Origo1" serif:id="Origo">
-                    <g>
-                        <path d="M18.5,20.118L9.5,20.118L9.5,2.118L18.5,20.118Z" style="fill:rgb(255,0,0);fill-rule:nonzero;stroke:rgb(255,0,0);stroke-width:0.79px;stroke-linecap:butt;stroke-miterlimit:10;"/>
+                        <path d="M18.5,20.118L9.5,20.118L9.5,2.118L18.5,20.118Z" style="fill:rgb(255,0,0);fill-rule:nonzero;stroke:rgb(255,0,0);stroke-width:0.79px;stroke-linecap:butt;stroke-linejoin:miter;"/>
                     </g>
                 </g>
             </g>

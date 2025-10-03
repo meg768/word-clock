@@ -2,8 +2,8 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="911px" height="925px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
     <g transform="matrix(0.24,0,0,0.24,-109.933,-95.7601)">
-        <g transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
-            <g id="Skruvhål-stora" serif:id="Skruvhål stora">
+        <g id="C" transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
+            <g id="Skruvhål-stora--djup-11mm-" serif:id="Skruvhål stora (djup 11mm)">
                 <g transform="matrix(2.49998,0,0,2.49998,850.394,2019.67)">
                     <path d="M0,-776.693C-4.696,-776.693 -8.504,-780.501 -8.504,-785.197C-8.504,-789.894 -4.696,-793.701 0,-793.701C4.697,-793.701 8.504,-789.894 8.504,-785.197C8.504,-780.501 4.697,-776.693 0,-776.693Z" style="fill:white;stroke:black;stroke-width:0.34px;"/>
                 </g>
@@ -17,9 +17,7 @@
                     <path d="M-793.701,17.008C-798.397,17.008 -802.205,13.2 -802.205,8.504C-802.205,3.807 -798.397,0 -793.701,0C-789.004,0 -785.197,3.807 -785.197,8.504C-785.197,13.2 -789.004,17.008 -793.701,17.008Z" style="fill:white;stroke:black;stroke-width:0.34px;"/>
                 </g>
             </g>
-        </g>
-        <g transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
-            <g id="Skruvhål-små" serif:id="Skruvhål små">
+            <g id="Skruvhål-små--djup-22mm-" serif:id="Skruvhål små (djup 22mm)">
                 <g transform="matrix(0.999993,0,0,0.999993,850.394,841.884)">
                     <path d="M0,-776.693C-4.696,-776.693 -8.504,-780.501 -8.504,-785.197C-8.504,-789.894 -4.696,-793.701 0,-793.701C4.697,-793.701 8.504,-789.894 8.504,-785.197C8.504,-780.501 4.697,-776.693 0,-776.693Z" style="fill:white;stroke:black;stroke-width:0.34px;"/>
                 </g>
@@ -33,38 +31,18 @@
                     <path d="M-793.701,17.008C-798.397,17.008 -802.205,13.2 -802.205,8.504C-802.205,3.807 -798.397,0 -793.701,0C-789.004,0 -785.197,3.807 -785.197,8.504C-785.197,13.2 -789.004,17.008 -793.701,17.008Z" style="fill:white;stroke:black;stroke-width:0.34px;"/>
                 </g>
             </g>
-        </g>
-        <g transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
+            <g id="Upphängning--djup-11mm-" serif:id="Upphängning (djup 11mm)" transform="matrix(0.144,0,0,0.144,155.906,-144.567)">
+                <circle cx="2066.93" cy="2185.04" r="236.22" style="fill:white;stroke:black;stroke-width:9.32px;"/>
+            </g>
             <g id="Guide" transform="matrix(0.698182,0,0,0.698182,-329.85,-536.006)">
                 <rect x="472.441" y="767.717" width="1299.21" height="1299.21" style="fill:none;stroke:rgb(0,23,255);stroke-width:0.34px;stroke-linecap:square;stroke-miterlimit:1;"/>
             </g>
-        </g>
-        <g transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
-            <g transform="matrix(0.366076,0,0,0.366076,-806.379,-153.961)">
-                <g transform="matrix(50,0,0,50,3572.43,727.526)">
-                </g>
-                <text x="3306.61px" y="727.526px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;">Djup 1<tspan x="3447.43px 3475.24px " y="727.526px 727.526px ">1 </tspan>mm</text>
-            </g>
-        </g>
-        <g transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
-            <g transform="matrix(0.366076,0,0,0.366076,-1186.22,-239.001)">
-                <g transform="matrix(50,0,0,50,3641.94,727.526)">
-                </g>
-                <text x="3306.61px" y="727.526px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;">Djup 1<tspan x="3447.43px 3475.24px " y="727.526px 727.526px ">1/</tspan>22 mm</text>
-            </g>
-        </g>
-        <g transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
             <g transform="matrix(0.944882,0,0,0.787402,-8.97638,-15.8409)">
                 <g id="Origo">
                     <g>
                         <path d="M18.5,20.118L9.5,20.118L9.5,2.118L18.5,20.118Z" style="fill:rgb(255,0,0);fill-rule:nonzero;stroke:rgb(255,0,0);stroke-width:0.79px;"/>
                     </g>
                 </g>
-            </g>
-        </g>
-        <g transform="matrix(4.16667,0,0,4.16667,472.441,472.441)">
-            <g id="Upphängning" transform="matrix(0.144,0,0,0.144,155.906,-116.22)">
-                <circle cx="2066.93" cy="2185.04" r="236.22" style="fill:white;stroke:black;stroke-width:9.32px;"/>
             </g>
         </g>
     </g>
