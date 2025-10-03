@@ -2,17 +2,51 @@
 include <BOSL2/std.scad>;
 
 /**
- * M5 mutter (huvud) som solid hexprisma.
- * - af: across-flats (mm), ~8.0 för M5 (ISO 4032)
- * - thickness: mutterhöjd, ~4.0 mm
- * - chamfer: valfri avfasning på båda sidor (0 = ingen)
+ * cornerMount med genomgående hex-hål.
+ * - diameter: ytterdiameter (mm) [obligatorisk]
+ * - height: cylinderhöjd (mm)
+ * - acrossFlats: nominell AF för M5 (≈ 8.0 mm)
+ * - cylinderChamfer: chamfer på yttercylindern (mm)
+ * - hexChamfer: chamfer-höjd på hex-hålet (mm, gäller både topp & botten)
  */
-module m5_nut_head(af=8.0, thickness=4.0, chamfer=0.3) {
-    R = af / sqrt(3);  // circumradius för hex
-    // Hexkropp (använd $fn=6 för exakt sexkant)
-    cyl(h=thickness, r=R, $fn=6,
-        chamfer1=chamfer, chamfer2=-chamfer);
+
+module cornerMount(
+    diameter = 15,
+    height = 10,
+    acrossFlats = 8.0,
+    cylinderChamfer = 1.0,
+    hexChamfer = 0.5
+) {
+    // Genomgående hex-hål med chamfer uppe & nere
+    module hex_hole_through_chamfer(acrossFlats, h, ch) {
+        R = acrossFlats / sqrt(3);
+        g = ch;
+
+        union() {
+            // Nedre chamfer
+            linear_extrude(height=ch, scale=R / (R + g))
+                circle(r=R + g, $fn=6);
+
+            // Raka mittdelen
+            if (h > 2 * ch)
+                translate([0, 0, ch])
+                    linear_extrude(height=h - 2 * ch)
+                        circle(r=R, $fn=6);
+
+            // Övre chamfer
+            translate([0, 0, h - ch])
+                linear_extrude(height=ch, scale=(R + g) / R)
+                    circle(r=R, $fn=6);
+        }
+    }
+
+    difference() {
+        // ytterkropp med BOSL2-chamfer
+        cyl(h=height, d=diameter, chamfer=cylinderChamfer, center=false, $fn=128);
+
+        // genomgående hex-hål
+        hex_hole_through_chamfer(acrossFlats, height, hexChamfer);
+    }
 }
 
-// ===== Exempel =====
-m5_nut_head();
+cornerMount(diameter = 15.1, height = 20, acrossFlats = 8.0);
