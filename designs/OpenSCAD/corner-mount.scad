@@ -7,15 +7,13 @@ include <BOSL2/std.scad>;
  * - height: cylinderhöjd (mm)
  * - acrossFlats: nominell AF för M5 (≈ 8.0 mm)
  * - cylinderChamfer: chamfer på yttercylindern (mm)
- * - hexChamfer: chamfer-höjd på hex-hålet (mm, gäller både topp & botten)
  */
 
 module cornerMount(
-    diameter = 15,
+    diameter = 14.4,
     height = 10,
     acrossFlats = 8.0,
-    cylinderChamfer = 1.0,
-    hexChamfer = 0.5
+    cylinderChamfer = 1.0
 ) {
     // Genomgående hex-hål med chamfer uppe & nere
     module hex_hole_through_chamfer(acrossFlats, h, ch) {
@@ -44,9 +42,29 @@ module cornerMount(
         // ytterkropp med BOSL2-chamfer
         cyl(h=height, d=diameter, chamfer=cylinderChamfer, center=false, $fn=128);
 
-        // genomgående hex-hål
-        hex_hole_through_chamfer(acrossFlats, height, hexChamfer);
+        // halvt genomgående hex-hål
+        up(0) {
+            #hex_hole_through_chamfer(acrossFlats, height, 0);
+        }
+        // genomgående hål
+        *up(0) {
+            cyl(h=height, d=6, center=false, $fn=128);
+        }
     }
 }
 
-cornerMount(diameter = 15.1, height = 20, acrossFlats = 8.0);
+//cornerMount();
+
+back(20) {
+    cornerMount();
+}
+back(-20) {
+    cornerMount();
+}
+right(20) {
+    cornerMount();
+}
+right(-20) {
+    cornerMount();
+}
+

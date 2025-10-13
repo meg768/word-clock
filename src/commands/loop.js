@@ -48,7 +48,7 @@ var Module = new (function () {
 						return new MatrixAnimation({ pixels: pixels, duration: duration, priority: '!' });
 				}
 
-				return new ClockAnimation({ pixels: pixels, duration: duration * 13, priority: '!' });
+				return new ClockAnimation({ pixels: pixels, duration: duration * 1, priority: '!' });
 			}
 
 			// Get next animation
