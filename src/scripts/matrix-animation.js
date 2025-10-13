@@ -75,7 +75,7 @@ module.exports = class extends Animation {
         super({name:'Matrix Animation', ...options});
 
         this.pixels = pixels;
-        this.delay  = delay || 10;
+        this.delay  = delay || 15;
         this.worms  = [];
 
     }
