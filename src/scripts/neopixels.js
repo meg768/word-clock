@@ -3,7 +3,7 @@ var debug = require('./debug.js');
 
 function configure() {
 
-	var stripType = process.env('NEOPIXEL-STRIP-TYPE') ? process.env('NEOPIXEL-STRIP-TYPE') : 'grb';
+	var stripType = process.env.NEOPIXEL_STRIP_TYPE ? process.env.NEOPIXEL_STRIP_TYPE : 'grb';
 	var width = 13;
 	var height = 13;
 	var map = 'alternating-matrix';
