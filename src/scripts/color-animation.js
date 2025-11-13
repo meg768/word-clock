@@ -1,4 +1,4 @@
-var Animation = require('rpi-animations').Animation;
+var Animation = require('./animation.js');
 var Color = require('color');
 var debug = require('./debug.js');
 

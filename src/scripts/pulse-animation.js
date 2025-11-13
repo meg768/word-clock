@@ -1,7 +1,7 @@
 
 var sprintf   = require('yow/sprintf');
 var isString  = require('yow/is').isString;
-var Animation = require('rpi-animations').Animation;
+var Animation = require('./animation.js');
 var Color     = require('color');
 var debug = require('./debug.js');
 

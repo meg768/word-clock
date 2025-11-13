@@ -1,4 +1,4 @@
-var Animation = require('rpi-animations').Animation;
+var Animation = require('./animation');
 
 var isArray   = require('yow/is').isArray;
 var sprintf   = require('yow/sprintf');
