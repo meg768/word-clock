@@ -1,4 +1,4 @@
-return require('rpi-animations').Animation; 
+module.exports =  require('rpi-animations').Animation; 
 
 /*
 
