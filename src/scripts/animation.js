@@ -1,3 +1,7 @@
+return require('rpi-animations').Animation; 
+
+/*
+
 var Sleep = require('sleep');
 var Events = require('events');
 
@@ -29,7 +33,7 @@ module.exports = class extends Events {
     }
 
     start() {
-        this.debug('Starting animationX', this.name);
+        this.debug('Starting animation', this.name);
 
         return new Promise((resolve, reject) => {
 
@@ -142,3 +146,5 @@ module.exports = class extends Events {
 
     }
 }
+
+*/
