@@ -5,7 +5,7 @@ var Color     = require('color');
 var random    = require('yow/random');
 var Timer     = require('yow/timer');
 
-var Animation = require('rpi-animations').Animation;
+var Animation = require('./animation.js');
 
 class Worm {
 
