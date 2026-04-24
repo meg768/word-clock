@@ -34,11 +34,15 @@ module.exports = class Module extends WordAnimation {
 
 			if (quote != undefined && quote.change != undefined) {
 				var change = Math.max(-2, Math.min(2, quote.change));
-				var hue = quote.change >= 0 ? 240 : 0;
-				var saturation = 100;
-				var luminance = Math.abs((change) / 2) * 30;
+				var magnitude = Math.abs(change);
 
-				color = Color.hsl(hue, saturation, luminance);
+				if (magnitude >= 0.05) {
+					var hue = quote.change >= 0 ? 240 : 0;
+					var saturation = 100;
+					var luminance = 12 + (magnitude / 2) * 33;
+
+					color = Color.hsl(hue, saturation, Math.min(45, luminance));
+				}
 			}
 
 			words.push({ word: symbol.name, color: color });
