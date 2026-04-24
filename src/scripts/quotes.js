@@ -30,14 +30,19 @@ module.exports = class extends Events {
 
 		debug('Fetching quotes for symbols', tickers.join(' '));
 
-		let data = await yahoo.quote(tickers);
+		try {
+			let data = await yahoo.quote(tickers);
 
-		data.forEach(item => {
-			debug(item.symbol, item.regularMarketChangePercent, item.regularMarketPrice);
-			this.quotes[item.symbol] = { change: item.regularMarketChangePercent, price: item.regularMarketPrice };
-		});
+			data.forEach(item => {
+				debug(item.symbol, item.regularMarketChangePercent, item.regularMarketPrice);
+				this.quotes[item.symbol] = { change: item.regularMarketChangePercent, price: item.regularMarketPrice };
+			});
 
-		debug('Finished fetching quotes.');
-		this.emit('quotes', this.quotes);
+			debug('Finished fetching quotes.');
+			this.emit('quotes', this.quotes);
+		}
+		catch (error) {
+			debug('Failed fetching quotes:', error.message);
+		}
 	}
 };
